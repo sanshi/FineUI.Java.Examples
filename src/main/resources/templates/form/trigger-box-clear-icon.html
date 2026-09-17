@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TriggerBox 清除图标</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="表单" show-header="true">
+                <f:items>
+                    <f:trigger-box id="TriggerBox1" show-label="false" value="默认值" trigger-icon="Clear" show-trigger="false"
+                        auto-show-clear-icon="true"></f:trigger-box>
+                    <f:button id="btnSubmit" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+    </body>
+
+</html>

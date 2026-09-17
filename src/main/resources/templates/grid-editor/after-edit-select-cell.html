@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 结束编辑（绑定数据后选中单元格）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（单击编辑）" data-id-field="Id" data-text-field="Name"
+                allow-cell-editing="true" clicks-to-edit="1" on-after-edit="Grid1_AfterEdit">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name">
+                        <f:editor>
+                            <f:text-box id="tbxName" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender">
+                        <f:editor>
+                            <f:drop-down-list id="ddlGender" required="true">
+                                <f:list-item text="男" value="1"></f:list-item>
+                                <f:list-item text="女" value="0"></f:list-item>
+                            </f:drop-down-list>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="入学年份" column-id="EntranceYear" data-field="EntranceYear" field-type="Int">
+                        <f:editor>
+                            <f:number-box id="nbxEntranceYear" no-decimal="true" no-negative="true" min-value="2000" max-value="2025"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="入学日期" column-id="EntranceDate" data-field="EntranceDate" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy/MM/dd" width="150">
+                        <f:editor>
+                            <f:date-picker id="dpEntranceDate" required="true"></f:date-picker>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-check-field header-text="是否在校" column-id="AtSchool" data-field="AtSchool"></f:render-check-field>
+                    <f:render-field header-text="所学专业" column-id="Major" data-field="Major" expand-unused-space="true" min-width="150">
+                        <f:editor>
+                            <f:text-box id="tbxMajor" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="afteredit" handler="onGrid1AfterEdit"></f:listener>
+                    <f:listener event="dataload" handler="onGrid1DataLoad"></f:listener>
+                </f:listeners>
+            </f:grid>
+            <br>
+            <br>
+            <f:label id="labResult" encode-text="false"></f:label>
+            <br />
+            <br />
+            注：
+            <ul>
+                <li>结束编辑后回发保存数据，并选中最后一个编辑的单元格，方便通过 TAB、ENTER 键进行接下来的操作</li>
+                <li>为了保持表格行ID的稳定，请指定表格的DataIDField</li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                // 记住最后一个结束编辑的单元格（结束编辑会回发重新绑定数据，绑定后清空选中）
+                var lastEditedCell = null;
+
+                function onGrid1AfterEdit(event, value, params) {
+                    lastEditedCell = [params.rowId, params.columnId];
+                }
+
+                // 数据重新绑定后，重新选中之前的单元格
+                function onGrid1DataLoad(event) {
+                    if (lastEditedCell) {
+                        this.selectCell(lastEditedCell);
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

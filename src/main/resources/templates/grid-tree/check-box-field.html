@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 树表格复选框列</title>
+
+        <style>
+            .f-grid-cell.hidethis .f-grid-checkbox {
+                display: none;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="树表格" data-id-field="Id" data-text-field="Name"
+                data-parent-id-field="ParentId" enable-tree="true" tree-column="Name">
+                <f:columns>
+                    <f:row-number-field enable-tree-number="true"></f:row-number-field>
+                    <f:render-field column-id="Name" header-text="名称" data-field="Name" expand-unused-space="true" min-width="150"></f:render-field>
+                    <f:render-field header-text="类型" data-field="Type" width="150"></f:render-field>
+                    <f:render-field header-text="大小" data-field="Size" width="150"></f:render-field>
+                    <f:render-check-field column-id="FollowFolder" header-text="关注目录" render-as-static-field="false"
+                        renderer-function="renderFollowFolder"></f:render-check-field>
+                    <f:render-field header-text="修改日期" data-field="ModifyDate" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"
+                        width="150"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+
+            <f:button id="Button2" text="关注的目录列表" click-handler="onNotifyCheckedFollowFolderClick"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                // 复选框列渲染：非「文件夹」类型的行隐藏复选框（给单元格加类 hidethis）
+                function renderFollowFolder(value, params) {
+                    var rowData = params.rowData;
+
+                    var type = rowData.values.Type;
+                    if (type !== '文件夹') {
+                        params.cellCls = 'hidethis';
+                    }
+
+                    return value;
+                }
+
+                // 列出所有勾选「关注目录」的行
+                function onNotifyCheckedFollowFolderClick(event) {
+                    var grid1 = F.ui.Grid1;
+
+                    var rowEls = grid1.getRowEls();
+
+                    var result = ['<table class="result">'];
+                    result.push('<tr>');
+                    result.push('<th>行号</th>');
+                    result.push('<th>ID</th>');
+                    result.push('<th>名称</th>');
+                    result.push('</tr>');
+                    rowEls.each(function() {
+                        var cnode = $(this);
+                        var rowData = grid1.getRowData(cnode);
+                        var followFolderEl = cnode.find('.f-grid-cell-FollowFolder .f-grid-checkbox');
+                        var isChecked = followFolderEl.hasClass('f-checked');
+
+                        if (isChecked) {
+                            result.push('<tr>');
+                            result.push('<td>' + (rowData.index + 1) + '</td>');
+                            result.push('<td>' + rowData.id + '</td>');
+                            result.push('<td>' + rowData.text + '</td>');
+                            result.push('</tr>');
+                        }
+                    });
+                    result.push('</table>');
+
+                    F.notify({
+                        message: F.rawHtml(result.join('')),
+                        target: '_top',
+                        header: false,
+                        messageIcon: '',
+                        positionX: 'center',
+                        positionY: 'top'
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

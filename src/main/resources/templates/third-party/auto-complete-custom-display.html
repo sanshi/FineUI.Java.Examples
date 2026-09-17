@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · AutoCompleteCustomDisplay</title>
+
+        <link rel="stylesheet" th:href="@{/res/third-party/jqueryuiautocomplete/jquery-ui.css}" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" label-width="60" body-padding="10" enable-collapse="false" title="简单表单">
+                <f:items>
+                    <f:text-box id="TextBox1" label="标题" empty-text="输入字母 j 试试"></f:text-box>
+                    <f:text-box id="TextBox2" label="值"></f:text-box>
+                    <f:text-box id="TextBox3" label="描述"></f:text-box>
+                </f:items>
+            </f:simple-form>
+            <br />
+            参考：http://jqueryui.com/autocomplete/#custom-data
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/third-party/jqueryuiautocomplete/jquery-ui.js}"></script>
+            <script>
+                F.ready(function() {
+                    var projects = [{
+                            value: "jquery",
+                            label: "jQuery",
+                            desc: "the write less, do more, JavaScript library"
+                        },
+                        {
+                            value: "jquery-ui",
+                            label: "jQuery UI",
+                            desc: "the official user interface library for jQuery"
+                        },
+                        {
+                            value: "sizzlejs",
+                            label: "Sizzle JS",
+                            desc: "a pure-JavaScript CSS selector engine"
+                        }
+                    ];
+
+                    $('#TextBox1 input').autocomplete({
+                        minLength: 0,
+                        source: projects,
+                        select: function(event, ui) {
+                            var input = $(this);
+                            input.val(ui.item.label);
+                            $('#TextBox2 input').val(ui.item.value);
+                            $('#TextBox3 input').val(ui.item.desc);
+                            return false;
+                        }
+                    }).autocomplete('instance')._renderItem = function(ul, item) {
+                        return $('<li>').append('<a><span class="autocomplete-item-title">' + item.label +
+                            '</span><br/>' + item.desc + '</a>').appendTo(ul);
+                    };
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

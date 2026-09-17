@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 通知对话框（向父页面添加选项卡）</title>
+
+        <style>
+            .addtabcontainer {
+                text-align: center;
+                padding-top: 20px;
+                padding-bottom: 20px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnOperation1" text="弹出通知对话框" on-click="btnOperation1_Click"></f:button>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function openExampleHello(notifyId) {
+                    parent.addExampleTab({
+                        iframeUrl: F.resolveUrl('/basic/hello'),
+                        title: '你好 FineUI',
+                        icon: F.resolveUrl('/res/images/filetype/vs_aspx.png'),
+                        refreshWhenExist: true
+                    });
+
+                    // 关闭通知对话框
+                    F(notifyId).hide();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

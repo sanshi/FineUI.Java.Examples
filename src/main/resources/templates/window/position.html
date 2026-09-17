@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 窗体（定位）</title>
+
+        <style th:inline="css">
+            body {
+                background: url([(@{/res/images/bg/small/3.jpg})]) !important;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <div style="height: 1200px;">
+            </div>
+
+            <f:window id="Window1" width="200" height="80" position-x="Left" position-y="Top" depends-view-port-size="false" is-modal="false" auto-scroll="true"
+                body-padding="10" show-header="false" content="DependsViewPortSize=false PositionX=Left PositionY=Top">
+            </f:window>
+
+            <f:window id="Window2" width="200" height="80" position-x="Left" position-y="Center" depends-view-port-size="false" is-modal="false"
+                auto-scroll="true" body-padding="10" show-header="false" content="DependsViewPortSize=false PositionX=Left PositionY=Center">
+            </f:window>
+
+            <f:window id="Window3" width="200" height="80" position-x="Left" position-y="Bottom" depends-view-port-size="false" is-modal="false"
+                auto-scroll="true" body-padding="10" show-header="false" content="DependsViewPortSize=false PositionX=Left PositionY=Bottom">
+            </f:window>
+
+            <f:window id="Window4" width="200" height="80" position-x="Center" position-y="Top" depends-view-port-size="false" is-modal="false"
+                auto-scroll="true" body-padding="10" show-header="false" content="DependsViewPortSize=false PositionX=Center PositionY=Top">
+            </f:window>
+
+            <f:window id="Window5" width="200" height="80" position-x="Center" position-y="Center" depends-view-port-size="false" is-modal="false"
+                auto-scroll="true" body-padding="10" show-header="false" content="DependsViewPortSize=false PositionX=Center PositionY=Center">
+            </f:window>
+
+            <f:window id="Window6" width="200" height="80" position-x="Center" position-y="Bottom" depends-view-port-size="false" is-modal="false"
+                auto-scroll="true" body-padding="10" show-header="false" content="DependsViewPortSize=false PositionX=Center PositionY=Bottom">
+            </f:window>
+
+            <f:window id="Window7" width="200" height="80" position-x="Right" position-y="Top" depends-view-port-size="false" is-modal="false"
+                auto-scroll="true" body-padding="10" show-header="false" content="DependsViewPortSize=false PositionX=Right PositionY=Top">
+            </f:window>
+
+            <f:window id="Window8" width="200" height="80" position-x="Right" position-y="Center" depends-view-port-size="false" is-modal="false"
+                auto-scroll="true" body-padding="10" show-header="false" content="DependsViewPortSize=false PositionX=Right PositionY=Center">
+            </f:window>
+
+            <f:window id="Window9" width="200" height="80" position-x="Right" position-y="Bottom" depends-view-port-size="false" is-modal="false"
+                auto-scroll="true" body-padding="10" show-header="false" content="DependsViewPortSize=false PositionX=Right PositionY=Bottom">
+            </f:window>
+
+        </th:block>
+    </body>
+
+</html>

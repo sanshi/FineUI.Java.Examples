@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 窗体图片自适应</title>
+
+        <style>
+            #mylogo {
+                position: absolute;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:window id="Window2" width="650" height="300" icon="TagBlue" title="窗体（观察图片随着窗体大小的变化）" enable-close="false" enable-maximize="true"
+                enable-collapse="false" enable-resize="true" is-modal="false" auto-scroll="true" body-padding="10"
+                content="<img id='mylogo' src='/res/images/newlogo/fineui_500.png' alt='Logo'>">
+                <f:listeners>
+                    <f:listener event="resize" handler="onWindowResize" />
+                    <f:listener event="render" handler="onWindowResize" />
+                </f:listeners>
+            </f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                // 保持图片的长宽比
+                var LOGO_WIDTH = 500,
+                    LOGO_HEIGHT = 500;
+
+                // resize，render
+                function onWindowResize(event) {
+                    var bodyWidth = this.bodyEl.width();
+                    var bodyHeight = this.bodyEl.height();
+
+                    var logoWidth = bodyWidth;
+                    var logoHeight = Math.floor(bodyWidth * LOGO_HEIGHT / LOGO_WIDTH);
+                    if (logoHeight > bodyHeight) {
+                        logoHeight = bodyHeight;
+                        logoWidth = Math.floor(bodyHeight * LOGO_WIDTH / LOGO_HEIGHT);
+                    }
+
+                    $('#mylogo').css({
+                        top: Math.floor((bodyHeight - logoHeight) / 2),
+                        left: Math.floor((bodyWidth - logoWidth) / 2),
+                        width: logoWidth,
+                        height: logoHeight
+                    });
+
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

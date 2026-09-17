@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 无需 eval 的严格 CSP</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <p>本页启用最严格的内容安全策略：<code>script-src 'self' 'nonce-xxx';</code>——不含 <code>'unsafe-inline'</code>，
+                更不含 <code>'unsafe-eval'</code>。FineUI.Java 回发是纯 JSON、无 <code>eval</code>/<code>new Function</code>，因此无需放行 eval 即可全功能运行。</p>
+
+            <f:button id="btnPostback" text="回发测试（严格 CSP 下正常）" button-color="Primary" on-click="btnPostback_Click"></f:button>
+            <br />
+            <br />
+
+            <p>下面尝试在脚本中执行 <code>eval(...)</code> 与 <code>new Function(...)</code>，因策略不含 <code>'unsafe-eval'</code>，浏览器会拦截并抛错：</p>
+            <ul id="evalResult"></ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <!--/* 本内联脚本带 nonce 才被放行；脚本内部尝试 eval / new Function 则会被 CSP 拦截抛错（证明策略生效） */-->
+            <script th:attr="nonce=${page.cspScriptsNonceValue}">
+                (function() {
+                    var list = document.getElementById('evalResult');
+
+                    function report(label, ok, detail) {
+                        var li = document.createElement('li');
+                        li.textContent = label + '：' + (ok ? '意外执行成功（策略不够严格）' : '已被 CSP 拦截 —— ' + detail);
+                        list.appendChild(li);
+                    }
+                    try {
+                        eval('1 + 1');
+                        report('eval("1 + 1")', true, '');
+                    } catch (err) {
+                        report('eval("1 + 1")', false, err.name + ': ' + err.message);
+                    }
+                    try {
+                        new Function('return 1')();
+                        report('new Function("return 1")()', true, '');
+                    } catch (err) {
+                        report('new Function("return 1")()', false, err.name + ': ' + err.message);
+                    }
+                })();
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 键盘导航（Tab纵向导航）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-check-box-select="true" show-selected-cell="true" show-selected-row="false" enable-row-hover-state="false" tab-vertical-navigate="true">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+            <br />
+            <br />
+            快捷键说明：
+            <ul>
+                <li>方向键在单元格之间导航</li>
+                <li>
+                    设置 TabVerticalNavigate=true 之后，Tab键在垂直方向上导航：
+                    <ul>
+                        <li>Tab键转到当前列的下一个单元格（如果当前位于某一列的最后一个单元格，则会跳转到下一列的第一个单元格）</li>
+                        <li>Shift+Tab键回退到当前列的上一个单元格（如果当前位于某一列的第一个单元格，则会跳转到上一列的最后一个单元格）</li>
+                    </ul>
+                </li>
+            </ul>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

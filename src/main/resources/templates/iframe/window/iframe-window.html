@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · IFrameWindow</title>
+
+        <style>
+            .steps {
+                border: solid 1px red;
+                padding: 5px;
+                margin-bottom: 5px;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" css-class="f-widget-content" layout="Fit" is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="btnClose" text="关闭" icon="SystemClose" click-handler="onCloseActiveWindowClick"></f:button>
+                            <f:button id="btnClosePostBack" text="保存数据" validate-forms="SimpleForm1" on-click="btnClosePostBack_Click" icon="SystemSave">
+                            </f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:simple-form id="SimpleForm1" show-border="false" show-header="false" auto-scroll="true" body-padding="10" enable-collapse="false">
+                        <f:items>
+                            <f:content-panel show-header="false" css-class="steps">
+                                按照如下步骤操作来观察“确认关闭”对话框：
+                                <ul>
+                                    <li>编辑本表单（比如选中复选框、修改日期）</li>
+                                    <li>点击弹出窗体右上角关闭图标、关闭按钮、当前选项卡关闭图标、浏览器的关闭按钮或者浏览器的刷新图标，<a target="_blank"
+                                            th:href="@{/res/images/formchangeconfirm.png}">查看图示</a>
+                                    </li>
+                                    <li>弹出确认关闭窗体的对话框</li>
+                                </ul>
+                            </f:content-panel>
+                            <f:number-box id="NumberBox1" label="数字输入框" required="true" show-red-star="true"></f:number-box>
+                            <f:check-box id="CheckBox1" label="复选框"></f:check-box>
+                            <f:text-box id="TextBox1" label="文本输入框" show-red-star="true" required="true"></f:text-box>
+                            <f:date-picker id="DatePicker1" label="日期选择器" text="2008-05-09"></f:date-picker>
+                            <f:text-box id="TextBox2" label="默认隐藏的字段" hidden="true"></f:text-box>
+                            <f:drop-down-list label="下拉列表" id="DropDownList1">
+                                <f:list-items>
+                                    <f:list-item text="可选项1" value="Value1" selected="true"></f:list-item>
+                                    <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
+                                    <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
+                                    <f:list-item text="可选项4" value="Value4"></f:list-item>
+                                    <f:list-item text="可选项5" value="Value5"></f:list-item>
+                                    <f:list-item text="可选项6" value="Value6"></f:list-item>
+                                    <f:list-item text="可选择项7" value="Value7"></f:list-item>
+                                    <f:list-item text="可选择项8" value="Value8"></f:list-item>
+                                    <f:list-item text="普通型1 &lt; L &gt; 1.5" value="普通型1 &lt; L &gt; 1.5"></f:list-item>
+                                    <f:list-item text="可选择项9" value="Value9"></f:list-item>
+                                    <f:list-item text="可选择项10" value="Value10"></f:list-item>
+                                    <f:list-item text="可选择项11" value="Value11"></f:list-item>
+                                    <f:list-item text="可选择项12" value="Value12"></f:list-item>
+                                    <f:list-item text="可选择项13" value="Value13"></f:list-item>
+                                    <f:list-item text="可选择项14" value="Value14"></f:list-item>
+                                    <f:list-item text="可选择项15" value="Value15"></f:list-item>
+                                    <f:list-item text="可选择项16" value="Value16"></f:list-item>
+                                </f:list-items>
+                            </f:drop-down-list>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onCloseActiveWindowClick(event) {
+                    F.activeWindow.hide();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FormDisabled</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:form id="Form1" is-fluid="true" label-width="100" label-separator="：" body-padding="10" enable-collapse="false" title="表单">
+                <f:items>
+                    <f:form-row>
+                        <f:items>
+                            <f:label id="Label3" label="电话" text="0551-1234567"></f:label>
+                            <f:label id="Label16" label="申请人" text="admin"></f:label>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:label id="Label4" label="编号" text="200804170006"></f:label>
+                            <f:text-box id="TextBox2" required="true" show-red-star="true" label="电子邮箱" empty-text="请输入常用电子邮箱" regex-pattern="EMAIL"
+                                regex-message="请输入有效的邮箱地址"></f:text-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:drop-down-list id="DropDownList3" label="审批人" empty-text="请选择审批人" required="true" show-red-star="true"
+                                auto-select-first-item="false">
+                                <f:items>
+                                    <f:list-item text="老大甲" value="0"></f:list-item>
+                                    <f:list-item text="老大乙" value="1"></f:list-item>
+                                    <f:list-item text="老大丙" value="2"></f:list-item>
+                                </f:items>
+                            </f:drop-down-list>
+                            <f:number-box id="NumberBox1" label="申请数量" empty-text="请输入申请数量" no-negative="true" no-decimal="true" max-value="1000"
+                                required="true" show-red-star="true"></f:number-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:date-picker id="DatePicker1" required="true" label="日期" empty-text="请选择日期" text="2014-07-10"
+                                show-red-star="true"></f:date-picker>
+                            <f:time-picker id="TimePicker1" show-red-star="true" label="时间" increment="30" required="true" text="08:30"
+                                empty-text="请选择时间"></f:time-picker>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:file-upload id="filePhoto" empty-text="请选择一张照片" label="个人头像" required="true" show-red-star="true"></f:file-upload>
+                            <f:check-box id="cbxAtSchool" label="是否在读"></f:check-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:text-area id="TextArea1" label="描述" show-red-star="true" required="true"></f:text-area>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:check-box-list id="CheckBoxList1" label="复选框列表" column-number="3">
+                                <f:check-item text="可选项 1" value="value1"></f:check-item>
+                                <f:check-item text="可选项 2" value="value2" selected="true"></f:check-item>
+                                <f:check-item text="可选项 3" value="value3" selected="true"></f:check-item>
+                                <f:check-item text="可选项 4" value="value4" selected="true"></f:check-item>
+                                <f:check-item text="可选项 5" value="value5" selected="true"></f:check-item>
+                            </f:check-box-list>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:radio-button-list id="RadioButtonList2" label="单选框列表" required="true" column-number="3">
+                                <f:radio-item text="可选项 1" value="value1"></f:radio-item>
+                                <f:radio-item text="可选项 2" value="value2"></f:radio-item>
+                                <f:radio-item text="可选项 3" value="value3"></f:radio-item>
+                                <f:radio-item text="可选项 4" value="value4"></f:radio-item>
+                                <f:radio-item text="可选项 5" value="value5"></f:radio-item>
+                            </f:radio-button-list>
+                        </f:items>
+                    </f:form-row>
+                </f:items>
+            </f:form>
+            <br />
+            <f:button id="btnDisableAll" text="全部禁用" css-class="marginr" click-handler="onDisableAllClick"></f:button>
+            <f:button id="btnEnableAll" text="全部启用" css-class="marginr" click-handler="onEnableAllClick"></f:button>
+            <f:button id="btnReadOnlyAll" text="全部只读" css-class="marginr" click-handler="onReadOnlyClick"></f:button>
+            <f:button id="btnCancelReadOnlyAll" text="取消只读" css-class="marginr" click-handler="onCancelReadOnlyClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnMarkInvalid" text="设置无效标识" css-class="marginr" click-handler="onMarkInvalidClick"></f:button>
+            <f:button id="btnClearInvalid" text="取消无效标识" css-class="marginr" click-handler="onClearInvalidClick"></f:button>
+            <f:button id="Button1" validate-forms="Form1" text="验证并提交表单" on-click="Button1_Click"></f:button>
+            <br />
+            <br />
+            <br />
+            <br />
+            <f:button id="btnDisablePanel" text="禁用表单面板" css-class="marginr" click-handler="onDisableFormClick"></f:button>
+            <f:button id="btnEnablePanel" text="启用表单面板" css-class="marginr" click-handler="onEnableFormClick"></f:button>
+            <br />
+            <br />
+            <f:button id="Button2" text="添加只读样式（类似禁用样式）" css-class="marginr" click-handler="onAddReadonlyStyleClick"></f:button>
+            <f:button id="Button3" text="删除只读样式" css-class="marginr" click-handler="onRemoveReadonlyStyleClick"></f:button>
+
+            <textarea id="readonlycss_holder" style="display: none;">
+        .f-readonly {
+        opacity: .5;
+        filter: alpha(opacity=50);
+        }
+    </textarea>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onDisableAllClick(event) {
+                    $.each(F.ui.Form1.getFormFields(), function(index, field) {
+                        field.disable();
+                    });
+                }
+
+                function onEnableAllClick(event) {
+                    $.each(F.ui.Form1.getFormFields(), function(index, field) {
+                        field.enable();
+                    });
+                }
+
+                function onReadOnlyClick(event) {
+                    $.each(F.ui.Form1.getFormFields(), function(index, field) {
+                        field.setReadonly(true);
+                    });
+                }
+
+                function onCancelReadOnlyClick(event) {
+                    $.each(F.ui.Form1.getFormFields(), function(index, field) {
+                        field.setReadonly(false);
+                    });
+                }
+
+                // 无效标识，排除 Label 控件
+                function onMarkInvalidClick(event) {
+                    $.each(F.ui.Form1.getFormFields(), function(index, field) {
+                        if (!field.isType('Label')) {
+                            field.markInvalid('这个字段出错了！');
+                        }
+                    });
+                }
+
+                // 无效标识，排除 Label 控件
+                function onClearInvalidClick(event) {
+                    $.each(F.ui.Form1.getFormFields(), function(index, field) {
+                        if (!field.isType('Label')) {
+                            field.clearInvalid();
+                        }
+                    });
+                }
+
+                function onAddReadonlyStyleClick(event) {
+                    F.addCSS('readonlycss', $('#readonlycss_holder').val());
+                }
+
+                function onRemoveReadonlyStyleClick(event) {
+                    $('#readonlycss').remove();
+                }
+
+                function onDisableFormClick(event) {
+                    F.ui.Form1.disable();
+                }
+
+                function onEnableFormClick(event) {
+                    F.ui.Form1.enable();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

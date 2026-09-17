@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · NumberBox 触发器布局</title>
+
+        <style>
+            .text-align-center input {
+                text-align: center;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-align="Right" enable-collapse="false" title="简单表单" label-width="100"
+                show-header="true">
+                <f:items>
+                    <f:number-box id="NumberBox1" label="Stack" no-decimal="true" no-negative="true" trigger-type="Stack" value="100"></f:number-box>
+                    <f:number-box id="NumberBox2" label="Tile" no-decimal="true" no-negative="true" trigger-type="Tile" value="20"></f:number-box>
+                    <f:number-box id="NumberBox3" label="None" no-decimal="true" no-negative="true" show-trigger="false" value="20"></f:number-box>
+                    <f:number-box id="NumberBox4" label="Separate" css-class="text-align-center" no-decimal="true" no-negative="true" trigger-type="Separate"
+                        width="180" value="1"></f:number-box>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

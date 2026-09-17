@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 结束编辑（更新单元格的值）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（双击编辑）" data-id-field="Id" data-text-field="Name"
+                allow-cell-editing="true" clicks-to-edit="2" enable-check-box-select="true">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name">
+                        <f:editor>
+                            <f:text-box id="tbxName"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender">
+                        <f:editor>
+                            <f:drop-down-list id="ddlGender" required="true">
+                                <f:list-item text="男" value="1"></f:list-item>
+                                <f:list-item text="女" value="0"></f:list-item>
+                            </f:drop-down-list>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="所学专业" column-id="Major" data-field="Major" expand-unused-space="true" min-width="150">
+                        <f:editor>
+                            <f:text-box id="tbxMajor" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="语文成绩" column-id="ChineseScore" data-field="ChineseScore" field-type="Int">
+                        <f:editor>
+                            <f:number-box id="nbChineseScore" no-decimal="true" no-negative="true" required="true"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="数学成绩" column-id="MathScore" data-field="MathScore" field-type="Int">
+                        <f:editor>
+                            <f:number-box id="nbMathScore" no-decimal="true" no-negative="true" required="true"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="总成绩" column-id="TotalScore" data-field="TotalScore" field-type="Int">
+                        <f:editor>
+                            <f:number-box id="nbTotalScore" no-decimal="true" no-negative="true" required="true"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field enable-header-menu="false">
+                        <f:commands>
+                            <f:command command-name="Delete" icon="Delete" confirm-text="删除选中行？" confirm-target="Top"></f:command>
+                        </f:commands>
+                    </f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="afteredit" handler="onGrid1AfterEdit"></f:listener>
+                    <f:listener event="rowcommand" handler="onGrid1RowCommand"></f:listener>
+                </f:listeners>
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="btnNew" text="新增数据" icon="Add" click-handler="onNewClick"></f:button>
+                            <f:button id="btnDelete" text="删除选中行" icon="Delete" click-handler="onDeleteClick"></f:button>
+                            <f:toolbar-fill></f:toolbar-fill>
+                            <f:button id="btnReset" text="重置表格数据" click-handler="onResetClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:grid>
+
+            <br>
+            <f:button id="btnSubmit" text="保存数据" on-click="btnSubmit_Click"></f:button>
+
+            <br>
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br>
+            注：编辑[语文成绩]或者[数学成绩]时会同时更新[总成绩]。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function onGrid1AfterEdit(event, value, params) {
+                    var me = this,
+                        columnId = params.columnId,
+                        rowId = params.rowId;
+                    if (columnId === 'ChineseScore' || columnId === 'MathScore') {
+                        var chineseScore = me.getCellValue(rowId, 'ChineseScore');
+                        var mathScore = me.getCellValue(rowId, 'MathScore');
+
+                        me.updateCellValue(rowId, 'TotalScore', chineseScore + mathScore);
+
+                    }
+                }
+
+                function onNewClick(event) {
+                    var grid1 = F.ui.Grid1;
+
+                    // 新增一行（返回新增行的ID）
+                    var addedRowId = grid1.addNewRecord({
+                        'Name': '新用户',
+                        'Gender': '1',
+                        'Major': '化学系',
+                        'ChineseScore': 0,
+                        'MathScore': 0,
+                        'TotalScore': 0
+                    }, true);
+
+                }
+
+                function onResetClick(event) {
+                    F.confirm({
+                        message: '确定要重置表格数据？',
+                        ok: function() {
+                            F.ui.Grid1.rejectChanges();
+                        }
+                    });
+                }
+
+                function onDeleteClick(event) {
+                    var grid1 = F.ui.Grid1;
+                    if (!grid1.hasSelection()) {
+                        F.alert('没有选中项！');
+                        return;
+                    }
+
+                    var selectedRows = grid1.getSelectedRows();
+                    F.confirm({
+                        message: F.rawHtml('你确定要删除选中的&nbsp;<b>' + selectedRows.length + '</b>&nbsp;行数据吗？'),
+                        target: '_top',
+                        ok: function() {
+                            grid1.deleteRows(selectedRows);
+                        }
+                    });
+                }
+
+                // 行命令
+                function onGrid1RowCommand(event, rowId, rowIndex, columnId, commandName) {
+                    if (commandName === 'Delete') {
+                        F.ui.Grid1.deleteRow(rowId);
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

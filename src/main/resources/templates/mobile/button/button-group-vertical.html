@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 按钮分组（垂直）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 10px 0" body-padding="10px"
+                auto-scroll="true" is-view-port="true">
+                <f:items>
+                    <f:button-group id="ButtonGroup2" layout="VBox" box-config-align="StretchMax" enable-press-group="true" vertical="true">
+                        <f:button id="Button4" text="按钮一" icon="Cake" enable-press="true" pressed="true"></f:button>
+                        <f:button id="Button5" text="按钮二" icon-font="_Bank" enable-press="true"></f:button>
+                        <f:button id="Button6" text="按钮三" icon-font="_Group" enable-press="true"></f:button>
+                    </f:button-group>
+                    <f:button-group id="ButtonGroup6" layout="VBox" box-config-align="StretchMaxCenter" enable-press-group="true" vertical="true">
+                        <f:button id="Button16" text="按钮一" icon="Cake" enable-press="true"></f:button>
+                        <f:button id="Button17" text="按钮二" icon-font="_Bank" enable-press="true" pressed="true"></f:button>
+                        <f:button id="Button18" text="按钮三" icon-font="_Group" enable-press="true"></f:button>
+                    </f:button-group>
+                    <f:button-group id="ButtonGroup7" layout="VBox" box-config-align="StretchMaxEnd" enable-press-group="true" vertical="true">
+                        <f:button id="Button19" text="按钮一" icon="Cake" enable-press="true"></f:button>
+                        <f:button id="Button20" text="按钮二" icon-font="_Bank" enable-press="true"></f:button>
+                        <f:button id="Button21" text="按钮三" icon-font="_Group" enable-press="true" pressed="true"></f:button>
+                    </f:button-group>
+                    <f:button-group id="ButtonGroup8" layout="VBox" box-config-align="Stretch" enable-press-group="true" vertical="true">
+                        <f:button id="Button22" text="按钮一" icon="Cake" enable-press="true"></f:button>
+                        <f:button id="Button23" text="按钮二" icon-font="_Bank" enable-press="true" pressed="true"></f:button>
+                        <f:button id="Button24" text="按钮三" icon-font="_Group" enable-press="true"></f:button>
+                    </f:button-group>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

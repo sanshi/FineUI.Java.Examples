@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.fineui.samples</groupId>
+    <artifactId>fineui-java-examples</artifactId>
+    <version>16.0.0-beta.1</version>
+    <name>FineUI.Java Examples</name>
+    <description>FineUI.Java 使用方示例：只依赖 fineui-java 一个库，零 @Configuration 即可跑通标签式有状态服务端组件的完整闭环。</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <fineui.version>16.0.0-beta.1</fineui.version>
+    </properties>
+
+    <dependencies>
+        <!-- 业务项目只需引这一个依赖，方言/过滤器/回发端点/页面路由 + 内嵌 F.js 运行时自动装配 -->
+        <dependency>
+            <groupId>com.fineui</groupId>
+            <artifactId>fineui-java</artifactId>
+            <version>${fineui.version}</version>
+        </dependency>
+
+        <!-- 示例站选择启用 Spring Security CSRF；FineUI 自动配置会保持所有示例路由匿名可访问。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- DataModel 示例实际执行 Jakarta Bean Validation。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- 开发期热部署：改 Java 后自动重启、改模板/静态资源刷新即生效（关缓存）。
+             optional=true 不传递给下游；spring-boot 打包（repackage）默认排除，不进正式制品。 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- 测试：点击闭环冒烟（examples 不卡覆盖率门槛，仅作端到端装配回归） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 仅可运行的应用模块用重打包插件；fineui-java 作为库不用 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

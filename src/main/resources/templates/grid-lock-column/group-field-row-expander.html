@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多表头 + 列锁定 + 行扩展列</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-check-box-select="true" allow-column-locking="true" allow-sorting="true" height="500" width="1000">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text-raw-html="姓名<br>（换行）" data-field="Name" sort-field="Name" enable-lock="true" locked="true"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" sort-field="Gender" field-type="Int" renderer-function="renderGender"
+                        enable-lock="true"></f:render-field>
+                    <f:group-field enable-lock="true" header-text="考试成绩" text-align="Center">
+                        <f:columns>
+                            <f:render-field enable-lock="true" data-field="ChineseScore" sort-field="ChineseScore" header-text="语文成绩"
+                                text-align="Center"></f:render-field>
+                            <f:render-field enable-lock="true" data-field="MathScore" sort-field="MathScore" header-text="数学成绩"
+                                text-align="Center"></f:render-field>
+                            <f:render-field enable-lock="true" data-field="TotalScore" sort-field="TotalScore" header-text="总成绩"
+                                text-align="Center"></f:render-field>
+                        </f:columns>
+                    </f:group-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" sort-field="EntranceYear" field-type="Int" enable-lock="true"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" sort-field="AtSchool" render-as-static-field="true"
+                        enable-lock="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" sort-field="Major" renderer-function="renderMajor" width="800"
+                        enable-lock="true"></f:render-field>
+                    <f:render-field header-text="" data-field="Desc" render-as-row-expander="true" renderer-function="renderExpander" enable-lock="true"
+                        locked="true"></f:render-field>
+                    <f:render-field enable-lock="true" data-field="ShenGao" column-id="ShenGao" header-text="身高"></f:render-field>
+                    <f:render-field enable-lock="true" data-field="TiZhong" column-id="TiZhong" header-text="体重"></f:render-field>
+                    <f:render-field enable-lock="true" data-field="XueYaDi" column-id="XueYaDi" header-text="血压（低）"></f:render-field>
+                    <f:render-field enable-lock="true" data-field="XueYaGao" column-id="XueYaGao" header-text="血压（高）"></f:render-field>
+                    <f:render-field enable-lock="true" data-field="ShiLiZuo" column-id="ShiLiZuo" header-text="视力（左）"></f:render-field>
+                    <f:render-field enable-lock="true" data-field="ShiLiYou" column-id="ShiLiYou" header-text="视力（右）"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"
+                        enable-lock="true"></f:render-field>
+                </f:columns>
+            </f:grid>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

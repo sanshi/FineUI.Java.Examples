@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多行文本框（自定义编辑器获取函数）</title>
+
+        <style>
+            .f-grid-row .f-grid-cell-text {
+                white-space: normal;
+                word-break: break-all;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（单击编辑）" data-id-field="Id" data-text-field="Name"
+                allow-cell-editing="true" clicks-to-edit="1" height="500">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name">
+                        <f:editor>
+                            <f:text-box id="tbxName" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender">
+                        <f:editor>
+                            <f:drop-down-list id="ddlGender" required="true">
+                                <f:list-item text="男" value="1"></f:list-item>
+                                <f:list-item text="女" value="0"></f:list-item>
+                            </f:drop-down-list>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="入学年份" column-id="EntranceYear" data-field="EntranceYear" field-type="Int" hidden="true">
+                        <f:editor>
+                            <f:number-box id="nbxEntranceYear" no-decimal="true" no-negative="true" min-value="2000" max-value="2025"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="入学日期" column-id="EntranceDate" data-field="EntranceDate" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy/MM/dd" width="150" hidden="true">
+                        <f:editor>
+                            <f:date-picker id="dpEntranceDate" required="true"></f:date-picker>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-check-field header-text="是否在校" column-id="AtSchool" data-field="AtSchool" hidden="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" column-id="Major" data-field="Major" width="150">
+                        <f:editor>
+                            <f:text-box id="tbxMajor" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="个人简介" column-id="Desc" data-field="Desc" expand-unused-space="true" min-width="150"
+                        edit-getter-function="editGetterDesc" edit-setter-function="editSetterDesc">
+                        <f:editor>
+                            <f:text-area id="TextArea1" required="true"></f:text-area>
+                        </f:editor>
+                    </f:render-field>
+                </f:columns>
+            </f:grid>
+            <br>
+
+            <f:button id="btnSubmit" text="保存数据" on-click="btnSubmit_Click"></f:button>
+
+            <br>
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br />
+            注：进入[个人简介]的编辑框时，用换行符替换 &lt;br /&gt; 标签。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                // 自定义编辑器获取函数（从Editor返回单元格）
+                function editGetterDesc(editor) {
+                    return editor.getText().replace(/\n/g, '<br/>');
+                }
+
+                // 自定义编辑器设置函数（从单元格进入Editor）
+                function editSetterDesc(editor, val, columnId, rowId) {
+                    editor.setText(val.replace(/<br\/>/g, '<br>').replace(/<br>/g, '\n'));
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

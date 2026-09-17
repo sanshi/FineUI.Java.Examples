@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 自定义回发动画</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:form id="Form1" is-fluid="true" body-padding="10" enable-collapse="false" label-width="100" title="表单">
+                <f:items>
+                    <f:form-row column-widths="50% 50%">
+                        <f:items>
+                            <f:label id="Label3" label="电话" text="0551-1234567"></f:label>
+                            <f:label id="Label16" label="申请人" text="admin"></f:label>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row column-widths="50% 50%">
+                        <f:items>
+                            <f:label id="Label4" label="编号" text="200804170006"></f:label>
+                            <f:text-box id="TextBox2" label="电子邮箱" required="true" show-red-star="true" regex-pattern="EMAIL"
+                                regex-message="请输入有效的邮箱地址"></f:text-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row column-widths="100%">
+                        <f:items>
+                            <f:drop-down-list id="DropDownList3" label="审批人" required="true" show-red-star="true" empty-text="请选择审批人"
+                                auto-select-first-item="false">
+                                <f:items>
+                                    <f:list-item text="老大甲" value="0"></f:list-item>
+                                    <f:list-item text="老大乙" value="1"></f:list-item>
+                                    <f:list-item text="老大丙" value="2"></f:list-item>
+                                    <f:list-item text="老大丁" value="3"></f:list-item>
+                                    <f:list-item text="老大午" value="4"></f:list-item>
+                                    <f:list-item text="老大己" value="5"></f:list-item>
+                                </f:items>
+                            </f:drop-down-list>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row column-widths="100%">
+                        <f:items>
+                            <f:number-box id="NumberBox1" label="申请数量" no-decimal="true" no-negative="true" max-value="1000" required="true"
+                                show-red-star="true"></f:number-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row column-widths="100%">
+                        <f:items>
+                            <f:text-area id="TextArea1" label="描述" required="true" show-red-star="true"></f:text-area>
+                        </f:items>
+                    </f:form-row>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="btnSubmit" text="验证此表单并提交" css-class="marginr" click-handler="onSubmitClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:form>
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onSubmitClick(event) {
+                    var form1 = F.ui.Form1;
+
+                    // AJAX回发之前，先对表单进行验证
+                    if (!F.validateForm('Form1', {
+                            target: '_top'
+                        })) {
+                        return;
+                    }
+
+                    // AJAX回发之前显示面板加载动画
+                    form1.showLoading();
+
+                    // 自定义回发，设置完成时回调complete
+                    F.doPostBack({
+                        eventName: 'Form1_Submit',
+                        // 不显示页面级加载动画（FineUI.Java 的 F.doPostBack 仅支持
+                        // eventName/eventArgument/eventTarget/complete，本键为兼容占位，无实际效果）
+                        enableAjaxLoading: false,
+                        complete: function(data) {
+                            // AJAX回发结束时隐藏面板加载动画
+                            form1.hideLoading();
+                        }
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 菜单复选框</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel is-fluid="true" show-border="true" body-padding="10" height="300" title="面板" enable-collapse="false">
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="btnLangMenu" text="系统语言">
+                                <f:menu>
+                                    <f:menu-check-box id="MenuLangEnglish" text="English" group-name="MenuLang" on-checked-changed="MenuLang_CheckedChanged"
+                                        checked="true"></f:menu-check-box>
+                                    <f:menu-check-box id="MenuLangZHCN" text="简体中文" group-name="MenuLang"
+                                        on-checked-changed="MenuLang_CheckedChanged"></f:menu-check-box>
+                                    <f:menu-check-box id="MenuLangZHTW" text="繁體中文" group-name="MenuLang"
+                                        on-checked-changed="MenuLang_CheckedChanged"></f:menu-check-box>
+                                </f:menu>
+                            </f:button>
+                            <f:button id="btnSiteMenu" text="喜欢的站点">
+                                <f:menu>
+                                    <f:menu-check-box id="MenuSiteBaidu" text="baidu.com" checked="true"
+                                        on-checked-changed="MenuSite_CheckedChanged"></f:menu-check-box>
+                                    <f:menu-check-box id="MenuSiteGoogle" text="google.com" checked="true"
+                                        on-checked-changed="MenuSite_CheckedChanged"></f:menu-check-box>
+                                    <f:menu-check-box id="MenuSiteMicrosoft" text="microsoft.com"
+                                        on-checked-changed="MenuSite_CheckedChanged"></f:menu-check-box>
+                                </f:menu>
+                            </f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:label id="labLangResult"></f:label>
+                    <f:label id="labSiteResult"></f:label>
+                    <f:button text="获取喜欢的站点（客户端脚本）" click-handler="onGetSiteMenuChecked"></f:button>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onGetSiteMenuChecked(event) {
+                    var result = [];
+                    var checkedItems = F.ui.btnSiteMenu.menu.getCheckedItems();
+                    $.each(checkedItems, function(index, item) {
+                        result.push(item.getText());
+                    });
+                    F.alert('喜欢的站点：' + result.join(', '));
+                }
+
+                function getMenuCheckBoxChecked(type) {
+                    var result = [];
+                    var btnContainer = type === 'lang' ? F.ui.btnLangMenu : F.ui.btnSiteMenu;
+                    $.each(btnContainer.menu.items, function(index, item) {
+                        if (item.isChecked()) {
+                            result.push(item.getText());
+                        }
+                    });
+                    return result.join(', ');
+                }
+
+                F.ready(function() {
+                    F.ui.labLangResult.setText('你选择的语言：' + getMenuCheckBoxChecked('lang'));
+                    F.ui.labSiteResult.setText('你选择的站点：' + getMenuCheckBoxChecked('site'));
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

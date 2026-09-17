@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 改变标题栏文本和宽度</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button id="Button1" text="修改[入学年份]的标题文本和宽度" on-click="Button1_Click"></f:button>
+            <f:button id="Button2" text="还原[入学年份]" on-click="Button2_Click"></f:button>
+            <br />
+            <br />
+            注：后台通过注册 JavaScript 代码来改变列的宽度和标题文本。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

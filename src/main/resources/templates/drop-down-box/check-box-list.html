@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CheckBoxList</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10px" enable-collapse="false" show-border="true" title="下拉复选框列表" show-header="true">
+                <f:items>
+                    <f:drop-down-box id="DropDownBox1" data-control-id="CheckBoxList1" enable-multi-select="true" values="js,php">
+                        <f:pop-panel>
+                            <f:simple-form id="SimpleForm2" body-padding="10px" auto-scroll="true" show-border="true" show-header="false" hidden="true">
+                                <f:items>
+                                    <f:label id="Label1" text="请选择编程语言："></f:label>
+                                    <f:check-box-list id="CheckBoxList1" column-number="3">
+                                        <f:check-item text="C#" value="csharp"></f:check-item>
+                                        <f:check-item text="JavaScript" value="js"></f:check-item>
+                                        <f:check-item text="JAVA" value="java"></f:check-item>
+                                        <f:check-item text="Ruby" value="ruby"></f:check-item>
+                                        <f:check-item text="PHP" value="php"></f:check-item>
+                                        <f:check-item text="Objective-C" value="objc"></f:check-item>
+                                        <f:check-item text="Python" value="python"></f:check-item>
+                                        <f:check-item text="Perl" value="perl"></f:check-item>
+                                        <f:check-item text="C++" value="cplusplus"></f:check-item>
+                                        <f:check-item text="Basic" value="basic"></f:check-item>
+                                        <f:check-item text="Go" value="go"></f:check-item>
+                                        <f:check-item text="Swift" value="swift"></f:check-item>
+                                    </f:check-box-list>
+                                </f:items>
+                            </f:simple-form>
+                        </f:pop-panel>
+                    </f:drop-down-box>
+                    <f:button id="btnSelectItem6" text="选中[php,basic]" on-click="btnSelectItem6_Click" css-class="marginr"></f:button>
+                    <f:button id="btnGetSelection" text="获取下拉框的选中值" on-click="btnGetSelection_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br>
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

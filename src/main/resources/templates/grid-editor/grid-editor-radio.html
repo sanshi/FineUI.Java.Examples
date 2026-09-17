@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 复选框列（单选）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（单击编辑）" data-id-field="Id" data-text-field="Name"
+                allow-cell-editing="true" clicks-to-edit="1">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name">
+                        <f:editor>
+                            <f:text-box id="tbxName" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-check-field header-text="是否在校" column-id="AtSchool" data-field="AtSchool" width="150"></f:render-check-field>
+                    <f:render-check-field header-text="测试列（单选）" column-id="TestColumn1" width="150"></f:render-check-field>
+                    <f:render-field header-text="所学专业" column-id="Major" data-field="Major" expand-unused-space="true" min-width="150">
+                        <f:editor>
+                            <f:text-box id="tbxMajor" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="afteredit" handler="onGrid1AfterEdit"></f:listener>
+                </f:listeners>
+            </f:grid>
+
+            <br>
+            <f:button id="btnSubmit" text="保存数据" on-click="btnSubmit_Click"></f:button>
+
+            <br>
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function onGrid1AfterEdit(event, value, params) {
+                    var grid1 = F.ui.Grid1;
+
+                    // 如果取消复选框选中，则不做处理
+                    if (value && params.columnId === 'TestColumn1') {
+                        // 遍历所有的行
+                        grid1.getRowEls().each(function() {
+                            var row = grid1.getRowData($(this));
+                            if (row.id !== params.rowId) {
+                                // 如果不是当前操作的行，则取消单元格选中
+                                grid1.updateCellValue(row.id, params.columnId, false);
+                            }
+                        });
+
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

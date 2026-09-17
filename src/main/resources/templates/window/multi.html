@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多窗体</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <f:drop-down-list id="DropDownList1">
+                                <f:list-item text="窗体一" value="1"></f:list-item>
+                                <f:list-item text="窗体二" value="2"></f:list-item>
+                                <f:list-item text="窗体三" value="3"></f:list-item>
+                            </f:drop-down-list>
+                        </td>
+                        <td>
+                            <f:button id="btnShowWindow" text="显示窗体" click-handler="onShowWindowClick"></f:button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br>
+            <br>
+            <f:window id="Window1" width="650" height="300" icon="TagBlue" title="窗体一" hidden="true" enable-maximize="true" enable-collapse="false"
+                enable-resize="true" is-modal="false" auto-scroll="true" body-padding="10">
+                <f:items>
+                    <f:form id="Form2" body-padding="10" label-width="100" show-border="false" show-header="false" title="表单 1">
+                        <f:items>
+                            <f:form-row column-widths="50% 50%">
+                                <f:items>
+                                    <f:label id="Label1" label="标签" text="标签的值"></f:label>
+                                    <f:check-box id="CheckBox1" text="复选框" label="复选框"></f:check-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row column-widths="50% 50%">
+                                <f:items>
+                                    <f:drop-down-list id="DropDownList2" label="下拉列表" required="true" show-red-star="true" auto-select-first-item="false">
+                                        <f:items>
+                                            <f:list-item text="可选项1" value="Value1"></f:list-item>
+                                            <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
+                                            <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
+                                            <f:list-item text="可选项4" value="Value4"></f:list-item>
+                                            <f:list-item text="可选项5" value="Value5"></f:list-item>
+                                            <f:list-item text="可选项6" value="Value6"></f:list-item>
+                                            <f:list-item text="可选择项7" value="Value7"></f:list-item>
+                                            <f:list-item text="可选择项8" value="Value8"></f:list-item>
+                                        </f:items>
+                                    </f:drop-down-list>
+                                    <f:text-box id="TextBox1" show-red-star="true" label="文本框" required="true" text=""></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                        </f:items>
+                    </f:form>
+                </f:items>
+            </f:window>
+            <f:window id="Window2" width="650" height="300" icon="TagBlue" title="窗体二" hidden="true" enable-maximize="true" enable-collapse="false"
+                enable-resize="true" is-modal="false" auto-scroll="true" body-padding="10">
+                <f:items>
+                    <f:form id="Form3" body-padding="10" label-width="100" show-border="false" show-header="false" title="表单 2">
+                        <f:items>
+                            <f:form-row column-widths="50% 50%">
+                                <f:items>
+                                    <f:label id="Label2" label="标签" text="标签的值"></f:label>
+                                    <f:check-box id="CheckBox2" text="复选框" label="复选框"></f:check-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row column-widths="50% 50%">
+                                <f:items>
+                                    <f:drop-down-list id="DropDownList3" label="下拉列表" required="true" show-red-star="true" auto-select-first-item="false">
+                                        <f:items>
+                                            <f:list-item text="可选项1" value="Value1"></f:list-item>
+                                            <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
+                                            <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
+                                            <f:list-item text="可选项4" value="Value4"></f:list-item>
+                                            <f:list-item text="可选项5" value="Value5"></f:list-item>
+                                            <f:list-item text="可选项6" value="Value6"></f:list-item>
+                                            <f:list-item text="可选择项7" value="Value7"></f:list-item>
+                                            <f:list-item text="可选择项8" value="Value8"></f:list-item>
+                                        </f:items>
+                                    </f:drop-down-list>
+                                    <f:text-box id="TextBox2" show-red-star="true" label="文本框" required="true" text=""></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                        </f:items>
+                    </f:form>
+                </f:items>
+            </f:window>
+            <f:window id="Window3" width="650" height="300" icon="TagBlue" title="窗体三" enable-maximize="true" enable-collapse="false" enable-resize="true"
+                is-modal="false" auto-scroll="true" body-padding="10">
+                <f:items>
+                    <f:form id="Form4" body-padding="10" label-width="100" show-border="false" show-header="false" title="表单 3">
+                        <f:items>
+                            <f:form-row column-widths="50% 50%">
+                                <f:items>
+                                    <f:label id="Label3" label="标签" text="标签的值"></f:label>
+                                    <f:check-box id="CheckBox3" text="复选框" label="复选框"></f:check-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row column-widths="50% 50%">
+                                <f:items>
+                                    <f:drop-down-list id="DropDownList4" label="下拉列表" required="true" show-red-star="true" auto-select-first-item="false">
+                                        <f:items>
+                                            <f:list-item text="可选项1" value="Value1"></f:list-item>
+                                            <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
+                                            <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
+                                            <f:list-item text="可选项4" value="Value4"></f:list-item>
+                                            <f:list-item text="可选项5" value="Value5"></f:list-item>
+                                            <f:list-item text="可选项6" value="Value6"></f:list-item>
+                                            <f:list-item text="可选择项7" value="Value7"></f:list-item>
+                                            <f:list-item text="可选择项8" value="Value8"></f:list-item>
+                                        </f:items>
+                                    </f:drop-down-list>
+                                    <f:text-box id="TextBox3" show-red-star="true" label="文本框" required="true" text=""></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                        </f:items>
+                    </f:form>
+                </f:items>
+            </f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onShowWindowClick(event) {
+                    var ddlValue = F.ui.DropDownList1.getValue();
+                    // 显示相应的窗体
+                    F.ui['Window' + ddlValue].show();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Block 左右嵌套</title>
+
+        <style>
+            body.f-body {
+                overflow-x: hidden;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel is-fluid="true" layout="Block" block-config-space="20" show-border="false" show-header="false">
+                <f:items>
+                    <f:panel block-md="8" layout="Block" block-config-space="20" show-border="false" show-header="false">
+                        <f:items>
+                            <f:panel title="1" block-md="6" height="300"></f:panel>
+                            <f:panel title="2" block-md="6" height="300"></f:panel>
+                            <f:panel title="3" block-md="12" height="400"></f:panel>
+                            <f:panel title="4" block-md="12" height="400"></f:panel>
+                        </f:items>
+                    </f:panel>
+                    <f:panel block-md="4" layout="Block" block-config-space="20" show-border="false" show-header="false">
+                        <f:items>
+                            <f:panel title="5" block-md="12" height="300"></f:panel>
+                            <f:panel title="6" block-md="12" height="200"></f:panel>
+                            <f:panel title="7" block-md="12" height="200"></f:panel>
+                            <f:panel title="8" block-md="12" height="200"></f:panel>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+        </th:block>
+    </body>
+
+</html>

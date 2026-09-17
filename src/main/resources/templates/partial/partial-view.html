@@ -1,0 +1,7 @@
+<!-- 公共用户卡片片段（对应源示例 PartialView 分部视图）：由页面 th:replace 按参数多次引用，复用同一份卡片结构。
+     参数：prefix（所属面板 id，作控件 id 前缀避免跨面板冲突）、index（面板内序号，从 1 起）、userName、userAge、userCountry。 -->
+<f:panel th:fragment="card(prefix, index, userName, userAge, userCountry)" id="|${prefix}_PartialView${index}|" body-padding="10" title="分部视图">
+    <f:items>
+        <f:label id="|${prefix}_PartialView${index}_labUserInfo|" text="|${userName}今年${userAge}岁，住在${userCountry}。|"></f:label>
+    </f:items>
+</f:panel>

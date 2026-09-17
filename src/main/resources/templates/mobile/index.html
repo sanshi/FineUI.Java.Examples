@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 移动示例预览</title>
+
+        <style>
+            .phonebg {
+                position: absolute;
+                top: 30px;
+                left: 30px;
+            }
+
+            .myiframe {
+                border-width: 10px;
+                border-style: solid;
+                border-radius: 10px;
+                width: 320px;
+                height: 568px;
+                box-shadow: 0px 0px 8px #ccc;
+                margin-bottom: 20px;
+            }
+
+            body.f-theme-darkbg .myiframe {
+                box-shadow: 0px 0px 8px #333;
+            }
+
+            .qrcode {
+                position: absolute;
+                bottom: 0;
+                left: 400px;
+                margin-bottom: 20px;
+            }
+
+            .qrcode img {
+                width: 180px;
+                height: 180px;
+                border: solid 1px #eee;
+            }
+
+            .qrcode .desc {
+                font-size: 12px;
+                text-align: center;
+                padding-top: 5px;
+            }
+
+        </style>
+
+        <!--/*
+          客户端解析 ?file=（服务端不暴露查询串，故在浏览器端读）。放 <head> 里尽早执行：
+            不带 file → 立即跳转移动首页（把当前路径末段 index → main，保留大小写，避免正文闪现）；
+            带 file  → 原样（保留大小写）作为内嵌 IFrame 的 src（DOM 就绪后写入）。
+        */-->
+        <script>
+            (function() {
+                var file = new URLSearchParams(window.location.search).get('file');
+
+                // 不带参数访问 → 转到移动首页（末段 index→main，按原大小写保留）
+                if (!file) {
+                    window.location.replace(window.location.pathname.replace(/[^/]*$/, function(seg) {
+                        return seg.charAt(0) === seg.charAt(0).toUpperCase() ? 'Main' : 'main';
+                    }));
+                    return;
+                }
+
+                // 兼容站点根前缀并保持大小写：内嵌页路由大小写不敏感能命中
+                var resolved = file.charAt(0) === '~' ? file.replace(/^~\//, '/') : file;
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    var frame = document.getElementById('myiframe');
+                    if (frame) {
+                        frame.setAttribute('src', resolved);
+                    }
+                });
+            })();
+
+        </script>
+    </head>
+
+    <body>
+
+        <th:block layout:fragment="body">
+            <div class="phonebg">
+                <iframe class="f-iframe myiframe f-widget-content" id="myiframe"></iframe>
+
+                <div class="qrcode">
+                    <img th:src="@{/res/images/fineuicore_mobile_pages.png}" />
+                    <div class="desc">
+                        请打开手机，扫描二维码
+                        <br />
+                        移动示例支持 iOS、Android 系统
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </body>
+
+</html>

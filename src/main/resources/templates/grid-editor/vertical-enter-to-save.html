@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 单元格编辑（Enter纵向导航，最后自动点击保存按钮）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（单击编辑）" data-id-field="Id" data-text-field="Name"
+                allow-cell-editing="true" clicks-to-edit="1" tab-vertical-navigate="false" enter-same-as-tab="true">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name">
+                        <f:editor>
+                            <f:text-box id="tbxName" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender">
+                        <f:editor>
+                            <f:drop-down-list id="ddlGender" required="true">
+                                <f:list-item text="男" value="1"></f:list-item>
+                                <f:list-item text="女" value="0"></f:list-item>
+                            </f:drop-down-list>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="入学年份" column-id="EntranceYear" data-field="EntranceYear" field-type="Int">
+                        <f:editor>
+                            <f:number-box id="nbxEntranceYear" no-decimal="true" no-negative="true" min-value="2000" max-value="2025"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="入学日期" column-id="EntranceDate" data-field="EntranceDate" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy/MM/dd" width="150">
+                        <f:editor>
+                            <f:date-picker id="dpEntranceDate" required="true"></f:date-picker>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-check-field header-text="是否在校" column-id="AtSchool" data-field="AtSchool"></f:render-check-field>
+                    <f:render-field header-text="所学专业" column-id="Major" data-field="Major" expand-unused-space="true" min-width="150">
+                        <f:editor>
+                            <f:text-box id="tbxMajor" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="beforetabedit" handler="onGridBeforeTabEdit"></f:listener>
+                </f:listeners>
+            </f:grid>
+
+            <br>
+            <f:button id="btnSubmit" text="保存数据" on-click="btnSubmit_Click"></f:button>
+
+            <br>
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br>
+            快捷键说明：
+            <ul>
+                <li>方向键在单元格之间导航（非编辑状态）</li>
+                <li>ESC 键取消单元格的编辑状态</li>
+                <li>Enter、Tab 键进入垂直方向的下一个单元格（如果单元格可编辑，则使其进入编辑状态）</li>
+                <li>Shift+Enter、Shift+Tab 键回退到垂直方向的上一个单元格（如果单元格可编辑，则使其进入编辑状态）</li>
+                <li>在最后一个单元格按下 Enter 或者 ESC 键，会触发[保存数据]按钮的点击事件</li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function onGridBeforeTabEdit(event, params) {
+                    // 如果当前列是[所学专业]列，并且 TAB键 要跳转到的单元格为空（也就是当前位于表格的最后一个单元格）
+                    if (params.columnId === 'Major' && !params.nextTd.length) {
+                        // 点击保存按钮
+                        F.ui.btnSubmit.click();
+
+                        // 阻止 TAB键 跳转
+                        return false;
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

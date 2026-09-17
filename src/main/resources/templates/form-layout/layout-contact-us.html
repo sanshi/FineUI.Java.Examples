@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · LayoutContactUs</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:window id="Window1" title="联系我们" is-modal="false" enable-close="false" enable-resize="true" width="550" auto-scroll="true">
+                <f:items>
+                    <f:form id="Form1" label-align="Top" body-padding="10" show-border="false" show-header="false">
+                        <f:items>
+                            <f:panel id="Panel2" layout="Column" show-header="false" show-border="false">
+                                <f:items>
+                                    <f:text-box id="TextBox2" label="姓" margin="0 5 0 0" required="true" show-red-star="true" column-width="50%"></f:text-box>
+                                    <f:text-box id="TextBox4" label="名" required="true" show-red-star="true" column-width="50%"></f:text-box>
+                                </f:items>
+                            </f:panel>
+                            <f:text-box id="TextBox1" required="true" show-red-star="true" label="电子邮箱" regex-pattern="EMAIL"
+                                regex-message="请输入有效的邮箱地址"></f:text-box>
+                            <f:text-box id="TextBox3" required="true" show-red-star="true" label="主题"></f:text-box>
+                            <f:text-area id="TextArea1" height="120" required="true" show-red-star="true" label="消息正文"></f:text-area>
+                        </f:items>
+                    </f:form>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" toolbar-align="Right" position="Bottom">
+                        <f:items>
+                            <f:button id="Button1" text="发送" icon-font="_Send" validate-forms="Form1"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:window>
+
+        </th:block>
+    </body>
+
+</html>

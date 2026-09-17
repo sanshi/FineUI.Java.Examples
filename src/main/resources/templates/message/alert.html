@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 提示对话框</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:form id="SimpleForm1" is-fluid="true" title="创建对话框" label-width="150" body-padding="10">
+                <f:items>
+                    <f:group-panel id="GroupPanel2" layout="Anchor" title="常用属性">
+                        <f:items>
+                            <f:text-box id="tbxMessage" required="true" show-red-star="true" label="消息提示" text="你好 FineUI！"></f:text-box>
+                            <f:text-box id="tbxTitle" label="对话框标题"></f:text-box>
+                            <f:check-box id="cbxEnableClose" checked="true" label="是否可关闭"></f:check-box>
+                            <f:radio-button-list id="rblMessageBoxIcon" label="消息图标" column-number="3">
+                                <f:items>
+                                    <f:radio-item value="None" text="无图标" selected="true"></f:radio-item>
+                                    <f:radio-item value="Information" text="消息"></f:radio-item>
+                                    <f:radio-item value="Warning" text="警告"></f:radio-item>
+                                    <f:radio-item value="Question" text="问题"></f:radio-item>
+                                    <f:radio-item value="Error" text="错误"></f:radio-item>
+                                    <f:radio-item value="Success" text="成功"></f:radio-item>
+                                </f:items>
+                            </f:radio-button-list>
+                        </f:items>
+                    </f:group-panel>
+                    <f:group-panel id="GroupPanel1" layout="Anchor" title="其它属性">
+                        <f:items>
+                            <f:text-box id="tbxID" label="对话框ID"></f:text-box>
+                            <f:number-box id="nbWidth" no-decimal="true" no-negative="true" label="对话框宽度" min-value="200" max-value="900"></f:number-box>
+                            <f:number-box id="nbMinWidth" no-decimal="true" no-negative="true" label="对话框最小宽度"></f:number-box>
+                            <f:number-box id="nbMaxWidth" no-decimal="true" no-negative="true" label="对话框最大宽度"></f:number-box>
+                            <f:radio-button-list id="rblTarget" label="弹出位置" column-number="3">
+                                <f:items>
+                                    <f:radio-item value="Self" text="当前页面" selected="true"></f:radio-item>
+                                    <f:radio-item value="Parent" text="父页面"></f:radio-item>
+                                    <f:radio-item value="Top" text="顶层页面"></f:radio-item>
+                                </f:items>
+                            </f:radio-button-list>
+                        </f:items>
+                    </f:group-panel>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="btnHello" text="点击弹出对话框" validate-forms="SimpleForm1" on-click="btnSubmit_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:form>
+
+        </th:block>
+    </body>
+
+</html>

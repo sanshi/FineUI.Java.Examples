@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 登陆窗体（简洁按钮）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 5px 0" body-padding="10px"
+                is-view-port="true">
+                <f:items>
+                    <f:button id="btnOpenWindow" text="打开登陆窗体" click-handler="onOpenWindowClick"></f:button>
+                </f:items>
+            </f:panel>
+
+            <f:window id="Window1" title="登陆窗体" title-align="Center" hidden="true" is-modal="true" enable-close="false" layout="Fit" body-padding="15px"
+                width="300">
+                <f:items>
+                    <f:simple-form id="SimpleForm1" show-border="false" show-header="false" layout="VBox" message-target="None">
+                        <f:items>
+                            <f:text-box id="tbxUserName" label="用户名" show-label="false" empty-text="请输入用户名" required="true"></f:text-box>
+                            <f:text-box id="tbxPassword" label="密码" show-label="false" text-mode="Password" empty-text="请输入密码" required="true"></f:text-box>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" css-class="f-toolbar-buttonplain" position="Bottom" layout="Fit">
+                        <f:items>
+                            <f:button-group id="ButtonGroup1" layout="HBox">
+                                <f:items>
+                                    <f:button id="btnCancel" text="取消" box-flex="1" click-handler="onCancelClick"></f:button>
+                                    <f:button id="btnLogin" text="登录" type="Submit" box-flex="1" validate-forms="Window1" validate-message-box-plain="true"
+                                        on-click="btnLogin_Click"></f:button>
+                                </f:items>
+                            </f:button-group>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:window>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/common.js}"></script>
+            <script>
+                function onCancelClick(event) {
+                    F.ui.Window1.hide();
+                }
+
+                function onOpenWindowClick(event) {
+                    F.ui.Window1.show();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

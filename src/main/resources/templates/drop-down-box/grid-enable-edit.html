@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 下拉表格（单选，用户输入值）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="下拉表格" show-header="true">
+                <f:items>
+                    <f:drop-down-box id="DropDownBox1" empty-text="请从下拉表格中选择" match-field-width="false" value="105" enable-multi-select="false"
+                        enable-edit="true">
+                        <f:pop-panel>
+                            <f:grid id="Grid1" show-border="true" show-header="false" data-id-field="Id" data-text-field="Name" hidden="true" width="550"
+                                height="300" enable-multi-select="false">
+                                <f:columns>
+                                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                                    <f:render-field header-text="所学专业" data-field="Major" expand-unused-space="true" min-width="150"></f:render-field>
+                                </f:columns>
+                            </f:grid>
+                        </f:pop-panel>
+                    </f:drop-down-box>
+                    <f:button id="btnGetSelection" text="获取下拉框的选中值" css-class="marginr" on-click="btnGetSelection_Click"></f:button>
+                    <f:button id="btnReset" text="重置表单" click-handler="onResetClick"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br>
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function onResetClick(event) {
+                    F.ui.SimpleForm1.reset();
+                }
+
+            </script>
+
+        </th:block>
+    </body>
+
+</html>

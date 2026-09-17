@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · RadioButtonListDisabled</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" label-width="160" enable-collapse="false" body-padding="10" show-border="true" show-header="true"
+                title="简单表单">
+                <f:items>
+                    <f:radio-button-list id="RadioButtonList1" label="列表一">
+                        <f:radio-item text="可选项 1" value="value1" enabled="false"></f:radio-item>
+                        <f:radio-item text="可选项 2" value="value2"></f:radio-item>
+                        <f:radio-item text="可选项 3" value="value3"></f:radio-item>
+                    </f:radio-button-list>
+                    <f:button id="btnServerSetSelectedValue" css-class="marginr" text="选中上面列表中的第一项" on-click="btnServerSetSelectedValue_Click"></f:button>
+                    <f:button id="btnServerGetSelectedValue" css-class="marginr" text="获取上面列表的选中项" on-click="btnServerGetSelectedValue_Click"></f:button>
+                    <f:button id="btnClientGetSelectedValue" text="获取上面列表的选中项（JavaScript 脚本）" click-handler="onAlertSelectedValueClick"></f:button>
+                    <f:label></f:label>
+                    <f:radio-button-list id="RadioButtonList2" label="列表二（一列）" column-number="1"></f:radio-button-list>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onAlertSelectedValueClick(event) {
+                    var list1 = F.ui.RadioButtonList1;
+
+                    var checkedValue = list1.getValue();
+                    if (checkedValue) {
+                        F.alert("列表一的选中项：" + checkedValue);
+                    } else {
+                        F.alert("列表一没有选中项！");
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

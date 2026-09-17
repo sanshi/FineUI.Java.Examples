@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 编辑框</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br /><br />
+            注：
+            <ul>
+                <li>使用 Enter 或者 Tab 键遍历所有的文本输入框</li>
+                <li>点击输入框会选中文本</li>
+            </ul>
+            <f:button id="Button1" text="获取用户输入的分组值" click-handler="onGetInputsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function renderGroup(value, params) {
+                    return F.formatString('<input class="myinput" value="{0}" style="width:80px;" type="text">', value);
+                }
+
+                var inputselector = 'input.myinput';
+
+                function getUserInputs() {
+                    var result = [];
+
+                    var grid1 = F.ui.Grid1;
+                    grid1.getRowEls().each(function() {
+                        var rowEl = $(this);
+                        var rowData = grid1.getRowData(rowEl);
+
+                        result.push([rowData.id, rowData.text, rowEl.find(inputselector).val()]);
+                    });
+
+                    return F.toJSON(result);
+                }
+
+                function onGetInputsClick(event) {
+                    F.customEvent('GetInputs', getUserInputs());
+                }
+
+                function registerEnterEvent() {
+                    var grid = F.ui.Grid1;
+
+                    grid.el.on('keydown', inputselector, function(event) {
+                        if (event.keyCode === F.KEY.ENTER || event.keyCode === F.KEY.TAB) {
+                            var nextRow = $(this).closest('.f-grid-row').next();
+                            if (nextRow.length) {
+                                nextRow.find(inputselector).select();
+                            }
+
+                            // 阻止 Enter 或者 Tab 的默认行为
+                            event.preventDefault();
+                        }
+                    });
+
+                    grid.el.on('click', inputselector, function(event) {
+                        $(this).select();
+                    });
+                }
+
+                F.ready(function() {
+                    registerEnterEvent();
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

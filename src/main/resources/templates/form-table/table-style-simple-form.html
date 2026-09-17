@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TableStyleSimpleForm</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" show-header="false" show-border="false" enable-table-style="true" message-target="Qtip">
+                <f:items>
+                    <f:text-box id="tbxUserName" label="用户名" required="true" show-red-star="true"></f:text-box>
+                    <f:text-box id="tbxPassword" label="密码" required="true" show-red-star="true" text-mode="Password"></f:text-box>
+                </f:items>
+            </f:simple-form>
+            <f:button id="btnSubmit" text="注册" on-click="btnSubmit_Click" validate-forms="SimpleForm1" validate-target="Top" margin-top="5"></f:button>
+            <br />
+            <br />
+            注：<strong>启用 EnableTableStyle 时，必须去除 BodyPadding 属性</strong>，并建议设置 MessageTarget=Qtip。
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 模拟树列</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-check-box-select="true" enable-simulate-tree="true">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="地区" data-field="Name" data-simulate-tree-level-field="TreeLevel" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                </f:columns>
+            </f:grid>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

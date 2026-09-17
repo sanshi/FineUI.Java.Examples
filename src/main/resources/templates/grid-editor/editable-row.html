@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 禁止行编辑</title>
+
+        <style>
+            .row-entranceyear-lte-2002 .f-grid-cell-text {
+                opacity: .5;
+                filter: alpha(opacity=50);
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（单击编辑）" data-id-field="Id" data-text-field="Name"
+                allow-cell-editing="true" clicks-to-edit="1" row-data-bound-function="grid1RowDataBound">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name">
+                        <f:editor>
+                            <f:text-box id="tbxName" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender">
+                        <f:editor>
+                            <f:drop-down-list id="ddlGender" required="true">
+                                <f:list-item text="男" value="1"></f:list-item>
+                                <f:list-item text="女" value="0"></f:list-item>
+                            </f:drop-down-list>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="入学年份" column-id="EntranceYear" data-field="EntranceYear" field-type="Int">
+                        <f:editor>
+                            <f:number-box id="nbxEntranceYear" no-decimal="true" no-negative="true" min-value="2000" max-value="2025"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="入学日期" column-id="EntranceDate" data-field="EntranceDate" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy/MM/dd" width="150">
+                        <f:editor>
+                            <f:date-picker id="dpEntranceDate" required="true"></f:date-picker>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-check-field header-text="是否在校" column-id="AtSchool" data-field="AtSchool"></f:render-check-field>
+                    <f:render-field header-text="所学专业" column-id="Major" data-field="Major" expand-unused-space="true" min-width="150">
+                        <f:editor>
+                            <f:text-box id="tbxMajor" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="beforeedit" handler="onGrid1BeforeEdit"></f:listener>
+                </f:listeners>
+            </f:grid>
+
+            <br>
+            <br>
+            <f:button id="btnSubmit" text="保存数据" on-click="btnSubmit_Click"></f:button>
+
+            <br>
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br>
+            注：本例子禁止[入学年份小于等于2002]行的单元格编辑。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                // 在 RowDataBound 中改变行CSS类
+                function grid1RowDataBound(rowData) {
+                    var entranceYear = rowData.values['EntranceYear'];
+
+                    if (entranceYear <= 2002) {
+                        rowData.cls = "row-entranceyear-lte-2002";
+                    }
+                }
+
+                function onGrid1BeforeEdit(event, value, params) {
+                    // 取消单元格编辑
+                    if (params.tr.hasClass('row-entranceyear-lte-2002')) {
+                        return false;
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

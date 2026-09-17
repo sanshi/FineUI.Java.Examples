@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 选项卡改变事件</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="350" show-border="true" tab-position="Top" enable-tab-close-menu="false" active-tab-index="1"
+                on-tab-index-changed="TabStrip1_TabIndexChanged">
+                <f:tabs>
+                    <f:tab title="标签一" body-padding="10" layout="Fit">
+                        <f:items>
+                            <f:simple-form id="SimpleForm1" show-border="false" show-header="false" title="SimpleForm1" label-width="120">
+                                <f:items>
+                                    <f:label id="Label1" label="文本" text="三生石上" css-class="highlight" />
+                                    <f:number-box id="NumberBox1" label="数字输入框" required="true" show-red-star="true" />
+                                    <f:text-box id="TextBox1" label="文本输入框" required="true" show-red-star="true" />
+                                    <f:date-picker id="DatePicker1" label="日期选择器" required="true" show-red-star="true" />
+                                    <f:text-area id="TextArea2" label="多行文本输入框" required="true" height="100" show-red-star="true" />
+                                </f:items>
+                            </f:simple-form>
+                        </f:items>
+                    </f:tab>
+                    <f:tab title="标签二" body-padding="10">
+                        <f:items>
+                            <f:label id="Label2" css-class="highlight" text="初始文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab title="标签三" body-padding="10">
+                        <f:items>
+                            <f:label id="Label3" css-class="highlight" text="初始文本" />
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+            <br />
+
+            <f:button id="Button2" css-class="marginr" validate-forms="SimpleForm1" text="验证第一个标签中的表单"></f:button>
+
+            <f:button id="Button3" text="打开下一个标签" on-click="Button3_Click"></f:button>
+
+        </th:block>
+    </body>
+
+</html>

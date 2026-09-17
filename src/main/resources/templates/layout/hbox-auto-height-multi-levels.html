@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · HBox 自动高度多层嵌套</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel5" is-fluid="true" show-border="true" enable-collapse="false" layout="HBox" auto-scroll="true" body-padding="5" show-header="true"
+                title="面板（Layout=HBox AutoScroll=true）">
+                <f:items>
+                    <f:panel id="Panel1" title="面板1" box-flex="1" margin-right="5" body-padding="10" show-border="true" show-header="false" layout="VBox">
+                        <f:items>
+                            <f:text-box label="姓名" show-red-star="true" required="true"></f:text-box>
+                            <f:drop-down-list label="性别" show-red-star="true" required="true">
+                                <f:list-item text="男" value="男" selected="true"></f:list-item>
+                                <f:list-item text="女" value="女"></f:list-item>
+                            </f:drop-down-list>
+                            <f:text-area label="个人简介" margin-bottom="0" box-flex="1"></f:text-area>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel2" title="面板2" box-flex="1" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label id="Label3" text-raw-html="BoxFlex=1<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>bottom line">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

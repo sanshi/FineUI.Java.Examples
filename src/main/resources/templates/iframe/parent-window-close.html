@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 关闭子窗体回写父页面</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:iframe/parent-window-close/iframe-window1;route:iframe/parent-window-close/iframe-window2" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            页面一：IFrame/ParentWindowClose/Index
+            <br />
+
+            <f:label id="labResult" encode-text="false"></f:label>
+            <br />
+            <f:button id="Button2" text="刷新面板一中的IFrame" click-handler="onRefreshIFrameClick"></f:button>
+            <br />
+            <br />
+            <f:panel id="Panel1" is-fluid="true" show-border="true" enable-collapse="false" height="500" enable-iframe="true"
+                iframe-url="/iframe/parent-window-close/iframe-window1" show-header="true" title="面板一">
+            </f:panel>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function updateLabelResult() {
+
+                    F.ui.labResult.setValue(F.formatDate('HH:mm:ss', new Date));
+
+                }
+
+                function onRefreshIFrameClick(event) {
+                    F.ui.Panel1.refreshIFrame();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 关闭图标与右键菜单</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="350" enable-tab-close-menu="true" show-border="true" active-tab-index="1">
+                <f:tabs>
+                    <f:tab id="Tab1" title="标签一" enable-close="false" body-padding="10">
+                        <f:items>
+                            <f:label id="Label5" text="标签一中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab2" title="标签二" body-padding="10" enable-close="true">
+                        <f:items>
+                            <f:label id="Label4" text="标签二中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab3" title="标签三" hidden="true" body-padding="10" enable-close="true">
+                        <f:items>
+                            <f:label id="Label3" text="标签三中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab4" title="标签四" body-padding="10" enable-close="true">
+                        <f:items>
+                            <f:label id="Label2" text="标签四中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab5" enable-close="true" title="标签五" body-padding="10">
+                        <f:items>
+                            <f:label id="Label1" text="标签五中的文本" />
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+            <br />
+            <br />
+            <f:button id="btnShowInClient" text="显示标签三（客户端代码）" css-class="marginr" click-handler="onShowInClientClick"></f:button>
+            <f:button id="btnShowActiveInClient" text="显示并激活标签三（客户端代码）" css-class="marginr" click-handler="onShowActiveInClientClick"></f:button>
+            <f:button id="btnHideInClient" text="隐藏标签三（客户端代码）" click-handler="onHideClientClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnShowInServer" text="显示标签三（服务端代码）" css-class="marginr" on-click="btnShowInServer_Click"></f:button>
+            <f:button id="btnShowActiveInServer" text="显示并激活标签三（服务端代码）" css-class="marginr" on-click="btnShowActiveInServer_Click"></f:button>
+            <f:button id="btnHideInServer" text="隐藏标签三（服务端代码）" on-click="btnHideInServer_Click"></f:button>
+            <br />
+            <br />
+            <br />
+            <f:button id="btnShowMoveToEnd" text="显示标签三（客户端代码，移动到尾部）" css-class="marginr" click-handler="onShowMoveToEndClick"></f:button>
+            <f:button id="btnShowActiveMoveToEnd" text="显示并激活标签三（客户端代码，移动到尾部）" css-class="marginr" click-handler="onShowActiveMoveToEndClick"></f:button>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onShowInClientClick(event) {
+                    F.ui.Tab3.show();
+                }
+
+                function onShowActiveInClientClick(event) {
+                    F.ui.Tab3.activate();
+                }
+
+                function onHideClientClick(event) {
+                    F.ui.Tab3.hide();
+                }
+
+                function onShowMoveToEndClick(event) {
+                    F.ui.Tab3.show(true);
+                }
+
+                function onShowActiveMoveToEndClick(event) {
+                    F.ui.Tab3.activate(true);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

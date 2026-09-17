@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 数字编辑框（初始为空）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（单击编辑）" data-id-field="Id" data-text-field="Name"
+                allow-cell-editing="true" clicks-to-edit="1">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="年份" column-id="Year" data-field="Year" field-type="Int" expand-unused-space="true" min-width="150">
+                        <f:editor>
+                            <f:number-box no-decimal="true" no-negative="true" min-value="2000" required="true" max-value="2025"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="学费" column-id="XueFei" data-field="XueFei" field-type="Int">
+                        <f:editor>
+                            <f:number-box no-decimal="true" no-negative="true"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="住宿费" column-id="ZhusuFei" data-field="ZhusuFei" field-type="Int">
+                        <f:editor>
+                            <f:number-box no-decimal="true" no-negative="true"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="伙食费" column-id="HuoshiFei" data-field="HuoshiFei" field-type="Int">
+                        <f:editor>
+                            <f:number-box no-decimal="true" no-negative="true"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="书本费" column-id="ShubenFei" data-field="ShubenFei" field-type="Int">
+                        <f:editor>
+                            <f:number-box no-decimal="true" no-negative="true"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="合计" column-id="Heji" field-type="Int" renderer-function="renderHeji">
+                    </f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="afteredit" handler="onGrid1AfterEdit"></f:listener>
+                </f:listeners>
+            </f:grid>
+            <br>
+
+            <f:button id="btnSubmit" text="保存数据" on-click="btnSubmit_Click"></f:button>
+
+            <br>
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br>
+            注：
+            <ul>
+                <li>
+                    年份[2017]和[2018]的初始费用都为空。
+                </li>
+                <li>
+                    也可以将某个现有数字更新为空。
+                </li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function calculateHejiValue(rowValue) {
+                    var total = 0;
+
+                    function addColumnValue(columnName) {
+                        var columnValue = rowValue[columnName];
+                        if (typeof(columnValue) === 'number') {
+                            total += columnValue;
+                        }
+                    }
+
+                    addColumnValue('XueFei');
+                    addColumnValue('HuoshiFei');
+                    addColumnValue('ShubenFei');
+                    addColumnValue('ZhusuFei');
+
+                    return total;
+                }
+
+                // 渲染合计列
+                function renderHeji(value, params) {
+                    return calculateHejiValue(params.rowValue);
+                }
+
+                function onGrid1AfterEdit(event, value, params) {
+                    this.updateCellValue(params.rowId, 'Heji', calculateHejiValue(params.rowValue));
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

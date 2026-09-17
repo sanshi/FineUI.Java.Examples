@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 通知对话框（分组显示）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="res:static/res/js/notify_group.js" />
+
+        <style>
+            .notify-group-item .f-messagebox-message {
+                min-width: 260px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnOperation1" text="弹出通知对话框（多次点击）" click-handler="onOperation1Click"></f:button>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/notify_group.js}"></script>
+            <script>
+                var _orderNumber = 0;
+
+                function onOperation1Click(event) {
+                    // 创建一个消息对话框实例
+                    var displayTime = 2000 + Math.random() * 10000;
+
+                    var allMessageIcons = ['information', 'warning', 'question', 'error', 'success'];
+                    showNotifyGroup({
+                        message: F.rawHtml('这是第<strong>' + _orderNumber + '</strong>条提示信息，显示' + Math.floor(displayTime / 1000) + '秒'),
+                        messageIcon: allMessageIcons[_orderNumber % allMessageIcons.length],
+                        header: false,
+                        displayMilliseconds: displayTime
+                    });
+
+                    _orderNumber++;
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

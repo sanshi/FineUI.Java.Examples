@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 表单居中显示</title>
+
+        <style>
+            /* margin 属性不能设置到 #SimpleForm1，因为 SimpleForm1 的宽度设置包含了 margin */
+            #SimpleForm1_wrapper {
+                margin: 100px auto 0 auto;
+                width: 350px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            用户名：admin
+            <br />
+            密码：admin
+            <br />
+            <br />
+            <br />
+            注：
+            <ul>
+                <li>
+                    通过CSS设置登陆表单居中显示（CSS属性不能直接设置到 SimpleForm1，因为其 Width 已经包含了 margin ）。
+                </li>
+                <li>
+                    设置表单属性 css-class="f-shadow"，增加其边框阴影。
+                </li>
+            </ul>
+
+            <f:simple-form id="SimpleForm1" show-border="true" body-padding="10" is-fluid="true" css-class="f-shadow" show-header="true" title="登陆表单"
+                width="350">
+                <f:items>
+                    <f:text-box id="tbxUserName" label="用户名" required="true" show-red-star="true"></f:text-box>
+                    <f:text-box id="tbxPassword" label="密码" text-mode="Password" required="true" show-red-star="true"></f:text-box>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" toolbar-align="Center" position="Bottom">
+                        <f:items>
+                            <f:button id="btnLogin" text="登录" type="Submit" validate-forms="SimpleForm1" validate-target="Top" on-click="btnLogin_Click">
+                            </f:button>
+                            <f:button id="btnReset" text="重置" type="Reset"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+        </th:block>
+    </body>
+
+</html>

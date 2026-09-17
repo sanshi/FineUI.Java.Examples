@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 新标签页编辑表单</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:form id="SimpleForm1" is-fluid="true" show-border="true" show-header="false" margin="10" auto-scroll="true" body-padding="10"
+                is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1">
+                        <f:items>
+                            <f:button id="btnClose" text="关闭当前标签页" icon="SystemClose" click-handler="onCloseTabClick"></f:button>
+                            <f:toolbar-fill></f:toolbar-fill>
+                            <f:toolbar-text text="提示一"></f:toolbar-text>
+                            <f:toolbar-separator></f:toolbar-separator>
+                            <f:toolbar-text text="提示二"></f:toolbar-text>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:rows>
+                    <f:form-row>
+                        <f:items>
+                            <f:label id="labUserName" label="申请人" text="三生石上" css-class="highlight"></f:label>
+                            <f:label id="Label3" label="电话" text="0551-1234567"></f:label>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:number-box id="NumberBox1" no-decimal="true" no-negative="true" label="数量" required="true" show-red-star="true"></f:number-box>
+                            <f:date-picker id="DatePicker1" required="true" show-red-star="true" label="申请日期" text="2008-05-09"></f:date-picker>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:text-area id="TextArea2" height="80" label="描述" required="true" show-red-star="true"></f:text-area>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:html-editor id="HtmlEditor1" editor="UMEditor" base-path="/res/third-party/umeditor/" label="详细描述" height="200"></f:html-editor>
+                        </f:items>
+                    </f:form-row>
+                </f:rows>
+            </f:form>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onCloseTabClick(event) {
+                    parent.removeActiveTab();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

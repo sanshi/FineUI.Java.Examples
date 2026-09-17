@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · IFrameWindow1</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            页面二：IFrame/ParentWindowClose/IFrameWindow1
+            <br />
+
+            <f:label id="labResult" encode-text="false"></f:label>
+            <br />
+
+            <f:window id="Window1" height="350" enable-iframe="true" iframe-url="/iframe/parent-window-close/iframe-window2" is-modal="false" width="650"
+                enable-maximize="true" enable-resize="true" target="Self" on-close="IFrameWindow1_Window1_Close" title="页面二中的弹出对话框"></f:window>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 单元格文本自动换行（限制行数）</title>
+
+        <style>
+            .f-grid-row .f-grid-cell-text {
+                white-space: normal;
+                word-break: break-all;
+                overflow: hidden;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                display: -webkit-box;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" height="400" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" width="150"></f:render-field>
+                    <f:render-field header-text="个人简介" data-field="Desc" width="400" min-width="150"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

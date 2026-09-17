@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CheckBox</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="简单表单" show-header="true">
+                <f:items>
+                    <f:check-box id="CheckBox1" show-label="false" text="复选框" checked="true"></f:check-box>
+                    <f:button id="btnSelectCheckBox" css-class="marginr" text="选择/反选复选框" on-click="btnSelectCheckBox_Click"></f:button>
+                    <f:button id="btnChangeCheckStatus" css-class="marginr" text="选择/反选复选框（客户端脚本）" click-handler="onChangeCheckStatusClick"></f:button>
+                    <f:button id="btnChangeText" css-class="marginr" text="改变复选框文本" on-click="btnChangeText_Click"></f:button>
+                    <f:button id="btnDisable" css-class="marginr" text="启用/禁用复选框" on-click="btnDisableCheckBox_Click"></f:button>
+                    <f:label id="Label1"></f:label>
+                    <f:check-box id="CheckBox2" show-label="false" checked="true" text="复选框（OnCheckedChanged）"
+                        on-checked-changed="CheckBox2_CheckedChanged"></f:check-box>
+                    <f:label id="labResult" encode-text="false" show-label="false"></f:label>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onChangeCheckStatusClick(event) {
+                    var checkbox = F.ui.CheckBox1;
+                    checkbox.setValue(!checkbox.getValue());
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

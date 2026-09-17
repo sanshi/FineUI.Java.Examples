@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TwinTriggerBox</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="表单" show-header="true">
+                <f:items>
+                    <f:twin-trigger-box id="TwinTriggerBox1" show-label="false" trigger1-icon="Clear" show-trigger1="false" empty-text="搜索用户名"
+                        trigger2-icon="Search" on-trigger1-click="TwinTriggerBox1_Trigger1Click"
+                        on-trigger2-click="TwinTriggerBox1_Trigger2Click"></f:twin-trigger-box>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+    </body>
+
+</html>

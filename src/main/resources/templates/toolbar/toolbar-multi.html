@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多个工具栏</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" show-border="true" body-padding="10" height="500" title="面板" enable-collapse="false" auto-scroll="true"
+                content='<p><a href="http://tech.163.com/special/jobsdead/" target="_blank"><b>乔布斯</b></a></p><p>乔布斯于1955年2月24日出生，苹果创始人之一。今年8月苹果超越埃克森美孚成为全球最大市值企业，截止上季度持有现金达到762亿美金，甚至超过了美国政府国库存款。</p><p>遗憾的是，苹果的取得巨大成功还是无法给乔布斯一个健康的身体，乔布斯2003年被发现患有胰脏癌，随后又查出肝癌，危在旦夕的乔布斯在经历了8年的抗癌斗争、3次病休、若干次手术后，于2011年8月25日正式宣布从CEO位置辞职。2011年10月6日，乔布斯在苹果发布iPhone 4S后的第二天与世长辞。</p>'>
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="Button6" text="第一行工具栏中的按钮，靠左显示"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar id="Toolbar1" toolbar-align="Center">
+                        <f:items>
+                            <f:button text="第二行工具栏中的按钮，居中显示"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar id="Toolbar2" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="Button1" text="第三行工具栏中的按钮，靠右显示"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar id="Toolbar3" position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="Button2" text="第一行底部工具栏中的按钮"></f:button>
+                            <f:toolbar-separator></f:toolbar-separator>
+                            <f:button id="Button4" text="按钮二"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar id="Toolbar4" position="Bottom" toolbar-align="Center">
+                        <f:items>
+                            <f:button id="Button3" text="第二行底部工具栏中的按钮，居中显示"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar id="Toolbar5" position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="Button7" text="第三行底部工具栏中的按钮，左右显示"></f:button>
+                            <f:toolbar-fill id="ToolbarFill1"></f:toolbar-fill>
+                            <f:button id="Button5" text="第三行底部工具栏中的按钮，左右显示"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

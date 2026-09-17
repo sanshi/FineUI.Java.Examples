@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java 在线示例 - Java 企业级全栈 UI 框架</title>
+
+        <style>
+            :root {
+                --sidebar-width: 320px;
+                --sidebar-minimode-width: 70px;
+            }
+
+        </style>
+        <link type="text/css" rel="stylesheet" th:href="@{/res/css/index.css}" />
+        <link type="text/css" rel="stylesheet" th:href="@{/res/css/mobileview.css}" />
+    </head>
+
+    <body>
+
+        <th:block layout:fragment="body">
+
+            <f:panel id="mainPanel" layout="Region" css-class="mainpanel" show-border="false" show-header="false" is-view-port="true">
+                <f:items>
+
+                    <!--/* 左侧区域：Logo + 菜单树（菜单树随后层补入 leftPanel） */-->
+                    <f:panel id="sidebarRegion" css-class="sidebarregion" region-position="Left" show-border="false" width="320" show-header="false"
+                        enable-collapse="false" collapsed="false" layout="VBox" region-split="true" region-split-icon="false" region-split-width="3"
+                        region-split-transparent="true">
+                        <f:items>
+                            <f:content-panel id="sideheaderTopPanel" css-class="topregion" show-border="false" show-header="false">
+                                <div id="sideheader" class="f-widget-header f-mainheader">
+                                    <a class="logo-img f-widget-header" href="./">
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+                                            <path fill="currentColor" opacity="0.9" fill-rule="evenodd"
+                                                d="M498.526 215.579h-4.58c-22.829-0.196-42.295-14.382-50.262-34.394l-0.13-0.369-1.617-4.042c-2.978-6.535-4.714-14.172-4.714-22.214 0-14.908 5.964-28.424 15.636-38.291l3.225-3.225c2.421-2.436 3.918-5.792 3.918-9.499s-1.497-7.064-3.919-9.5l0 0.001-38.4-38.13c-2.436-2.421-5.792-3.919-9.5-3.919s-7.063 1.497-9.5 3.919l-3.233 3.233c-9.859 9.663-23.373 15.627-38.282 15.627-8.043 0-15.68-1.736-22.558-4.853l0.344 0.14-4.043-1.617c-20.268-8.177-34.341-27.621-34.492-50.373v-4.6c0-7.441-6.032-13.473-13.474-13.473v0h-53.894c-7.441 0-13.474 6.032-13.474 13.473v0 4.58c-0.196 22.828-14.382 42.295-34.394 50.262l-0.369 0.129-4.042 1.617c-6.535 2.978-14.172 4.713-22.214 4.713-14.908 0-28.424-5.964-38.291-15.636l-3.225-3.225c-2.436-2.421-5.792-3.919-9.499-3.919s-7.064 1.497-9.5 3.919l0.001-0.001-38.13 38.4c-2.421 2.436-3.919 5.792-3.919 9.499s1.497 7.064 3.919 9.5l3.233 3.233c9.663 9.859 15.627 23.373 15.627 38.282 0 8.043-1.736 15.68-4.853 22.559l0.14-0.344-1.617 4.042c-8.177 20.268-27.621 34.341-50.373 34.492h-4.6c-7.441 0-13.473 6.032-13.473 13.474v0 53.894c0 7.442 6.032 13.474 13.473 13.474v0h4.58c22.828 0.197 42.295 14.382 50.262 34.394l0.129 0.369 1.617 4.043c2.978 6.534 4.713 14.172 4.713 22.214 0 14.908-5.964 28.425-15.636 38.291l-3.225 3.225c-2.421 2.436-3.919 5.792-3.919 9.5s1.497 7.063 3.919 9.5l-0.001-0 38.4 38.13c2.436 2.421 5.792 3.918 9.499 3.918s7.064-1.497 9.5-3.919l3.233-3.233c9.859-9.663 23.373-15.627 38.282-15.627 8.043 0 15.68 1.736 22.559 4.853l-0.344-0.14 4.042 1.617c20.268 8.177 34.341 27.622 34.492 50.373v4.6c0 7.442 6.032 13.474 13.474 13.474h53.894c7.442 0 13.474-6.032 13.474-13.474v0-4.58c0.197-22.829 14.382-42.295 34.394-50.262l0.369-0.13 4.043-1.617c6.534-2.978 14.172-4.714 22.214-4.714 14.908 0 28.425 5.964 38.291 15.636l3.225 3.225c2.436 2.421 5.792 3.918 9.5 3.918s7.063-1.497 9.5-3.919l-0 0 38.13-38.4c2.421-2.436 3.918-5.792 3.918-9.5s-1.497-7.063-3.919-9.5l-3.233-3.233c-9.663-9.859-15.627-23.373-15.627-38.282 0-8.043 1.736-15.68 4.853-22.558l-0.14 0.344 1.617-4.043c8.177-20.268 27.622-34.341 50.373-34.492h4.6c7.442 0 13.473-6.032 13.473-13.474v0-53.894c0-7.441-6.032-13.474-13.474-13.474v0z M256 107.79c81.854 0 148.21 66.356 148.21 148.21s-66.356 148.21-148.21 148.21S107.79 337.854 107.79 256 174.146 107.79 256 107.79z">
+                                            </path>
+                                            <path fill="currentColor" opacity="0.6" fill-rule="evenodd"
+                                                d="M256.002 107.79c-81.854 0-148.21 66.356-148.21 148.21s66.356 148.21 148.21 148.21c81.854 0 148.21-66.356 148.21-148.21v0c0-81.854-66.356-148.21-148.21-148.21v0z M256.002 323.369c-37.206 0-67.369-30.161-67.369-67.369s30.161-67.369 67.369-67.369c37.206 0 67.369 30.161 67.369 67.369v0c0 37.206-30.161 67.369-67.369 67.369v0z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                    <a class="logo f-widget-header" th:href="@{/}" title="FineUI.Java" id="logoTitle">FineUI.Java</a>
+                                    <div class="logo-subtitle">Spring Boot</div>
+                                </div>
+                            </f:content-panel>
+                            <f:panel id="leftPanel" css-class="leftregion" box-flex="1" show-border="false" show-header="false" layout="Fit">
+                                <f:items>
+                                    <f:tree id="treeMenu" show-border="false" show-header="false" enable-single-click-expand="true" hide-h-scrollbar="true"
+                                        hide-v-scrollbar="true" expander-to-right="true" header-style="true" all-header-style="true"></f:tree>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                        <!--/* 拖动分隔条记住宽度：折叠再展开时恢复到用户拖动后的宽度（index.js onSidebarSplitDrag） */-->
+                        <f:listeners>
+                            <f:listener event="splitdrag" handler="onSidebarSplitDrag"></f:listener>
+                        </f:listeners>
+                    </f:panel>
+
+                    <!--/* 右侧区域：顶部页头 + 工作区（选项卡随后层替换 centerPlaceholder） */-->
+                    <f:panel id="bodyRegion" css-class="bodyregion" region-position="Center" show-border="false" show-header="false" layout="VBox">
+                        <f:items>
+                            <!--/* 页头：内含可交互工具栏控件（各自渲染出占位、随主体一起搬入面板） */-->
+                            <f:content-panel id="topPanel" css-class="topregion" show-border="false" show-header="false">
+                                <div id="header" class="f-widget-header f-mainheader">
+                                    <div class="header-left">
+                                        <f:button id="btnCollapseSidebar" css-class="icononlyaction" tool-tip="折叠/展开侧边栏" icon-align="Top" icon-font="_Fold"
+                                            enable-default-state="false" tab-index="-1" click-handler="onFoldClick"></f:button>
+                                        <div id="breadcrumb">
+                                            <div class="breadcrumb-inner">
+                                                <span class="breadcrumb-last">首页</span>
+                                            </div>
+                                            <div class="breadcrumb-icons">
+                                                <a data-qtip="查看源代码" href="javascript:onToolSourceCodeClick();"><i
+                                                        class="f-icon f-iconfont f-iconfont-code"></i></a>
+                                                <a data-qtip="刷新本页" href="javascript:onToolRefreshClick();"><i
+                                                        class="f-icon f-iconfont f-iconfont-refresh"></i></a>
+                                                <a data-qtip="在新标签页中打开" href="javascript:onToolNewWindowClick();"><i
+                                                        class="f-icon f-iconfont f-iconfont-new-tab"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="header-right">
+                                        <f:twin-trigger-box id="ttbxSearch" css-class="searchbox collapsed" show-label="false" trigger1-icon="Clear"
+                                            show-trigger1="false" empty-text="搜索示例" trigger2-icon="Search" width="24">
+                                            <f:listeners>
+                                                <f:listener event="trigger1click" handler="onSearchTrigger1Click"></f:listener>
+                                                <f:listener event="trigger2click" handler="onSearchTrigger2Click"></f:listener>
+                                                <f:listener event="blur" handler="onSearchBlur"></f:listener>
+                                            </f:listeners>
+                                        </f:twin-trigger-box>
+                                        <f:button id="btnDownload" css-class="icononlyaction btn-apply-trial" tool-tip="社区版下载" icon-align="Top"
+                                            icon-font="_Download" enable-default-state="false" tab-index="-1" badge="true" badge-type="Warning"
+                                            badge-animation-type="Processing" click-handler="onBaseDownloadClick"></f:button>
+                                        <f:button id="btnThemeSelect" css-class="icononlyaction" tool-tip="主题仓库" icon-align="Top" icon-font="_Skin"
+                                            enable-default-state="false" tab-index="-1" click-handler="onThemeSelectClick"></f:button>
+                                        <f:button css-class="userpicaction" id="btnUserAvatar" text="三生石上" icon-url="/res/images/my_face_80.jpg"
+                                            icon-align="Left" enable-default-state="false" enable-default-corner="false">
+                                            <f:menu id="menuSettings">
+                                                <f:menu-check-box id="cbxShowOnlyCommunity" text="仅显示社区版示例" click-handler="onShowOnlyCommunityClick"></f:menu-check-box>
+                                                <f:menu-button text="企业版试用" icon-font="_Enterprise" click-handler="onApplyTrialClick"></f:menu-button>
+                                                <f:menu-separator></f:menu-separator>
+                                                <f:menu-button id="MenuFramePageStyle" text="框架页风格">
+                                                    <f:menu>
+                                                        <f:menu-check-box text="暗色侧栏" id="MenuFramePageStyleDarkLeft" attribute-data-tag="f-dark-left"
+                                                            group-name="MenuFramePageStyle"></f:menu-check-box>
+                                                        <f:menu-check-box text="暗色顶栏" id="MenuFramePageStyleDarkTop" attribute-data-tag="f-dark-top"
+                                                            group-name="MenuFramePageStyle"></f:menu-check-box>
+                                                        <f:menu-check-box text="暗色顶栏和侧栏" id="MenuFramePageStyleDarkTopLeft" attribute-data-tag="f-dark-top-left"
+                                                            group-name="MenuFramePageStyle"></f:menu-check-box>
+                                                        <f:listeners>
+                                                            <f:listener event="checkchange" handler="onMenuFramePageStyleCheckChange"></f:listener>
+                                                        </f:listeners>
+                                                    </f:menu>
+                                                </f:menu-button>
+                                                <f:menu-button id="MenuDisplayMode" text="显示模式">
+                                                    <f:menu>
+                                                        <f:menu-check-box text="紧凑模式" id="MenuDisplayModeCompact" attribute-data-tag="compact"
+                                                            group-name="MenuDisplayMode"></f:menu-check-box>
+                                                        <f:menu-check-box text="小字体模式" id="MenuDisplayModeSmall" attribute-data-tag="small"
+                                                            group-name="MenuDisplayMode"></f:menu-check-box>
+                                                        <f:menu-check-box text="普通模式" id="MenuDisplayModeNormal" attribute-data-tag="normal" checked="true"
+                                                            group-name="MenuDisplayMode"></f:menu-check-box>
+                                                        <f:menu-check-box text="大间距模式" id="MenuDisplayModeLargeSpace" attribute-data-tag="largeSpace"
+                                                            group-name="MenuDisplayMode"></f:menu-check-box>
+                                                        <f:menu-check-box text="大字体模式" id="MenuDisplayModeLarge" attribute-data-tag="large"
+                                                            group-name="MenuDisplayMode"></f:menu-check-box>
+                                                        <f:listeners>
+                                                            <f:listener event="checkchange" handler="onMenuDisplayModeCheckChange"></f:listener>
+                                                        </f:listeners>
+                                                    </f:menu>
+                                                </f:menu-button>
+                                                <f:menu-button text="主选项卡标签" id="MenuMainTabs">
+                                                    <f:menu>
+                                                        <f:menu-check-box text="多标签页" id="MenuMainTabsMulti" attribute-data-tag="multi" checked="true"
+                                                            group-name="MenuMainTabs"></f:menu-check-box>
+                                                        <f:menu-check-box text="单标签页" id="MenuMainTabsSingle" attribute-data-tag="single"
+                                                            group-name="MenuMainTabs"></f:menu-check-box>
+                                                        <f:listeners>
+                                                            <f:listener event="checkchange" handler="onMenuMainTabsCheckChange"></f:listener>
+                                                        </f:listeners>
+                                                    </f:menu>
+                                                </f:menu-button>
+                                                <f:menu-button text="语言" id="MenuLang">
+                                                    <f:menu>
+                                                        <f:menu-check-box text="简体中文" id="MenuLangZHCN" attribute-data-tag="zh_CN" checked="true"
+                                                            group-name="MenuLang"></f:menu-check-box>
+                                                        <f:menu-check-box text="繁體中文" id="MenuLangZHTW" attribute-data-tag="zh_TW"
+                                                            group-name="MenuLang"></f:menu-check-box>
+                                                        <f:menu-check-box text="English" id="MenuLangEN" attribute-data-tag="en"
+                                                            group-name="MenuLang"></f:menu-check-box>
+                                                        <f:menu-check-box text="ئۇيغۇر تىلى" id="MenuLangZHUEY" attribute-data-tag="zh_UEY"
+                                                            group-name="MenuLang"></f:menu-check-box>
+                                                        <f:listeners>
+                                                            <f:listener event="checkchange" handler="onMenuLangCheckChange"></f:listener>
+                                                        </f:listeners>
+                                                    </f:menu>
+                                                </f:menu-button>
+                                                <f:menu-button text="页面加载动画（CSS）" click-handler="onLoadingSelectClick"></f:menu-button>
+                                                <f:menu-separator></f:menu-separator>
+                                                <f:menu-button text="在线示例" id="MenuExamples">
+                                                    <f:menu>
+                                                        <f:menu-hyper-link
+                                                            text-raw-html="FineUI.Pro <div class='online-examples-subtitle'>ASP.NET WebForms 控件库，经典始于 2008 年</div>"
+                                                            navigate-url="https://fineui.com/pro/demo/" target="_blank"></f:menu-hyper-link>
+                                                        <f:menu-hyper-link
+                                                            text-raw-html="FineUI.Core <div class='online-examples-subtitle'>ASP.NET Core 控件库，创新 RazorForms 开发模式，信创产品适用</div>"
+                                                            navigate-url="https://fineui.com/core/demo/" target="_blank"></f:menu-hyper-link>
+                                                        <f:menu-hyper-link
+                                                            text-raw-html="FineUI.Java <div class='online-examples-subtitle'>Java 生态「AI 友好 · 标签式 · 有状态」企业级全栈 UI 框架</div>"
+                                                            navigate-url="https://fineui.com/java/demo/" target="_blank"></f:menu-hyper-link>
+                                                    </f:menu>
+                                                </f:menu-button>
+                                                <f:menu-separator></f:menu-separator>
+                                                <!--/* 版权信息（下拉菜单最后一项）：logo + 产品名 + 版本号 + 免费社区/更新记录链接。
+                                               整块 HTML 由 Index 在 Page_Load 里拼好、按可信 HTML 交给控件。不写在模板属性里：
+                                               Thymeleaf 会先把属性值转义再交给控件，HTML 标签会变成一串可见文本。 */-->
+                                                <f:menu-text id="menuTextCopyright" hide-on-click="false" css-class="copyright-menutext"></f:menu-text>
+                                            </f:menu>
+                                        </f:button>
+                                    </div>
+                                </div>
+                            </f:content-panel>
+                            <f:tab-strip id="mainTabStrip" css-class="centerregion" show-ink-bar="true" ink-bar-position="Bottom" box-flex="1"
+                                show-border="true" enable-tab-close-menu="true">
+                                <f:tabs>
+                                    <f:tab id="tabHomepage" title="首页" icon-font="_Home" enable-iframe="true" iframe-url="/basic/main"></f:tab>
+                                </f:tabs>
+                                <f:tools>
+                                    <f:tool id="toolSourceCode" icon-font="_Code" css-class="tabtool viewcode" tool-tip="查看源代码"
+                                        click-handler="onToolSourceCodeClick"></f:tool>
+                                    <f:tool id="toolRefresh" icon-font="_Refresh" css-class="tabtool" tool-tip="刷新本页" click-handler="onToolRefreshClick">
+                                    </f:tool>
+                                    <f:tool id="toolNewWindow" icon-font="_NewTab" css-class="tabtool" tool-tip="在新标签页中打开" click-handler="onToolNewWindowClick">
+                                    </f:tool>
+                                </f:tools>
+                            </f:tab-strip>
+                        </f:items>
+                    </f:panel>
+
+                </f:items>
+            </f:panel>
+
+            <!--/* 示例总数隐藏域：必须置于页头面板之外。隐藏域渲染为 inline-block 包裹，若与块级页头 #header
+           同处一个容器内，会在页头下方多撑出一个 line-box 高度的空行，页头与选项卡之间就冒出一条多余横杠 */-->
+            <f:hidden-field id="hfExamplesCount"></f:hidden-field>
+
+            <!--/* 弹窗（浮动到 body，初始隐藏，由头部/工具/设置菜单按需 show()）。源代码/主题仓库/加载动画三窗以 IFrame 承载
+           对应子页；企业版试用窗内容简短、直接内联在窗体内（body-padding 内边距 + contentpanel 承载纯 HTML 主体）。 */-->
+            <f:window id="windowSourceCode" icon-font="_Code" title="源代码" hidden="true" enable-iframe="true" is-modal="true" width="1000" height="600"
+                enable-close="true" enable-maximize="true" enable-resize="true"></f:window>
+            <f:window id="windowThemeRoller" title="主题仓库" hidden="true" enable-iframe="true" iframe-url="/home/themes" clear-iframe-after-close="false"
+                is-modal="true" width="850" height="600" enable-close="true" enable-maximize="true" enable-resize="true" window-position="Center"></f:window>
+            <f:window id="windowLoadingSelector" title="页面加载动画（CSS）" hidden="true" enable-iframe="true" iframe-url="/home/loading-css"
+                clear-iframe-after-close="false" is-modal="true" width="500" height="400" enable-close="true" enable-maximize="true" enable-resize="true">
+            </f:window>
+            <f:window id="windowApplyTrial" title="企业版试用" hidden="true" is-modal="true" width="450" enable-close="true" enable-maximize="false"
+                body-padding="15" icon-font="_Mail">
+                <f:items>
+                    <f:content-panel id="applyTrialContent" show-border="false" show-header="false" body-padding="0">
+                        <div>请填写如下资料发送到邮箱：2877408506@qq.com</div>
+                        <ul class="applytrial">
+                            <li>产品名称：FineUI.Java（企业版）</li>
+                            <li>单位全称：XXX单位</li>
+                            <li>申请人邮箱：XXX</li>
+                            <li>申请人QQ：XXX</li>
+                            <li>申请人姓名：XXX</li>
+                            <li>申请人地址：XX省XX市</li>
+                        </ul>
+                    </f:content-panel>
+                </f:items>
+            </f:window>
+
+        </th:block>
+
+        <!--/* 页面专属脚本：首页交互参数 + 驱动脚本（copy 自主站的静态资源，勿改）。须在 f:scripts 之后（FineUI.js 已就绪） */-->
+        <th:block layout:fragment="script">
+            <script type="text/javascript" th:inline="javascript">
+                var PARAMS = {
+                    mainPanel: 'mainPanel',
+                    mainTabStrip: 'mainTabStrip',
+                    treeMenu: 'treeMenu',
+                    sidebarRegion: 'sidebarRegion',
+                    btnCollapseSidebar: 'btnCollapseSidebar',
+                    tabHomepage: 'tabHomepage',
+                    windowSourceCode: 'windowSourceCode',
+                    windowThemeRoller: 'windowThemeRoller',
+                    windowLoadingSelector: 'windowLoadingSelector',
+                    windowApplyTrial: 'windowApplyTrial',
+                    hfExamplesCount: 'hfExamplesCount',
+                    sourceUrl: /*[[@{/home/source}]]*/ '/home/source',
+                    dashboardUrl: /*[[@{/block/dashboard}]]*/ '/block/dashboard',
+                    mainUrl: /*[[@{/basic/main}]]*/ '/basic/main',
+                    processNewWindowUrl: function(url) {
+                        return url;
+                    }
+                };
+
+            </script>
+            <script th:src="@{/res/js/index.js}"></script>
+        </th:block>
+
+    </body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多语言登录（数据注解）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.multilang.model.User" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <!-- 提示信息（多语言资源含 HTML <br>，静态可信值，raw 输出） -->
+            <div th:utext="${page.resource('multilang.login.notice')}"></div>
+
+            <f:window id="Window1" width="350" window-position="GoldenSection" enable-close="false" is-modal="false" title="#{multilang.login.title}">
+                <f:items>
+                    <f:simple-form id="SimpleForm1" show-header="false" body-padding="10" show-border="false">
+                        <f:items>
+                            <!-- 数据注解版：字段标签/校验规则/消息均由 DTO 注解 + 多语言资源推导（for 绑定） -->
+                            <f:text-box for="currentUser.userName"></f:text-box>
+                            <f:text-box for="currentUser.password"></f:text-box>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="btnLogin" text="#{multilang.login.loginButton}" type="Submit" validate-forms="SimpleForm1" validate-target="Top"
+                                on-click="btnLogin_Click"></f:button>
+                            <f:button id="btnReset" text="#{multilang.login.resetButton}" type="Reset"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:window>
+
+        </th:block>
+    </body>
+
+</html>

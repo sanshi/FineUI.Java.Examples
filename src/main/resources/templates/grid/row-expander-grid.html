@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 行扩展列（嵌套表格）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.web.RowExpanderGridDataController" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-view-port="true" show-border="true" show-header="true" title="表格（嵌套表格仅用于数据展示，不适合复杂的逻辑处理）" data-id-field="Id"
+                data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"></f:render-field>
+                    <f:render-field column-id="Desc" render-as-row-expander="true"></f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="rowexpanderexpand" handler="onRowExpanderExpand"></f:listener>
+                    <f:listener event="rowexpandercollapse" handler="onRowExpanderCollapse"></f:listener>
+                </f:listeners>
+            </f:grid>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function onRowExpanderExpand(event, rowId) {
+                    var grid = this,
+                        rowEl = grid.getRowEl(rowId),
+                        rowData = grid.getRowData(rowId);
+
+                    // 行扩展列的详情区位于 .f-grid-row.f-grid-rowexpander 节点的下一行
+                    var tplEl = rowEl.next().find('.f-grid-cell-text');
+                    if (!tplEl.find('.gridinrowexpander').length) {
+
+                        var url = F.resolveUrl('/grid/row-expander-grid-data');
+                        url += '?rowId=' + rowId + '&name=' + encodeURIComponent(rowData.values['Name']); // 这里可传递行中任意数据（rowData）
+
+                        F.create({
+                            type: 'Grid',
+                            renderTo: tplEl,
+                            header: false,
+                            columnMenu: false,
+                            columnResizing: false,
+                            cls: 'gridinrowexpander',
+                            fields: ['type', 'yuwen', 'shuxue', 'yingwen', 'wuli', 'huaxue'],
+                            columns: [{
+                                text: '',
+                                field: 'type',
+                                width: 80
+                            }, {
+                                text: '语文',
+                                field: 'yuwen',
+                                width: 80
+                            }, {
+                                text: '数学',
+                                field: 'shuxue',
+                                width: 80
+                            }, {
+                                text: '英文',
+                                field: 'yingwen',
+                                width: 80
+                            }, {
+                                text: '物理',
+                                field: 'wuli',
+                                width: 80
+                            }, {
+                                text: '化学',
+                                field: 'huaxue',
+                                width: 80
+                            }, {
+                                text: '平均成绩',
+                                columnId: 'avg',
+                                flex: 1,
+                                renderer: function(value, params) {
+                                    var total = 0;
+
+                                    var kemuList = ['yuwen', 'shuxue', 'yingwen', 'wuli', 'huaxue'];
+                                    $.each(kemuList, function(index, item) {
+                                        total += params.rowData.values[item];
+                                    });
+
+                                    return Math.round(total / kemuList.length);
+                                }
+                            }],
+                            dataUrl: url,
+                            listeners: {
+                                dataload: function() {
+                                    rowExpandersDoLayout();
+                                }
+                            }
+                        });
+                    }
+                }
+
+                function onRowExpanderCollapse(event, rowId) {
+                    rowExpandersDoLayout();
+                }
+
+                // 重新布局表格和行扩展列中的表格（解决出现纵向滚动条时的布局问题）
+                function rowExpandersDoLayout() {
+
+                    // 先布局外部表格
+                    F.ui.Grid1.doLayout();
+
+                    // 再布局已展开行扩展列的内部表格
+                    $('.f-grid-rowexpander-details:not(.f-hidden) .gridinrowexpander').each(function() {
+                        var gridInside = F($(this).attr('id'));
+                        gridInside.doLayout();
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

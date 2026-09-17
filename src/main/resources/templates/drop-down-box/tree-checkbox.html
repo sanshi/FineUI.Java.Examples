@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TreeCheckbox</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="下拉树" show-header="true">
+                <f:items>
+                    <f:drop-down-box id="DropDownBox1" enable-multi-select="true" values="henan,anhui" text="河南省,安徽省" custom-data="true">
+                        <f:pop-panel>
+                            <f:tree id="Tree1" show-header="false" hidden="true" enable-check-box="true">
+                                <f:nodes>
+                                    <f:tree-node text="中国" node-id="china" expanded="true">
+                                        <f:tree-node text="河南省" node-id="henan" expanded="true">
+                                            <f:tree-node text="驻马店市" node-id="zhumadian">
+                                                <f:tree-node text="遂平县" leaf="false" node-id="suiping">
+                                                    <f:tree-node text="槐树乡" leaf="false" node-id="huaishu">
+                                                        <f:tree-node text="陈庄村" node-id="chenzhuang"></f:tree-node>
+                                                    </f:tree-node>
+                                                </f:tree-node>
+                                            </f:tree-node>
+                                            <f:tree-node text="漯河市" node-id="luohe"></f:tree-node>
+                                        </f:tree-node>
+                                        <f:tree-node text="安徽省" expanded="true" node-id="anhui">
+                                            <f:tree-node text="合肥市" expanded="true" node-id="hefei">
+                                                <f:tree-node text="蜀山区" expanded="false" node-id="shushanqu">
+                                                    <f:tree-node text="金色池塘小区" node-id="golden"></f:tree-node>
+                                                    <f:tree-node text="梦圆小区" node-id="mengyuan"></f:tree-node>
+                                                    <f:tree-node text="桂花园小区" node-id="guihuayuan"></f:tree-node>
+                                                </f:tree-node>
+                                                <f:tree-node text="包河区" expanded="true" node-id="baohequ">
+                                                    <f:tree-node text="中国科学技术大学" node-id="ustc"></f:tree-node>
+                                                </f:tree-node>
+                                            </f:tree-node>
+                                        </f:tree-node>
+                                    </f:tree-node>
+                                </f:nodes>
+                            </f:tree>
+                        </f:pop-panel>
+                        <f:listeners>
+                            <f:listener event="poppanelshow" handler="onPopPanelShow"></f:listener>
+                        </f:listeners>
+                    </f:drop-down-box>
+                    <f:button id="btnGetSelection" text="获取下拉框的选中值" on-click="btnGetSelection_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br>
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br />
+            注：
+            <ul>
+                <li>自定义数据来源时（CustomData=true），需要同时设置 Value 和 Text 属性来初始化下拉框。</li>
+                <li>下拉框的值对应于树控件的复选框，而不是树控件的选中项。</li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onPopPanelShow(event) {
+                    var nodes = this.getValue();
+
+                    F.noEvent(function() {
+                        F.ui.Tree1.checkNodes(nodes, {
+                            keep: false // 是否保持已选中复选框的状态（false表示在执行本次操作之前，取消已选中的复选框）
+                        });
+                    });
+
+                }
+
+                F.ready(function() {
+
+                    var tree1 = F.ui.Tree1;
+                    tree1.on('nodecheck', function(event, nodeId, checked) {
+
+                        var values = [],
+                            texts = [];
+                        var checkedNodes = tree1.getCheckedNodes(true);
+                        $.each(checkedNodes, function(index, node) {
+                            values.push(node.id);
+                            texts.push(node.text);
+                        });
+
+                        F.ui.DropDownBox1.setValue(values, texts);
+                    });
+
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

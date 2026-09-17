@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 卡片模式（默认表格模式）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="res:static/res/js/gridcard.js" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name" height="500"
+                display-type="Default" card-renderer-function="renderCard">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-field header-text="入学日期" column-id="EntranceDate" data-field="EntranceDate" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy/MM/dd" width="150"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"></f:render-field>
+                </f:columns>
+                <f:toolbars>
+                    <f:toolbar position="Top">
+                        <f:items>
+                            <f:toolbar-fill></f:toolbar-fill>
+                            <f:button icon-font="_Table" id="btnDisplayDefault" enable-press="true" pressed="true" click-handler="onDisplayDefaultClick">
+                            </f:button>
+                            <f:button icon-font="_Gallery" id="btnDisplayCard" enable-press="true" pressed="false" click-handler="onDisplayCardClick">
+                            </f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:grid>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function renderCard(params) {
+                    var rowId = params.rowData.id;
+                    var renderer = params.renderer;
+                    var atSchool = params.rowData.values["AtSchool"] ? "<i class=\"f-icon f-iconfont f-grid-static-checkbox f-checked\"></i>" :
+                        "<i class=\"f-icon f-iconfont f-grid-static-checkbox\"></i>";
+                    return $("<table>")
+                        .append($("<tr>").append($("<td>").text("编号：")).append($("<td>").text(rowId)))
+                        .append($("<tr>").append($("<td>").text("姓名：")).append($("<td>").text(renderer("Name"))))
+                        .append($("<tr>").append($("<td>").text("性别：")).append($("<td>").text(renderer("Gender"))))
+                        .append($("<tr>").append($("<td>").text("入学年份：")).append($("<td>").text(renderer("EntranceYear"))))
+                        .append($("<tr>").append($("<td>").text("入学日期：")).append($("<td>").text(renderer("EntranceDate"))))
+                        .append($("<tr>").append($("<td>").text("是否在校：")).append($("<td>").html(atSchool)))
+                        .append($("<tr>").append($("<td>").text("所学专业：")).append($("<td>").html(renderer("Major"))));
+                }
+
+                function onDisplayDefaultClick(event) {
+                    F.ui.btnDisplayDefault.setPressed(true);
+                    F.ui.btnDisplayCard.setPressed(false);
+                    F.ui.Grid1.setDisplayType("default");
+                }
+
+                function onDisplayCardClick(event) {
+                    F.ui.btnDisplayDefault.setPressed(false);
+                    F.ui.btnDisplayCard.setPressed(true);
+                    F.ui.Grid1.setDisplayType("card");
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

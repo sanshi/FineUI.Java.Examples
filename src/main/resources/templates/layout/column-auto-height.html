@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 列布局（自适应高度）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" auto-scroll="true" show-border="true" enable-collapse="false" body-padding="10" layout="Column"
+                show-header="true" title="面板">
+                <f:items>
+                    <f:panel id="Panel24" column-width="33%" show-border="false" show-header="false" margin="0 5 0 0">
+                        <f:items>
+                            <f:panel id="Panel25" body-padding="10" show-border="true" show-header="true" enable-collapse="true" margin-bottom="5"
+                                content="我的面板<br><br><br>">
+                            </f:panel>
+                            <f:panel id="Panel26" body-padding="10" show-border="true" show-header="true" enable-collapse="true" margin-bottom="5"
+                                content="我的面板<br><br><br><br><br><br><br><br>">
+                            </f:panel>
+                            <f:panel id="Panel27" body-padding="10" show-border="true" show-header="true" enable-collapse="true"
+                                content="我的面板<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>">
+                            </f:panel>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel28" column-width="33%" show-border="false" show-header="false" margin="0 5 0 0">
+                        <f:items>
+                            <f:panel id="Panel29" body-padding="10" show-border="true" show-header="true" enable-collapse="true" margin-bottom="5"
+                                content="我的面板<br><br><br><br><br><br>">
+                            </f:panel>
+                            <f:panel id="Panel30" body-padding="10" show-border="true" show-header="true" enable-collapse="true" margin-bottom="5"
+                                content="我的面板<br><br><br><br><br>">
+                            </f:panel>
+                            <f:panel id="Panel31" body-padding="10" show-border="true" show-header="true" enable-collapse="true"
+                                content="我的面板<br><br><br><br><br>">
+                            </f:panel>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel32" column-width="34%" show-border="false" show-header="false">
+                        <f:items>
+                            <f:panel id="Panel33" body-padding="10" show-border="true" show-header="true" enable-collapse="true" margin-bottom="5"
+                                content="我的面板<br><br><br><br><br><br><br><br>">
+                            </f:panel>
+                            <f:panel id="Panel34" body-padding="10" show-border="true" show-header="true" enable-collapse="true" margin-bottom="5"
+                                content="我的面板<br><br><br><br><br><br><br><br>">
+                            </f:panel>
+                            <f:panel id="Panel35" body-padding="10" show-border="true" show-header="true" enable-collapse="true"
+                                content="我的面板<br><br><br><br><br>">
+                            </f:panel>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · IFrameWindow2</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="formPanel" show-border="false" show-header="false" css-class="f-widget-content" layout="Fit" is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="btnClose" text="回发弹出窗体" click-handler="onCloseActiveWindowPostBackClick"></f:button>
+                            <f:button id="btnCloseServer" text="回发弹出窗体（后台注册脚本）" on-click="btnCloseServer_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:simple-form id="SimpleForm1" show-border="false" show-header="false" auto-scroll="true" body-padding="10" enable-collapse="false">
+                        <f:items>
+                            <f:label id="Label2" label="文本" text="三生石上" css-class="highlight"></f:label>
+                            <f:number-box id="NumberBox1" label="数字输入框" required="true" show-red-star="true"></f:number-box>
+                            <f:check-box id="CheckBox1" label="复选框"></f:check-box>
+                            <f:text-box id="TextBox1" label="文本输入框" show-red-star="true" required="true"></f:text-box>
+                            <f:date-picker id="DatePicker1" label="日期选择器" text="2008-05-09"></f:date-picker>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onCloseActiveWindowPostBackClick(event) {
+                    F.activeWindow.hidePostBack();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

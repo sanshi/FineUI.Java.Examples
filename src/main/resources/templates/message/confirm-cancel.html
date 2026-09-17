@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 响应确定按钮</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnOperation1" text="操作一（ConfirmText）" confirm-text="确认执行操作一？" confirm-target="Top" on-click="btnOperation1_Click"></f:button>
+            <br />
+            <br />
+            <f:button id="btnOperation2" text="操作二（ClickHandler）" click-handler="onOperation2Click"></f:button>
+            <br />
+            <br />
+            <f:button id="btnOperation3" text="操作三（ClickHandler，点击取消按钮也回发）" click-handler="onOperation3Click"></f:button>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onOperation2Click(event) {
+                    F.confirm({
+                        message: '确认执行操作二？',
+                        messageIcon: 'question',
+                        ok: function() {
+                            // 触发后台事件
+                            F.customEvent('Operation2');
+                        }
+                    });
+                }
+
+                function onOperation3Click(event) {
+                    F.confirm({
+                        message: '确认执行操作三？',
+                        messageIcon: 'question',
+                        ok: function() {
+                            // 触发后台事件
+                            F.customEvent('Operation3_ok');
+                        },
+                        cancel: function() {
+                            // 触发后台事件
+                            F.customEvent('Operation3_cancel');
+                        }
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

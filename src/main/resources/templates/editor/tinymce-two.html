@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TinyMCETwo</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="Form1" is-fluid="true" body-padding="10" enable-collapse="false" title="添加文章">
+                <f:items>
+                    <f:text-box id="tbxTitle" label="文章标题" required="true"></f:text-box>
+                    <f:html-editor id="HtmlEditor1" label="文章正文" editor="TinyMCE" base-path="/res/third-party/tinymce/" toolbar-set="Full"
+                        height="400"></f:html-editor>
+                    <f:html-editor id="HtmlEditor2" label="文章摘要" editor="TinyMCE" base-path="/res/third-party/tinymce/" toolbar-set="Basic"
+                        height="200"></f:html-editor>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar toolbar-align="Right" position="Bottom">
+                        <f:items>
+                            <f:button id="Button1" validate-forms="Form1" text="获取文章内容" on-click="Button1_Click"></f:button>
+                            <f:button id="Button2" text="更新文章摘要" on-click="Button2_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · NoForceSelectionInitValue</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="下拉列表（用户输入值，初始值）"
+                show-header="true">
+                <f:items>
+                    <f:drop-down-list id="DropDownList1" enable-edit="true" auto-select-first-item="false" force-selection="false" text="初始自定义值">
+                        <f:list-item text="可选项1" value="Value1"></f:list-item>
+                        <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
+                        <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
+                        <f:list-item text="可选项4" value="Value4"></f:list-item>
+                        <f:list-item text="可选项5" value="Value5"></f:list-item>
+                        <f:list-item text="可选项6" value="Value6"></f:list-item>
+                        <f:list-item text="可选择项7" value="Value7"></f:list-item>
+                        <f:list-item text="可选择项8" value="Value8"></f:list-item>
+                        <f:list-item text="可选择项9" value="Value9"></f:list-item>
+                        <f:list-item text="普通型1 < L > 1.5" value="普通型1 < L > 1.5"></f:list-item>
+                    </f:drop-down-list>
+                    <f:button id="btnSelectItem6" text="选中[可选项6]" css-class="marginr" on-click="btnSelectItem6_Click"></f:button>
+                    <f:button id="btnSetText" text="更新为[用户输入值]" css-class="marginr" on-click="btnSetText_Click"></f:button>
+                    <f:button id="btnGetSelection" text="获取此下拉列表的选中项" on-click="btnGetSelection_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+            <br>
+            下拉列表的属性设置为：AutoSelectFirstItem=false（初始不强制选中第一项）、EnableEdit=true（可以手工编辑）、ForceSelection=false（用户输入值）。
+
+        </th:block>
+    </body>
+
+</html>

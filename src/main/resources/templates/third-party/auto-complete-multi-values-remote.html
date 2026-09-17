@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · AutoCompleteMultiValuesRemote</title>
+
+        <link rel="stylesheet" th:href="@{/res/third-party/jqueryuiautocomplete/jquery-ui.css}" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" label-width="60" body-padding="10" enable-collapse="false" title="简单表单">
+                <f:items>
+                    <f:text-box id="TextBox1" label="标题" empty-text="输入字母 a 试试，可以输入多个值"></f:text-box>
+                </f:items>
+            </f:simple-form>
+            <br />
+            参考：http://jqueryui.com/autocomplete/#multiple-remote
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/third-party/jqueryuiautocomplete/jquery-ui.js}"></script>
+            <script>
+                F.ready(function() {
+                    function split(value) {
+                        return value.split(/,\s*/);
+                    }
+
+                    function extractLast(term) {
+                        return split(term).pop();
+                    }
+
+                    $('#TextBox1 input').on('keydown', function(event) {
+                        if (event.keyCode === $.ui.keyCode.TAB && $(this).data('autocomplete').menu.active) {
+                            event.preventDefault();
+                        }
+                    }).autocomplete({
+                        minLength: 0,
+                        source: function(request, response) {
+                            $.getJSON('/third-party/auto-complete-multi-values-remote/search-result', {
+                                term: extractLast(request.term)
+                            }, response);
+                        },
+                        search: function() {
+                            return extractLast(this.value).length >= 1;
+                        },
+                        focus: function() {
+                            return false;
+                        },
+                        select: function(event, ui) {
+                            var terms = split(this.value);
+                            terms.pop();
+                            terms.push(ui.item.value);
+                            terms.push('');
+                            this.value = terms.join(', ');
+                            return false;
+                        }
+                    });
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

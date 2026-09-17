@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · BeforeSelectConfirmEnableEdit</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="下拉列表（确认对话框，F.confirm）"
+                show-header="true">
+                <f:items>
+                    <f:drop-down-list id="DropDownList1" enable-edit="true">
+                        <f:items>
+                            <f:list-item text="可选项1" value="Value1" selected="true"></f:list-item>
+                            <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
+                            <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
+                            <f:list-item text="可选项4" value="Value4"></f:list-item>
+                            <f:list-item text="可选项5" value="Value5"></f:list-item>
+                            <f:list-item text="可选项6" value="Value6"></f:list-item>
+                            <f:list-item text="可选择项7" value="Value7"></f:list-item>
+                            <f:list-item text="可选择项8" value="Value8"></f:list-item>
+                            <f:list-item text="可选择项9" value="Value9"></f:list-item>
+                            <f:list-item text="普通型1 < L > 1.5" value="普通型1 < L > 1.5"></f:list-item>
+                        </f:items>
+                        <f:listeners>
+                            <f:listener event="beforeselect" handler="onDropDownListBeforeSelect"></f:listener>
+                        </f:listeners>
+                    </f:drop-down-list>
+                    <f:button id="btnSelectItem6" text="选中[可选项6]" css-class="marginr" on-click="btnSelectItem6_Click"></f:button>
+                    <f:button id="btnGetSelection" text="获取此下拉列表的选中项" on-click="btnGetSelection_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+            <br>
+            注：下拉列表的属性设置为 EnableEdit=true（ForceSelection 默认为 true）。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onDropDownListBeforeSelect(event, selectedValue) {
+                    // this 代表当前下拉列表对象
+                    var ddl = this;
+
+                    // F.confirm 是异步函数，直接返回
+                    F.confirm({
+                        message: '确定改变选中项？',
+                        ok: function() {
+                            // 重新设置选中项
+                            ddl.hidePopEl();
+                            ddl.setValue(selectedValue);
+                        },
+                        cancel: function() {
+                            // 如果用户手工输入值，则可能输入框中的值已经改变，需要还原
+                            ddl.hidePopEl();
+                            ddl.setValue(ddl.getValue());
+                        }
+                    });
+
+                    // 需要显式的返回 false，来阻止执行返回的脚本
+                    return false;
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

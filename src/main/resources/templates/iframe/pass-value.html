@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 跨 IFrame 传值（服务端）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:iframe/pass-value/iframe-window" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" title="表单" body-padding="10" enable-collapse="false">
+                <f:items>
+                    <f:text-box label="你所在的省份" id="tbxProvince" text="安徽"></f:text-box>
+                    <f:button id="Button1" on-click="Button1_Click" text="从列表中选择"></f:button>
+                </f:items>
+            </f:simple-form>
+
+            <f:window id="Window1" title="编辑" hidden="true" enable-iframe="true" enable-maximize="true" enable-resize="true" target="Parent" is-modal="true"
+                width="550" height="350">
+            </f:window>
+
+        </th:block>
+    </body>
+
+</html>

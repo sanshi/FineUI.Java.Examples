@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CSP HtmlEditor</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-align="Top" title="表单">
+                <f:items>
+                    <f:html-editor id="HtmlEditor1" label="文本编辑器" editor="UEditor" base-path="/res/third-party/ueditor/" height="250"></f:html-editor>
+                    <f:text-area id="TextArea1" label="多行文本框" height="150" text="FineUI的使命是创建 No JavaScript，No CSS 的网站应用程序"></f:text-area>
+                    <f:button id="Button1" text="获取 HTML 编辑器的内容" css-class="marginr" on-click="Button1_Click"></f:button>
+                    <f:button id="Button2" text="设置 HTML 编辑器的内容" on-click="Button2_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+
+            <br />
+            <br />
+            注：
+            <ul>
+                <li>由于第三方类库（UEditor）使用了内联脚本，因此需要启用 <code>cspScriptsAllowUnsafeInline</code>，允许所有的内联脚本执行。</li>
+                <li>UEditor 还用到了 <code>eval</code>/<code>new Function</code>，因此还需启用 <code>cspScriptsAllowUnsafeEval</code>。这两个开关默认关闭，仅为放行此类第三方库——FineUI.Java
+                    自身既不用内联脚本、也不用 eval。</li>
+                <li>一般情况下推荐启用 <code>cspScriptsAllowNonce</code>，这样更加安全。</li>
+                <li>文章：<a target="_blank"
+                        href="https://fineui.com/docs/#/Questions/5000_CSP_unsafe_inline">https://fineui.com/docs/#/Questions/5000_CSP_unsafe_inline</a></li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <!--/* 页面自带内联脚本：本页用 unsafe-inline 放行（未启用 nonce），故无需 nonce 属性 */-->
+            <script>
+                console.log('Hello world!');
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

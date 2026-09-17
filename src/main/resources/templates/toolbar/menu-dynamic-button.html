@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 向工具栏中动态添加按钮</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel is-fluid="true" show-border="true" title="面板" body-padding="10" height="300" enable-collapse="false">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1">
+                        <f:items>
+                            <f:button id="Button1" text="点击打开新窗体（内联按钮）" click-handler="onOpenNewWindowClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onOpenNewWindowClick(event) {
+                    window.open('/', '_blank');
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

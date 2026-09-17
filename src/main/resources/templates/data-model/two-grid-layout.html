@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataModel 多个模型布局</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles"
+            content="class:com.fineui.java.examples.datamodel.model.Student;class:com.fineui.java.examples.datamodel.model.StudentHelper;template:data-model/two-grid-partial.html" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <!--/* 同一份学生表格分部片段在 VBox 布局里引用两次，参数注入表格 id / 标题 / 行模型来源字段 / 伸缩比 / 最小高度 */-->
+            <f:panel id="Panel1" is-fluid="true" body-padding="10" show-border="true" show-header="false" layout="VBox" box-config-space="8"
+                is-view-port="true">
+                <f:items>
+                    <th:block th:replace="~{data-model/two-grid-partial :: studentGrid('Grid1', '表格一（在校生）', 'students1', 2, 180)}"></th:block>
+                    <th:block th:replace="~{data-model/two-grid-partial :: studentGrid('Grid2', '表格二（毕业生）', 'students2', 1, 130)}"></th:block>
+                </f:items>
+            </f:panel>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · AutoCompleteInlineWindow</title>
+
+        <link rel="stylesheet" th:href="@{/res/third-party/jqueryuiautocomplete/jquery-ui.css}" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:window id="SimpleForm1" width="500" layout="Fit" body-padding="10" enable-collapse="false" title="简单表单">
+                <f:items>
+                    <f:simple-form show-border="false" show-header="false">
+                        <f:items>
+                            <f:text-box id="TextBox1" show-label="false" empty-text="输入字母 a 试试"></f:text-box>
+                            <f:button id="Button1" text="获取输入值" on-click="Button1_Click"></f:button>
+                            <f:label id="labResult" encode-text="false"></f:label>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+            </f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/third-party/jqueryuiautocomplete/jquery-ui.js}"></script>
+            <script>
+                F.ready(function() {
+                    var availableTags = [
+                        'ActionScript', 'AppleScript', 'Asp', 'BASIC', 'C', 'C++', 'Clojure',
+                        'COBOL', 'ColdFusion', 'Erlang', 'Fortran', 'Groovy', 'Haskell', 'Java',
+                        'JavaScript', 'Lisp', 'Perl', 'PHP', 'Python', 'Ruby', 'Scala', 'Scheme'
+                    ];
+
+                    $('#TextBox1 input').autocomplete({
+                        source: availableTags,
+                        open: function() {
+                            var input = $(this);
+                            var windowZIndex = parseInt(input.parents('.f-window').css('z-index'), 10);
+                            input.autocomplete('widget').css('z-index', windowZIndex + 1);
+                        }
+                    });
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

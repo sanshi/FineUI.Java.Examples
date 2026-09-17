@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 刷新第一个选项卡</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:tab-strip/iframe-reload-first-empty-page" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="500" show-border="true" active-tab-index="1">
+                <f:tabs>
+                    <f:tab id="Tab1" enable-iframe="true" body-padding="10" iframe-url="/tab-strip/iframe-reload-first-empty-page"
+                        title="标签一（每次切换到此选项卡都重新加载IFrame）"></f:tab>
+                    <f:tab id="Tab2" enable-iframe="true" body-padding="10" iframe-url="/tab-strip/iframe-reload-first-empty-page" title="标签二"></f:tab>
+                    <f:tab id="Tab3" enable-iframe="true" body-padding="10" iframe-url="/tab-strip/iframe-reload-first-empty-page" title="标签三"></f:tab>
+                </f:tabs>
+                <f:listeners>
+                    <f:listener event="tabchange" handler="onTabChange" />
+                </f:listeners>
+            </f:tab-strip>
+            <br>
+            <br>
+            注：只有第一个选项卡在每次激活时都重新加载其中的IFrame。
+            <br>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onTabChange(event, tab) {
+                    // 如果激活的是第一个选项卡，则重新加载其中的IFrame
+                    if (tab.id === 'Tab1') {
+                        tab.refreshIFrame();
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

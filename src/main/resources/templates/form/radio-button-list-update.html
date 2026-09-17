@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · RadioButtonListUpdate</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" label-width="120" body-padding="10" show-border="true" show-header="true" title="简单表单">
+                <f:items>
+                    <f:radio-button-list id="RadioButtonList1" label="列表一">
+                        <f:radio-item text="可选项 1" value="value1"></f:radio-item>
+                        <f:radio-item text="可选项 2" value="value2" selected="true"></f:radio-item>
+                        <f:radio-item text="可选项 3" value="value3"></f:radio-item>
+                    </f:radio-button-list>
+                    <f:button id="btnUpdateList1" css-class="marginr" text="更新列表一" on-click="btnUpdateList1_Click"></f:button>
+                    <f:button id="btnCheckedItemsList1" text="获取列表一的选中项" on-click="btnCheckedItemsList1_Click"></f:button>
+                    <f:label></f:label>
+                    <f:radio-button-list id="RadioButtonList2" label="列表二（竖排）" column-number="3" column-vertical="true"></f:radio-button-list>
+                    <f:button id="btnUpdateList2" css-class="marginr" text="更新列表二" on-click="btnUpdateList2_Click"></f:button>
+                    <f:button id="btnCheckedItemsList2" text="获取列表二的选中项" on-click="btnCheckedItemsList2_Click"></f:button>
+                    <f:label id="Label1"></f:label>
+                    <f:radio-button-list id="RadioButtonList4" label="列表四" column-number="3" column-vertical="true"></f:radio-button-list>
+                    <f:button id="btnUpdateList4" css-class="marginr" text="更新列表四（可反复操作）" on-click="btnUpdateList4_Click"></f:button>
+                    <f:button id="btnCheckedItemsList4" text="获取列表四的选中项" on-click="btnCheckedItemsList4_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <br />
+            <f:radio-button-list id="RadioButtonList3" width="700" label="列表三" column-number="3" column-vertical="false">
+                <f:radio-item text="可选项 1" value="value1"></f:radio-item>
+                <f:radio-item text="可选项 2" value="value2"></f:radio-item>
+                <f:radio-item text="可选项 3" value="value3"></f:radio-item>
+                <f:radio-item text="可选项 4" value="value4"></f:radio-item>
+                <f:radio-item text="可选项 5" value="value5" selected="true"></f:radio-item>
+                <f:radio-item text="可选项 6" value="value6"></f:radio-item>
+                <f:radio-item text="可选项 7" value="value7"></f:radio-item>
+                <f:radio-item text="可选项 8" value="value8"></f:radio-item>
+            </f:radio-button-list>
+            <br />
+            <f:button id="btnUpdateList3" css-class="marginr" text="更新列表三" on-click="btnUpdateList3_Click"></f:button>
+            <f:button id="btnCheckedItemsList3" text="获取列表三的选中项" on-click="btnCheckedItemsList3_Click"></f:button>
+
+        </th:block>
+    </body>
+
+</html>

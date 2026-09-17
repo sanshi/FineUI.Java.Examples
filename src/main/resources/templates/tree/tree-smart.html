@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 智能树</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tree id="Tree1" width="300" height="400" show-header="false" enable-single-click-expand="true" selected-node-id="ustc" mini-mode="false"
+                hide-h-scrollbar="false" hide-v-scrollbar="false" expander-to-right="false" header-style="false">
+                <f:nodes>
+                    <f:tree-node text="中国" expanded="true" node-id="china" icon-font="_Home">
+                        <f:tree-node text="河南省" node-id="henan">
+                            <f:tree-node text="驻马店市" node-id="zhumadian">
+                                <f:tree-node text="遂平县" leaf="false" node-id="suiping">
+                                    <f:tree-node text="槐树乡" leaf="false" node-id="huaishu">
+                                        <f:tree-node text="陈庄村" node-id="chenzhuang"></f:tree-node>
+                                    </f:tree-node>
+                                </f:tree-node>
+                            </f:tree-node>
+                            <f:tree-node text="漯河市" node-id="luohe"></f:tree-node>
+                            <f:tree-node text="郑州市" node-id="zhengzhou"></f:tree-node>
+                        </f:tree-node>
+                        <f:tree-node text="安徽省" expanded="true" node-id="anhui">
+                            <f:tree-node text="合肥市" expanded="true" node-id="hefei">
+                                <f:tree-node text="金色池塘小区" node-id="golden"></f:tree-node>
+                                <f:tree-node text="中国科学技术大学" expanded="true" node-id="ustc">
+                                    <f:tree-node text="化学与材料科学学院" node-id="ustc-huaxue"></f:tree-node>
+                                    <f:tree-node text="管理学院" node-id="ustc-guanli"></f:tree-node>
+                                    <f:tree-node text="国家同步辐射实验室" node-id="ustc-fushe"></f:tree-node>
+                                    <f:tree-node text="火灾科学国家重点实验室（这一项很长很长很长很长很长很长很长很长）" node-id="ustc-huozai"></f:tree-node>
+                                </f:tree-node>
+                            </f:tree-node>
+                        </f:tree-node>
+                    </f:tree-node>
+                    <f:tree-node text="美国" expanded="true" node-id="mg" icon-font="_Plane" icon="Cake">
+                        <f:tree-node text="加利福尼亚州" node-id="mg-jlfny">
+                            <f:tree-node text="斯坦福大学" node-id="mg-stf"></f:tree-node>
+                            <f:tree-node text="加州大学" node-id="mg-jz"></f:tree-node>
+                        </f:tree-node>
+                        <f:tree-node text="马萨诸塞州" expanded="true" node-id="mg-mszs">
+                            <f:tree-node text="哈佛大学" node-id="mg-hf"></f:tree-node>
+                            <f:tree-node text="麻省理工学院" node-id="mg-mslg"></f:tree-node>
+                        </f:tree-node>
+                    </f:tree-node>
+                </f:nodes>
+                <f:listeners>
+                    <f:listener event="nodeclick" handler="onNodeClick"></f:listener>
+                </f:listeners>
+            </f:tree>
+            <br />
+
+            <f:check-box id="cbxHideHScrollbar" show-label="false" text="隐藏水平滚动条">
+                <f:listeners>
+                    <f:listener event="change" handler="onHideHScrollbarCheckChanged"></f:listener>
+                </f:listeners>
+            </f:check-box>
+            <f:check-box id="cbxHideVScrollbar" show-label="false" text="隐藏垂直滚动条">
+                <f:listeners>
+                    <f:listener event="change" handler="onHideVScrollbarCheckChanged"></f:listener>
+                </f:listeners>
+            </f:check-box>
+            <br />
+
+            <f:check-box id="cbxExpanderToRight" show-label="false" text="折叠图标移到右侧">
+                <f:listeners>
+                    <f:listener event="change" handler="onExpanderToRightCheckChanged"></f:listener>
+                </f:listeners>
+            </f:check-box>
+            <f:check-box id="cbxHeaderStyle" show-label="false" text="启用标题栏样式">
+                <f:listeners>
+                    <f:listener event="change" handler="onHeaderStyleCheckChanged"></f:listener>
+                </f:listeners>
+            </f:check-box>
+            <br />
+
+            <f:check-box id="cbxMiniMode" show-label="false" text="启用微型模式">
+                <f:listeners>
+                    <f:listener event="change" handler="onMiniModeCheckChanged"></f:listener>
+                </f:listeners>
+            </f:check-box>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+            <br />
+            <br />
+            注：启用微型模式时，请同时启用如下属性：
+            <ul>
+                <li>mini-mode="true"</li>
+                <li>hide-h-scrollbar="true"</li>
+                <li>hide-v-scrollbar="true"</li>
+                <li>expander-to-right="true"</li>
+                <li>header-style="true"</li>
+                <li>width="60px" （建议微型模式的最小宽度为60px）</li>
+            </ul>
+            <br />
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onNodeClick(event, nodeId) {
+                    F('labResult').setValue('你点击了树节点：' + this.getNodeData(nodeId).text);
+                }
+
+                function onHideHScrollbarCheckChanged(event, checked) {
+                    var tree1 = F.ui.Tree1;
+                    tree1.hideHScrollbar = checked;
+                    tree1.loadData();
+                }
+
+                function onHideVScrollbarCheckChanged(event, checked) {
+                    var tree1 = F.ui.Tree1;
+                    tree1.hideVScrollbar = checked;
+                    tree1.loadData();
+                }
+
+                function onExpanderToRightCheckChanged(event, checked) {
+                    var tree1 = F.ui.Tree1;
+                    tree1.expanderToRight = checked;
+                    tree1.loadData();
+                }
+
+                function onHeaderStyleCheckChanged(event, checked) {
+                    var tree1 = F.ui.Tree1;
+                    tree1.headerStyle = checked;
+                    tree1.loadData();
+                }
+
+                function onMiniModeCheckChanged(event, checked) {
+                    var tree1 = F.ui.Tree1;
+
+                    tree1.miniMode = checked;
+
+                    // 如果启用微型模式，则强制启用其他属性（建议微型模式的最小宽度为60px）
+                    if (checked) {
+                        tree1.width = 60;
+                        tree1.hideHScrollbar = true;
+                        tree1.hideVScrollbar = true;
+                        tree1.expanderToRight = true;
+                        tree1.headerStyle = true;
+
+                        F.ui.cbxHideHScrollbar.setValue(true);
+                        F.ui.cbxHideVScrollbar.setValue(true);
+                        F.ui.cbxExpanderToRight.setValue(true);
+                        F.ui.cbxHeaderStyle.setValue(true);
+
+                        F.ui.cbxHideHScrollbar.setEnabled(false);
+                        F.ui.cbxHideVScrollbar.setEnabled(false);
+                        F.ui.cbxExpanderToRight.setEnabled(false);
+                        F.ui.cbxHeaderStyle.setEnabled(false);
+                    } else {
+                        tree1.width = 300;
+
+                        F.ui.cbxHideHScrollbar.setEnabled(true);
+                        F.ui.cbxHideVScrollbar.setEnabled(true);
+                        F.ui.cbxExpanderToRight.setEnabled(true);
+                        F.ui.cbxHeaderStyle.setEnabled(true);
+                    }
+
+                    // 重新加载树控件
+                    tree1.loadData();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

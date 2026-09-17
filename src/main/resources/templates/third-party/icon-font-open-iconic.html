@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · IconFontOpenIconic</title>
+
+        <link rel="stylesheet" th:href="@{/res/third-party/openiconic/fonts.css}" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnIcon1" text="图标在左侧" icon-font-class="oi oi-tags" css-class="marginr"></f:button>
+            <f:button id="btnIcon2" text="图标在右侧" icon-align="Right" icon-font-class="oi oi-star"></f:button>
+            <br />
+            <br />
+            <f:button id="btnIcon3" text="图标在上面" icon-align="Top" icon-font-class="oi oi-cart" css-class="marginr"></f:button>
+            <f:button id="btnIcon4" text="图标在下面" icon-align="Bottom" icon-font-class="oi oi-cloud"></f:button>
+            <br />
+            <br />
+            只有图片的按钮：
+            <br />
+            <br />
+            <f:button id="Button1" icon-font-class="oi oi-share" css-class="marginr"></f:button>
+            <f:button id="Button2" icon-font-class="oi oi-key" css-class="marginr"></f:button>
+            <f:button id="Button7" icon-font-class="oi oi-lock-locked" css-class="marginr"></f:button>
+            <f:button id="Button8" icon-font-class="oi oi-trash" css-class="marginr"></f:button>
+            <br />
+            <br />
+            <f:panel id="Panel1" width="500" title="面板" height="250" body-padding="10" enable-collapse="true" icon-font-class="oi oi-list">
+                <f:items>
+                    <f:label text="面板内容"></f:label>
+                </f:items>
+                <f:tools>
+                    <f:tool icon-font-class="oi oi-cog" tool-tip="设置" click-handler="onToolIconClick"></f:tool>
+                    <f:tool icon-font-class="oi oi-cloud-download" tool-tip="下载" click-handler="onToolIconClick"></f:tool>
+                </f:tools>
+                <f:toolbars>
+                    <f:toolbar position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="btnMenu" text="操作" icon-font-class="oi oi-pencil">
+                                <f:menu>
+                                    <f:menu-button icon-font-class="oi oi-trash" text="删除选中项"></f:menu-button>
+                                    <f:menu-button icon-font-class="oi oi-ban" text="禁用选中项"></f:menu-button>
+                                </f:menu>
+                            </f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+            <br />
+            <f:tree id="Tree1" width="500" show-header="true" title="树控件" enable-collapse="false">
+                <f:nodes>
+                    <f:tree-node text="中国" expanded="true">
+                        <f:tree-node text="河南省" expanded="true">
+                            <f:tree-node text="驻马店市" expanded="true" icon-font-class="oi oi-flag" node-id="Zhumadian">
+                                <f:tree-node text="遂平县" icon-font-class="oi oi-tag" node-id="Suiping"></f:tree-node>
+                                <f:tree-node text="西平县" icon-font-class="oi oi-book" node-id="Xiping"></f:tree-node>
+                            </f:tree-node>
+                            <f:tree-node text="漯河市" node-id="Luohe" icon-font-class="oi oi-bookmark"></f:tree-node>
+                        </f:tree-node>
+                        <f:tree-node text="安徽省" node-id="Anhui"></f:tree-node>
+                    </f:tree-node>
+                </f:nodes>
+            </f:tree>
+            <br />
+            <br />
+            <a href="https://useiconic.com/open/" target="_blank">https://useiconic.com/open/</a>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onToolIconClick(event) {
+                    var iconFontCls = this.iconFontCls;
+                    F.notify({
+                        message: '你点击了标题栏工具图标：' + iconFontCls,
+                        messageIconFontCls: iconFontCls,
+                        displayMilliseconds: 300000,
+                        positionX: 'center',
+                        positionY: 'center'
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

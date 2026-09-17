@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FormValidate</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="用户注册表单">
+                <f:items>
+                    <f:text-box id="tbxUserName" label="用户名" required="true" next-focus-control="tbxPassword" show-red-star="true" text="admin"></f:text-box>
+                    <f:text-box id="tbxPassword" label="密码" required="true" show-red-star="true" next-focus-control="btnRegister"
+                        text-mode="Password"></f:text-box>
+                    <f:button id="btnRegister" text="注册" validate-forms="SimpleForm1" validate-target="Top" on-click="btnRegister_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <br />
+            注：
+            <ul>
+                <li>提交表单时验证[用户名]不能为 admin，否则标记为无效</li>
+            </ul>
+
+        </th:block>
+    </body>
+
+</html>

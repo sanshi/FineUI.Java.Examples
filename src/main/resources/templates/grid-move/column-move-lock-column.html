@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 列拖拽排序（列锁定）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-column-move="true" allow-column-locking="true">
+                <f:columns>
+                    <f:row-number-field column-id="RowNumber"></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name" enable-lock="false" locked="true"></f:render-field>
+                    <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender" enable-lock="true"
+                        locked="true"></f:render-field>
+                    <f:render-field header-text="入学年份" column-id="EntranceYear" data-field="EntranceYear" field-type="Int" enable-lock="true"></f:render-field>
+                    <f:render-check-field header-text="是否在校" column-id="AtSchool" data-field="AtSchool" render-as-static-field="true"
+                        enable-lock="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" column-id="Major" data-field="Major" renderer-function="renderMajor" width="300"
+                        enable-lock="true"></f:render-field>
+                    <f:render-field header-text="分组" column-id="Group" data-field="Group" renderer-function="renderGroup" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="注册日期" column-id="LogTime" data-field="LogTime" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy/MM/dd"></f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="columnmove" handler="onGrid1ColumnMove"></f:listener>
+                    <f:listener event="columnlock" handler="onGrid1ColumnLock"></f:listener>
+                    <f:listener event="columnunlock" handler="onGrid1ColumnUnlock"></f:listener>
+                </f:listeners>
+            </f:grid>
+            <br />
+            <br />
+            <f:button id="btnRefresh" text="刷新本页面（保持列顺序和列锁定状态）" click-handler="onRefreshClick"></f:button>
+            <br />
+            <br />
+            注：[姓名]列锁定后无法通过表头菜单解锁；[性别]列锁定后仍可通过表头菜单解锁。
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function onRefreshClick(event) {
+                    window.location.reload();
+                }
+
+                function saveToDB(grid) {
+                    // 列顺序数组
+                    var columnIds = $.map(grid.columns, function(item, index) {
+                        return item.columnId;
+                    });
+
+                    // 锁定列数组
+                    var lockedColumnIds = [];
+                    $.each(grid.columns, function(index, item) {
+                        if (item.locked) {
+                            lockedColumnIds.push(item.columnId);
+                        }
+                    });
+
+                    // 触发后台事件
+                    F.customEvent("Grid1_ColumnMoveOrLock", F.toJSON({
+                        columnIds: columnIds,
+                        lockedColumnIds: lockedColumnIds
+                    }));
+                }
+
+                function onGrid1ColumnLock(event, columnId) {
+                    saveToDB(this);
+                }
+
+                function onGrid1ColumnUnlock(event, columnId) {
+                    saveToDB(this);
+                }
+
+                function onGrid1ColumnMove(event, targetColumnId, sourceColumnId, operation) {
+                    var grid = this;
+
+                    // 如果目标列和源列的锁定状态不同，则随后会触发 columnlock 或者 columnunlock 事件
+                    // 因此直接返回，不要调用 saveToDB 函数，否则会重复保存
+                    var targetColumn = grid.getColumn(targetColumnId);
+                    var sourceColumn = grid.getColumn(sourceColumnId);
+
+                    // 有可能 locked 属性是 undefined，所以这里要先通过 !! 转为布尔值
+                    if (!!targetColumn.locked != !!sourceColumn.locked) {
+                        return;
+                    }
+
+                    saveToDB(this);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

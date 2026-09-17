@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FileUploadToolbar</title>
+
+        <style>
+            .photo {
+                height: 150px;
+                line-height: 150px;
+                overflow: hidden;
+            }
+
+            .photo img {
+                height: 150px;
+                vertical-align: middle;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="表单">
+                <f:items>
+                    <f:image id="imgPhoto" css-class="photo" image-url="/res/images/blank.png" show-empty-label="true"></f:image>
+                    <f:text-box id="tbxUserName" label="用户名" required="true" show-red-star="true"></f:text-box>
+                    <f:text-box id="tbxEmail" label="邮箱" required="true" regex-pattern="EMAIL" regex-message="请输入有效的邮箱地址" show-red-star="true"></f:text-box>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar position="Bottom">
+                        <f:items>
+                            <f:button text="测试按钮"></f:button>
+                            <f:toolbar-fill></f:toolbar-fill>
+                            <f:file-upload id="filePhoto" button-text="上传个人头像" button-icon-font="_Upload" accept-file-types="image/*" button-only="true"
+                                on-file-selected="filePhoto_FileSelected"></f:file-upload>
+                            <f:button id="btnSubmit" icon-font="_Save" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            注：
+            <ul>
+                <li>
+                    上传个人头像通过 accept-file-types="image/*" 来控制默认显示的文件类型
+                </li>
+                <li>
+                    <a href="http://stackoverflow.com/questions/181214/file-input-accept-attribute-is-it-useful" target="_blank">accept-file-types 的有效值</a>
+                </li>
+            </ul>
+
+        </th:block>
+    </body>
+
+</html>

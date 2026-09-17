@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 行密度（自动换行）</title>
+
+        <style>
+            .f-grid-row .f-grid-cell-text {
+                white-space: normal;
+                word-break: break-all;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-check-box-select="true">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field column-id="Desc" width="400" data-field="Desc" header-text="个人简介"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"></f:render-field>
+                </f:columns>
+                <f:tools>
+                    <f:tool id="toolRowDensity" icon-font="_List" text="行密度">
+                        <f:menu>
+                            <f:menu-check-box text="小间距" attribute-data-tag="small" group-name="RowDensity"
+                                click-handler="onRowDensityChange"></f:menu-check-box>
+                            <f:menu-check-box text="标准间距" attribute-data-tag="normal" checked="true" group-name="RowDensity"
+                                click-handler="onRowDensityChange"></f:menu-check-box>
+                            <f:menu-check-box text="大间距" attribute-data-tag="large" group-name="RowDensity"
+                                click-handler="onRowDensityChange"></f:menu-check-box>
+                            <f:menu-check-box text="超大间距" attribute-data-tag="xlarge" group-name="RowDensity"
+                                click-handler="onRowDensityChange"></f:menu-check-box>
+                        </f:menu>
+                    </f:tool>
+                </f:tools>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function onRowDensityChange(event) {
+                    var selectedRowDensity = this.el.attr("data-tag");
+                    F.ui.Grid1.setRowDensity(selectedRowDensity);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

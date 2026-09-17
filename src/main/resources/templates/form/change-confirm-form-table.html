@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 关闭页面前的确认框（表单或表格改变）</title>
+
+        <style>
+            .steps {
+                border: solid 1px red;
+                padding: 5px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" show-border="true" enable-collapse="false" title="表单" show-header="true" auto-scroll="true"
+                body-padding="10">
+                <f:items>
+                    <f:label id="Label2" css-class="steps"
+                        text-raw-html="按照如下步骤操作来观察“确认关闭”对话框：<ul><li>编辑本表单（比如选中复选框、修改日期）</li><li>点击弹出窗体右上角关闭图标、关闭按钮、当前选项卡关闭图标、浏览器的关闭按钮或者浏览器的刷新图标，<a target='_blank' href='/res/images/formchangeconfirm.png'>查看图示</a></li><li>弹出确认关闭窗体的对话框</li></ul>">
+                    </f:label>
+                    <f:number-box id="NumberBox1" label="数字输入框" required="true" show-red-star="true"></f:number-box>
+                    <f:check-box id="CheckBox1" label="复选框"></f:check-box>
+                    <f:text-box id="TextBox1" label="文本输入框" show-red-star="true" required="true"></f:text-box>
+                    <f:date-picker id="DatePicker1" label="日期选择器" text="2008-05-09"></f:date-picker>
+                    <f:text-box id="TextBox2" label="默认隐藏的字段" hidden="true"></f:text-box>
+                    <f:drop-down-list id="DropDownList1" label="下拉列表">
+                        <f:list-item text="可选项1" value="Value1" selected="true"></f:list-item>
+                        <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
+                        <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
+                        <f:list-item text="可选项4" value="Value4"></f:list-item>
+                        <f:list-item text="可选项5" value="Value5"></f:list-item>
+                        <f:list-item text="可选项6" value="Value6"></f:list-item>
+                        <f:list-item text="可选择项7" value="Value7"></f:list-item>
+                        <f:list-item text="可选择项8" value="Value8"></f:list-item>
+                        <f:list-item text="普通型1 &lt; L &gt; 1.5" value="普通型1 &lt; L &gt; 1.5"></f:list-item>
+                        <f:list-item text="可选择项9" value="Value9"></f:list-item>
+                        <f:list-item text="可选择项10" value="Value10"></f:list-item>
+                        <f:list-item text="可选择项11" value="Value11"></f:list-item>
+                        <f:list-item text="可选择项12" value="Value12"></f:list-item>
+                        <f:list-item text="可选择项13" value="Value13"></f:list-item>
+                        <f:list-item text="可选择项14" value="Value14"></f:list-item>
+                        <f:list-item text="可选择项15" value="Value15"></f:list-item>
+                        <f:list-item text="可选择项16" value="Value16"></f:list-item>
+                    </f:drop-down-list>
+                    <f:grid id="Grid1" show-border="true" show-header="true" title="表格（单击编辑）" data-id-field="Id" data-text-field="Name"
+                        allow-cell-editing="true" clicks-to-edit="1" height="250">
+                        <f:columns>
+                            <f:row-number-field></f:row-number-field>
+                            <f:render-field header-text="姓名" column-id="Name" data-field="Name">
+                                <f:editor>
+                                    <f:text-box id="tbxName" required="true"></f:text-box>
+                                </f:editor>
+                            </f:render-field>
+                            <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender">
+                                <f:editor>
+                                    <f:drop-down-list id="ddlGender" required="true">
+                                        <f:list-item text="男" value="1"></f:list-item>
+                                        <f:list-item text="女" value="0"></f:list-item>
+                                    </f:drop-down-list>
+                                </f:editor>
+                            </f:render-field>
+                            <f:render-field header-text="所学专业" column-id="Major" data-field="Major" expand-unused-space="true" min-width="150">
+                                <f:editor>
+                                    <f:text-box id="tbxMajor" required="true"></f:text-box>
+                                </f:editor>
+                            </f:render-field>
+                        </f:columns>
+                    </f:grid>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button text="刷新本页面" id="btnClose" icon="SystemClose" click-handler="onCloseClick"></f:button>
+                            <f:button id="btnClosePostBack" text="保存数据" validate-forms="SimpleForm1" on-click="btnClosePostBack_Click" icon="SystemSave">
+                            </f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function onCloseClick(event) {
+                    window.location.reload();
+                }
+
+                F.beforeUnload(function() {
+                    var form = F.ui.SimpleForm1;
+                    // 表单数据改变了
+                    if (form.isDirty()) {
+                        return '当前表单数据已经被修改，确认放弃修改？';
+                    }
+
+                    var grid = F.ui.Grid1;
+                    // 表格数据改变了
+                    if (grid.getModifiedData().length) {
+                        return '当前表格数据已经被修改，确认放弃修改？';
+                    }
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

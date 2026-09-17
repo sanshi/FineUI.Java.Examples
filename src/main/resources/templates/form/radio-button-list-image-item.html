@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · RadioButtonListImageItem</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" label-width="220" enable-collapse="false" body-padding="10" show-border="true" show-header="true"
+                title="单选框列表 - 图标选项（可信 HTML）">
+                <f:items>
+                    <f:radio-button-list id="RadioButtonList1" label="① DataBind + DataTextRaw（自动绑定）" column-number="4"></f:radio-button-list>
+                    <f:radio-button-list id="RadioButtonList2" label="② OnItemDataBound（逐项事件回调）" column-number="4"
+                        on-item-data-bound="RadioButtonList2_ItemDataBound"></f:radio-button-list>
+                    <f:radio-button-list id="RadioButtonList3" label="③ 手工构建 Items（TextRawHtml）" column-number="4"></f:radio-button-list>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="btnSubmit" text="获取选中值" on-click="btnSubmit_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+            <br />
+            注：三种方式实现的功能与安全性完全等价，区别只是数据供给方式。三者都只信任图标模板骨架与 URL，名称字段为安全字面量，杜绝 XSS。
+
+        </th:block>
+    </body>
+
+</html>

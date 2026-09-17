@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataModel 编辑实体</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles"
+            content="class:com.fineui.java.examples.datamodel.model.Student;class:com.fineui.java.examples.datamodel.model.StudentHelper;class:com.fineui.java.examples.datamodel.model.StudentStore" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" show-border="true" show-header="true" title="编辑学生">
+                <f:items>
+                    <!--/* 只读展示：Label 是展示型控件，客户端不采集它的值、也不参与回发绑定。
+                           首屏由 Page_Get 加载的实体填值；保存时事件处理器不覆盖分组，故数据源里的原值保持不变 */-->
+                    <f:label for="student.group"></f:label>
+                    <f:text-box for="student.name"></f:text-box>
+                    <f:radio-button-list for="student.gender" column-number="3">
+                        <f:radio-item text="男" value="1"></f:radio-item>
+                        <f:radio-item text="女" value="0"></f:radio-item>
+                    </f:radio-button-list>
+                    <f:number-box for="student.entranceYear"></f:number-box>
+                    <f:check-box for="student.atSchool"></f:check-box>
+                    <f:text-box for="student.major"></f:text-box>
+                    <f:date-picker for="student.entranceDate"></f:date-picker>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar position="Bottom">
+                        <f:items>
+                            <f:button id="btnSave" text="保存" validate-forms="SimpleForm1" on-click="btnSave_Click"></f:button>
+                            <f:button id="btnReset" type="Reset" text="重置表单"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+        </th:block>
+    </body>
+
+</html>

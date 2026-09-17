@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · ValidateForValue</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form is-fluid="true" body-padding="10" id="SimpleForm1" title="表单">
+                <f:items>
+                    <f:drop-down-list id="DropDownList1" label="List1" show-red-star="true" required="true" min-length="3">
+                        <f:items>
+                            <f:list-item text="甲" value="301"></f:list-item>
+                            <f:list-item text="老大乙" value="201"></f:list-item>
+                            <f:list-item text="老大丙" value="101"></f:list-item>
+                        </f:items>
+                    </f:drop-down-list>
+                    <f:drop-down-list id="DropDownList3" label="List2" show-red-star="true" required="true" min-length="3" validate-for-value="true">
+                        <f:items>
+                            <f:list-item text="老大甲（Value=0）" value="0"></f:list-item>
+                            <f:list-item text="老大乙（Value=201）" value="201"></f:list-item>
+                            <f:list-item text="老大丙（Value=101）" value="101"></f:list-item>
+                        </f:items>
+                    </f:drop-down-list>
+                    <f:button id="btnSubmit" text="验证此表单并提交" css-class="marginr" validate-forms="SimpleForm1" on-click="btnSubmitForm_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 下拉表格（输入框过滤）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10px" enable-collapse="false" show-border="true" title="下拉表格（输入框过滤）"
+                show-header="true">
+                <f:items>
+                    <f:drop-down-box id="DropDownBox1" empty-text="请从下拉表格中选择" enable-multi-select="true" match-field-width="false">
+                        <f:pop-panel>
+                            <f:grid id="Grid1" width="650" height="300" show-border="true" show-header="false" data-id-field="Id" data-text-field="Name"
+                                enable-check-box-select="true" allow-paging="true" is-database-paging="true" page-size="5" hidden="true"
+                                enable-multi-select="true" keep-current-selection="true" on-page-index-changed="Grid1_PageIndexChanged">
+                                <f:columns>
+                                    <f:row-number-field></f:row-number-field>
+                                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                                        min-width="150"></f:render-field>
+                                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                                </f:columns>
+                                <f:toolbars>
+                                    <f:toolbar position="Top">
+                                        <f:items>
+                                            <f:twin-trigger-box id="ttbSearch" width="300" empty-text="在姓名中查找" show-label="false" show-trigger1="false"
+                                                trigger1-icon="Clear" trigger2-icon="Search" on-trigger1-click="ttbSearch_Trigger1Click"
+                                                on-trigger2-click="ttbSearch_Trigger2Click"></f:twin-trigger-box>
+                                        </f:items>
+                                    </f:toolbar>
+                                </f:toolbars>
+                            </f:grid>
+                        </f:pop-panel>
+                    </f:drop-down-box>
+                    <f:button id="btnGetSelection" text="获取下拉框的选中值" css-class="marginr" on-click="btnGetSelection_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br>
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,8 @@
+<!-- 公共用户卡片片段（布局版，对应源示例 LayoutPartialView）：在 partial-view 基础上支持 box-flex / margin 透传
+     （参数未传时对应属性忽略，卡片不参与伸缩）。prefix 为所属面板 id（控件 id 前缀）、index 为面板内序号（从 1 起）。 -->
+<f:panel th:fragment="card(prefix, index, userName, userAge, userCountry, boxFlex, margin)" id="|${prefix}_PartialView${index}|" body-padding="10" title="分部视图"
+    box-flex="${boxFlex}" margin="${margin}">
+    <f:items>
+        <f:label id="|${prefix}_PartialView${index}_labUserInfo|" text="|${userName}今年${userAge}岁，住在${userCountry}。|"></f:label>
+    </f:items>
+</f:panel>

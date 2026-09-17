@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 表头过滤综合初始值</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name" allow-filters="true"
+                on-filter-changed="Grid1_FilterChanged">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field column-id="Name" header-text="姓名" data-field="Name" enable-filter="true">
+                        <f:filter enable-multi-conditions="true" matcher-default="any">
+                            <f:operator>
+                                <f:drop-down-list>
+                                    <f:list-item text="等于" value="equal"></f:list-item>
+                                    <f:list-item text="包含" value="contain" selected="true"></f:list-item>
+                                    <f:list-item text="开始于" value="start"></f:list-item>
+                                    <f:list-item text="结束于" value="end"></f:list-item>
+                                </f:drop-down-list>
+                            </f:operator>
+                        </f:filter>
+                    </f:render-field>
+                    <f:render-field column-id="Gender" header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"
+                        enable-filter="true">
+                        <f:filter>
+                            <f:field>
+                                <f:radio-button-list>
+                                    <f:radio-item text="男" value="1"></f:radio-item>
+                                    <f:radio-item text="女" value="0"></f:radio-item>
+                                </f:radio-button-list>
+                            </f:field>
+                        </f:filter>
+                    </f:render-field>
+                    <f:render-field column-id="EntranceYear" header-text="入学年份" data-field="EntranceYear" field-type="Int" enable-filter="true">
+                        <f:filter enable-multi-conditions="true">
+                            <f:operator>
+                                <f:drop-down-list>
+                                    <f:list-item text="大于" value="greater" selected="true"></f:list-item>
+                                    <f:list-item text="小于" value="less"></f:list-item>
+                                    <f:list-item text="等于" value="equal"></f:list-item>
+                                </f:drop-down-list>
+                            </f:operator>
+                            <f:field>
+                                <f:number-box no-decimal="true" no-negative="true"></f:number-box>
+                            </f:field>
+                        </f:filter>
+                    </f:render-field>
+                    <f:render-check-field column-id="AtSchool" header-text="是否在校" data-field="AtSchool" render-as-static-field="true" enable-filter="true">
+                        <f:filter>
+                            <f:field>
+                                <f:radio-button-list>
+                                    <f:radio-item text="在校" value="true"></f:radio-item>
+                                    <f:radio-item text="已离校" value="false"></f:radio-item>
+                                </f:radio-button-list>
+                            </f:field>
+                        </f:filter>
+                    </f:render-check-field>
+                    <f:render-field column-id="Major" header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150" enable-filter="true">
+                        <f:filter>
+                            <f:field>
+                                <f:check-box-list column-number="1">
+                                    <f:check-item text="材料科学与工程系" value="材料科学与工程系"></f:check-item>
+                                    <f:check-item text="化学系" value="化学系"></f:check-item>
+                                    <f:check-item text="物理系" value="物理系"></f:check-item>
+                                    <f:check-item text="数学系" value="数学系"></f:check-item>
+                                    <f:check-item text="自动化系" value="自动化系"></f:check-item>
+                                </f:check-box-list>
+                            </f:field>
+                        </f:filter>
+                    </f:render-field>
+                    <f:render-field column-id="Group" header-text="分组" data-field="Group" renderer-function="renderGroup" enable-filter="true">
+                        <f:filter>
+                            <f:field>
+                                <f:drop-down-list id="groupList" enable-multi-select="true" auto-select-first-item="false" multi-select-mode="Tags">
+                                    <f:list-item text="分组1" value="1"></f:list-item>
+                                    <f:list-item text="分组2" value="2"></f:list-item>
+                                    <f:list-item text="分组3" value="3"></f:list-item>
+                                    <f:list-item text="分组4" value="4"></f:list-item>
+                                    <f:list-item text="分组5" value="5"></f:list-item>
+                                </f:drop-down-list>
+                            </f:field>
+                        </f:filter>
+                    </f:render-field>
+                    <f:render-field column-id="LogTime" header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"
+                        enable-filter="true">
+                        <f:filter enable-multi-conditions="true">
+                            <f:operator>
+                                <f:drop-down-list>
+                                    <f:list-item text="大于" value="greater" selected="true"></f:list-item>
+                                    <f:list-item text="小于" value="less"></f:list-item>
+                                    <f:list-item text="等于" value="equal"></f:list-item>
+                                </f:drop-down-list>
+                            </f:operator>
+                            <f:field>
+                                <f:date-picker date-format-string="yyyy/MM/dd"></f:date-picker>
+                            </f:field>
+                        </f:filter>
+                    </f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <br />
+            <f:button id="btnUpdateFilteredData" css-class="marginr" text="后台更新过滤数据" on-click="btnUpdateFilteredData_Click"></f:button>
+            <br />
+            <br />
+            注：页面初始化时执行了服务器端过滤，因此需要为相关列定义 column-id 属性。
+            <br />
+            <br />
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

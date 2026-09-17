@@ -1,0 +1,37 @@
+package com.fineui.java.examples.gridurl;
+
+import com.fineui.java.core.EventArgs;
+import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.controls.Grid;
+import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.StudentGridData;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 网址数据源 · 选中多行（路由 {@code grid-data-url/select-rows}）：表格首屏按行 id 初始选中；
+ * 「选中[陈飞]，[彭博]，[唐超]所在的行」按钮回发时，服务端按姓名从数据源查出对应行 id 并设为选中行。
+ */
+@FineUIPage("grid-data-url/select-rows")
+public class SelectRows extends PageBase {
+
+    Grid Grid1;
+
+    public void Page_Load(Object sender, EventArgs e) {
+        // 首屏初始选中行由模板 selected-row-id-array 声明，服务端不绑定数据（由 data-url 拉取）。
+    }
+
+    /** 按姓名从数据源匹配出对应行 id，设置为选中行。 */
+    public void Button2_Click(Object sender, EventArgs e) {
+        List<String> ids = new ArrayList<>();
+        for (Map<String, Object> row : StudentGridData.rows()) {
+            String name = String.valueOf(row.get("Name"));
+            if ("陈飞".equals(name) || "彭博".equals(name) || "唐超".equals(name)) {
+                ids.add(String.valueOf(row.get("Id")));
+            }
+        }
+        Grid1.setSelectedRowIdArray(ids.toArray(new String[0]));
+    }
+}

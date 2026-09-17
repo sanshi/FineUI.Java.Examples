@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 行命令（客户端事件）</title>
+        <style>
+            .mybtn3 .f-icon.f-icon-remove {
+                color: red;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-check-box-select="true">
+                <f:listeners>
+                    <f:listener event="rowcommand" handler="onGrid1RowCommand"></f:listener>
+                </f:listeners>
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="">
+                        <f:commands>
+                            <f:command command-name="Action1" text="按钮"></f:command>
+                        </f:commands>
+                    </f:render-field>
+                    <f:render-field header-text="">
+                        <f:commands>
+                            <f:command command-name="Action2" icon="Delete" confirm-text="你确定要这么做吗？" confirm-target="Top"></f:command>
+                        </f:commands>
+                    </f:render-field>
+                    <f:render-field header-text="">
+                        <f:commands>
+                            <f:command command-name="Action3" icon-font="Remove" css-class="mybtn3" confirm-text="你确定要这么做吗？" confirm-target="Top"></f:command>
+                        </f:commands>
+                    </f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+            <br />
+            <br />
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                // 行命令客户端监听：弹出通知
+                function onGrid1RowCommand(event, rowId, rowIndex, columnId, commandName) {
+                    var rowData = F.ui.Grid1.getRowData(rowId);
+                    showNotify('你点击了第 ' + (rowIndex + 1) + ' 行，行ID：' + rowData.id + '，姓名：' + rowData.text);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

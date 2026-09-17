@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FileUploadTool</title>
+
+        <style>
+            .photo {
+                height: 150px;
+                line-height: 150px;
+                overflow: hidden;
+            }
+
+            .photo img {
+                height: 150px;
+                vertical-align: middle;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="表单" show-header="true">
+                <f:items>
+                    <f:image id="imgPhoto" css-class="photo" image-url="/res/images/blank.png" show-empty-label="true"></f:image>
+                    <f:text-box id="tbxUserName" label="用户名" required="true" show-red-star="true"></f:text-box>
+                    <f:text-box id="tbxEmail" label="邮箱" required="true" regex-pattern="EMAIL" regex-message="请输入有效的邮箱地址" show-red-star="true"></f:text-box>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+                <f:tools>
+                    <f:tool icon-font="_Upload" text="上传头像" click-handler="onUploadClick"></f:tool>
+                </f:tools>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+            <f:file-upload id="filePhoto" hidden="true" on-file-selected="filePhoto_FileSelected"></f:file-upload>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onUploadClick(event) {
+                    F.ui.filePhoto.el.find('.f-field-fileupload-fileinput').click();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CSP 表格</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" expand-unused-space="true" min-width="150"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <!--/* 按钮点击使用具名函数（click-handler），无需 'unsafe-eval'。 */-->
+            <f:button text="选中了哪些行" click-handler="onShowSelectedNamesClick"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <!--/* underscore 从白名单 CDN 加载：CSP 只放行 cdn.jsdelivr.net / unpkg.com 两个域（cspScriptsAllowUrls） */-->
+            <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.7/underscore-umd-min.js"></script>
+
+            <script src="https://unpkg.com/underscore@1.13.7/underscore-umd-min.js"></script>
+
+            <!--/* 页面自带的内联脚本：带 nonce 才被 CSP 放行（nonce 由服务端在渲染前生成、经 page.cspScriptsNonceValue 取用） */-->
+            <script th:attr="nonce=${page.cspScriptsNonceValue}">
+                function renderGender(value, params) {
+                    return value == 1 ? '男' : '女';
+                }
+
+                function onShowSelectedNamesClick(event) {
+                    var grid1 = F.ui.Grid1;
+
+                    if (!grid1.hasSelection()) {
+                        F.alert('没有选中项！');
+                    } else {
+                        var selectedRowTexts = _.map(grid1.getSelectedRows(true), function(rowData, index) {
+                            return rowData.text;
+                        });
+                        F.alert(F.formatString('选中的项：{0}', selectedRowTexts.join(', ')));
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

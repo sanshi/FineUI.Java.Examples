@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 网址数据源 · 表头过滤（POST）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" enable-collapse="false" enable-check-box-select="true"
+                data-id-field="Id" data-url="/grid-data-url/filter-data" data-method="POST" allow-filters="true">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field column-id="Name" data-field="Name" header-text="姓名" enable-filter="true">
+                        <f:filter enable-multi-conditions="true" matcher-default="any">
+                            <f:operator>
+                                <f:drop-down-list>
+                                    <f:list-item text="等于" value="equal"></f:list-item>
+                                    <f:list-item text="包含" value="contain" selected="true"></f:list-item>
+                                    <f:list-item text="开始于" value="start"></f:list-item>
+                                    <f:list-item text="结束于" value="end"></f:list-item>
+                                </f:drop-down-list>
+                            </f:operator>
+                        </f:filter>
+                    </f:render-field>
+                    <f:render-field column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender" header-text="性别">
+                    </f:render-field>
+                    <f:render-field column-id="EntranceYear" data-field="EntranceYear" field-type="Int" header-text="入学年份" enable-filter="true">
+                        <f:filter enable-multi-conditions="true">
+                            <f:operator>
+                                <f:drop-down-list>
+                                    <f:list-item text="大于" value="greater" selected="true"></f:list-item>
+                                    <f:list-item text="小于" value="less"></f:list-item>
+                                    <f:list-item text="等于" value="equal"></f:list-item>
+                                </f:drop-down-list>
+                            </f:operator>
+                            <f:field>
+                                <f:number-box no-decimal="true" no-negative="true" required="true" min-value="1995"></f:number-box>
+                            </f:field>
+                        </f:filter>
+                    </f:render-field>
+                    <f:render-check-field column-id="AtSchool" data-field="AtSchool" render-as-static-field="true" header-text="是否在校"></f:render-check-field>
+                    <f:render-field column-id="Major" data-field="Major" renderer-function="renderMajor" expand-unused-space="true" min-width="150"
+                        header-text="所学专业" enable-filter="true">
+                        <f:filter>
+                            <f:field>
+                                <f:check-box-list column-number="1" required="true">
+                                    <f:check-item text="材料科学与工程系" value="材料科学与工程系"></f:check-item>
+                                    <f:check-item text="化学系" value="化学系"></f:check-item>
+                                    <f:check-item text="物理系" value="物理系"></f:check-item>
+                                    <f:check-item text="数学系" value="数学系"></f:check-item>
+                                    <f:check-item text="自动化系" value="自动化系"></f:check-item>
+                                </f:check-box-list>
+                            </f:field>
+                        </f:filter>
+                    </f:render-field>
+                    <f:render-field column-id="Group" data-field="Group" renderer-function="renderGroup" header-text="分组">
+                    </f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <br />
+
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

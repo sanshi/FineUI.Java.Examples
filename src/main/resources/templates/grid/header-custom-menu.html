@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 自定义表头工具菜单</title>
+
+        <style>
+            .f-grid-allcolumns-hidden-message {
+                display: none !important;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-header-menu="false" data-key-names="Id,Name,Gender,Major">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                </f:columns>
+                <f:tools>
+                    <f:tool id="toolColumns" icon-font="_ColumnsAlt" text="管理列" tool-tip="显示隐藏列" tab-index="0" click-handler="onToolColumnsClick"></f:tool>
+                </f:tools>
+            </f:grid>
+
+            <br />
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+
+            <br />
+            <br />
+            <f:button id="Button1" text="选中了哪些行（服务器端）" css-class="marginr" on-click="Button1_Click"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function onToolColumnsClick(event) {
+                    var toolEl = this.el; // 当前工具图标元素
+                    F.ui.Grid1.showColumnsMenu(toolEl);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 自定义折叠工具</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" title="面板" height="350" body-padding="10" icon-url="/res/images/16/8.png">
+                <f:items>
+                    <f:label text="面板内容"></f:label>
+                </f:items>
+                <f:tools>
+                    <f:tool id="Tool4" icon-font="_Save" text="保存" tool-tip="保存" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool18" icon-font="_Plus" text="新增" tool-tip="新增" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool10" icon-font="_Edit" text="编辑" tool-tip="编辑" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool5" icon-font="_Minus" text="删除" tool-tip="删除" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool6" icon-font="_RoundMinus" text="折叠" tool-tip="折叠" click-handler="onToolIconClick"></f:tool>
+                </f:tools>
+            </f:panel>
+            <br>
+
+            <f:button id="Button2" css-class="marginr" text="检查面板的折叠状态" on-click="Button2_Click"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onToolIconClick(event) {
+                    var iconFont = this.iconFont;
+                    var text = this.text;
+
+                    F.notify({
+                        message: '你点击了标题栏工具图标：' + text,
+                        messageIconFont: iconFont,
+                        displayMilliseconds: 3000,
+                        positionX: 'center',
+                        positionY: 'center'
+                    });
+
+                    // 展开，折叠
+                    var panel1 = F.ui.Panel1;
+                    if (iconFont === 'f-iconfont-round-minus') {
+                        this.setIconFont('f-iconfont-round-plus');
+                        this.setText('展开');
+                        this.setTooltip('展开');
+                        panel1.collapse();
+                    } else if (iconFont === 'f-iconfont-round-plus') {
+                        this.setIconFont('f-iconfont-round-minus');
+                        this.setText('折叠');
+                        this.setTooltip('折叠');
+                        panel1.expand();
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

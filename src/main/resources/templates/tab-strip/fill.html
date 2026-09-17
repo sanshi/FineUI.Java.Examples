@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 选项卡填充整个标题栏</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="150" tab-fill="true" show-border="true" active-tab-index="0">
+                <f:tabs>
+                    <f:tab title="标签一" body-padding="10">
+                        <f:items>
+                            <f:label text="第一个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab title="标签二" body-padding="10">
+                        <f:items>
+                            <f:label text="第二个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab title="标签三" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label text="第三个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab7" title="标签四" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label7" text="第四个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+            <br />
+            <br />
+            <f:tab-strip id="TabStrip2" is-fluid="true" height="150" tab-fill="true" tab-space="0" show-border="true" active-tab-index="1">
+                <f:tabs>
+                    <f:tab id="Tab1" title="标签一" body-padding="10">
+                        <f:items>
+                            <f:label id="Label1" text="第一个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab2" title="标签二" body-padding="10">
+                        <f:items>
+                            <f:label id="Label2" text="第二个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab3" title="标签三" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label3" text="第三个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab8" title="标签四" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label8" text="第四个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+            <br />
+            <br />
+            <f:tab-strip id="TabStrip3" is-fluid="true" height="150" tab-fill="true" tab-space="-1" show-border="true" active-tab-index="2">
+                <f:tabs>
+                    <f:tab id="Tab4" title="标签一" body-padding="10">
+                        <f:items>
+                            <f:label id="Label4" text="第一个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab5" title="标签二" body-padding="10">
+                        <f:items>
+                            <f:label id="Label5" text="第二个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab6" title="标签三" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label6" text="第三个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab9" title="标签四" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label9" text="第四个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+            <br>
+            注意三个选项卡控件的区别：
+            <ul>
+                <li>第一次选项卡：tab-fill="true" tab-space="2"（默认值）</li>
+                <li>第二次选项卡：tab-fill="true" tab-space="0"</li>
+                <li>第三次选项卡：tab-fill="true" tab-space="-1"（选项卡标题栏之间的间隔完全不见了）</li>
+            </ul>
+            <br>
+            <br>
+
+        </th:block>
+    </body>
+
+</html>

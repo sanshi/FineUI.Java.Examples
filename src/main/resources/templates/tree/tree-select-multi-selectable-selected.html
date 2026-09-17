@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 节点选择（禁止选中节点，默认选中）</title>
+
+        <style>
+            /* 设置不可选择节点的文本样式 */
+            .f-tree-node-unselectable .f-tree-cell-icon.f-tree-folder,
+            .f-tree-node-unselectable .f-tree-cell-text {
+                opacity: 0.6;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <th:block layout:fragment="body">
+
+            <f:tree id="Tree1" is-fluid="true" show-header="true" title="树控件" enable-multi-select="true" enable-single-click-expand="true"
+                selected-node-id-array="henan,zhumadian">
+                <f:nodes>
+                    <f:tree-node text="中国" expanded="true" node-id="china">
+                        <f:tree-node text="河南省" expanded="true" node-id="henan" selectable="false">
+                            <f:tree-node text="驻马店市" expanded="true" node-id="zhumadian">
+                                <f:tree-node text="遂平县" node-id="suiping"></f:tree-node>
+                                <f:tree-node text="西平县" node-id="xiping"></f:tree-node>
+                            </f:tree-node>
+                            <f:tree-node text="漯河市" node-id="luohe"></f:tree-node>
+                        </f:tree-node>
+                        <f:tree-node text="安徽省" expanded="true" node-id="anhui" selectable="false">
+                            <f:tree-node text="合肥市" node-id="hefei"></f:tree-node>
+                            <f:tree-node text="黄山市" node-id="huangshan"></f:tree-node>
+                        </f:tree-node>
+                    </f:tree-node>
+                </f:nodes>
+            </f:tree>
+            <br />
+            <br />
+            注：本示例默认禁用[河南省]和[安徽省]两个节点，默认选中[河南省]和[驻马店市]两个节点。
+            <br />
+            <br />
+
+            <f:button id="btnGetSelectedValues" on-click="btnGetSelectedValues_Click" css-class="marginr" text="获取选中的节点列表"></f:button>
+
+            <f:button id="btnSelectOthers" on-click="btnSelectOthers_Click" text="继续选中[合肥市]和[黄山市]"></f:button>
+            <br />
+
+            <f:label id="labResult" encode-text="false"></f:label>
+            <br />
+            <br />
+
+        </th:block>
+    </body>
+
+</html>

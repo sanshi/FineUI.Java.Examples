@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 面板</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" title="面板" body-padding="10" enable-collapse="true" icon-font="_VolumeUp">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" position="Top">
+                        <f:items>
+                            <f:toolbar-text id="ToolbarText1" text="工具条文本一"></f:toolbar-text>
+                            <f:toolbar-separator id="ToolbarSeparator1"></f:toolbar-separator>
+                            <f:toolbar-text id="ToolbarText2" text="工具条文本二"></f:toolbar-text>
+                            <f:toolbar-separator id="ToolbarSeparator2"></f:toolbar-separator>
+                            <f:button id="btnToolbarButton" text="工具条按钮" click-handler="onToolbarButtonClick"></f:button>
+                            <f:toolbar-fill id="ToolbarFill1"></f:toolbar-fill>
+                            <f:toolbar-text id="ToolbarText4" text="工具条文本四"></f:toolbar-text>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:panel id="Panel2" title="内容面板" show-border="true" height="200" icon="TagBlue" body-padding="10" enable-collapse="true" show-header="true"
+                        auto-scroll="true">
+                    </f:panel>
+                </f:items>
+            </f:panel>
+            <br>
+
+            <f:button id="Button2" css-class="marginr" text="检查面板的折叠状态" on-click="Button2_Click"></f:button>
+            <f:button id="Button4" text="更新面板的标题" on-click="Button4_Click"></f:button>
+            <br />
+            <br />
+            <f:button id="Button3" text="展开/折叠内容面板" on-click="Button3_Click"></f:button>
+            <br />
+            <br />
+            <f:button id="Button5" css-class="marginr" text="更新工具条文本一的值" on-click="Button5_Click"></f:button>
+            <f:button id="Button6" text="显示/隐藏工具条文本一" on-click="Button6_Click"></f:button>
+            <br />
+            <br />
+            <f:button id="Button7" text="隐藏工具栏" css-class="marginr" on-click="Button7_Click"></f:button>
+            <f:button id="Button8" text="显示工具栏" on-click="Button8_Click"></f:button>
+            <br />
+            <br />
+            <f:button id="Button9" text="点击修改面板图标（在三个图标之前切换）" css-class="marginr" on-click="Button9_Click"></f:button>
+            <f:button id="Button10" text="清空面板图标" css-class="marginr" on-click="Button10_Click"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onToolbarButtonClick(event) {
+                    F.alert('你点击了工具栏按钮');
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

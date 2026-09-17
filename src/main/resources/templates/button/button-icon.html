@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 图片图标按钮</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnIcon1" text="图标在左侧" icon="Email" css-class="marginr"></f:button>
+            <f:button id="btnIcon2" text="图标在右侧" icon-align="Right" icon="Star"></f:button>
+            <br />
+            <br />
+            <f:button id="btnIcon3" text="图标在上面" icon-align="Top" icon="Email" css-class="marginr"></f:button>
+            <f:button id="btnIcon4" text="图标在下面" icon-align="Bottom" icon="Star"></f:button>
+            <br />
+            <br />
+            <f:button id="btnCustomIcon" text="自定义图标（点击修改图标）" icon-url="/res/images/16/1.png" on-click="btnCustomIcon_Click"></f:button>
+            <br />
+            <br />
+            只有图片的按钮：
+            <br />
+            <br />
+            <f:button id="Button1" icon-url="/res/images/16/1.png" css-class="marginr"></f:button>
+            <f:button id="Button2" icon-url="/res/images/16/8.png"></f:button>
+            <br />
+            <br />
+            大按钮：
+            <br />
+            <br />
+            <f:button id="Button3" size="Large" text="图标在左侧" icon="Email" css-class="marginr"></f:button>
+            <f:button id="Button4" size="Large" text="图标在右侧" icon-align="Right" icon="Star"></f:button>
+            <br />
+            <br />
+            <f:button id="Button5" size="Large" text="图标在上面" icon-align="Top" icon="Email" css-class="marginr"></f:button>
+            <f:button id="Button6" size="Large" text="图标在下面" icon-align="Bottom" icon="Email"></f:button>
+            <br />
+            <br />
+
+        </th:block>
+    </body>
+
+</html>

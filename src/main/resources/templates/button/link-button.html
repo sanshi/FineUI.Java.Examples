@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 链接按钮</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:link-button id="LinkButton2" text="客户端事件" click-handler="onClientEventClick"></f:link-button>
+            <br />
+            <f:link-button id="LinkButton3" text="服务器端事件" on-click="LinkButton3_Click"></f:link-button>
+            <br />
+            <br />
+            <f:link-button id="LinkButton1" enabled="false" text="客户端事件（初始禁用）" click-handler="onLinkButtonClick"></f:link-button>
+            <br />
+            <f:button id="btnChangeEnable" text="启用/禁用最后一个链接按钮" on-click="btnChangeEnable_Click"></f:button>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onLinkButtonClick(event) {
+                    top.F.alert("这是初始禁用的链接按钮的客户端事件！");
+                }
+
+                function onClientEventClick(event) {
+                    F.alert({
+                        message: '这是客户端事件',
+                        messageIcon: 'information',
+                        target: '_top'
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

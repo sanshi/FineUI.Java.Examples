@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Label</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:label id="Label1" text="普通的 Label 标签，会自动编码字符串（比如：<strong></strong>）"></f:label>
+            <br />
+            <f:label id="Label4" text-raw-html="<a href='http://www.ustc.edu.cn/' target='_blank'>中国科学技术大学（Label 标签生成的链接）</a>"></f:label>
+            <br />
+            <f:label id="Label2" css-class="customlabel" text="修改文本的样式（CssClass）"></f:label>
+            <br />
+            <f:label id="Label3" enabled="false" text-raw-html="<span style='color:red;font-weight:bold;'>修改文本的样式（内嵌HTML）</span>"></f:label>
+            <br />
+            <f:button id="btnChangeEnable" text="启用/禁用最后一个标签" on-click="btnChangeEnable_Click"></f:button>
+        </th:block>
+    </body>
+
+</html>

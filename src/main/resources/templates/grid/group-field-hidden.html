@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多表头显隐</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id">
+                <f:columns>
+                    <f:render-field data-field="Year" header-text="统计年份"></f:render-field>
+                    <f:group-field column-id="anhui" header-text="安徽省" text-align="Center">
+                        <f:columns>
+                            <f:group-field header-text="合肥市" text-align="Center">
+                                <f:columns>
+                                    <f:render-field data-field="AHData1" header-text="数据一"></f:render-field>
+                                    <f:render-field data-field="AHData2" header-text="数据二"></f:render-field>
+                                </f:columns>
+                            </f:group-field>
+                        </f:columns>
+                    </f:group-field>
+                    <f:group-field header-text="河南省" text-align="Center">
+                        <f:columns>
+                            <f:group-field column-id="zhumadian" header-text="驻马店市" text-align="Center" hidden="true">
+                                <f:columns>
+                                    <f:render-field data-field="HZData1" header-text="数据一"></f:render-field>
+                                    <f:render-field data-field="HZData2" header-text="数据二"></f:render-field>
+                                </f:columns>
+                            </f:group-field>
+                            <f:group-field header-text="漯河市" text-align="Center">
+                                <f:columns>
+                                    <f:render-field data-field="HLData1" header-text="数据一"></f:render-field>
+                                    <f:render-field data-field="HLData2" header-text="数据二"></f:render-field>
+                                </f:columns>
+                            </f:group-field>
+                        </f:columns>
+                    </f:group-field>
+                    <f:render-field box-flex="1" text-align="Center" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"
+                        header-text="记录时间"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br /><br />
+            <f:button id="Button3" text="显示/隐藏[安徽省]列" css-class="marginr" on-click="Button3_Click"></f:button>
+            <f:button id="Button1" text="显示/隐藏[河南省/驻马店市]列" css-class="marginr" on-click="Button1_Click"></f:button>
+            <br /><br /><br />
+            注：初始隐藏[河南省]下面的[驻马店]。
+        </th:block>
+    </body>
+
+</html>

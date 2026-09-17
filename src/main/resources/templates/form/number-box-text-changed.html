@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · NumberBox 文本改变事件</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-align="Top" enable-collapse="false" title="简单表单" label-width="120">
+                <f:items>
+                    <f:number-box label="非负整数" id="NumberBox3" empty-text="比如 99" no-decimal="true" no-negative="true" required="true" show-red-star="true"
+                        on-text-changed="NumberBox3_TextChanged"></f:number-box>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <br />
+            注：手工输入数字，或者点击右侧上下箭头都会触发文本改变事件。
+
+        </th:block>
+    </body>
+
+</html>

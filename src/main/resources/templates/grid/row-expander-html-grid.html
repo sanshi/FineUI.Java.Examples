@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 行扩展列（嵌套 HTML 表格）</title>
+        <style>
+            .mytable {
+                border-width: 1px;
+                border-style: solid;
+                border-collapse: separate;
+                border-spacing: 0;
+                border-bottom-width: 0;
+                border-right-width: 0;
+            }
+
+            .mytable th,
+            .mytable td {
+                padding: 5px;
+                text-align: left;
+                border-bottom-width: 1px;
+                border-bottom-style: solid;
+                border-right-width: 1px;
+                border-right-style: solid;
+                width: 100px;
+            }
+
+        </style>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.web.RowExpanderGridDataController" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（嵌套表格仅用于数据展示，不适合复杂的逻辑处理）" data-id-field="Id"
+                data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"></f:render-field>
+                    <f:render-field column-id="Desc" render-as-row-expander="true"></f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="rowexpanderexpand" handler="onRowExpanderExpand"></f:listener>
+                    <f:listener event="rowexpandercollapse" handler="onRowExpanderCollapse"></f:listener>
+                </f:listeners>
+            </f:grid>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                // 展开行时从数据接口拉取该学生成绩，拼成 HTML 成绩表注入行扩展内容区
+                function onRowExpanderExpand(event, rowId) {
+                    var grid = this,
+                        rowEl = grid.getRowEl(rowId),
+                        rowData = grid.getRowData(rowId);
+                    // 行扩展详情区位于当前行的下一个兄弟节点
+                    var tplEl = rowEl.next().find('.f-grid-cell-text');
+                    if (!tplEl.find('.mytable').length) {
+                        var url = F.resolveUrl('/grid/row-expander-grid-data?rowId=') + rowId + '&name=' + encodeURIComponent(rowData.values['Name']);
+                        $.ajax({
+                            dataType: 'json',
+                            cache: false,
+                            url: url,
+                            method: 'GET',
+                            success: function(data) {
+                                // data: [["入学",62,72,47,55,55],...]
+                                var html = [];
+                                html.push(
+                                    '<table class="mytable f-widget-header"><tr><th class="f-widget-header f-state-default"></th><th class="f-widget-header f-state-default">语文</th><th class="f-widget-header f-state-default">数学</th><th class="f-widget-header f-state-default">英文</th><th class="f-widget-header f-state-default">物理</th><th class="f-widget-header f-state-default">化学</th><th class="f-widget-header f-state-default">平均成绩</th></tr>'
+                                );
+                                for (var i = 0, count = data.length; i < count; i++) {
+                                    var item = data[i];
+                                    html.push('<tr>');
+                                    var totalScore = 0;
+                                    html.push('<td class="f-widget-content">' + item[0] + '</td>');
+                                    for (var j = 1; j <= 5; j++) {
+                                        totalScore += item[j];
+                                        html.push('<td class="f-widget-content">' + item[j] + '</td>');
+                                    }
+                                    var avgScore = Math.round(totalScore / 5);
+                                    html.push('<td class="f-widget-content">' + avgScore + '</td>');
+                                    html.push('</tr>');
+                                }
+                                html.push('</table>');
+                                tplEl.html(html.join(''));
+                                rowExpandersDoLayout();
+                            }
+                        });
+                    }
+                }
+
+                function onRowExpanderCollapse(event, rowId) {
+                    rowExpandersDoLayout();
+                }
+
+                // 重新布局表格（解决出现纵向滚动条时的布局问题）
+                function rowExpandersDoLayout() {
+                    F.ui.Grid1.doLayout();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

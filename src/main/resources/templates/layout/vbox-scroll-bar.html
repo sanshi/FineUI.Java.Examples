@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · VBox 滚动条布局</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel5" is-fluid="true" show-border="true" enable-collapse="true" layout="VBox" auto-scroll="true" margin="24px" show-header="true"
+                title="面板（Layout=VBox AutoScroll=true），高度变小时可能出现纵向滚动条" box-config-child-margin="0 0 5 0" body-padding="5" is-view-port="true">
+                <f:items>
+                    <f:panel id="Panel1" title="面板1" height="300" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label id="Label1" text="Height=300">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel2" title="面板2" box-flex="1" min-height="300" margin="0" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label id="Label3" text="BoxFlex=1 Margin=0 MinHeight=300">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

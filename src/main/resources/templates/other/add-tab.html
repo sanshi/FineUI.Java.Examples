@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 向父页面添加选项卡</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:button id="Button1" text="向父页面添加选项卡" click-handler="onOpenHelloFineUIClick"></f:button>
+            <br />
+            <br />
+            <f:button id="Button4" text="向父页面添加选项卡（图标字体，与上个按钮添加的选项卡为同一个）" click-handler="onOpenHelloFineUI2Click"></f:button>
+            <br />
+            <br />
+            <f:button id="Button2" text="关闭当前选项卡" click-handler="onCloseActiveTabClick"></f:button>
+            <br />
+            <br />
+            <f:button id="Button3" text="关闭当前选项卡（服务器端注册脚本）" on-click="Button3_Click"></f:button>
+        </th:block>
+
+        <!--/* 页面专属脚本注入母版 script 槽（输出在 <f:scripts> 之后，此时 FineUI.js 已就绪）。 */-->
+        <th:block layout:fragment="script">
+            <script>
+                function onOpenHelloFineUIClick(event) {
+                    parent.addExampleTab({
+                        id: 'hello_fineui_tab',
+                        iframeUrl: F.resolveUrl('/Basic/Hello'),
+                        title: '你好 FineUI.Java',
+                        icon: F.resolveUrl('/res/images/filetype/vs_aspx.png'),
+                        refreshWhenExist: true
+                    });
+                }
+
+                function onOpenHelloFineUI2Click(event) {
+                    // 这里的 id 和上面的相同，所以会使用同一个选项卡
+                    parent.addExampleTab({
+                        id: 'hello_fineui_tab',
+                        iframeUrl: F.resolveUrl('/Basic/Login'),
+                        title: '登陆页面',
+                        iconFont: 'sign-in',
+                        refreshWhenExist: true
+                    });
+                }
+
+                function onCloseActiveTabClick(event) {
+                    parent.removeActiveTab();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

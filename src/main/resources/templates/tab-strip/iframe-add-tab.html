@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 后台添加更新</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="500" show-border="true" active-tab-index="0">
+                <f:tabs>
+                    <f:tab title="FineUI官网" enable-iframe="true" iframe-url="https://fineui.com/"></f:tab>
+                </f:tabs>
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="Button1" text="打开DeepSeek官网（tab1_iframe）" on-click="Button1_Click"></f:button>
+                            <f:button id="Button2" text="打开Spring 官网（tab1_iframe）" on-click="Button2_Click"></f:button>
+                            <f:button id="Button3" text="打开FineUI官网（tab2_iframe）" on-click="Button3_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:tab-strip>
+            <br>
+            <br>
+            注：由于设置了相同的tabID，专业版示例和开源版示例在同一个选项卡中打开。
+            <br>
+
+        </th:block>
+    </body>
+
+</html>

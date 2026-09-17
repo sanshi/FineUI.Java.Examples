@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 手风琴（面板改变事件）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:accordion id="Accordion1" is-fluid="true" title="手风琴控件" show-header="false" height="500" show-border="true" active-pane-index="1"
+                enable-collapse="false" on-pane-index-changed="Accordion1_PaneIndexChanged">
+                <f:panes>
+                    <f:accordion-pane id="AccordionPane1" title="面板一" icon-url="/res/images/16/1.png" body-padding="2px 5px">
+                        <f:items>
+                            <f:label id="Label1" text="面板一中的文本"></f:label>
+                        </f:items>
+                    </f:accordion-pane>
+                    <f:accordion-pane id="AccordionPane2" title="面板二" icon-url="/res/images/16/4.png" body-padding="2px 5px">
+                        <f:items>
+                            <f:label id="Label2" text="面板二中的文本"></f:label>
+                        </f:items>
+                    </f:accordion-pane>
+                    <f:accordion-pane id="AccordionPane3" title="面板三" icon-url="/res/images/16/7.png" body-padding="2px 5px">
+                        <f:items>
+                            <f:label id="Label3" text="面板三中的文本"></f:label>
+                        </f:items>
+                    </f:accordion-pane>
+                </f:panes>
+            </f:accordion>
+            <br>
+
+            <f:button id="Button1" text="获取当前展开的面板" on-click="Button1_Click"></f:button>
+            <br>
+            <br>
+
+            <f:button id="Button2" text="展开下一个面板" on-click="Button2_Click"></f:button>
+            <br>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 按钮分组（改变按钮文本）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" show-border="true" body-padding="10" height="300" title="面板">
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:button-group id="ButtonGroup1">
+                            <f:button id="Button1" text="按钮一" icon-align="Top" icon="Email"></f:button>
+                            <f:button id="Button2" text="按钮二" icon-align="Bottom" icon="Star"></f:button>
+                            <f:button id="Button3" text="按钮三" icon-align="Top" icon-font="_Camera"></f:button>
+                            <f:button id="Button4" text="按钮四" icon-align="Bottom" icon-font="_Phone"></f:button>
+                        </f:button-group>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:button css-class="marginr" id="btnChangeButtonText" text="修改[按钮四]的文本" on-click="btnChangeButtonText_Click"></f:button>
+                    <f:button id="btnShowHideButton" text="显示隐藏[按钮四]" on-click="btnShowHideButton_Click"></f:button>
+                </f:items>
+            </f:panel>
+            <br />
+            <f:button-group id="ButtonGroup2">
+                <f:button id="Button5" text="按钮五" icon-align="Top" icon="Email"></f:button>
+                <f:button id="Button6" text="按钮六" icon-align="Bottom" icon="Star"></f:button>
+                <f:button id="Button7" text="按钮七" icon-align="Top" icon-font="_Camera"></f:button>
+                <f:button id="Button8" text="按钮八" icon-align="Bottom" icon-font="_Phone"></f:button>
+            </f:button-group>
+            <br />
+            <f:button css-class="marginr" id="btnChangeButtonText2" text="修改[按钮八]的文本" on-click="btnChangeButtonText2_Click"></f:button>
+            <f:button id="btnShowHideButton2" text="显示隐藏[按钮八]" on-click="btnShowHideButton2_Click"></f:button>
+
+        </th:block>
+    </body>
+
+</html>

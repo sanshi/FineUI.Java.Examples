@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 面板折叠展开</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" title="面板一" body-padding="10" enable-collapse="true" icon-url="/res/images/16/8.png"
+                on-collapse="Panel1_CollapseExpand" on-expand="Panel1_CollapseExpand">
+                <f:items>
+                    <f:panel id="Panel2" title="面板二" show-border="true" height="200" body-padding="10" enable-collapse="true" show-header="true"
+                        content="展开折叠这两个面板。" on-collapse="Panel2_CollapseExpand" on-expand="Panel2_CollapseExpand">
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

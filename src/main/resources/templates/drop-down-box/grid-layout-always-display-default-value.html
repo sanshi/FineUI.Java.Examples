@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 始终显示弹出面板（初始值）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="始终显示弹出面板" show-header="true">
+                <f:items>
+                    <f:drop-down-box id="DropDownBox1" empty-text="请从下面表格中选择" data-control-id="Grid1" enable-multi-select="true" match-field-width="false"
+                        pop-panel-id="Panel1" always-display-pop-panel="true" auto-show-clear-icon="true" values="115,105" texts="董国,吴颖颖"></f:drop-down-box>
+                    <f:panel id="Panel1" body-padding="10" height="300" show-border="true" show-header="false" layout="VBox" box-config-space="5">
+                        <f:items>
+                            <f:form show-border="false" show-header="false" remove-last-fields-margin="true">
+                                <f:rows>
+                                    <f:form-row>
+                                        <f:items>
+                                            <f:twin-trigger-box id="ttbSearch" width="300" empty-text="在姓名中查找" show-label="false" show-trigger1="false"
+                                                on-trigger1-click="ttbSearch_Trigger1Click" on-trigger2-click="ttbSearch_Trigger2Click" trigger1-icon="Clear"
+                                                trigger2-icon="Search"></f:twin-trigger-box>
+                                            <f:radio-button-list id="rblAtSchool" label="是否在校" on-selected-index-changed="rblAtSchool_SelectedIndexChanged">
+                                                <f:radio-item text="全部" value="-1" selected="true"></f:radio-item>
+                                                <f:radio-item text="在校" value="1"></f:radio-item>
+                                                <f:radio-item text="离校" value="0"></f:radio-item>
+                                            </f:radio-button-list>
+                                        </f:items>
+                                    </f:form-row>
+                                </f:rows>
+                            </f:form>
+                            <f:grid id="Grid1" box-flex="1" data-id-field="Id" data-text-field="Name" enable-multi-select="true" keep-current-selection="true"
+                                page-size="10" show-border="true" show-header="false" allow-paging="true" is-database-paging="true"
+                                on-page-index-changed="Grid1_PageIndexChanged" enable-check-box-select="true" allow-sorting="true" sort-field="Name"
+                                sort-direction="ASC" on-sort="Grid1_Sort">
+                                <f:columns>
+                                    <f:row-number-field></f:row-number-field>
+                                    <f:render-field header-text="姓名" data-field="Name" sort-field="Name"></f:render-field>
+                                    <f:render-field header-text="性别" data-field="Gender" sort-field="Gender" field-type="Int"
+                                        renderer-function="renderGender"></f:render-field>
+                                    <f:render-field header-text="入学年份" data-field="EntranceYear" sort-field="EntranceYear" field-type="Int"></f:render-field>
+                                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                                        min-width="150"></f:render-field>
+                                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                                </f:columns>
+                            </f:grid>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:simple-form>
+            <br>
+
+            <f:button id="btnGetSelection" text="获取下拉框的选中值" css-class="marginr" on-click="btnGetSelection_Click"></f:button>
+            <f:button id="btnClearValue" text="清空下拉框的值" click-handler="onClearValueClick"></f:button>
+            <br>
+            <br>
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br />
+            <br />
+            注：通过 Values 和 Text 属性来设置下拉框的初始值（由于初始值可能不在第一页，所以需要指定 Text 属性）。
+            <br />
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function onClearValueClick(event) {
+                    F.ui.DropDownBox1.clearValue();
+                }
+
+            </script>
+
+        </th:block>
+    </body>
+
+</html>

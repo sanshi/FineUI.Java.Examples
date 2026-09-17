@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 自定义工具前置</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" title="面板" height="350" body-padding="10" enable-collapse="true" icon-url="/res/images/16/8.png"
+                custom-tool-ahead="true">
+                <f:items>
+                    <f:label text="面板内容"></f:label>
+                </f:items>
+                <f:tools>
+                    <f:tool id="Tool4" icon-font="_Save" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool18" icon-font="_Plus" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool10" icon-font="_Edit" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool5" icon-font="_Minus" click-handler="onToolIconClick"></f:tool>
+                </f:tools>
+            </f:panel>
+            <br>
+
+            <f:button id="Button2" css-class="marginr" text="检查面板的折叠状态" on-click="Button2_Click"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onToolIconClick(event) {
+                    var iconFont = this.iconFont;
+                    F.notify({
+                        message: '你点击了标题栏工具图标：' + iconFont,
+                        messageIconFont: iconFont,
+                        displayMilliseconds: 3000,
+                        positionX: 'center',
+                        positionY: 'center'
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

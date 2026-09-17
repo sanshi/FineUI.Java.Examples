@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 100 行（行高相同）</title>
+
+        <style>
+            .f-grid-row .f-grid-cell-text {
+                white-space: normal;
+                word-break: break-all;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="100 行（行高相同）" data-id-field="Id" data-text-field="Name" height="500"
+                allow-column-locking="true" fixed-row-height="true" row-height-lines="3">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="标识" data-field="Id" enable-lock="true" locked="true"></f:render-field>
+                    <f:render-field header-text="姓名" data-field="Name" width="150" enable-lock="true" locked="true"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int" enable-lock="true"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true" enable-lock="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true" min-width="150"
+                        enable-lock="true"></f:render-field>
+                    <f:render-field header-text="个人简介" data-field="Desc" width="500" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="GUID" data-field="GUID" width="300" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="爱好" data-field="Hobby" renderer-function="renderHobby" width="200" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="入学时间" data-field="EntranceDate" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="语文成绩" data-field="ChineseScore" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="数学成绩" data-field="MathScore" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="总成绩" data-field="TotalScore" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="身高" data-field="ShenGao" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="体重" data-field="TiZhong" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="血压（低）" data-field="XueYaDi" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="血压（高）" data-field="XueYaGao" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="视力（左）" data-field="ShiLiZuo" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="视力（右）" data-field="ShiLiYou" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="矫正视力（左）" data-field="ShiLiZuoJiaoZhen" width="150" enable-lock="true"></f:render-field>
+                    <f:render-field header-text="矫正视力（右）" data-field="ShiLiYouJiaoZhen" width="150" enable-lock="true"></f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="render" handler="onGridRender"></f:listener>
+                </f:listeners>
+            </f:grid>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                // 等所有 JS 资源下载完毕后开始计时
+                var __STARTTIME = new Date();
+
+                // 表格渲染完毕后结束，把渲染耗时追加到标题
+                function onGridRender(event) {
+                    this.setTitle(this.getTitle() + " - 渲染时间：" + ((new Date() - __STARTTIME) / 1000).toFixed(2));
+                }
+
+                function renderHobby(value, params) {
+                    var result = [];
+                    var hobbies = value.split(",");
+                    $.each(hobbies, function(index, hobby) {
+                        if (hobby == "reading") {
+                            result.push("读书");
+                        } else if (hobby == "basketball") {
+                            result.push("篮球");
+                        } else if (hobby == "travel") {
+                            result.push("旅游");
+                        } else if (hobby == "movie") {
+                            result.push("电影");
+                        } else if (hobby == "music") {
+                            result.push("音乐");
+                        }
+                    });
+                    return result.join(",");
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

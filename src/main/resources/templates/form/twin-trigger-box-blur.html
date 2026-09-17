@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TwinTriggerBox 失焦搜索</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="表单" show-header="true">
+                <f:items>
+                    <f:twin-trigger-box id="TwinTriggerBox1" show-label="false" trigger1-icon="Clear" show-trigger1="false" empty-text="搜索用户名"
+                        trigger2-icon="Search" on-trigger1-click="TwinTriggerBox1_Trigger1Click" on-trigger2-click="TwinTriggerBox1_Trigger2Click">
+                        <f:listeners>
+                            <f:listener event="blur" handler="onTwinTriggerBox1Blur"></f:listener>
+                        </f:listeners>
+                    </f:twin-trigger-box>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <br />
+            注：文本输入框失去焦点时，触发后台搜索事件。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                var __lastTriggerBoxValue;
+
+                function onTwinTriggerBox1Blur(event) {
+                    var value = this.getValue();
+                    if (value !== __lastTriggerBoxValue) {
+                        __lastTriggerBoxValue = value;
+                        F.customEvent('TwinTriggerBox1_Blur');
+                    }
+                }
+
+                function updateLastTriggerBoxValue(text) {
+                    __lastTriggerBoxValue = text;
+                }
+
+                F.ready(function() {
+                    __lastTriggerBoxValue = F.ui.TwinTriggerBox1.getValue();
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

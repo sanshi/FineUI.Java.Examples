@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CalendarDayRangeMinDate</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:calendar id="Calendar1" on-date-select="Calendar1_DateSelect" display-type="DayRange"></f:calendar>
+            <br />
+            <br />
+            <f:button id="Button1" on-click="Button1_Click"></f:button>
+            <br />
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

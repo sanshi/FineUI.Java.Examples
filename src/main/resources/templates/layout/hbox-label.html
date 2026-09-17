@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · HBox（标签）</title>
+
+        <style>
+            .zuckerberg {
+                padding: 10px;
+            }
+
+            .mylabel {
+                border-width: 1px;
+                border-style: solid;
+            }
+
+            .mylabel .f-field-label {
+                margin: 0;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel2" is-fluid="true" height="200" show-border="true" enable-collapse="true" layout="HBox" body-padding="10"
+                box-config-child-margin="0 5 0 0" show-header="true" title="面板（Panel）">
+                <f:items>
+                    <f:content-panel id="Panel1" show-border="true" show-header="false" auto-scroll="true" box-flex="1">
+                        <div class="zuckerberg">
+                            <p>
+                                <a href="http://baike.baidu.com/view/1299586.htm" target="_blank"><b>马克·扎克伯格</b></a>
+                            </p>
+                            <p>
+                                马克·艾略特·扎克伯格（Mark Elliot
+                                Zuckerberg），美国社交网站Facebook的创办人，被人们冠以“第二盖茨”的美誉。哈佛大学计算机和心理学专业辍学生。据《福布斯》杂志保守估计，马克·扎克伯格拥有135亿美元身家，是2008年全球最年轻的巨富，也是历来全球最年轻的自行创业亿万富豪。
+                            </p>
+                            <p>
+                                2014年2月10日，马克·扎克伯格及其华裔妻子普莉希拉·陈登上美国《慈善纪事报》2013年年度慈善排行榜榜首。
+                            </p>
+                        </div>
+                    </f:content-panel>
+                    <f:panel id="Panel4" box-flex="2" margin="0" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label id="Label3" text="BoxFlex=2 Margin=0"></f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+            <br />
+            <f:panel id="Panel5" is-fluid="true" height="200" show-border="true" enable-collapse="true" layout="HBox" body-padding="10"
+                box-config-child-margin="0 5 0 0" show-header="true" title="面板（Label）">
+                <f:items>
+                    <f:label id="Label1" css-class="mylabel f-widget-content" encode-text="false" auto-scroll="true" box-flex="1"></f:label>
+                    <f:panel id="Panel8" box-flex="2" margin="0" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label id="Label6" text="BoxFlex=2 Margin=0"></f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

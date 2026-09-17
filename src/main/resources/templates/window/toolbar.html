@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 窗体工具栏</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:window id="Window1" width="650" height="300" icon="TagBlue" title="窗体" enable-maximize="true" enable-collapse="false" enable-resize="true"
+                body-padding="10" auto-scroll="true" is-modal="false">
+                <f:items>
+                    <f:label id="mylabel" text="这是初始值！"></f:label>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar3" position="Top">
+                        <f:items>
+                            <f:toolbar-text id="ToolbarText3" text="工具条文本一"></f:toolbar-text>
+                            <f:toolbar-separator id="ToolbarSeparator2"></f:toolbar-separator>
+                            <f:toolbar-text id="ToolbarText4" text="工具条文本二"></f:toolbar-text>
+                            <f:toolbar-separator id="ToolbarSeparator1"></f:toolbar-separator>
+                            <f:button id="Button1" text="工具栏按钮"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="btnChangeText" on-click="btnChangeText_Click" text="修改窗体内的文本值"></f:button>
+                            <f:button id="btnClose" on-click="btnClose_Click" text="关闭窗体"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:window>
+
+        </th:block>
+    </body>
+
+</html>

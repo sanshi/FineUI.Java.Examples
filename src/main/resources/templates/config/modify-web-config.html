@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 项目配置</title>
+
+        <link rel="stylesheet" th:href="@{/res/google-code-prettify/themes/tomorrow-night.min.css}" />
+        <style>
+            .code-sample {
+                margin: 8px 0 18px;
+                overflow: hidden;
+                border: 1px solid #3c4048;
+                border-radius: 4px;
+                background: #1d1f21;
+            }
+
+            .code-sample-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 5px 8px;
+                color: #c5c8c6;
+                background: #282a2e;
+                font-family: Consolas, "Courier New", monospace;
+                font-size: 12px;
+            }
+
+            .code-sample-copy {
+                padding: 2px 8px;
+                border: 1px solid #5d626b;
+                border-radius: 3px;
+                color: #e8e8e8;
+                background: transparent;
+                cursor: pointer;
+            }
+
+            .code-sample-copy:hover,
+            .code-sample-copy:focus-visible {
+                border-color: #73a839;
+                color: #fff;
+            }
+
+            .code-sample pre.prettyprint {
+                box-sizing: border-box;
+                width: 100%;
+                margin: 0;
+                padding: 12px;
+                overflow: auto;
+                border: 0;
+                background: #1d1f21;
+                font-family: Consolas, "Courier New", monospace;
+                font-size: 13px;
+                line-height: 1.5;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <div style="max-width:900px; padding:10px 0; line-height:1.7">
+                <p>下面用一个可点击按钮的页面说明：在新的 Spring Boot 项目中，怎样接入 FineUI.Java。完成后访问 <code>/hello</code>，点击按钮会触发 Java 服务端事件。</p>
+
+                <h2>1. 引入依赖</h2>
+                <p>先用 Spring Initializr 或 IDE 创建一个 Java 17+ 的 Spring Boot 项目，再在 <code>pom.xml</code> 的 <code>&lt;dependencies&gt;</code> 中加入 FineUI.Java。</p>
+                <div class="code-sample">
+                    <div class="code-sample-header"><span>XML</span><button class="code-sample-copy" type="button" data-copy-code="">复制</button></div>
+                    <pre class="prettyprint lang-xml">
+&lt;dependency&gt;
+    &lt;groupId&gt;com.fineui&lt;/groupId&gt;
+    &lt;artifactId&gt;fineui-java&lt;/artifactId&gt;
+    &lt;version&gt;16.0&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+                </div>
+
+                <p>版本号按实际取得的 FineUI.Java 制品填写。引入后无需编写 <code>@Configuration</code>：FineUI.Java 会自动注册 f: 标签方言、页面路由、回发入口，以及内嵌的 F.js/CSS 资源。</p>
+
+                <h2>2. 建立三个文件</h2>
+                <p>假设启动类位于 <code>com.example.demo</code>。页面类必须放在它的子包中，才能被自动扫描。</p>
+                <div class="code-sample">
+                    <div class="code-sample-header"><span>目录结构</span><button class="code-sample-copy" type="button" data-copy-code="">复制</button></div>
+                    <pre class="prettyprint lang-sh">
+src/main/java/com/example/demo/
+├── DemoApplication.java
+└── pages/HelloPage.java
+
+src/main/resources/templates/
+├── shared/layout.html
+└── hello.html</pre>
+                </div>
+
+                <h2>3. 母版与第一个页面</h2>
+                <p>母版只需放一次 <code>f:styles</code> 和 <code>f:scripts</code>；所有页面共用它。</p>
+                <div class="code-sample">
+                    <div class="code-sample-header"><span>HTML</span><button class="code-sample-copy" type="button" data-copy-code="">复制</button></div>
+                    <pre class="prettyprint lang-html">
+&lt;!-- templates/shared/layout.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns:f="http://fineui.com/java"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;f:styles&gt;&lt;/f:styles&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;th:block layout:fragment="body"&gt;&lt;/th:block&gt;
+    &lt;f:scripts&gt;&lt;/f:scripts&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                </div>
+
+                <div class="code-sample">
+                    <div class="code-sample-header"><span>Java</span><button class="code-sample-copy" type="button" data-copy-code="">复制</button></div>
+                    <pre class="prettyprint lang-java">
+// src/main/java/com/example/demo/pages/HelloPage.java
+package com.example.demo.pages;
+
+import com.fineui.java.core.EventArgs;
+import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.FineUIPageBase;
+
+@FineUIPage("hello")
+public class HelloPage extends FineUIPageBase {
+
+    public void btnHello_Click(Object sender, EventArgs e) {
+        showNotify("你好，FineUI.Java！");
+    }
+}</pre>
+                </div>
+
+                <div class="code-sample">
+                    <div class="code-sample-header"><span>HTML</span><button class="code-sample-copy" type="button" data-copy-code="">复制</button></div>
+                    <pre class="prettyprint lang-html">
+&lt;!-- templates/hello.html：路由 hello 与模板路径同名 --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}"&gt;
+&lt;head&gt;
+    &lt;title&gt;第一个 FineUI.Java 页面&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;th:block layout:fragment="body"&gt;
+        &lt;f:button id="btnHello" text="点击问好"
+            on-click="btnHello_Click"&gt;&lt;/f:button&gt;
+    &lt;/th:block&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                </div>
+
+                <p><code>@FineUIPage("hello")</code> 同时确定 URL 和模板：访问 <code>/hello</code> 时，FineUI.Java 使用 <code>templates/hello.html</code>。按钮的
+                    <code>on-click</code> 指向页面类中的同名方法；点击时通过 AJAX 回发，不会整页刷新。
+                </p>
+
+                <h2>4. 配置并启动</h2>
+                <p><code>application.properties</code> 可以为空。开发时建议关闭模板缓存；主题等全局选项按需再加。</p>
+                <div class="code-sample">
+                    <div class="code-sample-header"><span>Properties</span><button class="code-sample-copy" type="button" data-copy-code="">复制</button></div>
+                    <pre class="prettyprint lang-properties">
+# src/main/resources/application.properties
+spring.thymeleaf.cache=false
+fineui.theme=pure_black</pre>
+                </div>
+
+                <div class="code-sample">
+                    <div class="code-sample-header"><span>Shell</span><button class="code-sample-copy" type="button" data-copy-code="">复制</button></div>
+                    <pre class="prettyprint lang-sh">
+./mvnw spring-boot:run</pre>
+                </div>
+
+                <p>浏览器打开 <code>http://localhost:8080/hello</code>。能看到按钮并在点击后弹出“你好，FineUI.Java！”，即表示接入完成。</p>
+
+                <p><strong>常见遗漏：</strong>页面类不在启动类包的子包中会扫描不到；路由和模板路径不一致会找不到页面；母版缺少 <code>f:styles</code> 或 <code>f:scripts</code> 时，控件无法正常呈现或回发。</p>
+            </div>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/google-code-prettify/prettify.js}"></script>
+            <script>
+                (function() {
+                    function getCodeText(sample) {
+                        return sample.querySelector('pre').textContent
+                            .replace(/^\s*\n/, '')
+                            .replace(/\s+$/, '');
+                    }
+
+                    function copyFallback(text) {
+                        var input = document.createElement('textarea');
+                        input.value = text;
+                        input.setAttribute('readonly', '');
+                        input.style.position = 'fixed';
+                        input.style.opacity = '0';
+                        document.body.appendChild(input);
+                        input.select();
+                        var copied = document.execCommand('copy');
+                        document.body.removeChild(input);
+                        return copied;
+                    }
+
+                    function showCopyResult(button, success) {
+                        var originalText = button.textContent;
+                        button.textContent = success ? '已复制' : '复制失败';
+                        window.setTimeout(function() {
+                            button.textContent = originalText;
+                        }, 1500);
+                    }
+
+                    document.addEventListener('click', function(event) {
+                        var button = event.target.closest('[data-copy-code]');
+                        if (!button) {
+                            return;
+                        }
+                        var text = getCodeText(button.closest('.code-sample'));
+                        if (navigator.clipboard && window.isSecureContext) {
+                            navigator.clipboard.writeText(text)
+                                .then(function() {
+                                    showCopyResult(button, true);
+                                })
+                                .catch(function() {
+                                    showCopyResult(button, copyFallback(text));
+                                });
+                        } else {
+                            showCopyResult(button, copyFallback(text));
+                        }
+                    });
+
+                    if (window.PR && window.PR.prettyPrint) {
+                        window.PR.prettyPrint();
+                    }
+                })();
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

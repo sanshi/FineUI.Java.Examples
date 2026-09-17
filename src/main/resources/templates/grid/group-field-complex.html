@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 复杂多表头</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field data-field="Year" header-text="统计年份"></f:render-field>
+                    <f:group-field header-text="安徽省" text-align="Center">
+                        <f:columns>
+                            <f:render-field data-field="HSData" header-text="黄山市"></f:render-field>
+                            <f:group-field header-text="合肥市" text-align="Center">
+                                <f:columns>
+                                    <f:render-field data-field="HFData" header-text="总数据"></f:render-field>
+                                    <f:group-field header-text="其中" text-align="Center">
+                                        <f:columns>
+                                            <f:render-field data-field="HF_SHData" header-text="蜀山区"></f:render-field>
+                                            <f:render-field data-field="HF_BHData" header-text="滨湖区"></f:render-field>
+                                        </f:columns>
+                                    </f:group-field>
+                                </f:columns>
+                            </f:group-field>
+                        </f:columns>
+                    </f:group-field>
+                    <f:group-field header-text="河南省" text-align="Center">
+                        <f:columns>
+                            <f:render-field data-field="LHData" header-text="漯河市"></f:render-field>
+                            <f:group-field header-text="驻马店市" text-align="Center">
+                                <f:columns>
+                                    <f:render-field data-field="ZMDData" header-text="总数据"></f:render-field>
+                                    <f:group-field header-text="其中" text-align="Center">
+                                        <f:columns>
+                                            <f:render-field data-field="ZMD_SPData" header-text="遂平县"></f:render-field>
+                                            <f:render-field data-field="ZMD_XPData" header-text="西平县"></f:render-field>
+                                        </f:columns>
+                                    </f:group-field>
+                                </f:columns>
+                            </f:group-field>
+                        </f:columns>
+                    </f:group-field>
+                    <f:render-field expand-unused-space="true" min-width="150" text-align="Center" data-field="LogTime" header-text="记录时间"></f:render-field>
+                </f:columns>
+            </f:grid>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 列布局</title>
+
+        <style>
+            .columnpanel {
+                margin-right: 5px;
+            }
+
+            .rowpanel {
+                margin-bottom: 5px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel2" is-fluid="true" height="250" show-border="true" enable-collapse="false" body-padding="10" layout="Column" show-header="true"
+                title="面板（Height=250 Layout=Column）">
+                <f:items>
+                    <f:panel id="Panel1" width="200" height="150" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text="Width=200 Height=150"></f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel4" column-width="60%" body-padding="10" show-border="true" show-header="false" layout="Fit">
+                        <f:items>
+                            <f:label id="Label1" text-raw-html="ColumnWidth=60%<br />长长的文本1<br />长长的文本2<br />长长的文本3<br />长长的文本4"></f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel3" column-width="40%" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label id="Label2" text="ColumnWidth=40%"></f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+            <br />
+            <f:panel id="Panel5" is-fluid="true" height="250" show-border="true" enable-collapse="false" body-padding="10" layout="Column" show-header="true"
+                title="面板（Height=250 Layout=Column）">
+                <f:items>
+                    <f:panel id="Panel6" width="200" height="150" css-class="columnpanel" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label id="Label3" text="Width=200 Height=150 CssClass=columnpanel"></f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel7" column-width="60%" css-class="columnpanel" body-padding="10" show-border="true" show-header="false" layout="Fit">
+                        <f:items>
+                            <f:label id="Label4" text-raw-html="ColumnWidth=60% CssClass=columnpanel<br />长长的文本1<br />长长的文本2<br />长长的文本3<br />长长的文本4"></f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel8" column-width="40%" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label id="Label5" text="ColumnWidth=40%"></f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+            <br />
+            <f:panel id="Panel9" is-fluid="true" height="350" layout="Column" body-padding="10" enable-collapse="false" show-border="true" show-header="true"
+                title="面板（Height=350 Layout=Column BodyPadding=5）">
+                <f:items>
+                    <f:panel id="Panel13" column-width="50%" margin-right="5" title="ColumnWidth=50% MarginRight=5" show-border="true" show-header="true">
+                        <f:items>
+                            <f:panel id="Panel14" height="150" margin-bottom="5" body-padding="10" show-border="true" show-header="false">
+                                <f:items>
+                                    <f:label id="Label8" text="Height=100 MarginBottom=5"></f:label>
+                                </f:items>
+                            </f:panel>
+                            <f:panel id="Panel15" height="100" body-padding="10" show-border="true" show-header="false">
+                                <f:items>
+                                    <f:label id="Label9" text="Height=100"></f:label>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel16" column-width="50%" title="ColumnWidth=50%" show-border="true" show-header="true">
+                        <f:items>
+                            <f:panel id="Panel17" height="100" margin-bottom="5" body-padding="10" show-border="true" show-header="false">
+                                <f:items>
+                                    <f:label id="Label10" text="Height=100 MarginBottom=5"></f:label>
+                                </f:items>
+                            </f:panel>
+                            <f:panel id="Panel18" height="100" body-padding="10" show-border="true" show-header="false">
+                                <f:items>
+                                    <f:label id="Label11" text="Height=100"></f:label>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+            <br />
+            <br />
+            <br />
+            <strong>【推荐】</strong>使用HBox布局实现与上例相同的界面：
+            <br />
+            <hr />
+            <br />
+            <f:panel id="Panel10" is-fluid="true" height="350" layout="HBox" enable-collapse="false" body-padding="10" box-config-child-margin="0 5 0 0"
+                show-border="true" show-header="true" title="面板（Height=350 Layout=HBox BodyPadding=5 BoxConfigChildMargin=0 5 0 0）">
+                <f:items>
+                    <f:panel id="Panel11" box-flex="1" title="BoxFlex=1" show-border="true" show-header="true">
+                        <f:items>
+                            <f:panel id="Panel12" height="150" margin-bottom="5" body-padding="10" show-border="true" show-header="false">
+                                <f:items>
+                                    <f:label id="Label6" text="Height=100 MarginBottom=5"></f:label>
+                                </f:items>
+                            </f:panel>
+                            <f:panel id="Panel19" height="100" body-padding="10" show-border="true" show-header="false">
+                                <f:items>
+                                    <f:label id="Label7" text="Height=100"></f:label>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel20" box-flex="1" margin="0" title="BoxFlex=1 Margin=0" show-border="true" show-header="true">
+                        <f:items>
+                            <f:panel id="Panel21" height="100" margin-bottom="5" body-padding="10" show-border="true" show-header="false">
+                                <f:items>
+                                    <f:label id="Label12" text="Height=100 MarginBottom=5"></f:label>
+                                </f:items>
+                            </f:panel>
+                            <f:panel id="Panel22" height="100" body-padding="10" show-border="true" show-header="false">
+                                <f:items>
+                                    <f:label id="Label13" text="Height=100"></f:label>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

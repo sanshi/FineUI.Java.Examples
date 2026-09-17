@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多层 IFrame</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:iframe/iframe-iframe/iframe-window;route:iframe/iframe-iframe/iframe-window2" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="Button1" text="在本页面弹出窗体" click-handler="onOpenWindow1Click"></f:button>
+            <f:window id="Window1" hidden="true" enable-iframe="true" iframe-url="/iframe/iframe-iframe/iframe-window" enable-maximize="true"
+                enable-resize="true" height="500" width="900" title="窗体一" on-close="Window1_Close"></f:window>
+            <br />
+            <f:button id="Button2" text="在父页面弹出窗体" click-handler="onOpenWindow2Click"></f:button>
+            <f:window id="Window2" hidden="true" enable-iframe="true" enable-maximize="true" iframe-url="/iframe/iframe-iframe/iframe-window"
+                enable-resize="true" target="Parent" height="500" width="900" title="窗体二" on-close="Window2_Close"></f:window>
+            <br />
+            <br />
+            <f:label id="labResult" encode-text="false" css-style="font-weight:bold;"></f:label>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onOpenWindow1Click(event) {
+                    F.ui.Window1.show();
+                }
+
+                function onOpenWindow2Click(event) {
+                    F.ui.Window2.show();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

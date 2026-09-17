@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 行分组（分组合计，多行合计）</title>
+
+        <style>
+            .f-grid-rowgroup-summary .f-grid-cell-Major .f-grid-cell-text {
+                text-align: right;
+            }
+
+            .f-grid-rowgroup-summary .f-grid-cell-text {
+                font-style: italic;
+            }
+
+            .f-grid-row-summary .f-grid-cell-Major .f-grid-cell-text {
+                text-align: right;
+            }
+
+            .f-grid-row-summary .f-grid-cell-text {
+                font-weight: bold;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" height="500" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-row-group="true" data-row-group-field="EntranceYear" row-group-summary="true" row-group-summary-row-count="3" enable-summary="true"
+                summary-position="Bottom" summary-row-count="3">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" column-id="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150" summary-renderer-function="majorSummaryRenderer"
+                        row-group-summary-renderer-function="majorRowGroupSummaryRenderer"></f:render-field>
+                    <f:render-field header-text="语文成绩" data-field="ChineseScore" column-id="ChineseScore" field-type="Int"
+                        summary-renderer-function="chineseScoreSummaryRenderer"
+                        row-group-summary-renderer-function="chineseScoreRowGroupSummaryRenderer"></f:render-field>
+                    <f:render-field header-text="数学成绩" data-field="MathScore" column-id="MathScore" field-type="Int"
+                        summary-renderer-function="mathScoreSummaryRenderer"
+                        row-group-summary-renderer-function="mathScoreRowGroupSummaryRenderer"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function majorSummaryRenderer(summaryRowIndex) {
+                    return summaryRowIndex == 0 ? "最小值：" : (summaryRowIndex == 1 ? "最大值：" : "平均值：");
+                }
+
+                function chineseScoreSummaryRenderer(summaryRowIndex) {
+                    var g = this;
+                    return summaryRowIndex == 0 ? g.calcSummaryValue("ChineseScore", "min") : (summaryRowIndex == 1 ? g.calcSummaryValue("ChineseScore",
+                        "max") : g.calcSummaryValue("ChineseScore", "avg"));
+                }
+
+                function mathScoreSummaryRenderer(summaryRowIndex) {
+                    var g = this;
+                    return summaryRowIndex == 0 ? g.calcSummaryValue("MathScore", "min") : (summaryRowIndex == 1 ? g.calcSummaryValue("MathScore", "max") : g
+                        .calcSummaryValue("MathScore", "avg"));
+                }
+
+                function majorRowGroupSummaryRenderer(summaryRowIndex) {
+                    return summaryRowIndex == 0 ? "最小值：" : (summaryRowIndex == 1 ? "最大值：" : "平均值：");
+                }
+
+                function chineseScoreRowGroupSummaryRenderer(summaryRowIndex, cellValue, params) {
+                    var g = this;
+                    return summaryRowIndex == 0 ? g.calcSummaryValue("ChineseScore", "min", params.rowGroupData) : (summaryRowIndex == 1 ? g.calcSummaryValue(
+                        "ChineseScore", "max", params.rowGroupData) : g.calcSummaryValue("ChineseScore", "avg", params.rowGroupData));
+                }
+
+                function mathScoreRowGroupSummaryRenderer(summaryRowIndex, cellValue, params) {
+                    var g = this;
+                    return summaryRowIndex == 0 ? g.calcSummaryValue("MathScore", "min", params.rowGroupData) : (summaryRowIndex == 1 ? g.calcSummaryValue(
+                        "MathScore", "max", params.rowGroupData) : g.calcSummaryValue("MathScore", "avg", params.rowGroupData));
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

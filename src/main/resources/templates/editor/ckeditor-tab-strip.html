@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CKEditorTabStrip</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="500" show-border="true" tab-position="Top" enable-tab-close-menu="false" active-tab-index="0">
+                <f:tabs>
+                    <f:tab id="Tab1" title="选项卡一" body-padding="10" layout="Anchor">
+                        <f:items>
+                            <f:html-editor id="HtmlEditor1" label="编辑器一" editor="CKEditor" base-path="/res/third-party/ckeditor/" toolbar-set="Full"
+                                height="300"></f:html-editor>
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab2" title="选项卡二" body-padding="10" layout="Fit">
+                        <f:items>
+                            <f:html-editor id="HtmlEditor2" label="编辑器二" editor="CKEditor" base-path="/res/third-party/ckeditor/"
+                                toolbar-set="Basic"></f:html-editor>
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+                <f:toolbars>
+                    <f:toolbar position="Bottom">
+                        <f:items>
+                            <f:button id="Button1" text="获取编辑器的值" on-click="Button1_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:tab-strip>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FileUploadMultiple</title>
+
+        <style type="text/css">
+            .result img {
+                border: 1px solid #CCCCCC;
+                max-width: 550px;
+                padding: 3px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="表单" show-header="true">
+                <f:items>
+                    <f:text-box id="tbxUserName" label="用户名" empty-text="请输入用户名" required="true" show-red-star="true"></f:text-box>
+                    <f:file-upload id="filePhotos" empty-text="请选择多张照片" label="个人照片" required="true" button-icon="Add" show-red-star="true"
+                        multiple="true"></f:file-upload>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <f:label id="labResult" encode-text="false" css-class="result"></f:label>
+            <br />
+            <br />
+            注：本示例支持的浏览器版本为：Edge、Chrome、Firefox、Safari、IE10+。
+
+        </th:block>
+    </body>
+
+</html>

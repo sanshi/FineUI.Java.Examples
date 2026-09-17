@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 响应确定按钮（点击确定按钮后，先隐藏窗体再下载文件）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.web.AlertDownloadTextFileController" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:window id="Window1" width="650" height="300" icon="TagBlue" title="窗体" enable-maximize="true" enable-collapse="false" enable-resize="true"
+                is-modal="false" body-padding="10">
+                <f:items>
+                    <f:button id="btnOperation" text="操作（先弹出提示框，点击确定后先关闭弹出窗体，然后下载文件）" on-click="btnOperation_Click"></f:button>
+                </f:items>
+            </f:window>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function confirmOKCallback() {
+                    window.location.href = F.resolveUrl('/Message/AlertDownloadTextFile');
+                }
+
+                function confirmCancelCallback() {
+                    // 触发后台事件
+                    F.customEvent('ConfirmCancel');
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

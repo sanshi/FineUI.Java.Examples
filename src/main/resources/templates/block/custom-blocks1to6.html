@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Block 1 到 6 列</title>
+
+        <style>
+            body.f-body {
+                overflow-x: hidden;
+            }
+
+            .custompanel {
+                min-height: 200px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel is-fluid="true" layout="Block" block-config-space="20" block-config-block-count="120" show-border="false" show-header="false">
+                <f:items>
+                    <f:panel css-class="custompanel" title="20" block-md="20"></f:panel>
+                    <f:panel css-class="custompanel" title="20" block-md="20"></f:panel>
+                    <f:panel css-class="custompanel" title="20" block-md="20"></f:panel>
+                    <f:panel css-class="custompanel" title="20" block-md="20"></f:panel>
+                    <f:panel css-class="custompanel" title="20" block-md="20"></f:panel>
+                    <f:panel css-class="custompanel" title="20" block-md="20"></f:panel>
+                    <f:panel css-class="custompanel" title="24" block-md="24"></f:panel>
+                    <f:panel css-class="custompanel" title="24" block-md="24"></f:panel>
+                    <f:panel css-class="custompanel" title="24" block-md="24"></f:panel>
+                    <f:panel css-class="custompanel" title="24" block-md="24"></f:panel>
+                    <f:panel css-class="custompanel" title="24" block-md="24"></f:panel>
+                    <f:panel css-class="custompanel" title="30" block-md="30"></f:panel>
+                    <f:panel css-class="custompanel" title="30" block-md="30"></f:panel>
+                    <f:panel css-class="custompanel" title="30" block-md="30"></f:panel>
+                    <f:panel css-class="custompanel" title="30" block-md="30"></f:panel>
+                    <f:panel css-class="custompanel" title="40" block-md="40"></f:panel>
+                    <f:panel css-class="custompanel" title="40" block-md="40"></f:panel>
+                    <f:panel css-class="custompanel" title="40" block-md="40"></f:panel>
+                    <f:panel css-class="custompanel" title="60" block-md="60"></f:panel>
+                    <f:panel css-class="custompanel" title="60" block-md="60"></f:panel>
+                    <f:panel css-class="custompanel" title="120" block-md="120"></f:panel>
+                </f:items>
+            </f:panel>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 动态创建表单元素</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:form id="Form2" is-fluid="true" body-padding="10" enable-collapse="false" title="表单" label-width="120" label-align="Top">
+                <f:rows>
+                    <f:form-row>
+                        <f:items>
+                            <f:label id="Label1" show-label="false" text="这是一个标签"></f:label>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row id="FormRow1">
+                    </f:form-row>
+                </f:rows>
+            </f:form>
+            <br />
+            注：用户名和性别两个控件是动态创建的。
+            <br />
+            <br />
+            <f:button id="Button1" validate-forms="Form2" validate-target="Top" text="验证表单并提交" on-click="Button1_Click"></f:button>
+
+        </th:block>
+    </body>
+
+</html>

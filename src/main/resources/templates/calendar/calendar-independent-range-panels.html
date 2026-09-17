@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CalendarIndependentRangePanels</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <b>日期范围</b>
+            <br />
+            <f:calendar id="Calendar1" date-format-string="yyyy/MM/dd" display-type="DayRange" independent-range-panels="true"></f:calendar>
+            <br />
+            <br />
+            <br />
+            <b>月份范围</b>
+            <br />
+            <f:calendar id="Calendar2" date-format-string="yyyy/MM" display-type="MonthRange" independent-range-panels="true"></f:calendar>
+            <br />
+            <br />
+            <br />
+            <b>年份范围</b>
+            <br />
+            <f:calendar id="Calendar3" date-format-string="yyyy" display-type="YearRange" independent-range-panels="true"></f:calendar>
+            <br />
+            <f:button id="Button1" text="获取选中的值" on-click="Button1_Click"></f:button>
+            <br />
+            <br />
+            <f:label id="labResult" encode-text="false" show-label="false"></f:label>
+            <br />
+            <div style="margin-top:15px;color:#666;line-height:1.8;">
+                说明：设置 IndependentRangePanels=true 开启“范围面板独立切换”。范围选择时左右两个面板可各自独立切换年份/月份，互不联动，便于快速定位跨度较大的起止日期区间。
+            </div>
+
+        </th:block>
+    </body>
+
+</html>

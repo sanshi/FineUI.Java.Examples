@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FormReset</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:form body-padding="10" id="Form1" is-fluid="true" enable-collapse="false" title="表单 1" icon-font="_Anchor">
+                <f:items>
+                    <f:form-row column-widths="60% 40%">
+                        <f:items>
+                            <f:label id="Label1" label="标签" text="标签的值"></f:label>
+                            <f:check-box id="CheckBox1" text="复选框" label="复选框"></f:check-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row column-widths="60% 40%">
+                        <f:items>
+                            <f:drop-down-list id="DropDownList1" label="下拉列表" empty-text="请选择一项" required="true" show-red-star="true"
+                                auto-select-first-item="false">
+                                <f:items>
+                                    <f:list-item text="可选项 1" value="0"></f:list-item>
+                                    <f:list-item text="可选项 2" value="1"></f:list-item>
+                                </f:items>
+                            </f:drop-down-list>
+                            <f:text-box id="TextBox1" show-red-star="true" label="文本框" required="true" text=""></f:text-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:panel id="Panel1" show-border="false" show-header="false">
+                                <f:items>
+                                    <f:button text="验证此表单并提交" css-class="marginr" validate-forms="Form1" id="btnSubmitForm1" on-click="btnSubmitForm1_Click">
+                                    </f:button>
+                                    <f:button id="btnResetForm1" text="重置表单1" click-handler="onResetClick"></f:button>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:form-row>
+                </f:items>
+            </f:form>
+            <br />
+            <f:form is-fluid="true" label-width="100" body-padding="10" enable-collapse="false" id="Form2" title="表单 2">
+                <f:items>
+                    <f:form-row>
+                        <f:items>
+                            <f:label id="Label3" label="电话" text="0551-1234567"></f:label>
+                            <f:label id="Label16" label="申请人" text="admin"></f:label>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:label id="Label4" label="编号" text="200804170006"></f:label>
+                            <f:text-box id="TextBox2" required="true" show-red-star="true" label="电子邮箱" empty-text="请输入常用电子邮箱" regex-pattern="EMAIL"
+                                regex-message="请输入有效的邮箱地址！"></f:text-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:drop-down-list id="DropDownList3" label="审批人" required="true" empty-text="请选择审批人" show-red-star="true"
+                                auto-select-first-item="false">
+                                <f:items>
+                                    <f:list-item text="老大甲" value="0"></f:list-item>
+                                    <f:list-item text="老大乙" value="1"></f:list-item>
+                                    <f:list-item text="老大丙" value="2"></f:list-item>
+                                </f:items>
+                            </f:drop-down-list>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:number-box id="NumberBox1" label="申请数量" no-decimal="true" no-negative="true" empty-text="请输入申请数量" max-value="1000"
+                                required="true" show-red-star="true"></f:number-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:text-area id="TextArea1" label="描述" show-red-star="true" required="true"></f:text-area>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:panel id="Panel2" show-border="false" show-header="false">
+                                <f:items>
+                                    <f:button id="btnSubmitForm2" text="验证此表单并提交" css-class="marginr" on-click="btnSubmitForm2_Click" validate-forms="Form2">
+                                    </f:button>
+                                    <f:button id="btnResetForm2" text="重置表单2" click-handler="onResetForm2Click"></f:button>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:form-row>
+                </f:items>
+            </f:form>
+            <br />
+            <f:button id="btnSubmitAll" text="验证两个表单并提交" css-class="marginr" on-click="btnSubmitAll_Click" validate-forms="Form1,Form2"></f:button>
+            <f:button id="btnResetAll" text="重置表单1和表单2" click-handler="onResetAllClick"></f:button>
+            <br />
+            <br />
+            注：下拉列表设置属性 required="true" 和 auto-select-first-item="false"，这样初始没有选中值，提交表单时不能为空。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onResetClick(event) {
+                    F.ui.Form1.reset();
+                }
+
+                function onResetForm2Click(event) {
+                    F.ui.Form2.reset();
+                }
+
+                function onResetAllClick(event) {
+                    F.ui.Form1.reset();
+                    F.ui.Form2.reset();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

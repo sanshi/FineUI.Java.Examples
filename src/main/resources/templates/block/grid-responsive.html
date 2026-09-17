@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Block 响应式表格</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="res:static/res/css/responsive_card.css;res:static/res/js/grid.js;res:static/res/js/responsive_card.js" />
+
+        <link th:href="@{/res/css/responsive_card.css}" rel="stylesheet" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" css-class="responsive-card-grid" show-border="true" show-header="true" title="表格" enable-check-box-select="true"
+                enable-alternate-row-color="true" enable-row-lines="true" keep-current-selection="true" data-id-field="Id" data-text-field="Name"
+                data-attribute-fields="Name,Gender,Avatar,EntranceYear,Status,Desc" height="600" responsive-card-size="MD"
+                card-renderer-function="renderResponsiveCard">
+                <f:columns>
+                    <f:render-field column-id="UserProfile" width="250" renderer-function="renderUserProfile" header-text="基本信息"></f:render-field>
+                    <f:render-check-field column-id="AtSchool" data-field="AtSchool" render-as-static-field="true" header-text="是否在校"></f:render-check-field>
+                    <f:render-field column-id="Rate1" data-field="Rate1" field-type="Int" width="150" header-text="评分"
+                        renderer-function="renderRate1"></f:render-field>
+                    <f:render-field column-id="Major" data-field="Major" renderer-function="renderMajor" expand-unused-space="true" min-width="150"
+                        header-text="所学专业"></f:render-field>
+                    <f:render-field column-id="Status" data-field="Status" renderer-function="renderStatus" header-text="状态"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <div style="padding:0 10px;line-height:1.8">注：缩放浏览器窗口（或在手机/平板上打开）：屏幕宽度小于 992px（中屏以下）时，表格自动切换为卡片模式；否则显示为普通表格。通过 ResponsiveCardSize 实现，由屏幕尺寸主导显示模式。
+            </div>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:src="@{/res/js/responsive_card.js}"></script>
+        </th:block>
+    </body>
+
+</html>

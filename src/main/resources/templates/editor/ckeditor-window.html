@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CKEditorWindow</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:window id="Window1" width="900" height="500" layout="Fit" body-padding="10" enable-collapse="false" title="简单表单" is-modal="false"
+                enable-resize="true">
+                <f:items>
+                    <f:simple-form id="SimpleForm1" layout="Fit" label-align="Top" show-border="false" show-header="false">
+                        <f:items>
+                            <f:html-editor id="HtmlEditor1" label="文本编辑器" editor="CKEditor" base-path="/res/third-party/ckeditor/"
+                                toolbar-set="Full"></f:html-editor>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="Button2" css-class="marginr" text="设置编辑器的值" on-click="Button2_Click"></f:button>
+                            <f:button id="Button1" text="获取编辑器的值" on-click="Button1_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:window>
+
+        </th:block>
+    </body>
+
+</html>

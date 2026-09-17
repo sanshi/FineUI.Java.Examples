@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataModel 字段比较</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.datamodel.model.UICompareForm" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-width="200" show-border="true" show-header="true" title="简单表单">
+                <f:items>
+                    <f:date-picker for="form.startDate"></f:date-picker>
+                    <f:date-picker for="form.endDate"></f:date-picker>
+                    <f:label></f:label>
+                    <f:text-box for="form.password"></f:text-box>
+                    <f:text-box for="form.confirmPassword"></f:text-box>
+                    <f:label></f:label>
+                    <f:number-box for="form.number1"></f:number-box>
+                    <f:number-box for="form.number2"></f:number-box>
+                    <f:label></f:label>
+                    <f:button id="btnSubmit" css-class="marginr" text="提交表单" validate-forms="SimpleForm1" on-click="btnSubmit_Click"></f:button>
+                    <f:button id="btnReset" type="Reset" text="重置表单"></f:button>
+                </f:items>
+            </f:simple-form>
+        </th:block>
+    </body>
+
+</html>

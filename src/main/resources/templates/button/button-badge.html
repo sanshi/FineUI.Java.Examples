@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 徽标按钮</title>
+
+        <style>
+            .custom-badge-color .f-badge {
+                background-color: #2d8cf0;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnIcon1" text="图标在左侧" icon="Email" css-class="marginr" badge="true"></f:button>
+            <f:button id="btnIcon2" text="图标在右侧" icon-align="Right" icon="Star" css-class="marginr" badge="true" badge-type="Error"
+                badge-animation-type="Processing"></f:button>
+            <br />
+            <br />
+            <f:button id="btnIcon3" text="图标在上面" icon-align="Top" icon="Email" css-class="marginr" badge="true" badge-type="Warning"></f:button>
+            <f:button id="btnIcon4" text="图标在下面" icon-align="Bottom" icon="Star" css-class="marginr" badge="true" badge-type="Success"
+                badge-animation-type="Fade"></f:button>
+            <br />
+            <br />
+            <f:button id="btnCustomIcon" text="自定义图标（点击修改图标）" icon-url="/res/images/16/1.png" css-class="marginr" badge="true" on-click="btnCustomIcon_Click">
+            </f:button>
+            <br />
+            <br />
+            只有图片的按钮：
+            <br />
+            <br />
+            <f:button id="Button1" icon-url="/res/images/16/1.png" css-class="marginr" badge="true" badge-text="3"></f:button>
+            <f:button id="btnBadgeNumber" icon-url="/res/images/16/8.png" css-class="marginr" badge="true" badge-text="10" badge-type="Success"></f:button>
+            <br />
+            <br />
+            <f:button id="btnChangeBadge" text="徽标数字加一" on-click="btnChangeBadge_Click"></f:button>
+            <br />
+            <br />
+            大按钮：
+            <br />
+            <br />
+            <f:button id="Button3" size="Large" text="图标在左侧" icon="Email" css-class="marginr custom-badge-color" badge="true" badge-text="new"></f:button>
+            <f:button id="Button4" size="Large" text="图标在右侧" icon-align="Right" icon="Star" css-class="marginr" badge="true" badge-text="hot" badge-type="Error"
+                badge-animation-type="Move"></f:button>
+            <br />
+            <br />
+            <f:button id="Button5" size="Large" text="图标在上面" icon-align="Top" icon="Email" css-class="marginr" badge="true" badge-text="88+"
+                badge-type="Warning" badge-animation-type="Processing"></f:button>
+            <f:button id="Button6" size="Large" text="图标在下面" icon-align="Bottom" icon="Email" css-class="marginr" badge="true" badge-text="999+"
+                badge-type="Success" badge-animation-type="Shake"></f:button>
+            <br />
+            <br />
+
+        </th:block>
+    </body>
+
+</html>

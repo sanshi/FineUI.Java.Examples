@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 窗体（固定定位）</title>
+
+        <style th:inline="css">
+            body {
+                background: url([(@{/res/images/bg/small/3.jpg})]) !important;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <div style="height: 1200px;">
+            </div>
+
+            <f:window id="Window1" width="200" height="80" position-x="Left" position-y="Top" fixed-position="true" is-modal="false" auto-scroll="true"
+                body-padding="10" show-header="false" content="FixedPosition=true PositionX=Left PositionY=Top">
+            </f:window>
+
+            <f:window id="Window2" width="200" height="80" position-x="Left" position-y="Center" fixed-position="true" is-modal="false" auto-scroll="true"
+                body-padding="10" show-header="false" content="FixedPosition=true PositionX=Left PositionY=Center">
+            </f:window>
+
+            <f:window id="Window3" width="200" height="80" position-x="Left" position-y="Bottom" fixed-position="true" is-modal="false" auto-scroll="true"
+                body-padding="10" show-header="false" content="FixedPosition=true PositionX=Left PositionY=Bottom">
+            </f:window>
+
+            <f:window id="Window4" width="200" height="80" position-x="Center" position-y="Top" fixed-position="true" is-modal="false" auto-scroll="true"
+                body-padding="10" show-header="false" content="FixedPosition=true PositionX=Center PositionY=Top">
+            </f:window>
+
+            <f:window id="Window5" width="200" height="80" position-x="Center" position-y="Center" fixed-position="true" is-modal="false" auto-scroll="true"
+                body-padding="10" show-header="false" content="FixedPosition=true PositionX=Center PositionY=Center">
+            </f:window>
+
+            <f:window id="Window6" width="200" height="80" position-x="Center" position-y="Bottom" fixed-position="true" is-modal="false" auto-scroll="true"
+                body-padding="10" show-header="false" content="FixedPosition=true PositionX=Center PositionY=Bottom">
+            </f:window>
+
+            <f:window id="Window7" width="200" height="80" position-x="Right" position-y="Top" fixed-position="true" is-modal="false" auto-scroll="true"
+                body-padding="10" show-header="false" content="FixedPosition=true PositionX=Right PositionY=Top">
+            </f:window>
+
+            <f:window id="Window8" width="200" height="80" position-x="Right" position-y="Center" fixed-position="true" is-modal="false" auto-scroll="true"
+                body-padding="10" show-header="false" content="FixedPosition=true PositionX=Right PositionY=Center">
+            </f:window>
+
+            <f:window id="Window9" width="200" height="80" position-x="Right" position-y="Bottom" fixed-position="true" is-modal="false" auto-scroll="true"
+                body-padding="10" show-header="false" content="FixedPosition=true PositionX=Right PositionY=Bottom">
+            </f:window>
+
+        </th:block>
+    </body>
+
+</html>

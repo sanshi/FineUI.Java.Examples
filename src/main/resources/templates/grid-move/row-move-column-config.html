@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 行拖拽列配置</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-header-menu="false">
+                <f:columns>
+                    <f:row-number-field column-id="RowNumber"></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" column-id="EntranceYear" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" column-id="AtSchool" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" column-id="Major" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="注册日期" column-id="LogTime" data-field="LogTime" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy/MM/dd"></f:render-field>
+                </f:columns>
+                <f:toolbars>
+                    <f:toolbar toolbar-align="Right" position="Top">
+                        <f:items>
+                            <f:button id="btnColumnConfig" text="列配置" icon-font="_Gear" click-handler="onColumnConfigClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:grid>
+
+            <f:window id="Window1" title="列配置（双击行显示隐藏）" is-modal="true" enable-close="true" icon-font="_Group" width="500" height="350" layout="HBox"
+                body-padding="10" hidden="true">
+                <f:items>
+                    <f:grid id="Grid2" box-flex="1" show-border="true" show-header="false" enable-collapse="false" data-id-field="ColumnID"
+                        enable-header-menu="false" margin-right="5">
+                        <f:columns>
+                            <f:row-number-field column-id="RowNumber"></f:row-number-field>
+                            <f:render-field column-id="ColumnID" header-text="ID"></f:render-field>
+                            <f:render-field column-id="HeaderText" header-text="标题" box-flex="1"></f:render-field>
+                            <f:render-check-field column-id="Hidden" header-text="显示" render-as-static-field="true"></f:render-check-field>
+                        </f:columns>
+                        <f:listeners>
+                            <f:listener event="rowdblclick" handler="onGridConfigDblClick"></f:listener>
+                        </f:listeners>
+                    </f:grid>
+                    <f:panel id="Panel1" show-border="false" show-header="false" width="120" layout="VBox" box-config-position="Start">
+                        <f:items>
+                            <f:button id="btnMoveUp" text="上移" margin-bottom="5" click-handler="onMoveUpClick"></f:button>
+                            <f:button id="btnMoveDown" text="下移" margin-bottom="20" click-handler="onMoveDownClick"></f:button>
+                            <f:button id="btnShowHide" text="显示隐藏" margin-bottom="5" click-handler="onShowHideClick"></f:button>
+                            <f:button id="btnChangeHeaderText" text="修改标题" margin-bottom="20" click-handler="onChangeHeaderTextClick"></f:button>
+                            <f:button id="btnResetColumnConfig" text="还原默认值" margin-bottom="20" click-handler="onResetColumnConfigClick"></f:button>
+                            <f:button id="btnCloseWindow" text="关闭" margin-bottom="5" click-handler="onCloseWindowClick"></f:button>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:window>
+            <br /><br />
+            <f:button id="btnRefresh" text="刷新本页面（保持列顺序）" css-class="marginr" click-handler="onRefreshClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                // 列配置默认值（用于「还原默认值」）
+                window.GRID_COLUMNCONFIG_DEFAULT = [{
+                        ColumnID: 'RowNumber',
+                        Hidden: true,
+                        HeaderText: ''
+                    },
+                    {
+                        ColumnID: 'Name',
+                        Hidden: false,
+                        HeaderText: '姓名'
+                    },
+                    {
+                        ColumnID: 'Gender',
+                        Hidden: false,
+                        HeaderText: '性别'
+                    },
+                    {
+                        ColumnID: 'EntranceYear',
+                        Hidden: false,
+                        HeaderText: '入学年份'
+                    },
+                    {
+                        ColumnID: 'AtSchool',
+                        Hidden: false,
+                        HeaderText: '是否在校'
+                    },
+                    {
+                        ColumnID: 'Major',
+                        Hidden: false,
+                        HeaderText: '所学专业'
+                    },
+                    {
+                        ColumnID: 'LogTime',
+                        Hidden: false,
+                        HeaderText: '注册日期'
+                    }
+                ];
+
+                function onRefreshClick(event) {
+                    window.location.reload();
+                }
+
+                // 更新主表格的列配置
+                function updateMainGridColumnConfig() {
+                    var grid = F.ui.Grid1;
+                    var gridConfig = F.ui.Grid2;
+
+                    // 从配置表格读取配置数据
+                    var configedColumns = $.map(gridConfig.data, function(item, index) {
+                        return {
+                            ColumnID: item.id,
+                            Hidden: !item.values['Hidden'],
+                            HeaderText: item.values['HeaderText']
+                        };
+                    });
+
+                    // 更新主表格
+                    var newcolumns = [];
+                    $.each(configedColumns, function(index, item) {
+                        var originalColumn = grid.getColumn(item.ColumnID);
+                        originalColumn.hidden = item.Hidden;
+                        originalColumn.text = item.HeaderText;
+
+                        newcolumns.push(originalColumn);
+                    });
+                    grid.columns = newcolumns;
+                    grid.loadData();
+
+                    // 触发后台事件
+                    F.customEvent('GridConfig_Change', {
+                        configedColumns: configedColumns
+                    });
+                }
+
+                // 点击[列配置]按钮
+                function onColumnConfigClick(event) {
+                    var grid = F.ui.Grid1;
+                    var gridConfig = F.ui.Grid2;
+
+                    // 初始化列配置表格
+                    var records = $.map(grid.columns, function(item, index) {
+                        return {
+                            id: item.columnId,
+                            values: {
+                                'ColumnID': item.columnId,
+                                'HeaderText': item.text,
+                                'Hidden': !item.hidden
+                            }
+                        };
+                    });
+                    gridConfig.loadData(records);
+
+                    gridConfig.selectRow(0);
+
+                    // 显示列配置窗体
+                    F.ui.Window1.show();
+                }
+
+                // 切换列配置[显示]列
+                function toggleGridConfigHidden(rowId) {
+                    var gridConfig = F.ui.Grid2;
+                    var grid = F.ui.Grid1;
+
+                    var rowData = gridConfig.getRowData(rowId);
+                    var rowId = rowData.id;
+
+                    var toggledShow = !rowData.values['Hidden'];
+                    gridConfig.updateCellValue(rowData, 'Hidden', toggledShow, true);
+
+                    updateMainGridColumnConfig();
+                }
+
+                // 列配置表格 - 行双击事件
+                function onGridConfigDblClick(event, rowId) {
+                    toggleGridConfigHidden(rowId);
+                }
+
+                // 列配置表格 - 点击[显示隐藏]按钮
+                function onShowHideClick(event) {
+                    var rowId = F.ui.Grid2.getSelectedRow();
+                    if (rowId) {
+                        toggleGridConfigHidden(rowId);
+                    }
+                }
+
+                // 列配置表格 - 点击[上移]按钮
+                function onMoveUpClick(event) {
+                    var gridConfig = F.ui.Grid2;
+                    var rowId = gridConfig.getSelectedRow();
+                    if (rowId) {
+                        gridConfig.moveRowUp(rowId);
+                    }
+
+                    updateMainGridColumnConfig();
+                }
+
+                // 列配置表格 - 点击[下移]按钮
+                function onMoveDownClick(event) {
+                    var gridConfig = F.ui.Grid2;
+                    var rowId = gridConfig.getSelectedRow();
+                    if (rowId) {
+                        gridConfig.moveRowDown(rowId);
+                    }
+
+                    updateMainGridColumnConfig();
+                }
+
+                // 列配置表格 - 点击[修改标题]按钮
+                function onChangeHeaderTextClick(event) {
+                    var gridConfig = F.ui.Grid2;
+
+                    var rowId = gridConfig.getSelectedRow();
+                    if (rowId) {
+                        var rowData = gridConfig.getRowData(rowId);
+                        F.prompt({
+                            message: '请输入新的列标题',
+                            defaultValue: rowData.values['HeaderText'],
+                            ok: function(userInputValue) {
+                                gridConfig.updateCellValue(rowData, 'HeaderText', userInputValue, true);
+
+                                updateMainGridColumnConfig();
+                            }
+                        });
+                    }
+
+                }
+
+                // 列配置表格 - 点击[还原默认值]按钮
+                function onResetColumnConfigClick(event) {
+                    var gridConfig = F.ui.Grid2;
+                    var defaultValue = window.GRID_COLUMNCONFIG_DEFAULT;
+
+                    // 初始化列配置表格
+                    var records = $.map(defaultValue, function(item, index) {
+                        return {
+                            id: item.ColumnID,
+                            values: {
+                                'ColumnID': item.ColumnID,
+                                'HeaderText': item.HeaderText,
+                                'Hidden': !item.Hidden
+                            }
+                        };
+                    });
+                    gridConfig.loadData(records);
+
+                    updateMainGridColumnConfig();
+                }
+
+                function onCloseWindowClick(event) {
+                    F.ui.Window1.hide();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

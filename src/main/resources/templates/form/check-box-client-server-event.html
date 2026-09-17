@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CheckBoxClientServerEvent</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="简单表单">
+                <f:items>
+                    <f:check-box id="CheckBox1" show-label="false" checked="true" text="复选框1（先执行客户端事件，再执行服务端事件）" on-checked-changed="CheckBox1_CheckedChanged">
+                        <f:listeners>
+                            <f:listener event="change" handler="onCheckBox1Changed"></f:listener>
+                        </f:listeners>
+                    </f:check-box>
+                    <f:check-box id="CheckBox2" show-label="false" checked="true" text="复选框2（只执行客户端事件）" on-checked-changed="CheckBox2_CheckedChanged">
+                        <f:listeners>
+                            <f:listener event="change" handler="onCheckBox2Changed"></f:listener>
+                        </f:listeners>
+                    </f:check-box>
+                    <f:label id="labResult" encode-text="false" show-label="false"></f:label>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onCheckBox1Changed(event, checked) {
+                    F.ui.labResult.setValue("【客户端】复选框1的状态：" + (checked ? "选中" : "未选中"));
+                }
+
+                function onCheckBox2Changed(event, checked) {
+                    F.ui.labResult.setValue("【客户端】复选框2的状态：" + (checked ? "选中" : "未选中"));
+
+                    // 客户端事件（change）显式返回 false，阻止服务端事件（OnCheckedChanged）执行
+                    return false;
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

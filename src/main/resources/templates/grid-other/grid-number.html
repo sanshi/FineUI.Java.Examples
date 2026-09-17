@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 数字格式列</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="res:static/res/js/grid.js" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field width="150" data-field="EntranceDate" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"
+                        header-text="入学日期"></f:render-field>
+                    <f:render-field width="150" data-field="Salary" header-text="工资（千分位）" field-type="Double" renderer="Number"
+                        renderer-argument="N2"></f:render-field>
+                    <f:render-field width="150" data-field="GPA" header-text="绩点（定点数）" field-type="Double" renderer="Number"
+                        renderer-argument="F2"></f:render-field>
+                    <f:render-field width="150" data-field="AttendanceRate" header-text="出勤率（百分比）" field-type="Double" renderer="Number"
+                        renderer-argument="P1"></f:render-field>
+                    <f:render-field width="150" data-field="ResearchFund" header-text="科研经费（科学计数法）" field-type="Double" renderer="Number"
+                        renderer-argument="E2"></f:render-field>
+                    <f:render-field width="150" data-field="StudentCode" header-text="学号（十进制整数）" field-type="Int" renderer="Number"
+                        renderer-argument="D10"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

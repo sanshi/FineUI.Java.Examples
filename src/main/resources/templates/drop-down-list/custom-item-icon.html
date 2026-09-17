@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CustomItemIcon</title>
+
+        <style>
+            ul.f-field-dropdownlist-pop img {
+                vertical-align: middle;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="列表项图标" show-header="true">
+                <f:items>
+                    <f:drop-down-list id="DropDownList1">
+                        <f:items>
+                            <f:list-item text="中国" value="cn" selected="true"></f:list-item>
+                            <f:list-item text="法国" value="fr"></f:list-item>
+                            <f:list-item text="美国" value="us"></f:list-item>
+                            <f:list-item text="英国" value="england"></f:list-item>
+                            <f:list-item text="澳大利亚" value="au"></f:list-item>
+                            <f:list-item text="意大利" value="it"></f:list-item>
+                            <f:list-item text="加拿大" value="ca"></f:list-item>
+                        </f:items>
+                    </f:drop-down-list>
+                    <f:button id="btnSelectItem6" text="选中“澳大利亚”" css-class="marginr" on-click="btnSelectItem6_Click"></f:button>
+                    <f:button id="btnGetSelection" text="获取此下拉列表的选中项" on-click="btnGetSelection_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+            <br />
+            <br />
+
+        </th:block>
+    </body>
+
+</html>

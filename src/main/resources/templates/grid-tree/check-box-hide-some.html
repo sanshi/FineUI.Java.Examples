@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 树表格隐藏部分复选框</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="树表格" data-id-field="Id" data-text-field="Name"
+                data-parent-id-field="ParentId" enable-tree="true" tree-column="Name" tree-check-box="true" row-data-bound-function="onGrid1RowDataBound">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field column-id="Name" header-text="名称" data-field="Name" expand-unused-space="true" min-width="150"></f:render-field>
+                    <f:render-field header-text="类型" data-field="Type" width="150"></f:render-field>
+                    <f:render-field header-text="大小" data-field="Size" width="150"></f:render-field>
+                    <f:render-field header-text="修改日期" data-field="ModifyDate" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"
+                        width="150"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+
+            <f:button id="btnGetCheckedValues" text="获取选中的复选框" click-handler="onGetCheckedRowsClick"></f:button>
+            <br />
+            <br />
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br />
+            <br />
+            注：本树表格默认隐藏 [basic] 和 [res] 两个目录的复选框。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                // 读取勾选行、经自定义事件回发服务端
+                function onGetCheckedRowsClick(event) {
+                    var result = [];
+                    var checkedRows = F.ui.Grid1.getCheckedRows(true);
+                    if (checkedRows.length) {
+                        $.each(checkedRows, function(index, row) {
+                            result.push({
+                                id: row.id,
+                                text: row.text
+                            });
+                        });
+                    }
+                    F.customEvent('GetCheckedRows', result);
+                }
+
+                // 行级初值：隐藏 basic(50) 与 res(60) 的复选框
+                function onGrid1RowDataBound(rowData) {
+                    var rowId = rowData.id;
+
+                    if (rowId == "50" || rowId == "60") {
+                        rowData.checkbox = false;
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

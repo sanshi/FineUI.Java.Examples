@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TreeMultiSelectLazyLoadDefaultValue</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="下拉树（多选，延迟加载）"
+                show-header="true">
+                <f:items>
+                    <f:drop-down-box id="DropDownBox1" enable-multi-select="true" values="henan,anhui,xiping" texts="河南省,安徽省,西平县">
+                        <f:pop-panel>
+                            <f:tree id="Tree1" show-header="false" hidden="true" enable-multi-select="true" keep-current-selection="true"
+                                auto-leaf-identification="false" on-node-lazy-load="Tree1_NodeLazyLoad">
+                                <f:nodes>
+                                    <f:tree-node text="中国" node-id="china" expanded="true">
+                                        <f:tree-node text="河南省" node-id="henan" expanded="true">
+                                            <f:tree-node text="驻马店市（延迟加载）" node-id="zhumadian"></f:tree-node>
+                                            <f:tree-node text="漯河市" node-id="luohe" leaf="true"></f:tree-node>
+                                        </f:tree-node>
+                                        <f:tree-node text="安徽省" expanded="true" node-id="anhui">
+                                            <f:tree-node text="合肥市" expanded="true" node-id="hefei">
+                                                <f:tree-node text="蜀山区" expanded="false" node-id="shushanqu">
+                                                    <f:tree-node text="金色池塘小区" node-id="golden" leaf="true"></f:tree-node>
+                                                    <f:tree-node text="梦圆小区" node-id="mengyuan" leaf="true"></f:tree-node>
+                                                    <f:tree-node text="桂花园小区" node-id="guihuayuan" leaf="true"></f:tree-node>
+                                                </f:tree-node>
+                                                <f:tree-node text="包河区" expanded="true" node-id="baohequ">
+                                                    <f:tree-node text="中国科学技术大学" node-id="ustc" leaf="true"></f:tree-node>
+                                                </f:tree-node>
+                                            </f:tree-node>
+                                        </f:tree-node>
+                                    </f:tree-node>
+                                </f:nodes>
+                            </f:tree>
+                        </f:pop-panel>
+                    </f:drop-down-box>
+                    <f:button id="btnGetSelection" text="获取下拉框的选中值" on-click="btnGetSelection_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br>
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br />
+            注：通过 Values 和 Text 属性来设置下拉框的初始值（由于页面初始化时树控件数据并没有全部载入，所以需要指定 Text 属性）。
+
+        </th:block>
+    </body>
+
+</html>

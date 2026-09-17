@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · NumberBox 四舍五入</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-align="Top" enable-collapse="false" title="简单表单" label-width="120">
+                <f:items>
+                    <f:number-box label="小数（两位精度，初始值：1.2367）" id="NumberBox1" value="1.2367" required="true" show-red-star="true"></f:number-box>
+                    <f:number-box label="小数（两位精度，禁用四舍五入，初始值：1.2367）" id="NumberBox2" value="1.2367" enable-round="false" required="true"
+                        show-red-star="true"></f:number-box>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

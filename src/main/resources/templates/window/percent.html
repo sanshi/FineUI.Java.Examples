@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 窗体（百分比尺寸）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnShowWindow" text="显示窗体" click-handler="onOpenWindow1Click"></f:button>
+            <br />
+            <br />
+            <f:button id="btnCloseWindow" text="关闭窗体" click-handler="onCloseWindow1Click"></f:button>
+            <br />
+            <br />
+
+            <f:window id="Window1" icon="TagBlue" title="窗体（PercentWidth=50% PercentHeight=50%）" is-modal="false" auto-scroll="true" body-padding="10"
+                percent-width="50%" percent-height="50%"
+                content="<p><a href='http://tech.163.com/special/jobsdead/' target='_blank'><b>乔布斯</b></a></p><p>乔布斯于1955年2月24日出生，苹果创始人之一。今年8月苹果超越埃克森美孚成为全球最大市值企业，截止上季度持有现金达到762亿美金，甚至超过了美国政府国库存款。</p>">
+            </f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onOpenWindow1Click(event) {
+                    F.ui.Window1.show();
+                }
+
+                function onCloseWindow1Click(event) {
+                    F.ui.Window1.hide();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

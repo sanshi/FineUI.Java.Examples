@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 窗体表单</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:window id="Window1" width="650" height="300" icon="TagBlue" title="窗体" enable-maximize="true" enable-collapse="false" enable-resize="true"
+                body-padding="10" layout="Fit" is-modal="false">
+                <f:items>
+                    <f:form id="Form2" body-padding="10" label-width="100" show-border="false" show-header="false" title="表单 1">
+                        <f:items>
+                            <f:form-row column-widths="50% 50%">
+                                <f:items>
+                                    <f:label id="Label1" label="标签" text="标签的值"></f:label>
+                                    <f:check-box id="CheckBox1" text="复选框" label="复选框"></f:check-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row column-widths="50% 50%">
+                                <f:items>
+                                    <f:drop-down-list id="DropDownList1" label="下拉列表" required="true" show-red-star="true" auto-select-first-item="false">
+                                        <f:items>
+                                            <f:list-item text="可选项1" value="Value1"></f:list-item>
+                                            <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
+                                            <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
+                                            <f:list-item text="可选项4" value="Value4"></f:list-item>
+                                            <f:list-item text="可选项5" value="Value5"></f:list-item>
+                                            <f:list-item text="可选项6" value="Value6"></f:list-item>
+                                            <f:list-item text="可选择项7" value="Value7"></f:list-item>
+                                            <f:list-item text="可选择项8" value="Value8"></f:list-item>
+                                        </f:items>
+                                    </f:drop-down-list>
+                                    <f:text-box id="TextBox1" show-red-star="true" label="文本框" required="true" text=""></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                        </f:items>
+                    </f:form>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar3" position="Top">
+                        <f:items>
+                            <f:toolbar-text id="ToolbarText3" text="工具条文本一"></f:toolbar-text>
+                            <f:toolbar-separator id="ToolbarSeparator2"></f:toolbar-separator>
+                            <f:toolbar-text id="ToolbarText4" text="工具条文本二"></f:toolbar-text>
+                            <f:toolbar-separator id="ToolbarSeparator1"></f:toolbar-separator>
+                            <f:button id="Button1" text="工具栏按钮" click-handler="onToolbarButtonClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="btnSubmit" text="验证此表单并提交" validate-forms="Form2" on-click="btnSubmit_Click"></f:button>
+                            <f:button id="btnClose" text="关闭窗体" click-handler="onCloseWindow1Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onToolbarButtonClick(event) {
+                    F.alert('你点击了工具栏按钮。');
+                }
+
+                function onCloseWindow1Click(event) {
+                    F.ui.Window1.hide();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

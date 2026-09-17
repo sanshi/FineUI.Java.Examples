@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 序号列（靠右显示）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（数据库分页，切换分页时序号连续）" data-id-field="Id" data-text-field="Name"
+                enable-check-box-select="true" allow-paging="true" page-size="10" is-database-paging="true" on-page-index-changed="Grid1_PageIndexChanged">
+                <f:columns>
+                    <f:row-number-field enable-paging-number="true" width="60" text-align="Right"></f:row-number-field>
+                    <f:render-field header-text="ID" data-field="Id" width="150"></f:render-field>
+                    <f:render-field header-text="时间" data-field="EntranceTime" expand-unused-space="true" min-width="150" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy/MM/dd HH:mm:ss"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+            <br />
+            <br />
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

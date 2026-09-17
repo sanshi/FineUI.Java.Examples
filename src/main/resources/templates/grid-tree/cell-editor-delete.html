@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 树表格单元格编辑 + 删除</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="树表格" data-id-field="Id" data-text-field="Name" enable-tree="true"
+                tree-column="Name" data-parent-id-field="ParentId" row-data-bound-function="onGrid1RowDataBound" allow-cell-editing="true" clicks-to-edit="1">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field column-id="Name" header-text="姓名" data-field="Name" expand-unused-space="true" min-width="150">
+                        <f:editor>
+                            <f:text-box id="tbxName" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="类型" column-id="Type" data-field="Type" renderer-function="renderType">
+                        <f:editor>
+                            <f:drop-down-list id="ddlType" required="true">
+                                <f:list-item text="文件夹" value="文件夹"></f:list-item>
+                                <f:list-item text="CS文件" value="CS文件"></f:list-item>
+                                <f:list-item text="配置文件" value="配置文件"></f:list-item>
+                                <f:list-item text="Java文件" value="Java文件"></f:list-item>
+                                <f:list-item text="CSS文件" value="CSS文件"></f:list-item>
+                                <f:list-item text="PNG文件" value="PNG文件"></f:list-item>
+                                <f:list-item text="ICO文件" value="ICO文件"></f:list-item>
+                                <f:list-item text="GIF文件" value="GIF文件"></f:list-item>
+                                <f:list-item text="XML文件" value="XML文件"></f:list-item>
+                                <f:list-item text="HTML文件" value="HTML文件"></f:list-item>
+                            </f:drop-down-list>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="大小" column-id="Size" data-field="Size" field-type="Int">
+                        <f:editor>
+                            <f:number-box id="tbxSize" no-decimal="true" no-negative="true" min-value="0"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="修改日期" column-id="ModifyDate" data-field="ModifyDate" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy/MM/dd" width="150">
+                        <f:editor>
+                            <f:date-picker id="DatePicker1" required="true"></f:date-picker>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field enable-header-menu="false">
+                        <f:commands>
+                            <f:command command-name="Delete" icon="Delete" confirm-text="删除选中行？" confirm-target="Top"></f:command>
+                        </f:commands>
+                    </f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="rowcommand" handler="onGrid1RowCommand"></f:listener>
+                </f:listeners>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1">
+                        <f:items>
+                            <f:button id="btnDelete" text="删除选中行" icon="Delete" click-handler="onDeleteClick"></f:button>
+                            <f:toolbar-fill></f:toolbar-fill>
+                            <f:button id="btnReset" text="重置表格数据" click-handler="onResetClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:grid>
+            <br />
+            <f:button id="btnSubmit" text="保存数据" on-click="btnSubmit_Click"></f:button>
+            <br />
+            <f:label id="labResult"></f:label>
+            <br />
+            <br />
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function onGrid1RowDataBound(rowData) {
+                    var rowId = rowData.id;
+
+                    // 默认展开的节点
+                    if (rowId === '50' || rowId === '60') {
+                        rowData.expanded = true;
+                    }
+                }
+
+                function renderType(value) {
+                    return F.ui.ddlType.getTextByValue(value);
+                }
+
+                function onResetClick(event) {
+                    F.confirm({
+                        message: '确定要重置表格数据？',
+                        ok: function() {
+                            F.ui.Grid1.rejectChanges();
+                        }
+                    });
+                }
+
+                function onDeleteClick(event) {
+                    var grid1 = F.ui.Grid1;
+                    if (!grid1.hasSelection()) {
+                        F.alert('没有选中项！');
+                        return;
+                    }
+
+                    var selectedRows = grid1.getSelectedRows();
+                    F.confirm({
+                        message: F.rawHtml('你确定要删除选中的&nbsp;<b>' + selectedRows.length + '</b>&nbsp;行数据吗？'),
+                        target: '_top',
+                        ok: function() {
+                            grid1.deleteRows(selectedRows);
+                        }
+                    });
+                }
+
+                // 行命令
+                function onGrid1RowCommand(event, rowId, rowIndex, columnId, commandName) {
+                    if (commandName === 'Delete') {
+                        F.ui.Grid1.deleteRow(rowId);
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

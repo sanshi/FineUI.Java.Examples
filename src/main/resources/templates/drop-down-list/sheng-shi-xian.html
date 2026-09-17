@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · ShengShiXian</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="中国省市县联动">
+                <f:items>
+                    <f:drop-down-list id="ddlSheng" persist-items="false" label="省份" show-red-star="true" compare-type="String" compare-value="-1"
+                        compare-operator="NotEqual" compare-message="请选择省份！" on-selected-index-changed="ddlSheng_SelectedIndexChanged"></f:drop-down-list>
+                    <f:drop-down-list id="ddlShi" persist-items="false" label="地区市" show-red-star="true" compare-type="String" compare-value="-1"
+                        compare-operator="NotEqual" compare-message="请选择地区市！" enabled="false" on-selected-index-changed="ddlShi_SelectedIndexChanged">
+                        <f:items>
+                            <f:list-item text="选择地区市" value="-1"></f:list-item>
+                        </f:items>
+                    </f:drop-down-list>
+                    <f:drop-down-list id="ddlXian" persist-items="false" show-red-star="true" compare-type="String" compare-value="-1"
+                        compare-operator="NotEqual" compare-message="请选择县区市！" label="县区市" enabled="false">
+                        <f:items>
+                            <f:list-item text="选择县区市" value="-1"></f:list-item>
+                        </f:items>
+                    </f:drop-down-list>
+                    <f:button id="btnSubmit" text="获取选中的省市县" validate-forms="SimpleForm1" validate-target="Top" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false" show-label="false" css-style="font-weight:bold;"></f:label>
+            <br />
+
+            注：本示例无需在后台维持Items属性的状态，所以设置下拉列表的PersistItems=false。
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 选择省份</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" label-align="Top" show-border="false" show-header="false" css-class="f-widget-content" title="SimpleForm"
+                body-padding="10" enable-collapse="false" auto-scroll="true" is-view-port="true">
+                <f:items>
+                    <f:radio-button-list id="ddlSheng" label="请选择省份" column-number="4" show-red-star="true"
+                        on-selected-index-changed="ddlSheng_SelectedIndexChanged"></f:radio-button-list>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+    </body>
+
+</html>

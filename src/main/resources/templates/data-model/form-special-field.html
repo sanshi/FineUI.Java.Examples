@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataModel 特殊字段</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" show-border="true" show-header="true" title="特殊字段（remove 移除绑定错误）">
+                <f:items>
+                    <f:text-box id="tbxViewPower" for="power.viewPowerId" value="${page.power.viewPowerName}"></f:text-box>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar position="Bottom">
+                        <f:items>
+                            <f:button id="btnSave" text="保存" validate-forms="SimpleForm1" on-click="btnSave_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+        </th:block>
+    </body>
+
+</html>

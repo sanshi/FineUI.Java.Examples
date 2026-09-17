@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 捕获全局JavaScript错误</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:button id="Button1" text="客户端的JavaScript错误" click-handler="onCallback1Click"></f:button>
+            <br />
+            <br />
+            <f:button id="Button4" text="服务器返回的JavaScript错误" on-click="Button4_Click"></f:button>
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script type="text/javascript">
+                function onCallback1Click(event) {
+                    var i = a[0];
+                }
+
+                // 服务端 Button4_Click 通过 invokeClientFunction("test") 按名调用本函数——
+                // 故意引用未定义变量触发 JS 错误，被 window.onerror 捕获并弹出「JavaScript错误！」提示
+                //（按名调用，全程无 eval）。
+                function test() {
+                    var i = a[0];
+                }
+
+                // 参考：http://stackoverflow.com/questions/951791/javascript-global-error-handling/10556743#10556743
+                window.onerror = function(msg, url, line, col, error) {
+                    var errors = [];
+                    errors.push('消息：' + msg);
+                    errors.push('网址：' + url);
+                    errors.push('行：' + line);
+                    errors.push('列：' + col);
+
+                    F.alert({
+                        message: F.rawHtml(errors.join('<br/>')),
+                        title: 'JavaScript错误！',
+                        messageIcon: 'error'
+                    });
+
+                    // 返回 true 阻止浏览器弹出错误提示框（比如在IE浏览器中）
+                    return true;
+                };
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

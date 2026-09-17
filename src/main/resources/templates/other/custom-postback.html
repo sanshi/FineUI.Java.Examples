@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 自定义回发（F.doPostBack）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="简单表单">
+                <f:items>
+                    <f:text-box id="TextBox1" show-label="false" empty-text="输入一些文字并按 ENTER 键">
+                        <f:listeners>
+                            <f:listener event="enter" handler="onTextBoxEnter" />
+                        </f:listeners>
+                    </f:text-box>
+                    <f:text-box id="TextBox2" show-label="false"></f:text-box>
+                </f:items>
+            </f:simple-form>
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onTextBoxEnter(event) {
+                    // 触发后台事件（演示 F.doPostBack 的完整形式：eventName 即事件名）
+                    F.doPostBack({
+                        eventName: 'TextBox1_ENTER'
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

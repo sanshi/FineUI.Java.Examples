@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Form HtmlEditor</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-align="Top" title="表单">
+                <f:items>
+                    <f:html-editor id="HtmlEditor1" label="文本编辑器" editor="UMEditor" base-path="/res/third-party/umeditor/" height="250"></f:html-editor>
+                    <f:text-area id="TextArea1" label="多行文本框" height="150" text="FineUI的使命是创建 No JavaScript，No CSS 的网站应用程序"></f:text-area>
+                    <f:button id="Button1" text="获取 HTML 编辑器的内容" css-class="marginr" on-click="Button1_Click"></f:button>
+                    <f:button id="Button2" text="设置 HTML 编辑器的内容" on-click="Button2_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            注：FineUI 中使用的富文本编辑器可以在 UMEditor、UEditor、CKEditor、TinyMCE 中间选择，通过控件属性就能简单切换。
+
+        </th:block>
+    </body>
+
+</html>

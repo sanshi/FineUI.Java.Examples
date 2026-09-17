@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TextBox</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="登录表单" show-header="true">
+                <f:items>
+                    <f:text-box id="tbxUserName" label="用户名" empty-text="请输入用户名" required="true" show-red-star="true"></f:text-box>
+                    <f:text-box id="tbxPassword" label="密码" empty-text="请输入密码" text-mode="Password" required="true" show-red-star="true"></f:text-box>
+                    <f:button id="btnSubmit" css-class="marginr" validate-forms="SimpleForm1" text="登录" on-click="btnSubmit_Click"></f:button>
+                    <f:button id="btnReset" click-handler="onResetClick" text="重置"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false" show-label="false"></f:label>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onResetClick(event) {
+                    F.ui.SimpleForm1.reset();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

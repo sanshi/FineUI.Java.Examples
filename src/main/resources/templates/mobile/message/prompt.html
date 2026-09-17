@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 输入对话框</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 10px 0" body-padding="10px"
+                is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" title="输入对话框" header-style="true"></f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:button id="Button1" text="输入对话框" on-click="Button1_Click"></f:button>
+                    <f:button id="Button2" text="输入对话框（ButtonFill）" on-click="Button2_Click"></f:button>
+                    <f:button id="Button5" text="输入对话框（ButtonPlain）" on-click="Button5_Click"></f:button>
+                    <f:button id="Button4" text="输入对话框（ButtonPlain，密码）" on-click="Button4_Click"></f:button>
+                    <f:button id="Button3" text="输入对话框（CancelButtonAhead）" on-click="Button3_Click"></f:button>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function notifyit(inputValue) {
+                    var message = '用户输入：' + inputValue;
+                    if (!inputValue) {
+                        message = '用户未输入值！';
+                    }
+
+                    F.notify({
+                        message: message,
+                        messageIcon: '',
+                        modal: true,
+                        hideOnMaskClick: true,
+                        header: false,
+                        displayMilliseconds: 3000,
+                        positionX: 'center',
+                        positionY: 'center',
+                        messageAlign: 'center',
+                        minWidth: 200
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

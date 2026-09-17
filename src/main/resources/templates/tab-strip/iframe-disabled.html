@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · IFrame内启用外部选项卡</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:tab-strip/iframe-disabled-tab1" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="500" show-border="true" active-tab-index="0">
+                <f:tabs>
+                    <f:tab id="Tab1" title="标签一" enable-iframe="true" iframe-url="/tab-strip/iframe-disabled-tab1"></f:tab>
+                    <f:tab id="Tab2" enable-iframe="true" body-padding="10" enabled="false" iframe-url="/panel/group" title="标签二"></f:tab>
+                    <f:tab id="Tab3" enable-iframe="true" body-padding="10" enabled="false" iframe-url="/panel/panel" title="标签三"></f:tab>
+                </f:tabs>
+            </f:tab-strip>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function enableTabs() {
+                    F.ui.Tab2.enable();
+                    F.ui.Tab3.enable();
+                }
+
+                function disableTabs() {
+                    F.ui.Tab2.disable();
+                    F.ui.Tab3.disable();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

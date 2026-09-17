@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 按钮放在选项卡前面</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="500" show-border="true" active-tab-index="0">
+                <f:tabs>
+                    <f:tab title="FineUI官网" enable-iframe="true" iframe-url="https://fineui.com/">
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+
+            <f:button id="btnOpenPages" text="在新的选项卡中打开新页面">
+                <f:menu>
+                    <f:menu-button id="Button1" text="打开DeepSeek官网（tab1_iframe）" on-click="Button1_Click"></f:menu-button>
+                    <f:menu-button id="Button2" text="打开Spring 官网（tab1_iframe）" on-click="Button2_Click"></f:menu-button>
+                    <f:menu-button id="Button3" text="打开FineUI官网（tab2_iframe）" on-click="Button3_Click"></f:menu-button>
+                </f:menu>
+            </f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                F.ready(function() {
+
+                    var btnEl = F.ui.btnOpenPages.el;
+                    var tabstripTitleEl = F.ui.TabStrip1.headerEl.find(' > .f-panel-title');
+
+                    var titleHeight = tabstripTitleEl.height();
+                    var btnWidth = btnEl.outerWidth(true);
+                    var btnHeight = btnEl.outerHeight(true);
+
+                    // 添加按钮样式（浮动，居中）
+                    btnEl.css({
+                        'position': 'absolute',
+                        'left': '5px',
+                        'top': (titleHeight - btnHeight) / 2
+                    });
+
+                    // TabStrip标题栏左侧留出空白放置按钮
+                    tabstripTitleEl.css({
+                        'margin-left': btnWidth + 10
+                    });
+
+                    // 添加按钮背景墙（出现左右滚动按钮时，防止选项卡标题覆盖此按钮）
+                    var btnContainer = $('<div>', {
+                        'class': 'f-widget-header'
+                    }).css({
+                        'position': 'absolute',
+                        'left': '0',
+                        'top': '0',
+                        'border-bottom-style': 'solid',
+                        'border-bottom-width': '1px',
+                        'z-index': 1,
+                        'width': btnWidth + 10,
+                        'height': titleHeight + 1
+                    }).insertBefore(tabstripTitleEl);
+
+                    // 将按钮添加到背景墙中
+                    btnEl.appendTo(btnContainer);
+
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

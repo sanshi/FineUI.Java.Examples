@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>Config/IPMAC</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form is-fluid="true" label-width="50" body-padding="10" title="服务器的 IP+MAC 地址">
+                <f:items>
+                    <f:text-box id="tbxIP" label="IP" readonly="true" text="${page.ip}"></f:text-box>
+                    <f:text-box id="tbxMAC" label="MAC" readonly="true" text="${page.mac}"></f:text-box>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+    </body>
+
+</html>

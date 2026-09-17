@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FormHideField</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:form label-width="100" body-padding="10" enable-collapse="false" id="Form1" is-fluid="true" title="表单">
+                <f:items>
+                    <f:form-row>
+                        <f:items>
+                            <f:label id="labTitle" hide-mode="Visibility" label="标题" text="申请单"></f:label>
+                            <f:label id="labLiuShuiHao" label="流水号" text="123456789"></f:label>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row id="FormRow2">
+                        <f:items>
+                            <f:label id="labPhone" label="电话" text="0551-1234567"></f:label>
+                            <f:label id="Label16" label="申请人" text="admin"></f:label>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row id="FormRow3" hide-mode="Visibility">
+                        <f:items>
+                            <f:label id="Label4" label="编号" text="200804170006"></f:label>
+                            <f:text-box id="TextBox2" required="true" show-red-star="true" label="电子邮箱" empty-text="请输入常用电子邮箱" regex-pattern="EMAIL"
+                                regex-message="请输入有效的邮箱地址"></f:text-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:drop-down-list id="DropDownList3" label="审批人" required="true" empty-text="请选择审批人" show-red-star="true"
+                                auto-select-first-item="false">
+                                <f:items>
+                                    <f:list-item text="老大甲" value="0"></f:list-item>
+                                    <f:list-item text="老大乙" value="1"></f:list-item>
+                                    <f:list-item text="老大丙" value="2"></f:list-item>
+                                </f:items>
+                            </f:drop-down-list>
+                            <f:number-box id="NumberBox1" label="申请数量" no-decimal="true" no-negative="true" empty-text="请输入申请数量" max-value="1000"
+                                required="true" show-red-star="true"></f:number-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:text-area id="TextArea1" label="描述" show-red-star="true" required="true"></f:text-area>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:panel id="Panel2" show-border="false" show-header="false">
+                                <f:items>
+                                    <f:button id="btnSubmitForm2" text="验证表单并提交" css-class="marginr" on-click="btnSubmit_Click"></f:button>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:form-row>
+                </f:items>
+            </f:form>
+            <br />
+            <f:button id="btnShowHideTitle" text="显示隐藏[标题]" css-class="marginr" click-handler="onToggleTitleClick"></f:button>
+            <f:button id="btnShowHidePhone" text="显示隐藏[电话]" click-handler="onTogglePhoneClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnShowHideFormRow2" text="显示隐藏第二行" css-class="marginr" click-handler="onToggleFormRow2Click"></f:button>
+            <f:button id="btnShowHideFormRow3" text="显示隐藏第三行（隐藏后显示空白行）" css-class="marginr" click-handler="onToggleFormRow3Click"></f:button>
+            <br />
+            <br />
+            注：
+            <ul>
+                <li>对比隐藏[标题]和隐藏[电话]的不同之处（[标题]的 hide-mode=Visibility）</li>
+                <li>对比隐藏第二行和隐藏第三行的不同之处（FormRow3 的 hide-mode=Visibility）</li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onToggleTitleClick(event) {
+                    F.ui.labTitle.toggleVisible();
+                }
+
+                function onTogglePhoneClick(event) {
+                    F.ui.labPhone.toggleVisible();
+                }
+
+                function onToggleFormRow2Click(event) {
+                    F.ui.FormRow2.toggleVisible();
+                }
+
+                function onToggleFormRow3Click(event) {
+                    F.ui.FormRow3.toggleVisible();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

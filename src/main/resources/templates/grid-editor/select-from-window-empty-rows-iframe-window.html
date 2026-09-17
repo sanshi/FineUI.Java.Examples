@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 选择用户</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-view-port="true" show-border="false" show-header="false" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-check-box-select="true" enable-multi-select="false">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" column-id="EntranceYear" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" column-id="AtSchool" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" column-id="Major" data-field="Major" expand-unused-space="true" min-width="150"></f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="rowdblclick" handler="onGridRowSelectNext"></f:listener>
+                </f:listeners>
+                <f:toolbars>
+                    <f:toolbar position="Bottom" toolbar-align="Center">
+                        <f:items>
+                            <f:button text="选择后定位到下一行" icon="SystemSave" click-handler="onGridRowSelectNext"></f:button>
+                            <f:button id="btnSaveClose" text="选择后关闭" icon="SystemSaveClose" click-handler="onGridRowSelectClose"></f:button>
+                            <f:button id="btnClose" text="关闭" icon="SystemClose" click-handler="onCloseWindowClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:grid>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function onCloseWindowClick(event) {
+                    F.activeWindow.hide();
+                }
+
+                // 调用父页面的 updateGridRow 函数
+                function updateParentGridRow(activeWindow) {
+                    // 选中行数据
+                    var rowData = F.ui.Grid1.getSelectedRow(true);
+                    var rowValue = rowData.values;
+
+                    var selectedValues = {
+                        'Name': rowValue['Name'],
+                        'Gender': rowValue['Gender'],
+                        'EntranceYear': rowValue['EntranceYear'],
+                        'EntranceDate': rowValue['EntranceDate'],
+                        'AtSchool': rowValue['AtSchool'],
+                        'Major': rowValue['Major']
+                    };
+
+                    // 调用父页面的 updateGridRow 函数
+                    activeWindow.window.updateGridRow(selectedValues);
+                }
+
+                function onGridRowSelectClose(event) {
+                    var grid1 = F.ui.Grid1;
+                    if (!grid1.getSelectedRow()) {
+                        F.alert('请至少选择一行！');
+                        return;
+                    }
+
+                    // 返回当前活动Window对象（浏览器窗口对象通过 F.getActiveWindow().window 获取）
+                    var activeWindow = F.getActiveWindow();
+
+                    // 调用父页面的 updateGridRow 函数
+                    updateParentGridRow(activeWindow);
+
+                    // 隐藏当前弹出窗体
+                    activeWindow.hide();
+                }
+
+                function onGridRowSelectNext(event) {
+                    var grid1 = F.ui.Grid1;
+                    if (!grid1.getSelectedRow()) {
+                        F.alert('请至少选择一行！');
+                        return;
+                    }
+
+                    // 返回当前活动Window对象（浏览器窗口对象通过 F.getActiveWindow().window 获取）
+                    var activeWindow = F.getActiveWindow();
+
+                    // 调用父页面的 updateGridRow 函数
+                    updateParentGridRow(activeWindow);
+
+                    // 调用父页面的 moveToNextRow 函数
+                    activeWindow.window.moveToNextRow();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

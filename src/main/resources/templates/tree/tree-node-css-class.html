@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 节点样式</title>
+
+        <style>
+            .important .f-tree-cell-text {
+                color: red;
+                font-weight: bold;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tree id="Tree1" is-fluid="true" show-header="true" title="树控件" enable-collapse="false" selected-node-id="zhumadian">
+                <f:nodes>
+                    <f:tree-node text="中国" expanded="true" node-id="china">
+                        <f:tree-node text="河南省" expanded="true" node-id="henan" css-class="important">
+                            <f:tree-node text="驻马店市" node-id="zhumadian">
+                                <f:tree-node text="遂平县" leaf="false" node-id="suiping">
+                                    <f:tree-node text="槐树乡" leaf="false" node-id="huaishu">
+                                        <f:tree-node text="陈庄村" node-id="chenzhuang"></f:tree-node>
+                                    </f:tree-node>
+                                </f:tree-node>
+                            </f:tree-node>
+                            <f:tree-node text="漯河市" node-id="luohe"></f:tree-node>
+                        </f:tree-node>
+                        <f:tree-node text="安徽省" expanded="true" node-id="anhui" css-class="important">
+                            <f:tree-node text="合肥市" expanded="true" node-id="hefei">
+                                <f:tree-node text="金色池塘小区" node-id="golden"></f:tree-node>
+                                <f:tree-node text="中国科学技术大学" node-id="ustc"></f:tree-node>
+                            </f:tree-node>
+                        </f:tree-node>
+                    </f:tree-node>
+                </f:nodes>
+            </f:tree>
+            <br />
+            <br />
+            注：本示例高亮显示[河南省]和[安徽省]两个节点。
+
+        </th:block>
+    </body>
+
+</html>

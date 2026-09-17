@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 登录回车键</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <div>
+                用户名：admin
+                <br />
+                密码：admin
+                <br />
+                <br />
+                <br />
+                注意：在表单内按回车键会导航到下一个控件。
+            </div>
+
+            <f:window id="Window1" title="登录表单" is-modal="false" enable-close="false" window-position="GoldenSection" width="350">
+                <f:items>
+                    <f:simple-form id="SimpleForm1" show-border="false" body-padding="10" remove-last-fields-margin="true" show-header="false">
+                        <f:items>
+                            <f:text-box id="tbxUserName" label="用户名" required="true" show-red-star="true" next-focus-control="tbxPassword"></f:text-box>
+                            <f:text-box id="tbxPassword" label="密码" text-mode="Password" required="true" show-red-star="true"
+                                next-focus-control="btnLogin"></f:text-box>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" toolbar-align="Right" position="Bottom">
+                        <f:items>
+                            <f:button id="btnLogin" button-color="Primary" text="登录" type="Button" validate-forms="SimpleForm1" validate-target="Top"
+                                on-click="btnLogin_Click"></f:button>
+                            <f:button id="btnReset" text="重置" type="Reset"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:window>
+
+        </th:block>
+    </body>
+
+</html>

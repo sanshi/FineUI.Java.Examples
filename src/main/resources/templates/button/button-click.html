@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 按钮的点击事件</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnServerClick" text="服务器端事件" on-click="btnServerClick_Click"></f:button>
+            <br />
+            <br />
+            <f:button id="btnClientClick" text="客户端事件" click-handler="onClientEventClick" css-class="marginr"></f:button>
+            <br />
+            <br />
+            <f:button id="btnClientClick2" text="客户端事件（可被服务端改变）" click-handler="onOriginalClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnChangeClientClick2" text="改变上个按钮的客户端事件" on-click="btnChangeClientClick2_Click"></f:button>
+            <br />
+            <br />
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onClientEventClick(event) {
+                    alert('这是客户端事件');
+                }
+
+                // 页面标签里用 ClickHandler 声明的客户端点击回调（属性里填的是函数名，不是一段脚本）
+                function onOriginalClick(event) {
+                    F.alert({
+                        message: '这是原来的客户端事件',
+                        messageIcon: 'information',
+                        target: '_top'
+                    });
+                }
+
+                // 服务端在回发中把上面那个按钮的回调换成了这个
+                function onChangedClick(event) {
+                    F.alert({
+                        message: '客户端事件已改变！',
+                        messageIcon: 'information',
+                        target: '_top'
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

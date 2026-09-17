@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 编辑框（购物车）</title>
+
+        <style>
+            .totalpanel {
+                border-top-width: 0 !important;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel id="Panel2" show-border="false" layout="VBox" body-padding="10" show-header="false" is-view-port="true">
+                <f:items>
+                    <f:grid id="Grid1" show-border="true" show-header="true" title="购物车" box-flex="1" data-id-field="Id" data-text-field="Name"
+                        enable-check-box-select="true" enable-text-selection="true" keep-current-selection="true">
+                        <f:columns>
+                            <f:row-number-field></f:row-number-field>
+                            <f:render-field header-text="商品代码" data-field="Code" width="150"></f:render-field>
+                            <f:render-field header-text="商品名称" data-field="Name" expand-unused-space="true" min-width="150"></f:render-field>
+                            <f:render-field header-text="商品单价" data-field="Price" enable-column-hide="false" field-type="Float" renderer-function="renderPrice"
+                                width="150"></f:render-field>
+                            <f:render-field header-text="数量" data-field="Number" enable-column-hide="false" field-type="Int" renderer-function="renderNumber"
+                                width="150"></f:render-field>
+                            <f:render-field header-text="小计" enable-column-hide="false" renderer-function="renderXiaoji" width="150"></f:render-field>
+                        </f:columns>
+                        <f:listeners>
+                            <f:listener event="selectionchange" handler="onGridSelectionchange"></f:listener>
+                        </f:listeners>
+                    </f:grid>
+                    <f:content-panel css-class="totalpanel" show-border="true" show-header="false">
+                        <div style="text-align: right; padding: 10px;">
+                            <div style="margin-bottom: 10px;">
+                                <input id="TOTAL_NUMBER" name="TOTAL_NUMBER" type="hidden">
+                                <span id="totalNumber" style="color: red;"></span> 件商品
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <input id="TOTAL_PRICE" name="TOTAL_PRICE" type="hidden">
+                                总计：<span id="totalPrice" style="color: red; font-size: 1.5em; font-weight: bold;"></span>
+                            </div>
+                            <div>
+                                <f:button id="btnGotoPay" text="去结算" enabled="false" size="Large" click-handler="onGotoPayClick"></f:button>
+                            </div>
+                        </div>
+                    </f:content-panel>
+                </f:items>
+            </f:panel>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function renderPrice(value, params) {
+                    return '¥' + value.toFixed(2);
+                }
+
+                function renderNumber(value, params) {
+                    return F.formatString('<input value="{0}" class="price" type="hidden">', params.rowData.values.Price) +
+                        F.formatString('<input value="{0}" class="number" style="width:98%;" type="text">', value);
+                }
+
+                function renderXiaoji(value, params) {
+                    var values = params.rowData.values;
+                    var total = (values.Price * values.Number).toFixed(2);
+                    return F.formatString('<span class="xiaoji">¥{0}</span>', total);
+                }
+
+                function getUserInputs() {
+                    var result = [];
+                    var grid1 = F.ui.Grid1;
+                    grid1.getSelectedRowEls().each(function() {
+                        var rowEl = $(this);
+                        var rowData = grid1.getRowData(rowEl);
+                        result.push([rowData.id, rowData.text, rowData.values.Price, getRowNumber(rowEl)]);
+                    });
+                    return F.toJSON(result);
+                }
+
+                function onGotoPayClick(event) {
+                    F.customEvent('GotoPay', getUserInputs());
+                }
+
+                var numberSelector = 'input.number';
+                var priceSelector = 'input.price';
+                var xiaojiSelector = 'span.xiaoji';
+
+                function getRowNumber(row) {
+                    var num = parseInt(row.find(numberSelector).val(), 10);
+                    if (isNaN(num)) {
+                        num = 0;
+                    }
+                    return num;
+                }
+
+                function getRowPrice(rowEl) {
+                    return parseFloat(rowEl.find(priceSelector).val()) || 0;
+                }
+
+                function updateTotal() {
+                    var grid = F.ui.Grid1;
+                    var selectedRows = grid.getSelectedRows();
+                    var total = 0;
+                    $.each(selectedRows, function(index, rowId) {
+                        var rowEl = grid.getRowEl(rowId);
+                        total += getRowNumber(rowEl) * getRowPrice(rowEl);
+                    });
+                    $('#totalNumber').text(selectedRows.length);
+                    $('#totalPrice').text("¥" + total.toFixed(2));
+                    $('#TOTAL_NUMBER').val(selectedRows.length);
+                    $('#TOTAL_PRICE').val(total.toFixed(2));
+                    var gotoPayBtn = F.ui.btnGotoPay;
+                    if (total === 0) {
+                        gotoPayBtn.disable();
+                    } else {
+                        gotoPayBtn.enable();
+                    }
+                }
+
+                function onGridSelectionchange(event) {
+                    updateTotal();
+                }
+
+                function filterNumberInput(inputNode) {
+                    var filterRegex = /[^0-9]/g;
+                    var originalValue = inputNode.val();
+                    var filteredValue = originalValue.replace(filterRegex, '');
+                    if (originalValue !== filteredValue) {
+                        inputNode.val(filteredValue);
+                    }
+                }
+
+                function registerNumberChangeEvents() {
+                    var grid = F.ui.Grid1;
+                    grid.el.find(numberSelector).on('input propertychange', function(event) {
+                        var cnode = $(this);
+                        filterNumberInput(cnode);
+                        var rowEl = cnode.closest('.f-grid-row');
+                        var number = getRowNumber(rowEl);
+                        var price = getRowPrice(rowEl);
+                        var resultNode = rowEl.find(xiaojiSelector);
+                        resultNode.text("¥" + (number * price).toFixed(2));
+                        updateTotal();
+                    }).on('click', function(event) {
+                        $(this).select();
+                        event.stopPropagation();
+                    });
+                }
+                F.ready(function() {
+                    registerNumberChangeEvents();
+                    updateTotal();
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

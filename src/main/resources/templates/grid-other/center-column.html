@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 文本居中显示</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校（居中）" data-field="AtSchool" render-as-static-field="true" text-align="Center"></f:render-check-field>
+                    <f:render-field header-text="所学专业（居中）" data-field="Major" renderer-function="renderMajor" expand-unused-space="true" min-width="150"
+                        text-align="Center"></f:render-field>
+                    <f:render-field header-text="分组（内容靠右，标题靠左）" data-field="Group" renderer-function="renderGroup" width="250" text-align="Right"
+                        header-text-align="Left"></f:render-field>
+                </f:columns>
+            </f:grid>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

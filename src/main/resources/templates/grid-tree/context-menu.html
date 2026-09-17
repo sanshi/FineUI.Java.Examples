@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 树表格（右键菜单）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="树表格" data-id-field="Id" data-text-field="Name"
+                data-parent-id-field="ParentId" enable-tree="true" tree-column="Name" row-data-bound-function="onGrid1RowDataBound">
+                <f:columns>
+                    <f:row-number-field enable-tree-number="true"></f:row-number-field>
+                    <f:render-field column-id="Name" header-text="名称" data-field="Name" expand-unused-space="true" min-width="150"></f:render-field>
+                    <f:render-field header-text="类型" data-field="Type" width="150"></f:render-field>
+                    <f:render-field header-text="大小" data-field="Size" width="150"></f:render-field>
+                    <f:render-field header-text="修改日期" data-field="ModifyDate" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"
+                        width="150"></f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="beforerowcontextmenu" handler="onRowContextMenu"></f:listener>
+                </f:listeners>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+
+            <f:menu id="Menu1">
+                <f:menu-button id="btnExpandRows" text="展开全部" click-handler="onExpandRows"></f:menu-button>
+                <f:menu-button id="btnCollapseRows" text="折叠全部" click-handler="onCollapseRows"></f:menu-button>
+                <f:listeners>
+                    <f:listener event="show" handler="onMenuShow"></f:listener>
+                </f:listeners>
+            </f:menu>
+
+            <br />
+            <br />
+            注：在叶子节点上点击右键，则弹出菜单的菜单项都是禁用状态。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function onGrid1RowDataBound(rowData) {
+                    var rowId = rowData.id;
+
+                    // 默认展开的节点
+                    if (rowId === '50' || rowId === '60') {
+                        rowData.expanded = true;
+                    }
+                }
+
+                // 保存当前菜单对应的树节点ID
+                var currentRowId;
+
+                // 返回 false 来阻止浏览器右键菜单
+                function onRowContextMenu(event, rowId) {
+                    currentRowId = rowId;
+                    F.ui.Menu1.show();
+                    return false;
+                }
+
+                // 设置所有菜单项的禁用状态
+                function setMenuItemsDisabled(disabled) {
+                    var menu = F.ui.Menu1;
+                    $.each(menu.items, function(index, item) {
+                        item.setDisabled(disabled);
+                    });
+                }
+
+                // 显示菜单后，检查是否禁用菜单项
+                function onMenuShow(event) {
+                    if (currentRowId) {
+                        var grid = F.ui.Grid1;
+                        var rowData = grid.getRowData(currentRowId);
+                        if (rowData.leaf) {
+                            setMenuItemsDisabled(true);
+                        } else {
+                            setMenuItemsDisabled(false);
+                        }
+                    }
+                }
+
+                function onExpandRows(event) {
+                    if (currentRowId) {
+                        F.ui.Grid1.expandRow(currentRowId, true);
+                    }
+                }
+
+                function onCollapseRows(event) {
+                    if (currentRowId) {
+                        F.ui.Grid1.collapseRow(currentRowId, true);
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

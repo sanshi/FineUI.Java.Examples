@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 网址数据源 · 单元格样式</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.gridurl.GridDataUrlDataController" />
+
+        <style type="text/css">
+            .color1 {
+                background-color: #0094ff;
+                color: #fff;
+            }
+
+            .color2 {
+                background-color: #0026ff;
+                color: #fff;
+            }
+
+            .color3 {
+                background-color: #b200ff;
+                color: #fff;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                data-url="/grid-data-url/grid-data-url-data">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int" renderer-function="renderEntranceYear"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+
+            <script>
+                function renderGender(value, params) {
+                    if (value == 1) {
+                        params.cellCls = 'color1';
+                    }
+
+                    return value == 1 ? '男' : '女';
+                }
+
+                function renderEntranceYear(value, params) {
+
+                    var entranceYear = params.rowData.values['EntranceYear'];
+
+                    if (entranceYear >= 2002 && entranceYear <= 2004) {
+                        params.cellCls = 'color3';
+                    }
+
+                    return value;
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 隐藏标题栏（按钮分组）</title>
+
+        <style>
+            .mybuttongroup .f-btn {
+                border-width: 0;
+                border-radius: 0;
+                margin-bottom: 5px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .mytabstrip {
+                border-left-width: 1px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-header="false" show-border="true" is-fluid="true" height="500" layout="HBox">
+                <f:items>
+                    <f:button-group id="ButtonGroup1" css-class="mybuttongroup f-state-default" enable-press-group="true" layout="VBox" vertical="true"
+                        width="200">
+                        <f:button id="Button1" text="标签一" icon="Cake" enable-press="true"></f:button>
+                        <f:button id="Button2" text="标签二" icon-font="_Bank" enable-press="true" pressed="true"></f:button>
+                        <f:button id="Button3" text="标签三" icon-font="_Group" enable-press="true"></f:button>
+                        <f:listeners>
+                            <f:listener event="presschange" handler="onButtonGroupPressChange" />
+                        </f:listeners>
+                    </f:button-group>
+                    <f:tab-strip id="TabStrip1" css-class="mytabstrip" enable-tab-close-menu="true" box-flex="1" show-border="false" show-tab-header="false"
+                        active-tab-index="1" animation-type="Fade">
+                        <f:tabs>
+                            <f:tab id="Tab1" title="标签一" enable-close="false" body-padding="10px">
+                                <f:items>
+                                    <f:label id="Label5" text="标签一中的文本" />
+                                </f:items>
+                            </f:tab>
+                            <f:tab id="Tab2" title="标签二" body-padding="10px" enable-close="true">
+                                <f:items>
+                                    <f:label id="Label4" text="标签二中的文本" />
+                                </f:items>
+                            </f:tab>
+                            <f:tab id="Tab3" title="标签三" body-padding="10px" enable-close="true" layout="VBox">
+                                <f:items>
+                                    <f:label id="Label3" text="标签三中的文本" />
+                                    <f:tab-strip id="TabStrip2" box-flex="1" enable-tab-close-menu="true" show-border="true" active-tab-index="1">
+                                        <f:tabs>
+                                            <f:tab id="Tab4" title="标签四" enable-close="false" body-padding="10px">
+                                                <f:items>
+                                                    <f:label id="Label1" text="标签四中的文本" />
+                                                </f:items>
+                                            </f:tab>
+                                            <f:tab id="Tab5" title="标签五" enable-close="false" body-padding="10px">
+                                                <f:items>
+                                                    <f:label id="Label2" text="标签五中的文本" />
+                                                </f:items>
+                                            </f:tab>
+                                        </f:tabs>
+                                    </f:tab-strip>
+                                </f:items>
+                            </f:tab>
+                        </f:tabs>
+                    </f:tab-strip>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onButtonGroupPressChange(event, btn) {
+                    var btnIndex = btn.el.index('.f-btn');
+
+                    // 激活相应的选项卡
+                    F.ui.TabStrip1.getItem(btnIndex).activate();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

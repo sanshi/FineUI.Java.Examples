@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--/*
+  母版：唯一写 html/head/body 骨架的地方。各示例页用 layout:decorate 装饰本母版，
+  只提供 layout:fragment="body" 的内容片段，无需重复 DOCTYPE/html/head/body 与运行时标签。
+  三个可填充槽：head（页面专属 CSS/meta，注入 <head>）、body（页面主体，必填）、script（页面专属脚本，注入 body 末）。
+  运行时输出点分处文档两端：
+    f:styles 在 head 输出 CSS link（先行加载、无 FOUC）；
+    f:scripts 在 body 末输出 FineUI.js + 语言包 + F.render（晚加载不阻塞解析、DOM 已就绪）。
+  用 Thymeleaf 解析级注释（stripped at parse），不泄漏进页面输出。
+*/-->
+<html f:lang="true" xmlns:f="http://fineui.com/java">
+
+    <head>
+        <meta charset="UTF-8" />
+        <!--/* 页面标题：各页 title 经 layout:title-pattern 注入 */-->
+        <title layout:title-pattern="$CONTENT_TITLE">FineUI.Java</title>
+        <!--/* CSS 输出到 head；启用 fineui.mobile-adaption 时同点输出 viewport meta */-->
+        <f:styles></f:styles>
+        <!--/* 示例站点通用样式 */-->
+        <link rel="stylesheet" th:href="@{/res/css/common.css}" />
+    </head>
+
+    <body>
+        <!--/* 各页 body 主体片段注入这里。用 th:block 不产生包裹 div、无额外 wrapper。 */-->
+        <th:block layout:fragment="body"></th:block>
+        <!--/* JS + 语言包 + F.render 输出到 body 末 */-->
+        <f:scripts></f:scripts>
+        <!--/* 页面专属脚本注入槽：须在 f:scripts 之后（FineUI.js 已就绪） */-->
+        <th:block layout:fragment="script"></th:block>
+    </body>
+
+</html>

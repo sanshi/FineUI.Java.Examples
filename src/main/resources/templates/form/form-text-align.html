@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FormTextAlign</title>
+
+        <style>
+            .text-align-center input {
+                text-align: center;
+            }
+
+            .text-align-right input {
+                text-align: right;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-width="180" label-align="Right" enable-collapse="false" title="简单表单">
+                <f:items>
+                    <f:text-box label="文本输入框" id="TextBox1" required="true" text="文本居左" show-red-star="true"></f:text-box>
+                    <f:text-box label="文本输入框（居中）" id="TextBox2" css-class="text-align-center" text="文本居中" required="true" show-red-star="true"></f:text-box>
+                    <f:text-box label="文本输入框（居右）" id="TextBox3" css-class="text-align-right" text="文本居右" required="true" show-red-star="true"></f:text-box>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+    </body>
+
+</html>

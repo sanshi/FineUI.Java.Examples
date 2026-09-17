@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 面板标题栏工具</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" title="面板" height="350" body-padding="10" enable-collapse="true" icon-url="/res/images/16/8.png">
+                <f:items>
+                    <f:label text="面板内容"></f:label>
+                </f:items>
+                <f:tools>
+                    <f:tool icon-font="_Gear" tool-tip="设置" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool13" icon-font="_Wrench" tool-tip="设置" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool1" icon-font="_Download" tool-tip="下载" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool3" icon-font="_Upload" tool-tip="上传" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool2" icon-font="_Print" tool-tip="打印" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool4" icon-font="_Save" tool-tip="保存" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool18" icon-font="_Plus" tool-tip="新增" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool10" icon-font="_Edit" tool-tip="编辑" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool5" icon-font="_Minus" tool-tip="删除" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool14" icon-font="_Trash" tool-tip="删除" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool15" icon-font="_Close" tool-tip="删除" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool6" icon-font="_SignIn" tool-tip="登陆" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool11" icon-font="_PowerOff" tool-tip="退出" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool9" icon-font="_Question" tool-tip="帮助" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool20" icon-font="_Info" tool-tip="详细" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool12" icon-font="_Search" tool-tip="搜索" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool17" icon-font="_Key" tool-tip="授权" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool7" icon-font="_User" tool-tip="用户" click-handler="onToolIconClick"></f:tool>
+                    <f:tool id="Tool19" icon-font="_Group" tool-tip="分组" click-handler="onToolIconClick"></f:tool>
+                </f:tools>
+            </f:panel>
+            <br />
+
+            <f:button id="Button2" css-class="marginr" text="检查面板的折叠状态" on-click="Button2_Click"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onToolIconClick(event) {
+                    var iconFont = this.iconFont;
+                    F.notify({
+                        message: '你点击了标题栏工具图标：' + iconFont,
+                        messageIconFont: iconFont,
+                        displayMilliseconds: 3000,
+                        positionX: 'center',
+                        positionY: 'center'
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

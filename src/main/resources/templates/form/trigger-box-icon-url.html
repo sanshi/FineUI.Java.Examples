@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 自定义触发图标</title>
+
+        <style th:inline="css">
+            .triggerbox-icon-app-edit {
+                background-image: url([(@{/res/icon/application_edit.png})]);
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            .triggerbox-icon-bullet-cross {
+                background-image: url([(@{/res/icon/bullet_cross.png})]);
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            .triggerbox-icon-zoom {
+                background-image: url([(@{/res/icon/zoom.png})]);
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="表单" show-header="true" label-width="150">
+                <f:items>
+                    <!--/* 自定义图标用 trigger-cls（CSS 类，本页 head 里定义背景图）——与内置 trigger-icon 图标类同机制 */-->
+                    <f:trigger-box id="TriggerBox1" label="TriggerBox" trigger-cls="triggerbox-icon-app-edit" empty-text="打开弹出窗口">
+                        <f:listeners>
+                            <f:listener event="triggerclick" handler="onTriggerBox1TriggerClick"></f:listener>
+                        </f:listeners>
+                    </f:trigger-box>
+                    <f:twin-trigger-box id="TwinTriggerBox1" label="TwinTriggerBox" on-trigger1-click="TwinTriggerBox1_Trigger1Click"
+                        on-trigger2-click="TwinTriggerBox1_Trigger2Click" show-trigger1="false" empty-text="搜索用户名" trigger-1-cls="triggerbox-icon-bullet-cross"
+                        trigger-2-cls="triggerbox-icon-zoom"></f:twin-trigger-box>
+                </f:items>
+            </f:simple-form>
+
+            <f:window id="Window1" title="弹出窗口" body-padding="10" is-modal="true" hidden="true" target="Top" width="450" height="300">
+                <f:items>
+                    <f:button id="btnCloseWindow" text="关闭当前窗口" on-click="btnCloseWindow_Click"></f:button>
+                </f:items>
+            </f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onTriggerBox1TriggerClick(event) {
+                    F.ui.Window1.show();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

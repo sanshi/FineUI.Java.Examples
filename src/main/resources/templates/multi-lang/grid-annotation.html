@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多语言表格（数据注解）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles"
+            content="class:com.fineui.java.examples.multilang.model.Student;class:com.fineui.java.examples.multilang.model.StudentHelper" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="#{multilang.grid.title}" row-type-from="students" data-id-field="id"
+                data-text-field="name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <!-- 数据注解版：列 for 是相对行模型（Student）的字段名，行模型由 Grid 的 row-type-from="students" 声明；
+                         列头/字段/类型/日期格式由 Student 注解（@Display nameKey + @DisplayFormat）推导 -->
+                    <f:render-field for="name" width="150"></f:render-field>
+                    <f:render-field for="gender" renderer-function="renderGender" width="150"></f:render-field>
+                    <f:render-field for="entranceYear" width="150"></f:render-field>
+                    <f:render-check-field for="atSchool" render-as-static-field="true" width="150"></f:render-check-field>
+                    <f:render-field for="major" renderer-function="renderMajor" expand-unused-space="true" min-width="150"></f:render-field>
+                    <f:render-field for="group" renderer-function="renderGroup" width="150"></f:render-field>
+                    <f:render-field for="entranceDate" width="150"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <br />
+            <f:button text="#{multilang.grid.button.selectedRows}" click-handler="onNotifySelectedRowsClick"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <!-- 服务端按当前 Locale 翻译的客户端 JS 资源（覆盖 grid.js 内静态中文兜底） -->
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                F.setResources( /*[[${page.javaScriptResources}]]*/ {});
+                /*]]>*/
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

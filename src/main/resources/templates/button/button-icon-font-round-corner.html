@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 圆角字体图标按钮</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnIcon1" enable-round-corner="true" text="图标在左侧" icon-font="_Home" css-class="marginr"></f:button>
+            <f:button id="btnIcon2" enable-round-corner="true" text="图标在右侧" icon-align="Right" icon-font="_Car"></f:button>
+            <br />
+            <br />
+            <f:button id="btnIcon3" enable-round-corner="true" text="图标在上面" icon-align="Top" icon-font="_Camera" css-class="marginr"></f:button>
+            <f:button id="btnIcon4" enable-round-corner="true" text="图标在下面" icon-align="Bottom" icon-font="_Phone"></f:button>
+            <br />
+            <br />
+            <f:button id="btnCustomIconFont" enable-round-corner="true" text="点击修改图标（在三个图标之前切换）" icon-font="_VolumeUp" on-click="btnCustomIconFont_Click">
+            </f:button>
+            <br />
+            <br />
+            只有图片的按钮：
+            <br />
+            <br />
+            <f:button id="Button1" size="Small" enable-round-corner="true" icon-font="_Android" css-class="marginr"></f:button>
+            <f:button id="Button2" size="Normal" enable-round-corner="true" icon-font="_Apple" css-class="marginr"></f:button>
+            <f:button id="Button7" size="Medium" enable-round-corner="true" icon-font="_Car" css-class="marginr"></f:button>
+            <f:button id="Button8" size="Large" enable-round-corner="true" icon-font="_Card" css-class="marginr"></f:button>
+            <br />
+            <br />
+
+        </th:block>
+    </body>
+
+</html>

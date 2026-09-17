@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 分部视图布局</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="template:partial/layout-partial-view.html" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <!--/* 公共卡片（partial/layout-partial-view 片段）嵌入 VBox/HBox 复杂布局，box-flex/margin 参数透传给卡片 */-->
+            <f:panel id="Panel1" is-fluid="true" enable-collapse="false" height="300" layout="VBox" box-config-align="Stretch" box-config-position="Start"
+                body-padding="10" box-config-child-margin="0 0 5 0" title="面板一">
+                <f:items>
+                    <th:block th:replace="~{partial/layout-partial-view :: card('Panel1', 1, '陈萍萍', 20, '合肥', null, null)}"></th:block>
+                    <f:panel body-padding="10" box-flex="1" margin="0" title="面板二">
+                        <f:items>
+                            <f:label text="胡斐今年22岁，住在驻马店。"></f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+            <br />
+            <f:panel id="Panel2" is-fluid="true" enable-collapse="false" height="300" layout="VBox" body-padding="10" box-config-child-margin="0 0 5 0"
+                title="面板三">
+                <f:items>
+                    <th:block th:replace="~{partial/layout-partial-view :: card('Panel2', 1, '陈萍萍', 20, '合肥', 1, null)}"></th:block>
+                    <th:block th:replace="~{partial/layout-partial-view :: card('Panel2', 2, '胡斐', 22, '驻马店', 1, 0)}"></th:block>
+                </f:items>
+            </f:panel>
+            <br />
+            <f:panel id="Panel4" is-fluid="true" enable-collapse="false" height="300" layout="HBox" body-padding="10" box-config-child-margin="0 5 0 0"
+                title="面板四">
+                <f:items>
+                    <th:block th:replace="~{partial/layout-partial-view :: card('Panel4', 1, '陈萍萍', 20, '合肥', 1, null)}"></th:block>
+                    <th:block th:replace="~{partial/layout-partial-view :: card('Panel4', 2, '陈萍萍', 20, '合肥', 1, 0)}"></th:block>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

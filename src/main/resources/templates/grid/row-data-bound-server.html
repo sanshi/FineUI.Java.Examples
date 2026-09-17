@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 服务端行绑定格式化</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-check-box-select="true" on-row-data-bound="Grid1_RowDataBound">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别（服务端格式化）" column-id="rfGender" data-field="Gender" width="200"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="注册日期（服务端格式化）" column-id="rfLogTime" data-field="LogTime" width="200"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnClearData" text="清空数据" on-click="btnClearData_Click" css-class="marginr"></f:button>
+            <f:button id="btnRebind" text="重新绑定数据" icon="Reload" on-click="btnRebindData_Click"></f:button>
+            <br />
+            <br />
+            注：
+            <ul>
+                <li>本示例使用行绑定事件对「LogTime」数据字段进行服务器端的格式化。</li>
+                <li>服务端行绑定事件中无法修改列的值，只能修改数据字段的值（数据字段包含但不限于每一列的 DataField，以及表格的 DataIDField/DataTextField/DataAttributeFields/DataKeyNames 等）。</li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

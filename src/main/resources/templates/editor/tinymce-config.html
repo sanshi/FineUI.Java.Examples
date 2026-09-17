@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TinyMCEConfig</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-align="Top" enable-collapse="false" title="表单">
+                <f:items>
+                    <f:html-editor id="HtmlEditor1" label="文本编辑器" editor="TinyMCE" base-path="/res/third-party/tinymce/" toolbar-set="Full"
+                        height="350"></f:html-editor>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:button id="Button2" css-class="marginr" text="设置编辑器的值" on-click="Button2_Click"></f:button>
+            <f:button id="Button1" text="获取编辑器的值" on-click="Button1_Click"></f:button>
+            <br />
+            <br />
+            注：本示例通过 Options 属性设置 TinyMCE 的菜单栏（无）和工具栏（自定义）。参考文档：http://www.tinymce.com/wiki.php/Configuration
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 从弹出窗体中快速选择（初始空白行）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:grid-editor/select-from-window-empty-rows-iframe-window" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（进入编辑状态后，从弹出窗体中选择用户）" height="500" data-id-field="Id"
+                data-text-field="Name" allow-cell-editing="true" clicks-to-edit="1">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name">
+                        <f:editor>
+                            <f:trigger-box id="tbxEditorName" trigger-icon="Search">
+                                <f:listeners>
+                                    <f:listener event="triggerclick" handler="onNameSearchTriggerClick"></f:listener>
+                                </f:listeners>
+                            </f:trigger-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender">
+                        <f:editor>
+                            <f:drop-down-list id="ddlGender" required="true">
+                                <f:list-item text="男" value="1"></f:list-item>
+                                <f:list-item text="女" value="0"></f:list-item>
+                            </f:drop-down-list>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="入学年份" column-id="EntranceYear" data-field="EntranceYear" field-type="Int">
+                        <f:editor>
+                            <f:number-box id="nbxEntranceYear" no-decimal="true" no-negative="true" min-value="2000" max-value="2025"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="入学日期" column-id="EntranceDate" data-field="EntranceDate" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy/MM/dd" width="150">
+                        <f:editor>
+                            <f:date-picker id="dpEntranceDate" required="true"></f:date-picker>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-check-field header-text="是否在校" column-id="AtSchool" data-field="AtSchool"></f:render-check-field>
+                    <f:render-field column-id="AtSchool" data-field="AtSchool" field-type="Boolean" renderer-function="renderAtSchool" header-text="是否在校">
+                        <f:editor>
+                            <f:drop-down-list required="true">
+                                <f:list-item text="在校" value="true"></f:list-item>
+                                <f:list-item text="离校" value="false"></f:list-item>
+                            </f:drop-down-list>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="所学专业" column-id="Major" data-field="Major" expand-unused-space="true" min-width="150">
+                        <f:editor>
+                            <f:text-box id="tbxMajor" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field enable-header-menu="false">
+                        <f:commands>
+                            <f:command command-name="Delete" icon="Delete" confirm-text="删除选中行？" confirm-target="Top"></f:command>
+                        </f:commands>
+                    </f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="dataload" handler="onGrid1DataLoad"></f:listener>
+                    <f:listener event="rowcommand" handler="onGrid1RowCommand"></f:listener>
+                </f:listeners>
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="btnNew" text="新增数据" icon="Add" click-handler="onNewClick"></f:button>
+                            <f:button id="btnDelete" text="删除选中行" icon="Delete" click-handler="onDeleteClick"></f:button>
+                            <f:toolbar-fill></f:toolbar-fill>
+                            <f:button id="btnReset" text="重置表格数据" click-handler="onResetClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:grid>
+
+            <br>
+            <f:button id="btnSubmit" text="保存数据" click-handler="onSubmitClick"></f:button>
+
+            <br>
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br />
+            <f:window id="Window1" hidden="true" enable-iframe="true" enable-maximize="true" enable-resize="true" target="Top" height="500" width="700"
+                title="选择用户"></f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function renderGender(value) {
+                    // value === '', 表示空数据
+                    if (value === '') {
+                        return '';
+                    } else {
+                        return value == 1 ? '男' : '女';
+                    }
+                }
+
+                function renderAtSchool(value) {
+                    // value === '', 表示空数据
+                    if (value === '') {
+                        return '';
+                    } else {
+                        return value ? '在校' : '离校';
+                    }
+                }
+
+                function moveToNextRow() {
+                    var grid1 = F.ui.Grid1;
+
+                    function selectNextRow() {
+                        // 当前选中行
+                        var selectedRowEl = grid1.getSelectedRowEl();
+                        var nextSelectedRowEl = selectedRowEl.next();
+
+                        if (nextSelectedRowEl.length) {
+                            // 如果下一行存在
+                            grid1.selectRow(nextSelectedRowEl);
+                            grid1.startEdit(nextSelectedRowEl, "Name");
+
+                            return true;
+                        }
+
+                        return false;
+                    }
+
+                    // 如果下一行不存在，需要新增一行
+                    if (!selectNextRow()) {
+                        var newRowData = {
+                            'Name': '',
+                            'Gender': '', // Gender 的列类型是整型，这里的空字符串表示未定义
+                            'EntranceYear': '',
+                            'EntranceDate': '',
+                            'AtSchool': '', // AtSchool 的列类型是布尔型，这里的空字符串表示未定义
+                            'Major': ''
+                        };
+                        // 此过程禁止触发事件 - dataload
+                        F.noEvent(function() {
+                            grid1.addNewRecord(newRowData, true, false);
+                        });
+
+                        selectNextRow();
+                    }
+                }
+
+                function onGrid1DataLoad(event) {
+                    var grid1 = F.ui.Grid1;
+
+                    // 最少 1 个空白行，最多 10 个空白行
+                    var emptyRowCount = 10 - grid1.data.length;
+                    if (emptyRowCount < 1) {
+                        emptyRowCount = 1;
+                    }
+
+                    // 初始空白行
+                    var records = [];
+                    for (var i = 0; i < emptyRowCount; i++) {
+                        records.push({
+                            'Name': '',
+                            'Gender': '', // Gender 的列类型是整型，这里的空字符串表示未定义
+                            'EntranceYear': '',
+                            'EntranceDate': '',
+                            'AtSchool': '', // AtSchool 的列类型是布尔型，这里的空字符串表示未定义
+                            'Major': ''
+                        });
+                    }
+                    // 此过程禁止触发事件，防止 dataload 事件死循环
+                    F.noEvent(function() {
+                        grid1.addNewRecords(records, true);
+                    });
+                }
+
+                function updateGridRow(values) {
+                    var grid1 = F.ui.Grid1;
+
+                    var selectedRow = grid1.getSelectedRow();
+
+                    // cancelEdit 用来取消编辑
+                    grid1.cancelEdit();
+                    grid1.updateCellValue(selectedRow, values);
+                }
+
+                function onNameSearchTriggerClick(event) {
+                    var grid1 = F.ui.Grid1;
+                    var selectedCell = grid1.getSelectedCell();
+                    if (selectedCell) {
+                        var iframeWindowUrl = F.resolveUrl('/grid-editor/select-from-window-empty-rows-iframe-window');
+                        F.ui.Window1.show(iframeWindowUrl + '?rowid=' + selectedCell[0]);
+                    }
+                }
+
+                function onSubmitClick(event) {
+                    var grid1 = F.ui.Grid1;
+
+                    // 触发后台事件
+                    F.customEvent('Submit_Click', {
+                        mergedData: grid1.getMergedData()
+                    });
+                }
+
+                function onNewClick(event) {
+                    var grid1 = F.ui.Grid1;
+
+                    // 此过程禁止触发事件，防止 dataload 事件死循环
+                    F.noEvent(function() {
+                        // 新增一行（返回新增行的ID）
+                        var addedRowId = grid1.addNewRecord({
+                            'Name': '',
+                            'Gender': '',
+                            'EntranceYear': '',
+                            'EntranceDate': '',
+                            'AtSchool': '',
+                            'Major': ''
+                        }, true);
+
+                        // 选中新增的那一行
+                        grid1.selectRow(addedRowId);
+                    });
+                }
+
+                function onResetClick(event) {
+                    F.confirm({
+                        message: '确定要重置表格数据？',
+                        ok: function() {
+                            F.ui.Grid1.rejectChanges();
+                        }
+                    });
+                }
+
+                function onDeleteClick(event) {
+                    var grid1 = F.ui.Grid1;
+                    if (!grid1.hasSelection()) {
+                        F.alert('没有选中项！');
+                        return;
+                    }
+
+                    var selectedRows = grid1.getSelectedRows();
+                    F.confirm({
+                        message: F.rawHtml('你确定要删除选中的&nbsp;<b>' + selectedRows.length + '</b>&nbsp;行数据吗？'),
+                        target: '_top',
+                        ok: function() {
+                            grid1.deleteRows(selectedRows);
+                        }
+                    });
+                }
+
+                // 行命令
+                function onGrid1RowCommand(event, rowId, rowIndex, columnId, commandName) {
+                    if (commandName === 'Delete') {
+                        F.ui.Grid1.deleteRow(rowId);
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

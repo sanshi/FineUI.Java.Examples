@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · IFrameWindow</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="formPanel" show-border="false" show-header="false" css-class="f-widget-content" is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="btnPostBackClose" click-handler="onCloseActiveWindowPostBackClick" text="回发弹出窗体"></f:button>
+                            <f:button id="Button1" text="本页面弹出窗体" click-handler="onOpenWindow3Click"></f:button>
+                            <f:button id="Button2" text="父页面弹出窗体" click-handler="onOpenWindow4Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:label id="labResult" encode-text="false" css-style="font-weight:bold;"></f:label>
+                </f:items>
+            </f:panel>
+
+            <f:window id="Window3" hidden="true" enable-iframe="true" iframe-url="/iframe/iframe-iframe/iframe-window2" enable-maximize="true"
+                enable-resize="true" height="300" width="600" on-close="Window3_Close" title="窗体三"></f:window>
+            <f:window id="Window4" hidden="true" enable-iframe="true" iframe-url="/iframe/iframe-iframe/iframe-window2" enable-maximize="true"
+                enable-resize="true" target="Parent" height="300" width="600" on-close="Window4_Close" close-action="HidePostBack" title="窗体四"></f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onCloseActiveWindowPostBackClick(event) {
+                    F.activeWindow.hidePostBack();
+                }
+
+                function onOpenWindow3Click(event) {
+                    F.ui.Window3.show();
+                }
+
+                function onOpenWindow4Click(event) {
+                    F.ui.Window4.show();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

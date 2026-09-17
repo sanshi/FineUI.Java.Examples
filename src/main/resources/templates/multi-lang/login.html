@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多语言登录</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <!-- 提示信息（多语言资源含 HTML <br>，静态可信值，raw 输出） -->
+            <div th:utext="${page.resource('multilang.login.notice')}"></div>
+
+            <f:window id="Window1" width="350" window-position="GoldenSection" enable-close="false" is-modal="false" title="#{multilang.login.title}">
+                <f:items>
+                    <f:simple-form id="SimpleForm1" show-header="false" body-padding="10" show-border="false">
+                        <f:items>
+                            <f:text-box id="tbxUserName" show-red-star="true" required="true" label="#{multilang.login.userName}" max-length="20"></f:text-box>
+                            <f:text-box id="tbxPassword" show-red-star="true" required="true" text-mode="Password"
+                                required-message="#{multilang.login.passwordRequired}" enable-validate-trim="false" label="#{multilang.login.password}"
+                                max-length="9" max-length-message="#{multilang.login.passwordMaxLength}" min-length="3"
+                                min-length-message="#{multilang.login.passwordMinLength}" regex="^(?:[0-9]+[a-zA-Z]|[a-zA-Z]+[0-9])[a-zA-Z0-9]*$"
+                                regex-message="#{multilang.login.passwordRegex}"></f:text-box>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="btnLogin" text="#{multilang.login.loginButton}" type="Submit" validate-forms="SimpleForm1" validate-target="Top"
+                                on-click="btnLogin_Click"></f:button>
+                            <f:button id="btnReset" text="#{multilang.login.resetButton}" type="Reset"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:window>
+
+        </th:block>
+    </body>
+
+</html>

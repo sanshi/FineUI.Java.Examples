@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TextBoxTextChanged</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-align="Top" title="简单表单" show-header="true">
+                <f:items>
+                    <f:text-box id="TextBox1" label="文本框一（文本改变事件）" empty-text="输入字符会立即触发TextChanged事件" on-text-changed="TextBox1_TextChanged"></f:text-box>
+                    <f:text-box id="TextBox2" label="文本框二（失去焦点事件）" empty-text="输入字符后失去焦点，会触发Blur事件" on-blur="TextBox2_Blur"></f:text-box>
+                </f:items>
+            </f:simple-form>
+
+            <f:label id="labResult1"></f:label>
+            <br />
+            <f:label id="labResult2"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

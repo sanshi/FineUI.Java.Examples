@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · IFrameWindow</title>
+
+        <style>
+            body.f-body {
+                padding: 0;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnOperation" text="操作（先弹出提示框，点击确定后先关闭弹出窗体，然后下载文件）" on-click="btnOperation_Click"></f:button>
+
+        </th:block>
+    </body>
+
+</html>

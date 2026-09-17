@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · multi-select-tags-enable-edit</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="下拉列表（多选，可编辑，强制选择）"
+                show-header="true">
+                <f:items>
+                    <f:drop-down-list id="DropDownList1" enable-multi-select="true" enable-edit="true" multi-select-mode="Tags">
+                        <f:items>
+                            <f:list-item text="可选项1" value="Value1" selected="true"></f:list-item>
+                            <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
+                            <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
+                            <f:list-item text="可选项4" value="Value4" selected="true"></f:list-item>
+                            <f:list-item text="可选项5" value="Value5"></f:list-item>
+                            <f:list-item text="可选项6" value="Value6"></f:list-item>
+                            <f:list-item text="可选择项7" value="Value7"></f:list-item>
+                            <f:list-item text="可选择项8" value="Value8"></f:list-item>
+                            <f:list-item text="可选择项9" value="Value9"></f:list-item>
+                            <f:list-item text="普通型1 < L > 1.5" value="普通型1 < L > 1.5"></f:list-item>
+                        </f:items>
+                    </f:drop-down-list>
+                    <f:button id="btnSelectItem6" text="选中[可选项6]" css-class="marginr" on-click="btnSelectItem6_Click"></f:button>
+                    <f:button id="btnGetSelection" text="获取此下拉列表的选中项" on-click="btnGetSelection_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

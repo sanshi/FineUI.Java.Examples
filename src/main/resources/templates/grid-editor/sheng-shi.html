@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 单元格编辑（下拉列表，省市联动）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（单击编辑）" data-id-field="Id" data-text-field="Name"
+                allow-cell-editing="true" clicks-to-edit="1">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name" expand-unused-space="true" min-width="150">
+                        <f:editor>
+                            <f:text-box id="tbxName" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="所在省" column-id="Sheng" data-field="Sheng" width="150">
+                        <f:editor>
+                            <f:drop-down-list id="ddlSheng" required="true"></f:drop-down-list>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="所在市" column-id="Shi" data-field="Shi" width="150">
+                        <f:editor>
+                            <f:drop-down-list id="ddlShi" required="true"></f:drop-down-list>
+                        </f:editor>
+                    </f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="beforeedit" handler="onGrid1BeforeEdit"></f:listener>
+                    <f:listener event="afteredit" handler="onGrid1AfterEdit"></f:listener>
+                </f:listeners>
+            </f:grid>
+
+            <br>
+            <f:button id="btnSubmit" text="保存数据" on-click="btnSubmit_Click"></f:button>
+
+            <br>
+            <f:label id="labResult" encode-text="false"></f:label>
+            <br>
+            <br>
+            注：
+            <ul>
+                <li>
+                    如果未设置省份，则所在市下拉列表禁用，并且显示提示信息 - 请先选择省！
+                </li>
+                <li>
+                    选择省份后，所在市下拉列表数据动态加载
+                </li>
+                <li>
+                    更改省份后，如果所在所在市不属于当前省份，则清空所在市
+                </li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:utext="|window._SHI = ${page.shiJson};|"></script>
+            <script>
+                function onGrid1BeforeEdit(event, value, params) {
+                    var grid1 = F.ui.Grid1;
+
+                    if (params.columnId === 'Shi') {
+                        var ddlShi = F.ui.ddlShi;
+
+                        var sheng = grid1.getCellValue(params.rowId, 'Sheng');
+
+                        var shidata = window._SHI[sheng];
+                        if (shidata) {
+                            ddlShi.enable();
+                            ddlShi.setEmptyText('');
+                            ddlShi.loadData(shidata);
+                        } else {
+                            ddlShi.setEmptyText('请先选择省！');
+                            ddlShi.disable();
+                        }
+                    }
+                }
+
+                function onGrid1AfterEdit(event, value, params) {
+                    var grid1 = F.ui.Grid1;
+
+                    if (params.columnId === 'Sheng') {
+                        var shidata = window._SHI[value];
+                        if (shidata) {
+                            var shi = grid1.getCellValue(params.rowId, 'Shi');
+                            // 如果结束编辑时，市 不属于 当前 省，则清空 市
+                            if ($.inArray(shi, shidata) < 0) {
+                                grid1.updateCellValue(params.rowId, 'Shi', '');
+                            }
+                        }
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

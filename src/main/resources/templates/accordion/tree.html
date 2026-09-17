@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 手风琴（树控件）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:accordion/tree-default-page" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:region-panel id="RegionPanel1" is-view-port="true" show-border="false" margin="24">
+                <f:regions>
+                    <f:region id="Region2" region-position="Left" region-split="true" width="200" show-header="false" title="目录" enable-collapse="false"
+                        layout="Fit">
+                        <f:items>
+                            <f:accordion show-border="false" show-header="false" show-collapse-tool="true">
+                                <f:panes>
+                                    <f:accordion-pane title="面板一" icon-url="/res/images/16/1.png" body-padding="2px 5px" layout="Fit">
+                                        <f:items>
+                                            <f:tree id="treeMenu" show-border="false" show-header="false"></f:tree>
+                                        </f:items>
+                                    </f:accordion-pane>
+                                    <f:accordion-pane title="面板二" icon-url="/res/images/16/4.png" body-padding="2px 5px">
+                                        <f:items>
+                                            <f:label text="面板二中的文本"></f:label>
+                                        </f:items>
+                                    </f:accordion-pane>
+                                </f:panes>
+                            </f:accordion>
+                        </f:items>
+                    </f:region>
+                    <f:region id="Region3" region-position="Center" show-header="false" enable-iframe="true" iframe-url="/accordion/tree-default-page"
+                        iframe-name="accordionmainframe">
+                    </f:region>
+                </f:regions>
+            </f:region-panel>
+
+        </th:block>
+    </body>
+
+</html>

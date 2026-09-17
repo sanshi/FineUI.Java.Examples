@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 表单比较校验（数字框）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-width="200" enable-collapse="false" show-border="true" show-header="true"
+                title="简单表单" label-align="Top">
+                <f:items>
+                    <f:number-box id="NumberBox1" required="true" label="数字框 1（必填项）"></f:number-box>
+                    <f:number-box id="NumberBox2" required="true" label="数字框 2（必填项，大于等于数字框 1）" compare-control="NumberBox1" compare-operator="GreaterThanEqual"
+                        compare-message="数字框 2 应该大于等于数字框 1!"></f:number-box>
+                    <f:number-box id="NumberBox3" label="数字框 3（可为空）"></f:number-box>
+                    <f:number-box id="NumberBox4" label="数字框 4（可为空，大于等于数字框 3）" compare-control="NumberBox3" compare-operator="GreaterThanEqual"
+                        compare-message="数字框 4 应该大于等于数字框 3!"></f:number-box>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" css-class="marginr" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                    <f:button id="btnReset" text="重置表单" click-handler="onResetClick"></f:button>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onResetClick(event) {
+                    F.ui.SimpleForm1.reset();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

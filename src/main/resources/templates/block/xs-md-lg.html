@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Block 多屏</title>
+
+        <style>
+            body.f-body {
+                overflow-x: hidden;
+            }
+
+            .custompanel {
+                min-height: 200px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel is-fluid="true" layout="Block" block-config-space="20" show-border="false" show-header="false">
+                <f:items>
+                    <f:panel css-class="custompanel" title="1" block="6" block-md="4" block-lg="3"></f:panel>
+                    <f:panel css-class="custompanel" title="2" block="6" block-md="8" block-lg="3"></f:panel>
+                    <f:panel css-class="custompanel" title="3" block="12" block-md="8" block-lg="3"></f:panel>
+                    <f:panel css-class="custompanel" title="4" block="6" block-md="4" block-lg="3"></f:panel>
+                    <f:panel css-class="custompanel" title="5" block="6" block-md="12" block-lg="9"></f:panel>
+                    <f:panel css-class="custompanel" title="6" block="12" block-md="6" block-lg="3"></f:panel>
+                    <f:panel css-class="custompanel" title="7" block="6" block-md="6" block-lg="6"></f:panel>
+                    <f:panel css-class="custompanel" title="8" block="6" block-md="12" block-lg="6"></f:panel>
+                </f:items>
+            </f:panel>
+        </th:block>
+    </body>
+
+</html>

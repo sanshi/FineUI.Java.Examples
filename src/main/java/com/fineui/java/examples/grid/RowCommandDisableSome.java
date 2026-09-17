@@ -1,0 +1,29 @@
+package com.fineui.java.examples.grid;
+
+import com.fineui.java.core.EventArgs;
+import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.GridCommandEventArgs;
+import com.fineui.java.core.controls.Grid;
+import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.StudentGridData;
+
+/** 行命令（渲染函数，禁用某个行命令）（路由 {@code grid/row-command-disable-some}）。 */
+@FineUIPage("grid/row-command-disable-some")
+public class RowCommandDisableSome extends PageBase {
+
+    Grid Grid1;
+
+    public void Page_Load(Object sender, EventArgs e) {
+        if (!isPostBack()) {
+            Grid1.setDataSource(StudentGridData.rows());
+            Grid1.dataBind();
+        }
+    }
+    public void Grid1_RowCommand(Object sender, GridCommandEventArgs e) {
+        java.util.List<Object[]> dataKeys = Grid1.getDataKeys();
+        Object[] keys = e.getRowIndex() >= 0 && e.getRowIndex() < dataKeys.size() ? dataKeys.get(e.getRowIndex()) : new Object[0];
+        showNotify(String.format("你点击了第 %d 行，第 %d 列，行命令：%s，行ID：%s，姓名：%s",
+                e.getRowIndex() + 1, e.getColumnIndex() + 1, e.getCommandName(),
+                keys.length > 0 ? keys[0] : "", keys.length > 1 ? keys[1] : ""));
+    }
+}

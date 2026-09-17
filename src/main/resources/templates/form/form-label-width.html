@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FormLabelWidth</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:form body-padding="10" id="Form1" is-fluid="true" label-width="120" label-align="Right" enable-collapse="false"
+                title="表单（LabelWidth=120 LabelAlign=Right）">
+                <f:items>
+                    <f:form-row column-widths="50% 50%">
+                        <f:items>
+                            <f:label id="Label1" label="标签" label-width="150" label-align="Left" text="标签的值"></f:label>
+                            <f:check-box id="CheckBox1" text="复选框" label="复选框"></f:check-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row column-widths="50% 50%">
+                        <f:items>
+                            <f:drop-down-list id="DropDownList1" required="true" label-width="150" label-align="Left" show-red-star="true"
+                                auto-select-first-item="false" label="下拉列表（长标签）">
+                                <f:items>
+                                    <f:list-item text="可选项 1" value="0"></f:list-item>
+                                    <f:list-item text="可选项 2" value="1"></f:list-item>
+                                </f:items>
+                            </f:drop-down-list>
+                            <f:text-box id="TextBox1" show-red-star="true" label="文本框" required="true" text=""></f:text-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:panel id="Panel1" css-style="text-align: right;" show-border="false" show-header="false">
+                                <f:items>
+                                    <f:button text="验证此表单并提交" validate-forms="Form1" id="btnSubmitForm1" on-click="btnSubmitForm1_Click"></f:button>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:form-row>
+                </f:items>
+            </f:form>
+            <br />
+            注：表单字段定义的 LabelWidth 和 LabelAlign 属性会覆盖 Form 的同名属性
+
+        </th:block>
+    </body>
+
+</html>

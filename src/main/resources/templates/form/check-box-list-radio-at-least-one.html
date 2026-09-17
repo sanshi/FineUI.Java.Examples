@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CheckBoxListRadioAtLeastOne</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" show-border="true" show-header="true" title="复选框列表（至少选中一项）">
+                <f:items>
+                    <f:check-box-list id="CheckBoxList1" column-number="2" label="列表一">
+                        <f:check-item text="可选项 1" value="value1"></f:check-item>
+                        <f:check-item text="可选项 2" value="value2" selected="true"></f:check-item>
+                        <f:check-item text="可选项 3" value="value3"></f:check-item>
+                        <f:check-item text="可选项 4" value="value4"></f:check-item>
+                        <f:check-item text="可选项 5" value="value5"></f:check-item>
+                        <f:check-item text="可选项 6" value="value6"></f:check-item>
+                        <f:listeners>
+                            <f:listener event="change" handler="onCheckBoxListChange"></f:listener>
+                        </f:listeners>
+                    </f:check-box-list>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                // 至少选中一项
+                function onCheckBoxListChange(event, checkbox, isChecked) {
+                    var me = this;
+
+                    // 当前操作是：取消选中
+                    if (!isChecked) {
+                        // 如果一项都没选中，则本次取消操作无效
+                        if (!me.getValue().length) {
+                            // 重新选中本项
+                            me.setValue(checkbox.getInputValue());
+                        }
+                    }
+
+                    // 触发后台事件
+                    F.customEvent('CheckBoxList1_Change');
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

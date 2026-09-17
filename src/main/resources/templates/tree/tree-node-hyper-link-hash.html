@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 节点超链接（地址栏 hash）</title>
+
+        <style>
+            .lefttree {
+                border-top-width: 0;
+                border-left-width: 0;
+                border-bottom-width: 0;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <th:block layout:fragment="body">
+
+            <f:panel id="RegionPanel1" is-fluid="true" layout="Region" height="500" show-header="true" title="左右区域布局" show-border="true">
+                <f:items>
+                    <f:tree id="Tree1" region-split="false" region-position="Left" width="200" css-class="lefttree" show-header="false" show-border="true"
+                        enable-single-click-expand="true">
+                        <f:nodes>
+                            <f:tree-node text="基本用法">
+                                <f:tree-node text="你好 FineUI" navigate-url="/basic/hello"></f:tree-node>
+                                <f:tree-node text="登陆页面" navigate-url="/basic/login"></f:tree-node>
+                            </f:tree-node>
+                            <f:tree-node text="表单控件">
+                                <f:tree-node text="简单按钮" navigate-url="/button/button"></f:tree-node>
+                                <f:tree-node text="文本输入框" navigate-url="/form/text-box"></f:tree-node>
+                            </f:tree-node>
+                        </f:nodes>
+                    </f:tree>
+                    <f:panel id="Panel1" show-header="false" enable-iframe="true" show-border="false" region-position="Center"></f:panel>
+                </f:items>
+            </f:panel>
+            <br />
+
+            <f:button id="btnRefresh" text="刷新本页面" click-handler="onRefreshClick"></f:button>
+            <br />
+            <br />
+            注：刷新页面后，能够保持当前选中的树节点。
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onRefreshClick(event) {
+                    window.location.reload();
+                }
+
+                F.ready(function() {
+                    var tree1 = F.ui.Tree1;
+                    var panel1 = F.ui.Panel1;
+
+                    // 树节点的点击事件
+                    tree1.on('nodeclick', function(event, nodeId) {
+
+                        // 点击树节点的数据
+                        var nodeData = tree1.getNodeData(nodeId);
+
+                        // 不管当前节点是否子节点，只要有 href 属性，都需要打开一个新Tab
+                        if (nodeData.href) {
+
+                            // 修改地址栏
+                            window.location.hash = '#' + nodeData.href;
+
+                            // 在主区域内打开链接
+                            panel1.setIFrameUrl(nodeData.href);
+
+                            // 阻止默认的点击行为（比如超链接）
+                            event.preventDefault();
+                        }
+                    });
+
+                    // 页面第一次加载时，根据URL地址在主窗口加载页面
+                    var HASH = window.location.hash.substr(1);
+                    if (HASH) {
+                        // 遍历树节点
+                        tree1.resolveNode(function(node) {
+
+                            // 找到节点
+                            if (node.href === HASH) {
+
+                                // 展开节点所在的路径
+                                tree1.expandNodePath(node);
+
+                                // 选中节点
+                                tree1.selectNode(node);
+
+                                // 在主区域内打开链接
+                                panel1.setIFrameUrl(node.href);
+
+                                return false; // break
+                            }
+                        });
+                    }
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

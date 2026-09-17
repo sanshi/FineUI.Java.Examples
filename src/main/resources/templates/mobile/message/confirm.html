@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 确认对话框</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 10px 0" body-padding="10px"
+                is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" title="确认对话框" header-style="true"></f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:button id="Button1" text="确认对话框" on-click="Button1_Click"></f:button>
+                    <f:button id="Button2" text="确认对话框（ButtonFill）" on-click="Button2_Click"></f:button>
+                    <f:button id="Button6" text="确认对话框（ButtonPlain）" on-click="Button6_Click"></f:button>
+                    <f:button id="Button3" text="确认对话框（CancelButtonAhead）" on-click="Button3_Click"></f:button>
+                    <f:button id="Button4" text="确认对话框（自定义按钮文本，回发）" click-handler="onButton4Click"></f:button>
+                    <f:button id="Button5" text="确认对话框（自定义按钮宽度，回发）" click-handler="onButton5Click"></f:button>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/common.js}"></script>
+            <script>
+                function onButton4Click(event) {
+                    F.create({
+                        type: 'MessageBox',
+                        title: '确认退出',
+                        message: '您即将直接退出，请先保存已修改数据！',
+                        titleAlign: 'center',
+                        closable: false,
+                        buttonPlain: true,
+                        messageIcon: '',
+                        buttons: [{
+                            buttonId: 'cancel',
+                            text: '不退出'
+                        }, {
+                            buttonId: 'ok',
+                            text: '直接退出'
+                        }],
+                        handler: function(event, buttonId) {
+                            // 触发后台事件
+                            F.customEvent('Button4_ConfirmResult', buttonId);
+                        }
+                    });
+                }
+
+                function onButton5Click(event) {
+                    F.create({
+                        type: 'MessageBox',
+                        title: '确认退出',
+                        message: '您即将直接退出，请先保存已修改数据！',
+                        titleAlign: 'center',
+                        closable: false,
+                        buttonPlain: true,
+                        messageIcon: '',
+                        buttons: [{
+                            buttonId: 'cancel',
+                            text: '取消',
+                            flex: 1
+                        }, {
+                            buttonId: 'ok',
+                            text: '直接退出',
+                            flex: 2
+                        }],
+                        autoFocusButtonId: 'ok',
+                        handler: function(event, buttonId) {
+                            // 触发后台事件
+                            F.customEvent('Button5_ConfirmResult', buttonId);
+                        }
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

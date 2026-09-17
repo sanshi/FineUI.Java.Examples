@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 工具栏填充</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" show-border="true" body-padding="10" title="面板" enable-collapse="false"
+                content='<p><a href="http://tech.163.com/special/jobsdead/" target="_blank"><b>乔布斯</b></a></p><p>乔布斯于1955年2月24日出生，苹果创始人之一。今年8月苹果超越埃克森美孚成为全球最大市值企业，截止上季度持有现金达到762亿美金，甚至超过了美国政府国库存款。</p><p>遗憾的是，苹果的取得巨大成功还是无法给乔布斯一个健康的身体，乔布斯2003年被发现患有胰脏癌，随后又查出肝癌，危在旦夕的乔布斯在经历了8年的抗癌斗争、3次病休、若干次手术后，于2011年8月25日正式宣布从CEO位置辞职。2011年10月6日，乔布斯在苹果发布iPhone 4S后的第二天与世长辞。</p>'>
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="Button1" text="按钮一"></f:button>
+                            <f:toolbar-fill id="ToolbarFill1"></f:toolbar-fill>
+                            <f:button id="Button2" text="按钮二"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="Button3" text="按钮三"></f:button>
+                            <f:toolbar-fill id="ToolbarFill2"></f:toolbar-fill>
+                            <f:button id="Button4" text="按钮四"></f:button>
+                            <f:toolbar-fill id="ToolbarFill3"></f:toolbar-fill>
+                            <f:button id="Button5" text="按钮五"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar id="Toolbar1">
+                        <f:items>
+                            <f:text-box id="TextBox6" empty-text="文本输入框" width="100"></f:text-box>
+                            <f:toolbar-fill id="ToolbarFill4"></f:toolbar-fill>
+                            <f:button id="Button7" text="按钮七"></f:button>
+                            <f:toolbar-fill id="ToolbarFill5"></f:toolbar-fill>
+                            <f:text-box id="TextBox1" empty-text="文本输入框二" width="200"></f:text-box>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+            <br />
+            <f:button id="btnHideFill1" text="显示隐藏[按钮一]和后面的ToolbarFill" on-click="btnHideFill1_Click"></f:button>
+            <br />
+            <br />
+            <f:button id="btnHideFill2" text="显示隐藏[按钮七]后面的ToolbarFill" on-click="btnHideFill2_Click"></f:button>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · RadioButtonListMatchFieldWidth</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="下拉单选框列表（MatchFieldWidth）"
+                show-header="true">
+                <f:items>
+                    <f:drop-down-box id="DropDownBox1" data-control-id="RadioButtonList1" value="js" match-field-width="false" enable-multi-select="false">
+                        <f:pop-panel>
+                            <f:simple-form id="SimpleForm2" body-padding="10" auto-scroll="true" show-border="true" show-header="false" hidden="true"
+                                width="650">
+                                <f:items>
+                                    <f:label id="Label1" text="请选择一种编程语言："></f:label>
+                                    <f:radio-button-list id="RadioButtonList1" column-number="3">
+                                        <f:radio-item text="C#" value="csharp"></f:radio-item>
+                                        <f:radio-item text="JavaScript" value="js"></f:radio-item>
+                                        <f:radio-item text="JAVA" value="java"></f:radio-item>
+                                        <f:radio-item text="Ruby" value="ruby"></f:radio-item>
+                                        <f:radio-item text="PHP" value="php"></f:radio-item>
+                                        <f:radio-item text="Objective-C" value="objc"></f:radio-item>
+                                        <f:radio-item text="Python" value="python"></f:radio-item>
+                                        <f:radio-item text="Perl" value="perl"></f:radio-item>
+                                        <f:radio-item text="C++" value="cplusplus"></f:radio-item>
+                                        <f:radio-item text="Basic" value="basic"></f:radio-item>
+                                        <f:radio-item text="Go" value="go"></f:radio-item>
+                                        <f:radio-item text="Swift" value="swift"></f:radio-item>
+                                    </f:radio-button-list>
+                                </f:items>
+                            </f:simple-form>
+                        </f:pop-panel>
+                    </f:drop-down-box>
+                    <f:button id="btnGetSelection" text="获取下拉框的选中值" on-click="btnGetSelection_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br>
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

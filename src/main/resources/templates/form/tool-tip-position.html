@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · ToolTip 位置</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <div style="padding: 50px 150px; width: 900px;">
+                <table style="width: 100%; border-spacing: 20px;">
+                    <tr>
+                        <td></td>
+                        <td style="text-align: center;">
+                            <f:button text="TopStart" tool-tip="这是提示信息" tool-tip-type="Qtip" tool-tip-position="TopStart" width="100"></f:button>
+                            <f:button text="Top" tool-tip="这是提示信息" tool-tip-type="Qtip" tool-tip-position="Top" width="100"></f:button>
+                            <f:button text="TopEnd" tool-tip="这是提示信息" tool-tip-type="Qtip" tool-tip-position="TopEnd" width="100"></f:button>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">
+                            <f:button text="LeftStart" tool-tip-raw-html="这是提示信息<br>这是第二行提示信息" tool-tip-type="Qtip" tool-tip-position="LeftStart" width="100">
+                            </f:button>
+                            <br /><br />
+                            <f:button text="Left" tool-tip-raw-html="这是提示信息<br>这是第二行提示信息" tool-tip-type="Qtip" tool-tip-position="Left" width="100">
+                            </f:button>
+                            <br /><br />
+                            <f:button text="LeftEnd" tool-tip-raw-html="这是提示信息<br>这是第二行提示信息" tool-tip-type="Qtip" tool-tip-position="LeftEnd" width="100">
+                            </f:button>
+                        </td>
+                        <td></td>
+                        <td style="text-align: left;">
+                            <f:button text="RightStart" tool-tip-raw-html="这是提示信息<br>这是第二行提示信息" tool-tip-type="Qtip" tool-tip-position="RightStart" width="100">
+                            </f:button>
+                            <br /><br />
+                            <f:button text="Right" tool-tip-raw-html="这是提示信息<br>这是第二行提示信息" tool-tip-type="Qtip" tool-tip-position="Right" width="100">
+                            </f:button>
+                            <br /><br />
+                            <f:button text="RightEnd" tool-tip-raw-html="这是提示信息<br>这是第二行提示信息" tool-tip-type="Qtip" tool-tip-position="RightEnd" width="100">
+                            </f:button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="text-align: center;">
+                            <f:button text="BottomStart" tool-tip="这是提示信息" tool-tip-type="Qtip" tool-tip-position="BottomStart" width="100"></f:button>
+                            <f:button text="Bottom" tool-tip="这是提示信息" tool-tip-type="Qtip" tool-tip-position="Bottom" width="100"></f:button>
+                            <f:button text="BottomEnd" tool-tip="这是提示信息" tool-tip-type="Qtip" tool-tip-position="BottomEnd" width="100"></f:button>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </th:block>
+    </body>
+
+</html>

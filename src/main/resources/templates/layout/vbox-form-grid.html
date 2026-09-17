@@ -1,0 +1,122 @@
+<!doctype html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · VBox 表单与表格</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel id="Panel7" is-fluid="true" margin="24" body-padding="10" auto-scroll="true" title="面板（Layout=VBox AutoScroll=true），高度变小时可能出现纵向滚动条"
+                show-border="true" show-header="true" layout="VBox" box-config-space="10" is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1">
+                        <f:items>
+                            <f:button id="Button1" text="测试按钮"></f:button>
+                            <f:toolbar-separator id="ToolbarSeparator2"></f:toolbar-separator>
+                            <f:button id="Button2" text="测试按钮"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:form id="Form5" show-border="true" show-header="true" title="表单" body-padding="10" remove-last-fields-margin="true">
+                        <f:rows>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox1" label="Label"></f:text-box>
+                                    <f:text-box id="TextBox2" label="Label"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox3" label="Label"></f:text-box>
+                                    <f:text-box id="TextBox4" label="Label"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox5" label="Label"></f:text-box>
+                                    <f:text-box id="TextBox6" label="Label"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox7" label="Label"></f:text-box>
+                                    <f:text-box id="TextBox8" label="Label"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox9" label="Label"></f:text-box>
+                                    <f:text-box id="TextBox10" label="Label"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox11" label="Label"></f:text-box>
+                                    <f:text-box id="TextBox12" label="Label"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox13" label="Label"></f:text-box>
+                                    <f:text-box id="TextBox14" label="Label"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox15" label="Label"></f:text-box>
+                                    <f:text-box id="TextBox16" label="Label"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox17" label="Label"></f:text-box>
+                                    <f:text-box id="TextBox18" label="Label"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox19" label="Label"></f:text-box>
+                                    <f:text-box id="TextBox20" label="Label"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox21" label="Label"></f:text-box>
+                                    <f:text-box id="TextBox22" label="Label"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                        </f:rows>
+                    </f:form>
+                    <f:grid id="Grid2" title="表格（BoxFlex=1 MinHeight=300）" page-size="10" allow-paging="true" show-border="true" show-header="true"
+                        data-id-field="Id" data-text-field="Name" enable-check-box-select="true" box-flex="1" min-height="300">
+                        <f:toolbars>
+                            <f:toolbar id="Toolbar2">
+                                <f:items>
+                                    <f:button id="btnPopupWindow" text="测试按钮"></f:button>
+                                    <f:toolbar-separator id="ToolbarSeparator1"></f:toolbar-separator>
+                                    <f:button id="btnCheckSelection" text="测试按钮"></f:button>
+                                </f:items>
+                            </f:toolbar>
+                        </f:toolbars>
+                        <f:columns>
+                            <f:row-number-field></f:row-number-field>
+                            <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                            <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                            <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                            <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                            <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                                min-width="150"></f:render-field>
+                            <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                        </f:columns>
+                    </f:grid>
+                </f:items>
+            </f:panel>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

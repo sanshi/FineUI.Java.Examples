@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 文本框改变客户端事件</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" title="简单表单">
+                <f:items>
+                    <f:text-box id="TextBox1" show-label="false" empty-text="输入一些文字，下面的文本框会随之改变">
+                        <f:listeners>
+                            <f:listener event="change" handler="onTextBoxChange" />
+                        </f:listeners>
+                    </f:text-box>
+                    <f:text-box id="TextBox2" show-label="false"></f:text-box>
+                </f:items>
+            </f:simple-form>
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onTextBoxChange(event) {
+                    F.ui.TextBox2.setValue(this.getValue());
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

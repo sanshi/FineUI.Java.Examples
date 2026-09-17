@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 标签很长的表单</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="简单表单">
+                <f:items>
+                    <f:text-box label="文本输入框（很长很长很长的标签）" id="tbxUserName" required="true" show-red-star="true"></f:text-box>
+                    <f:trigger-box id="tbxMyBox1" show-label="true" show-red-star="true" required="true" label="触发器输入框（很长很长很长的标签）" readonly="false"
+                        trigger-icon="Search"></f:trigger-box>
+                    <f:number-box label="数字输入框（很长很长很长的标签）" id="NumberBox5" show-red-star="true" required="true"></f:number-box>
+                    <f:date-picker date-format-string="yyyy/MM/dd" label="日期选择器（很长很长很长的标签）" id="DatePicker1" show-red-star="true" required="true">
+                    </f:date-picker>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+    </body>
+
+</html>

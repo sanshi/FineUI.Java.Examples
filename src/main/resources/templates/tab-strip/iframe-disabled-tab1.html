@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 启用禁用后面选项卡（IFrame内页）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnEnableTabs" text="启用后面的两个标签" click-handler="onEnableTabsClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnDisableTabs" text="禁用后面的两个标签" click-handler="onDisableTabsClick"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onEnableTabsClick(event) {
+                    parent.enableTabs();
+                }
+
+                function onDisableTabsClick(event) {
+                    parent.disableTabs();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

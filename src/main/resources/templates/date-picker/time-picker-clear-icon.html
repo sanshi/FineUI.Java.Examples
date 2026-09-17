@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TimePickerClearIcon</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="简单表单">
+                <f:items>
+                    <f:date-picker id="DatePicker1" required="true" enable-edit="false" label="日期" empty-text="请选择日期" show-red-star="true"
+                        auto-show-clear-icon="true"></f:date-picker>
+                    <f:time-picker id="TimePicker1" show-red-star="true" enable-edit="false" label="时间" increment="30" min-time-text="8:30"
+                        max-time-text="20:30" required="true" empty-text="请选择时间" auto-show-clear-icon="true" text="09:30"></f:time-picker>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false" show-label="false"></f:label>
+            <br />
+            <br />
+            注：本示例通过 EnableEdit 属性控制日期和时间选择器不可编辑。
+
+        </th:block>
+    </body>
+
+</html>

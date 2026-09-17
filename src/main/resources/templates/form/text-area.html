@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TextArea</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" title="简单表单" label-align="Top" show-header="true">
+                <f:items>
+                    <f:text-area id="TextArea1" empty-text="文本框的高度会自动扩展" label="自动扩展高度的文本输入框" auto-grow-height="true" auto-grow-height-min="100"
+                        auto-grow-height-max="600"></f:text-area>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

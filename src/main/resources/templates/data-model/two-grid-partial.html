@@ -1,0 +1,17 @@
+<!-- 学生表格分部片段（对应源示例 TwoGridPartialGrid / TwoGridLayoutPartialGrid 分部视图）：
+     由页面 th:replace 按参数多次引用，复用同一份列结构。
+     参数：id（表格 id）、title（标题）、rowTypeFrom（行模型来源字段名，指向页面模型的集合字段）、
+           boxFlex（VBox 布局的伸缩比，非布局场景传 null）、minHeight（最小高度，非布局场景传 null） -->
+<f:grid th:fragment="studentGrid(id, title, rowTypeFrom, boxFlex, minHeight)" id="${id}" is-fluid="true" show-border="true" show-header="true" title="${title}"
+    row-type-from="${rowTypeFrom}" data-id-field="id" data-text-field="name" th:attr="box-flex=${boxFlex},min-height=${minHeight}">
+    <f:columns>
+        <f:row-number-field></f:row-number-field>
+        <f:render-field for="name"></f:render-field>
+        <f:render-field for="gender" renderer-function="renderGender"></f:render-field>
+        <f:render-field for="entranceYear"></f:render-field>
+        <f:render-check-field for="atSchool" render-as-static-field="true"></f:render-check-field>
+        <f:render-field for="major" renderer-function="renderMajor" expand-unused-space="true" min-width="150"></f:render-field>
+        <f:render-field for="group" renderer-function="renderGroup"></f:render-field>
+        <f:render-field for="entranceDate"></f:render-field>
+    </f:columns>
+</f:grid>

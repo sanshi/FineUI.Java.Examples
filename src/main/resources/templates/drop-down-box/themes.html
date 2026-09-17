@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 自定义下拉框</title>
+
+        <style>
+            #themecontainer {
+                background: none;
+                background-color: #000;
+                padding: 5px 0;
+            }
+
+            #themecontainer ul {
+                list-style-type: none;
+                margin: 10px 0 0;
+                padding: 0;
+            }
+
+            #themecontainer ul li {
+                display: inline-block;
+                margin: 0 0 10px 10px;
+                padding: 0;
+            }
+
+            #themecontainer ul li .title {
+                text-align: center;
+                color: #666;
+                font-size: 12px;
+                margin-top: 10px;
+            }
+
+            #themecontainer ul li.hover,
+            #themecontainer ul li.active {
+                border-bottom-color: #fff;
+            }
+
+            #themecontainer ul li.hover .title,
+            #themecontainer ul li.active .title {
+                color: #fff;
+                font-weight: bold;
+            }
+
+            #themecontainer ul li img {
+                width: 100px;
+                border-radius: 5px;
+            }
+
+            #themecontainer .grouptitle {
+                color: #ccc;
+                font-size: 16px;
+                border-bottom: solid 1px #333;
+                padding: 5px;
+                margin: 10px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10px" enable-collapse="false" show-border="true" title="自定义下拉框" show-header="true">
+                <f:items>
+                    <f:drop-down-box id="DropDownBox1" value="Pure_Black" text="Pure Black" match-field-width="false" enable-multi-select="false"
+                        custom-data="true">
+                        <f:pop-panel>
+                            <f:content-panel id="ContentPanel1" css-class="themepanel" hidden="true" show-header="false" width="600" auto-scroll="true">
+                                <div id="themecontainer">
+                                    <div class="grouptitle">
+                                        Pure
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <img th:src="@{/res/images/themes/pure_black.png}" alt="Pure Black" data-value="Pure_Black" />
+                                            </a>
+                                            <div class="title">Pure Black</div>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <img th:src="@{/res/images/themes/pure_green.png}" alt="Pure Green" data-value="Pure_Green" />
+                                            </a>
+                                            <div class="title">Pure Green</div>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <img th:src="@{/res/images/themes/pure_blue.png}" alt="Pure Blue" data-value="Pure_Blue" />
+                                            </a>
+                                            <div class="title">Pure Blue</div>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <img th:src="@{/res/images/themes/pure_purple.png}" alt="Pure Purple" data-value="Pure_Purple" />
+                                            </a>
+                                            <div class="title">Pure Purple</div>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <img th:src="@{/res/images/themes/pure_orange.png}" alt="Pure Orange" data-value="Pure_Orange" />
+                                            </a>
+                                            <div class="title">Pure Orange</div>
+                                        </li>
+                                    </ul>
+                                    <div class="grouptitle">
+                                        jQuery UI
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <img th:src="@{/res/images/themes/cupertino.png}" alt="Cupertino" data-value="Cupertino" /></a>
+                                            <div class="title">Cupertino</div>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <img th:src="@{/res/images/themes/start.png}" alt="Start" data-value="Start" /></a>
+                                            <div class="title">Start</div>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <img th:src="@{/res/images/themes/dark_hive.png}" alt="Dark Hive" data-value="Dark_Hive" /></a>
+                                            <div class="title">Dark Hive</div>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <img th:src="@{/res/images/themes/flick.png}" alt="Flick" data-value="Flick" /></a>
+                                            <div class="title">Flick</div>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <img th:src="@{/res/images/themes/south_street.png}" alt="South Street" data-value="South_Street" /></a>
+                                            <div class="title">South Street</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </f:content-panel>
+                        </f:pop-panel>
+                        <f:listeners>
+                            <f:listener event="poppanelshow" handler="onPopPanelShow" />
+                        </f:listeners>
+                    </f:drop-down-box>
+                    <f:button id="btnGetSelection" text="获取下拉框的选中值" css-class="marginr" on-click="btnGetSelection_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br>
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br />
+            注：自定义数据来源时（CustomData=true），需要同时设置 Value 和 Text 属性来初始化下拉框。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onPopPanelShow(event) {
+                    var themeName = this.getValue();
+                    if (!themeName) {
+                        themeName = 'Pure_Black';
+                    }
+                    $('#themecontainer li').each(function() {
+                        var cnode = $(this);
+                        if (cnode.find('img').attr('data-value') === themeName) {
+                            cnode.addClass('active');
+                        } else {
+                            cnode.removeClass('active');
+                        }
+                    });
+                }
+
+                F.ready(function() {
+
+                    $('#themecontainer li').hover(function() {
+                        $(this).addClass('hover');
+                    }, function() {
+                        $(this).removeClass('hover');
+                    }).click(function() {
+                        var imgNode = $(this).find('img');
+
+                        var themeName = imgNode.attr('data-value');
+                        var themeTitle = imgNode.attr('alt');
+
+                        // 将其赋值给下拉框
+                        F.ui.DropDownBox1.setValue(themeName, themeTitle);
+
+                        // 隐藏下拉框的弹出面板
+                        F.ui.DropDownBox1.hidePopEl();
+
+                    });
+
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

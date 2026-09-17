@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 渲染函数（更改单元格样式）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（单击编辑）" data-id-field="Id" data-text-field="Name"
+                allow-cell-editing="true" clicks-to-edit="1">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name" renderer-function="renderName">
+                        <f:editor>
+                            <f:text-box id="tbxName" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender">
+                        <f:editor>
+                            <f:drop-down-list id="ddlGender" required="true">
+                                <f:list-item text="男" value="1"></f:list-item>
+                                <f:list-item text="女" value="0"></f:list-item>
+                            </f:drop-down-list>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="入学年份" column-id="EntranceYear" data-field="EntranceYear" field-type="Int">
+                        <f:editor>
+                            <f:number-box id="nbxEntranceYear" no-decimal="true" no-negative="true" min-value="2000" max-value="2025"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="入学日期" column-id="EntranceDate" data-field="EntranceDate" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy/MM/dd" width="150">
+                        <f:editor>
+                            <f:date-picker id="dpEntranceDate" required="true"></f:date-picker>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-check-field header-text="是否在校" column-id="AtSchool" data-field="AtSchool"></f:render-check-field>
+                    <f:render-field header-text="所学专业" column-id="Major" data-field="Major" expand-unused-space="true" min-width="150">
+                        <f:editor>
+                            <f:text-box id="tbxMajor" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="afteredit" handler="onGrid1AfterEdit"></f:listener>
+                </f:listeners>
+            </f:grid>
+            <br>
+            <f:button id="btnSubmit" text="保存数据" on-click="btnSubmit_Click"></f:button>
+
+            <br>
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br>
+            注：这个示例高亮所有[入学年份]大于等于 2003 的姓名，并在入学年份改变时更新姓名的高亮显示。
+            <ul>
+                <li>
+                    如何在 RendererFunction 中获取其他列的值
+                </li>
+                <li>
+                    如何注册表格的 afteredit 事件，并通过 ColumnID 相关的 CSS 类来获取列
+                </li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function renderName(value, params) {
+                    if (params.rowValue["EntranceYear"] >= 2003) {
+                        params.cellCls = 'highlight';
+                    }
+
+                    return value;
+                }
+
+                function onGrid1AfterEdit(event, value, params) {
+                    var grid = this,
+                        rowId = params.rowId,
+                        columnId = params.columnId;
+
+                    if (columnId === 'EntranceYear') {
+                        if (value >= 2003) {
+                            grid.updateCellValue(rowId, 'Name.cls', 'highlight');
+                        } else {
+                            grid.updateCellValue(rowId, 'Name.cls', '');
+                        }
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

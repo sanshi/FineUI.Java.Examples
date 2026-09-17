@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 隐藏节点图标</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tree id="Tree1" is-fluid="true" show-header="true" title="树控件（隐藏节点图标）" enable-collapse="false" enable-icons="false">
+                <f:nodes>
+                    <f:tree-node text="中国" expanded="true" node-id="china">
+                        <f:tree-node text="河南省" expanded="true" node-id="henan">
+                            <f:tree-node text="驻马店市" expanded="true" node-id="zhumadian">
+                                <f:tree-node text="遂平县" node-id="suiping" icon="TagBlue"></f:tree-node>
+                                <f:tree-node text="西平县" node-id="xiping" icon="TagBlue"></f:tree-node>
+                            </f:tree-node>
+                            <f:tree-node text="漯河市" node-id="luohe" icon-url="/res/icon/tag_orange.png"></f:tree-node>
+                        </f:tree-node>
+                        <f:tree-node text="安徽省" expanded="true" node-id="anhui">
+                            <f:tree-node text="合肥市" expanded="true" node-id="hefei">
+                                <f:tree-node text="中国科学技术大学（链接）" navigate-url="http://www.ustc.edu.cn/" target="_blank" tool-tip="点击跳转到科大主页"
+                                    node-id="ustc"></f:tree-node>
+                            </f:tree-node>
+                            <f:tree-node text="黄山市" node-id="huangshan"></f:tree-node>
+                        </f:tree-node>
+                    </f:tree-node>
+                </f:nodes>
+            </f:tree>
+            <br />
+
+            <f:button id="btnGetSelectedNode" on-click="btnGetSelectedNode_Click" css-class="marginr" text="获取选中的节点"></f:button>
+            <br />
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

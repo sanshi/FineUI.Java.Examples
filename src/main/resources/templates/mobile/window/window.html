@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 登陆窗体</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 5px 0" body-padding="10px"
+                is-view-port="true">
+                <f:items>
+                    <f:button id="btnOpenWindow" text="打开登陆窗体" click-handler="onOpenWindowClick"></f:button>
+                </f:items>
+            </f:panel>
+
+            <f:window id="Window1" title="登陆窗体" hidden="true" is-modal="true" enable-close="true" layout="Fit" body-padding="15px" width="300">
+                <f:items>
+                    <f:simple-form id="SimpleForm1" show-border="false" show-header="false" layout="VBox" message-target="None">
+                        <f:items>
+                            <f:text-box id="tbxUserName" label="用户名" show-label="false" empty-text="请输入用户名" required="true"></f:text-box>
+                            <f:text-box id="tbxPassword" label="密码" show-label="false" text-mode="Password" empty-text="请输入密码" required="true"></f:text-box>
+                            <f:button id="btnLogin" text="登录" type="Submit" box-flex="1" validate-forms="Window1" validate-message-box-plain="true"
+                                on-click="btnLogin_Click"></f:button>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+            </f:window>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/common.js}"></script>
+            <script>
+                function onCancelClick() {
+                    F.ui.Window1.hide();
+                }
+
+                function onOpenWindowClick(event) {
+                    F.ui.Window1.show();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

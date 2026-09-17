@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 从下方滑入窗体</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 5px 0" body-padding="10px"
+                is-view-port="true">
+                <f:items>
+                    <f:button id="btnOpenWindow" text="从下方滑入窗体" click-handler="onOpenWindow1Click"></f:button>
+                </f:items>
+            </f:panel>
+
+            <f:window id="Window1" show-header="false" hidden="true" is-modal="true" hide-on-mask-click="true" body-padding="10px" layout="Fit"
+                percent-width="100%" percent-height="100%" enable-default-corner="false" position-y="Bottom">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" title="弹出窗体标题" header-style="true" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="Button1" size="Small" text="关闭" click-handler="onCloseWindow1Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:content-panel show-border="false" show-header="false" auto-scroll="true">
+                        <p><a href="http://baike.baidu.com/view/3645.htm" target="_blank"><b>比尔·盖茨</b></a></p>
+                        <p>比尔·盖茨（Bill Gates），全名威廉·亨利·盖茨三世，简称比尔或盖茨。1975年与好友保罗·艾伦一起创办了微软公司，比尔盖茨担任微软公司董事长、CEO和首席软件设计师。</p>
+                    </f:content-panel>
+                </f:items>
+            </f:window>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onOpenWindow1Click(event) {
+                    F.ui.Window1.show();
+                }
+
+                function onCloseWindow1Click(event) {
+                    F.ui.Window1.hide();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

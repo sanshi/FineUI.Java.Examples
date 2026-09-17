@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 枚举属性设回默认（回发）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:label id="lblSec1"
+                text="① handler 设回默认（color 的 setter 与 setText 一样「设置即累计」）：声明/未声明颜色两按钮对 setButtonColor(Default) 反应相同——都累计 color=default、都进回发响应 updates：">
+            </f:label>
+            <br />
+            <f:button id="btnColorDeclared" text="声明按钮（模板 Primary）" button-color="Primary" css-class="marginr"></f:button>
+            <f:button id="btnColorAbsent" text="未声明颜色按钮（缺失）"></f:button>
+            <br />
+            <br />
+            <f:label id="lblSec2" text="② Page_Load 设回默认（模板声明 Primary，但 Page_Load 首屏设回 Default）——首屏即为默认灰（color=default 覆盖模板声明）、回发不复活："></f:label>
+            <br />
+            <f:button id="btnPageLoadDefault" text="Page_Load按钮（模板 Primary，Page_Load 改 Default）" button-color="Primary"></f:button>
+            <br />
+            <br />
+            <f:button id="btnReset" text="把①两个按钮设为 Default + 读取三者颜色（回发）" on-click="btnReset_Click"></f:button>
+            <br />
+            <br />
+            <f:label id="lblResult" text="（等待回发结果）"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 选中信息自定义渲染</title>
+
+        <style>
+            .bold {
+                font-weight: bold;
+                color: red;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name" height="350"
+                enable-check-box-select="true" allow-paging="true" page-size="5" is-database-paging="true" on-page-index-changed="Grid1_PageIndexChanged"
+                selection-message-renderer-function="selectionMessageRenderer">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="学费" data-field="Fee"></f:render-field>
+                    <f:render-field header-text="学杂费" data-field="ExtraFee"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function selectionMessageRenderer(selectedCount) {
+                    var grid1 = F.ui.Grid1;
+
+                    // 参数为 true：返回包含行对象的数组
+                    var selectedRows = grid1.getSelectedRows(true);
+                    if (!selectedRows.length) {
+                        return '无选中行';
+                    }
+
+                    var feeSum = 0,
+                        donateSum = 0;
+                    $.each(selectedRows, function(index, data) {
+                        feeSum += data.values['Fee'];
+                        donateSum += data.values['ExtraFee'];
+                    });
+
+                    return F.rawHtml('已选择 <strong class="bold">{0}</strong> 行&nbsp;（学费合计：{1} &nbsp;学杂费合计：{2}）',
+                        selectedRows.length,
+                        F.addCommas(feeSum.toFixed(2)),
+                        F.addCommas(donateSum.toFixed(2)));
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

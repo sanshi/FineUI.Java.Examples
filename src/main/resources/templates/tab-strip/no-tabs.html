@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 隐藏全部选项卡</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="250" enable-tab-close-menu="true" show-border="true">
+                <f:tabs>
+                    <f:tab id="Tab1" title="标签一" enable-close="false" hidden="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label5" text="标签一中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab2" title="标签二" body-padding="10" hidden="true" enable-close="true">
+                        <f:items>
+                            <f:label id="Label4" text="标签二中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab3" title="标签三" body-padding="10" hidden="true" enable-close="true">
+                        <f:items>
+                            <f:label id="Label3" text="标签三中的文本" />
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+            <br />
+            <br />
+
+            <f:button id="btnShowTab1" text="显示标签一" css-class="marginr" click-handler="onShowTab1Click"></f:button>
+
+            <f:button id="btnShowTab2" text="显示标签二" css-class="marginr" click-handler="onShowTab2Click"></f:button>
+
+            <f:button id="btnShowTab3" text="显示标签三" css-class="marginr" click-handler="onShowTab3Click"></f:button>
+
+            <br />
+            <br />
+
+            <f:button id="btnShowActiveTab1" text="显示并激活标签一" css-class="marginr" click-handler="onShowActiveTab1Click"></f:button>
+
+            <f:button id="btnShowActiveTab2" text="显示并激活标签二" css-class="marginr" click-handler="onShowActiveTab2Click"></f:button>
+
+            <f:button id="btnShowActiveTab3" text="显示并激活标签三" css-class="marginr" click-handler="onShowActiveTab3Click"></f:button>
+            <br />
+            <br />
+
+            <f:button id="btnHideTab1" text="隐藏标签一" css-class="marginr" click-handler="onHideTab1Click"></f:button>
+
+            <f:button id="btnHideTab2" text="隐藏标签二" css-class="marginr" click-handler="onHideTab2Click"></f:button>
+
+            <f:button id="btnHideTab3" text="隐藏标签三" css-class="marginr" click-handler="onHideTab3Click"></f:button>
+            <br />
+            <br />
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onShowTab1Click(event) {
+                    F.ui.Tab1.show();
+                }
+
+                function onShowTab2Click(event) {
+                    F.ui.Tab2.show();
+                }
+
+                function onShowTab3Click(event) {
+                    F.ui.Tab3.show();
+                }
+
+                function onShowActiveTab1Click(event) {
+                    F.ui.Tab1.activate();
+                }
+
+                function onShowActiveTab2Click(event) {
+                    F.ui.Tab2.activate();
+                }
+
+                function onShowActiveTab3Click(event) {
+                    F.ui.Tab3.activate();
+                }
+
+                function onHideTab1Click(event) {
+                    F.ui.Tab1.hide();
+                }
+
+                function onHideTab2Click(event) {
+                    F.ui.Tab2.hide();
+                }
+
+                function onHideTab3Click(event) {
+                    F.ui.Tab3.hide();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

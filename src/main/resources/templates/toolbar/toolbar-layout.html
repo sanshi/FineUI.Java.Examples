@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 工具栏布局</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" show-border="true" body-padding="10" title="面板" enable-collapse="false"
+                content='<p><a href="http://tech.163.com/special/jobsdead/" target="_blank"><b>乔布斯</b></a></p><p>乔布斯于1955年2月24日出生，苹果创始人之一。今年8月苹果超越埃克森美孚成为全球最大市值企业，截止上季度持有现金达到762亿美金，甚至超过了美国政府国库存款。</p><p>遗憾的是，苹果的取得巨大成功还是无法给乔布斯一个健康的身体，乔布斯2003年被发现患有胰脏癌，随后又查出肝癌，危在旦夕的乔布斯在经历了8年的抗癌斗争、3次病休、若干次手术后，于2011年8月25日正式宣布从CEO位置辞职。2011年10月6日，乔布斯在苹果发布iPhone 4S后的第二天与世长辞。</p>'>
+                <f:toolbars>
+                    <f:toolbar layout="HBox">
+                        <f:items>
+                            <f:button id="Button1" text="按钮一" box-flex="1" margin-right="5"></f:button>
+                            <f:button id="Button2" text="按钮二" box-flex="1"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar layout="Fit">
+                        <f:items>
+                            <f:button-group layout="HBox">
+                                <f:button id="Button5" text="按钮三" box-flex="1"></f:button>
+                                <f:button id="Button7" text="按钮四" box-flex="1"></f:button>
+                                <f:button id="Button9" text="按钮五" box-flex="1"></f:button>
+                            </f:button-group>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar layout="HBox">
+                        <f:items>
+                            <f:button-group margin-right="10">
+                                <f:button id="Button3" text="按钮三"></f:button>
+                                <f:button id="Button4" text="按钮四"></f:button>
+                                <f:button id="Button6" text="按钮五"></f:button>
+                            </f:button-group>
+                            <f:check-box-list id="CheckBoxList3" box-flex="1">
+                                <f:check-item text="可选项 1" value="value1"></f:check-item>
+                                <f:check-item text="可选项 2" value="value2" selected="true"></f:check-item>
+                                <f:check-item text="可选项 3" value="value3" selected="true"></f:check-item>
+                            </f:check-box-list>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar layout="HBox">
+                        <f:items>
+                            <f:button-group width="300" layout="HBox" margin-right="10">
+                                <f:button id="Button8" icon-font="_Apple" text="按钮六" box-flex="1"></f:button>
+                                <f:button id="Button10" icon-font="_Windows" text="按钮七" box-flex="1"></f:button>
+                                <f:button id="Button11" icon="Book" text="按钮八" box-flex="1"></f:button>
+                            </f:button-group>
+                            <f:check-box-list id="CheckBoxList2" box-flex="1">
+                                <f:check-item text="可选项 1" value="value1"></f:check-item>
+                                <f:check-item text="可选项 2" value="value2" selected="true"></f:check-item>
+                                <f:check-item text="可选项 3" value="value3" selected="true"></f:check-item>
+                            </f:check-box-list>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar id="Toolbar1" layout="HBox">
+                        <f:items>
+                            <f:text-box id="TextBox2" empty-text="文本输入框" width="100" margin-right="5"></f:text-box>
+                            <f:text-box id="TextBox1" empty-text="文本输入框" width="100" margin-right="10"></f:text-box>
+                            <f:check-box-list id="CheckBoxList1" box-flex="1">
+                                <f:check-item text="可选项 1" value="value1"></f:check-item>
+                                <f:check-item text="可选项 2" value="value2" selected="true"></f:check-item>
+                                <f:check-item text="可选项 3" value="value3" selected="true"></f:check-item>
+                            </f:check-box-list>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

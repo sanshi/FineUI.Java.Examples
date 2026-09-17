@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 弹出 IFrame 窗体（多选）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:grid/iframe-window" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-multi-select="true" enable-check-box-select="true">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="窗口列">
+                        <f:commands>
+                            <f:command command-name="Action1" text="编辑" css-class="mywindowfield"></f:command>
+                        </f:commands>
+                    </f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="rowcommand" handler="onGrid1RowCommand"></f:listener>
+                </f:listeners>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1">
+                        <f:items>
+                            <f:button id="btnApprove" text="审批数据" icon="ApplicationEdit" click-handler="onApproveClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:grid>
+
+            <br />
+            <br />
+            注：选择多行数据，然后点击[审批数据]按钮。
+
+            <f:window id="Window1" title="编辑" hidden="true" enable-iframe="true" close-action="HidePostBack" enable-maximize="true" enable-resize="true"
+                on-close="Window1_Close" target="Top" is-modal="true" width="850" height="500">
+            </f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                // 打开窗体
+                function openWindow(ids, texts) {
+                    var iframeUrl = F.resolveUrl('/grid/iframe-window?id=') + encodeURIComponent(ids) + '&name=' + encodeURIComponent(texts);
+                    F.ui.Window1.show(iframeUrl, '详细信息 - ' + texts);
+                }
+
+                // 行命令
+                function onGrid1RowCommand(event, rowId, rowIndex, columnId, commandName) {
+                    var rowData = F.ui.Grid1.getRowData(rowId);
+                    openWindow(rowId, rowData.text);
+                }
+
+                function onApproveClick(event) {
+                    var grid = F.ui.Grid1;
+                    if (!grid.hasSelection()) {
+                        F.alert('请至少选择一项！');
+                        return;
+                    }
+                    var selectedRows = grid.getSelectedRows(true);
+                    var selectedRowIds = $.map(selectedRows, function(item, index) {
+                        return item.id;
+                    }).join(',');
+                    var selectedRowTexts = $.map(selectedRows, function(item, index) {
+                        return item.text;
+                    }).join(',');
+                    openWindow(selectedRowIds, selectedRowTexts);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

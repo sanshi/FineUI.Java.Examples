@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 选项卡标题为空</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="150" show-border="true" tab-position="Top" active-tab-index="0">
+                <f:tabs>
+                    <f:tab icon-font="_Windows" title-tool-tip="标签一的提示文本" body-padding="10">
+                        <f:items>
+                            <f:label text="第一个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab icon="Accept" title-tool-tip="标签二的提示文本" body-padding="10">
+                        <f:items>
+                            <f:label text="第二个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab icon-font="_Apple" title-tool-tip="标签三的提示文本" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label text="第三个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab icon="Clock" title-tool-tip="标签四的提示文本" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label text="第四个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab icon-font="_Android" title-tool-tip="标签五的提示文本" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label text="第五个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab icon="Computer" title-tool-tip="标签六的提示文本" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label text="第六个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab icon-font="_Google" title-tool-tip="标签七的提示文本" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label text="第七个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+            <br />
+            <br />
+            <f:tab-strip id="TabStrip2" is-fluid="true" height="150" show-border="true" tab-position="Bottom" active-tab-index="3">
+                <f:tabs>
+                    <f:tab id="Tab1" icon-font="_Windows" title-tool-tip="标签一的提示文本" body-padding="10">
+                        <f:items>
+                            <f:label id="Label1" text="第一个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab2" icon="Accept" title-tool-tip="标签二的提示文本" body-padding="10">
+                        <f:items>
+                            <f:label id="Label2" text="第二个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab3" icon-font="_Apple" title-tool-tip="标签三的提示文本" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label3" text="第三个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab4" icon="Clock" title-tool-tip="标签四的提示文本" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label4" text="第四个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab5" icon-font="_Android" title-tool-tip="标签五的提示文本" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label5" text="第五个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab6" icon="Computer" title-tool-tip="标签六的提示文本" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label6" text="第六个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab7" icon-font="_Google" title-tool-tip="标签七的提示文本" enable-close="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label7" text="第七个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+
+            <br />
+            <br />
+            注：
+            <ul>
+                <li>选项卡的标题栏文本为空</li>
+                <li>选项卡标题栏有提示信息</li>
+            </ul>
+            <br />
+
+        </th:block>
+    </body>
+
+</html>

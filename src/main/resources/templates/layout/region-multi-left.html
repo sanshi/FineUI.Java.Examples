@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Region 多个左侧面板</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" margin="24" show-border="false" show-header="false" layout="Region" is-view-port="true">
+                <f:items>
+                    <f:panel id="panelLeftRegion" region-position="Left" region-split="true" enable-collapse="true" width="200" title="左侧面板" show-border="true"
+                        show-header="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label2" text="左侧面板的内容">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="panel2" region-position="Left" region-split="true" enable-collapse="true" width="200" title="左侧面板" show-border="true"
+                        show-header="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label6" text="左侧面板的内容">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="panel3" region-position="Left" region-split="true" enable-collapse="true" width="200" title="左侧面板" show-border="true"
+                        show-header="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label7" text="左侧面板的内容">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="panelCenterRegion" region-position="Center" title="中间面板" show-border="true" show-header="true" body-padding="10">
+                        <f:items>
+                            <f:label id="Label3" text="中间面板的内容">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

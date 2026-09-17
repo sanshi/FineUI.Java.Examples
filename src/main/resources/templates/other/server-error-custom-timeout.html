@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · AJAX请求超时错误（自行拦截）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:button id="Button5" text="服务器异常（500）" on-click="Button5_Click"></f:button>
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <!--/* 站点公共 JS（showCenterNotify 等全局函数） */-->
+            <script th:src="@{/res/js/common.js}"></script>
+            <script>
+                F.beforeAjaxError(function(data, textStatus) {
+                    if (textStatus === 'timeout') {
+                        showCenterNotify('AJAX请求超时！', 'error');
+                    }
+
+                    // 需要显式的返回 false，来阻止默认的错误处理
+                    return false;
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

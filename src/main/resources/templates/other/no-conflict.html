@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 释放window.F命名空间</title>
+
+        <!--/* 注意：head 里的脚本在 FineUI.js 加载前执行（f:scripts 输出在 body 末）——恰好在这里
+            先定义页面自定义的 window.F 对象，FineUI 入口保存为 _F 并在 noConflict() 时还原。 */-->
+        <script type="text/javascript">
+            function inspectNamespace(ns) {
+                if (ns === window.FineUI) {
+                    return "window.FineUI";
+                } else {
+                    return JSON.stringify(ns);
+                }
+            }
+
+            var result = [];
+            // 自定义一个全局变量window.F
+            window.F = {
+                message: 'Hello world!'
+            };
+            result.push('<ol>');
+            // 注意：本 head 脚本在 FineUI.js（body 末）加载前执行，此刻 F 仍是上面自定义的 window.F
+            //（不是框架），inspectNamespace(F) 返回其 JSON 表示——这正是 noConflict 演示的「原始数据」。
+            result.push('<li>原始数据，window.F = ' + inspectNamespace(F) + '</li>');
+
+        </script>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:button text="缺省按钮" css-class="marginr"></f:button>
+            <f:button id="btnPrimary" text="主按钮" button-color="Primary"></f:button>
+            <br />
+            <br />
+            <f:button id="btnChangeEnable" text="启用后面的按钮" on-click="btnChangeEnable_Click" css-class="marginr"></f:button>
+            <f:button id="btnEnable" text="禁用的按钮" on-click="btnEnable_Click" enabled="false"></f:button>
+            <br />
+            <br />
+            <f:button id="btnChangePressed" text="改变后面按钮的按下状态" on-click="btnChangePressed_Click" css-class="marginr"></f:button>
+            <f:button id="btnPressed" text="按下的按钮" enable-press="true" pressed="true"></f:button>
+            <br />
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <!--/* 注意：Java 的 F.render 在 DOM ready 回调里执行（f:scripts 输出 $(function(){F.render(...)})）。
+                 页面 script 槽在 f:scripts 之后，这里的 $(function(){...}) 注册更晚、执行更晚——
+                 保证在 F.render 完成控件创建后再释放 F 命名空间。若立即执行或用 F.ready
+                 （checkWindowLoaded 可能在 DOM ready 前触发 load），会在 F.render 之前把 window.F
+                 还原为页面自定义对象，导致稍后 F.render 报 "F.render is not a function"。 */-->
+            <script type="text/javascript">
+                $(function() {
+                    result.push('<li>引入 FineUI 的客户端脚本...</li>');
+
+                    result.push('<li>window.F = ' + inspectNamespace(F) + '</li>');
+
+                    // 释放对 F 命名空间的占用
+                    F.noConflict();
+                    result.push('<li>调用 F.noConflict();</li>');
+
+                    // FineUI 已经释放对 F 命名空间的占用，此时 F 指向其原始数据
+                    result.push('<li>window.F = ' + inspectNamespace(F) + '</li>');
+
+                    // 通过 FineUI.ready 注册页面渲染完毕后的回调函数
+                    FineUI.ready(function(F) {
+                        // 在 FineUI.ready 回调函数内，可以使用局部变量 F 访问 FineUI 命名空间
+                        result.push('<li>在 FineUI.ready 回调函数内');
+
+                        result.push('<ul>');
+                        result.push('<li>局部变量 F = ' + inspectNamespace(F) + '</li>');
+                        result.push('<li>全局变量 window.F = ' + inspectNamespace(window.F) + '</li>');
+                        result.push('<li>F(btnPrimaryClientID).getText() = ' + F.ui.btnPrimary.getText() + '</li>');
+                        result.push('<li>FineUI(btnPrimaryClientID).getText() = ' + F.ui.btnPrimary.getText() + '</li>');
+                        result.push('</ul></li>');
+
+                        result.push('</ol>');
+                        F.ui.labResult.setValue(result.join('<br>'));
+                    });
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

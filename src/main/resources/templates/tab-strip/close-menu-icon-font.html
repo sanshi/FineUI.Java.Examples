@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 菜单项图标字体（JS方式）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="500" enable-tab-close-menu="true" show-border="true" active-tab-index="1">
+                <f:tabs>
+                    <f:tab id="Tab1" title="标签一" enable-close="false" body-padding="10">
+                        <f:items>
+                            <f:label id="Label5" text="标签一中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab2" title="标签二" body-padding="10" enable-close="true">
+                        <f:items>
+                            <f:label id="Label4" text="标签二中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab3" title="标签三" hidden="true" body-padding="10" enable-close="true">
+                        <f:items>
+                            <f:label id="Label3" text="标签三中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab4" title="标签四" body-padding="10" enable-close="true">
+                        <f:items>
+                            <f:label id="Label2" text="标签四中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab5" enable-close="true" title="标签五" body-padding="10">
+                        <f:items>
+                            <f:label id="Label1" text="标签五中的文本" />
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+            <br>
+            <br>
+
+            <f:button id="btnShowInClient" text="显示标签三（客户端代码）" css-class="marginr" click-handler="onShowInClientClick"></f:button>
+
+            <f:button id="btnHideInClient" text="隐藏标签三（客户端代码）" css-class="marginr" click-handler="onHideInClientClick"></f:button>
+            <br>
+            <br>
+
+            <f:button id="btnShowInServer" text="显示标签三（服务端代码）" css-class="marginr" on-click="btnShowInServer_Click"></f:button>
+
+            <f:button id="btnHideInServer" text="隐藏标签三（服务端代码）" css-class="marginr" on-click="btnHideInServer_Click"></f:button>
+
+            <br>
+            <br>
+            <br>
+            注：在选项卡上点击鼠标右键，会看到为菜单项新增的图标字体。
+            <br>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onShowInClientClick(event) {
+                    F.ui.Tab3.show();
+                }
+
+                function onHideInClientClick(event) {
+                    F.ui.Tab3.hide();
+                }
+
+                F.ready(function() {
+
+                    var closeMenu = F.ui.TabStrip1.getCloseMenu();
+
+                    $.each(closeMenu.items, function(index, item) {
+                        if (item.isType('MenuItem')) {
+                            if (item.el.hasClass('f-tabstrip-tabmenu-close')) {
+                                item.setIconFont('f-icon-close');
+                            } else if (item.el.hasClass('f-tabstrip-tabmenu-close-others')) {
+                                item.setIconFont('f-icon-trash-o');
+                            } else if (item.el.hasClass('f-tabstrip-tabmenu-close-all')) {
+                                //item.setIconFont('f-icon-trash');
+                                item.setIcon('/res/icon/system_close.gif');
+                            }
+                        }
+                    });
+
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

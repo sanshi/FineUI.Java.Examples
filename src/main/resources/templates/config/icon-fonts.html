@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 自定义图标字体</title>
+
+        <style>
+            ul.icons {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            ul.icons li {
+                display: inline-block;
+                margin: 0 10px 10px 0;
+                text-align: center;
+                border-style: solid;
+                border-width: 1px;
+                padding: 10px 5px;
+                width: 180px;
+            }
+
+            ul.icons li .f-icon {
+                font-size: 28px;
+                height: 28px;
+                line-height: 28px;
+                min-width: 30px;
+                text-align: center;
+            }
+
+            ul.icons li .title {
+                margin-top: 10px;
+            }
+
+            ul.icons li .subtitle {
+                margin-top: 5px;
+            }
+
+            .mysearch {
+                text-align: left;
+            }
+
+            .mysearch .f-field-textbox {
+                height: 46px;
+                font-size: 24px;
+                line-height: 28px;
+                padding: 8px 12px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <div class="mysearch">
+                <f:text-box id="tbxSearch" width="350" empty-text="搜索图标" show-label="false">
+                    <f:listeners>
+                        <f:listener event="change" handler="onSearchBoxChange"></f:listener>
+                    </f:listeners>
+                </f:text-box>
+            </div>
+            <br />
+            <div>
+                自定义图标字体：共 <b th:text="${page.iconCount}"></b> 个图标，图标以 <code>f-iconfont</code> 自定义字体类渲染。
+            </div>
+            <br />
+            <div th:utext="${page.iconList}"></div>
+
+            <br />
+            <br />
+            本列表为自定义图标字体，来自 http://fontawesome.io/ 和 http://www.iconfont.cn/：
+            <pre>
+// Java
+Button1.setIconFont(IconFont._Newtab);
+// JavaScript
+btn1.setIconFont('f-iconfont-newtab');
+        </pre>
+            <br />
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onSearchBoxChange(event) {
+                    var keyword = this.getValue().toLowerCase();
+
+                    $('ul.icons li').each(function() {
+                        var cnode = $(this),
+                            title = cnode.find('.title').text().toLowerCase();
+
+                        if (title.indexOf(keyword) >= 0) {
+                            cnode.show();
+                        } else {
+                            cnode.hide();
+                        }
+                    });
+                }
+
+                F.ready(function() {
+                    $('ul.icons li').hover(function() {
+                        $(this).addClass('f-state-hover');
+                    }, function() {
+                        $(this).removeClass('f-state-hover');
+                    });
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

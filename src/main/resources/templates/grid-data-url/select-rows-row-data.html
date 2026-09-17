@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 选中多行并读取行数据</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.gridurl.GridDataUrlDataController" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                data-url="/grid-data-url/grid-data-url-data" selected-row-id-array="105,110">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <br />
+
+            <f:button text="选中了哪些行" css-class="marginr" click-handler="onButton1Click"></f:button>
+
+            <f:button text="选中[陈飞]，[彭博]，[唐超]所在的行" on-click="Button2_Click"></f:button>
+            <br />
+            <br />
+
+            <br />
+            <br />
+            注：表格默认选中了[康颖颖]，[徐鹏]所在的行。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                // 读取选中行的字段数据，拼成表格弹窗展示
+                function onButton1Click(event) {
+
+                    var result = '<table class="result"><tr><th>ID</th><th>姓名</th><th>性别</th><th>所学专业</th></tr>';
+                    $.each(F.ui.Grid1.getSelectedRows(true), function(index, item) {
+
+                        var values = item.values;
+
+                        result += F.formatString("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>",
+                            item.id,
+                            values.Name,
+                            values.Gender == 0 ? '女' : '男',
+                            values.Major);
+
+                    });
+
+                    result += '</table>';
+
+                    showNotify(F.rawHtml('选中的行：<br/>' + result));
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

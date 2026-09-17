@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FormColumnWidths</title>
+
+        <style>
+            .speciallabel {
+                color: red;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:form body-padding="10" enable-collapse="false" label-align="Left" id="Form1" is-fluid="true" title="表单">
+                <f:items>
+                    <f:form-row column-widths="20px 50% 50%">
+                        <f:items>
+                            <f:label css-class="speciallabel" text="1."></f:label>
+                            <f:label id="Label3" label="电话" text="0551-1234567"></f:label>
+                            <f:label id="Label16" label="申请人" text="admin"></f:label>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row column-widths="20px 50% 50%">
+                        <f:items>
+                            <f:label id="Label1" css-class="speciallabel" text="2."></f:label>
+                            <f:label id="Label4" label="编号" text="200804170006"></f:label>
+                            <f:text-box id="TextBox2" required="true" show-red-star="true" label="电子邮箱" regex-pattern="EMAIL"
+                                regex-message="请输入有效的邮箱地址"></f:text-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row column-widths="20px 100%">
+                        <f:items>
+                            <f:label id="Label2" css-class="speciallabel" text="3."></f:label>
+                            <f:drop-down-list id="DropDownList3" label="审批人" force-selection="false" required="true" show-red-star="true">
+                                <f:items>
+                                    <f:list-item text="老大甲" value="0"></f:list-item>
+                                    <f:list-item text="老大乙" value="1"></f:list-item>
+                                    <f:list-item text="老大丙" value="2"></f:list-item>
+                                </f:items>
+                            </f:drop-down-list>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row column-widths="20px 100%">
+                        <f:items>
+                            <f:label id="Label5" css-class="speciallabel" text="4."></f:label>
+                            <f:number-box id="NumberBox1" label="申请数量" no-decimal="true" no-negative="true" max-value="1000" required="true"
+                                show-red-star="true"></f:number-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row column-widths="20px 100%">
+                        <f:items>
+                            <f:label id="Label6" css-class="speciallabel" text="5."></f:label>
+                            <f:text-area id="TextArea1" label="描述" show-red-star="true" required="true"></f:text-area>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:panel id="Panel2" show-border="false" show-header="false">
+                                <f:items>
+                                    <f:button id="btnSubmitForm1" text="提交表单" css-class="marginr" on-click="btnSubmit_Click" validate-forms="Form1"></f:button>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:form-row>
+                </f:items>
+            </f:form>
+            <br />
+            <br />
+            注：假设行的总宽度是 100px，行的属性 column-widths="20px 50% 50%"，则：
+            <ul>
+                <li>第一个字段宽度：20px</li>
+                <li>第二个字段宽度：40px</li>
+                <li>第三个字段宽度：40px</li>
+            </ul>
+
+        </th:block>
+    </body>
+
+</html>

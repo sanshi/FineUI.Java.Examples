@@ -1,0 +1,20 @@
+# FineUI 公共仓库本地文件
+[Bb]in/
+[Oo]bj/
+target/
+[Pp]ackages/
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.iml
+*.nupkg
+*.snupkg
+*.mv.db
+*.trace.db
+Directory.Build.local.props
+NuGet.Config
+.local/
+FineUI*.lic*.config
+FineUI.Enterprise.props

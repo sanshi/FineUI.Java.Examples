@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多语言树控件（复选框）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tree id="Tree1" is-fluid="true" show-header="true" title="#{multilang.tree.title}" enable-check-box="true">
+                <f:nodes>
+                    <f:tree-node text="#{multilang.tree.node.china}" expanded="true" node-id="china">
+                        <f:tree-node text="#{multilang.tree.node.henan}" expanded="true" node-id="henan" checked="true">
+                            <f:tree-node text="#{multilang.tree.node.zhumadian}" node-id="zhumadian">
+                                <f:tree-node text="#{multilang.tree.node.suiping}" node-id="suiping"></f:tree-node>
+                                <f:tree-node text="#{multilang.tree.node.xiping}" node-id="xiping"></f:tree-node>
+                            </f:tree-node>
+                            <f:tree-node text="#{multilang.tree.node.luohe}" node-id="luohe"></f:tree-node>
+                        </f:tree-node>
+                        <f:tree-node text="#{multilang.tree.node.anhui}" expanded="true" node-id="anhui">
+                            <f:tree-node text="#{multilang.tree.node.hefei}" node-id="hefei"></f:tree-node>
+                            <f:tree-node text="#{multilang.tree.node.huangshan}" node-id="huangshan"></f:tree-node>
+                        </f:tree-node>
+                    </f:tree-node>
+                </f:nodes>
+            </f:tree>
+            <br />
+            <f:button id="btnGetCheckedValues" text="#{multilang.tree.button.getChecked}" on-click="btnGetCheckedValues_Click"></f:button>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · NumberBox 星级评分</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:number-box id="NumberBox1" display-type="Rate" value="3"></f:number-box>
+            <br />
+            <br />
+            半星评分：
+            <br />
+            <f:number-box id="NumberBox2" display-type="Rate" value="3.5" rate-allow-half="true"></f:number-box>
+            <br />
+            <br />
+            只读：
+            <br />
+            <f:number-box id="NumberBox3" display-type="Rate" value="2" readonly="true"></f:number-box>
+            <br />
+            <br />
+            禁用点击清除：
+            <br />
+            <f:number-box id="NumberBox4" display-type="Rate" value="3" rate-allow-clear="false"></f:number-box>
+            <br />
+            <br />
+            自定义字符、图标、个数：
+            <br />
+            <f:number-box id="NumberBox5" display-type="Rate" value="3" rate-character="A"></f:number-box>
+            <br />
+            <f:number-box id="NumberBox6" display-type="Rate" value="4" rate-character="好"></f:number-box>
+            <br />
+            <f:number-box id="NumberBox7" display-type="Rate" value="5" rate-icon-font="_SmileO" rate-count="10"></f:number-box>
+            <br />
+            <f:number-box id="NumberBox8" display-type="Rate" value="6" rate-icon-font="_ThumbsUp" rate-count="10"></f:number-box>
+            <br />
+            <f:number-box id="NumberBox9" display-type="Rate" value="7" rate-icon-font="_Heart" rate-count="10"></f:number-box>
+            <br />
+            <br />
+            评分文本：
+            <br />
+            <f:number-box id="NumberBox10" display-type="Rate" value="3" rate-text-visible="true"
+                rate-text-renderer-function="renderNumberBox10"></f:number-box>
+            <br />
+            <f:number-box id="NumberBox11" display-type="Rate" value="3.5" rate-allow-half="true" rate-text-visible="true"></f:number-box>
+            <br />
+            <br />
+            后台更新：
+            <br />
+            <f:number-box id="NumberBox12" display-type="Rate" value="3"></f:number-box>
+            <br />
+            <f:button id="Button1" text="更新" on-click="Button1_Click"></f:button>
+            <br />
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                var desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
+
+                function renderNumberBox10(val) {
+                    var rateText = 'not yet rated';
+                    if (val > 0) {
+                        rateText = desc[val - 1];
+                    }
+                    return rateText;
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

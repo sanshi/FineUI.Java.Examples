@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Block 表单</title>
+
+        <style>
+            .myblockform .f-panel-body .f-field {
+                margin: 0;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel is-fluid="true" layout="Block" block-config-space="20" show-border="false" show-header="false">
+                <f:items>
+                    <f:panel block-md="6" layout="Block" block-config-space="20" show-border="false" show-header="false">
+                        <f:items>
+                            <f:panel id="Panel1" css-class="myblockform" block-md="12" enable-collapse="true" layout="Block" block-config-space="20"
+                                body-padding="10" show-border="true" show-header="true" title="表单 1">
+                                <f:items>
+                                    <f:label id="Label1" block-md="6" label="标签" text="标签的值"></f:label>
+                                    <f:check-box id="CheckBox1" block-md="6" text="复选框" label="复选框"></f:check-box>
+                                    <f:drop-down-list id="DropDownList1" block-md="6" required="true" show-red-star="true" auto-select-first-item="false"
+                                        label="下拉列表">
+                                        <f:items>
+                                            <f:list-item text="可选项 1" value="0"></f:list-item>
+                                            <f:list-item text="可选项 2" value="2"></f:list-item>
+                                            <f:list-item text="可选项 3" value="3"></f:list-item>
+                                            <f:list-item text="可选项 4" value="4"></f:list-item>
+                                            <f:list-item text="可选项 5" value="5"></f:list-item>
+                                            <f:list-item text="可选项 6" value="6"></f:list-item>
+                                            <f:list-item text="可选项 7" value="7"></f:list-item>
+                                            <f:list-item text="可选项 8" value="8"></f:list-item>
+                                        </f:items>
+                                    </f:drop-down-list>
+                                    <f:text-box id="TextBox1" block-md="6" show-red-star="true" label="文本框" required="true" text=""></f:text-box>
+                                    <f:button id="btnSubmitForm1" block-md="12" text="验证此表单并提交" validate-forms="Panel1" on-click="btnSubmitForm1_Click">
+                                    </f:button>
+                                </f:items>
+                            </f:panel>
+                            <f:panel id="Panel2" css-class="myblockform" block-md="12" enable-collapse="true" layout="Block" block-config-space="20"
+                                body-padding="10" show-border="true" show-header="true" title="表单 2">
+                                <f:items>
+                                    <f:date-picker id="DatePicker1" block-md="6" readonly="true" required="true" label="日期" empty-text="请选择日期"
+                                        show-red-star="true" text="2014-07-10"></f:date-picker>
+                                    <f:time-picker id="TimePicker1" block-md="6" readonly="true" show-red-star="true" label="时间" increment="30" required="true"
+                                        text="08:30" empty-text="请选择时间"></f:time-picker>
+                                    <f:check-box id="cbxAtSchool" block-md="12" label="是否在读"></f:check-box>
+                                    <f:check-box-list id="CheckBoxList1" block-md="12" label="复选框列表" column-number="3">
+                                        <f:items>
+                                            <f:check-item text="可选项 1" value="value1"></f:check-item>
+                                            <f:check-item text="可选项 2" value="value2" selected="true"></f:check-item>
+                                            <f:check-item text="可选项 3" value="value3" selected="true"></f:check-item>
+                                            <f:check-item text="可选项 4" value="value4" selected="true"></f:check-item>
+                                            <f:check-item text="可选项 5" value="value5" selected="true"></f:check-item>
+                                        </f:items>
+                                    </f:check-box-list>
+                                    <f:radio-button-list id="RadioButtonList2" block-md="12" label="单选框列表" required="true" column-number="3">
+                                        <f:items>
+                                            <f:radio-item text="可选项 1" value="value1"></f:radio-item>
+                                            <f:radio-item text="可选项 2" value="value2"></f:radio-item>
+                                            <f:radio-item text="可选项 3" value="value3"></f:radio-item>
+                                            <f:radio-item text="可选项 4" value="value4"></f:radio-item>
+                                            <f:radio-item text="可选项 5" value="value5"></f:radio-item>
+                                        </f:items>
+                                    </f:radio-button-list>
+                                </f:items>
+                                <f:toolbars>
+                                    <f:toolbar position="Bottom" toolbar-align="Center">
+                                        <f:items>
+                                            <f:button id="btnSubmitForm2" text="验证此表单并提交" validate-forms="Panel2" on-click="btnSubmitForm2_Click"></f:button>
+                                        </f:items>
+                                    </f:toolbar>
+                                </f:toolbars>
+                            </f:panel>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel3" css-class="myblockform" block-md="6" enable-collapse="true" layout="Block" block-config-space="20" body-padding="10"
+                        show-border="true" show-header="true" title="表单 3">
+                        <f:items>
+                            <f:label id="Label3" block-md="6" label="电话" text="0551-1234567"></f:label>
+                            <f:label id="Label16" block-md="6" label="申请人" text="admin"></f:label>
+                            <f:label id="Label4" block-md="6" label="编号" text="200804170006"></f:label>
+                            <f:text-box id="TextBox2" block-md="6" required="true" show-red-star="true" label="电子邮箱" regex-pattern="EMAIL"
+                                regex-message="请输入有效的邮箱地址"></f:text-box>
+                            <f:drop-down-list id="DropDownList3" block-md="12" label="审批人" required="true" show-red-star="true" empty-text="请选择审批人"
+                                auto-select-first-item="false">
+                                <f:items>
+                                    <f:list-item text="老大甲" value="0"></f:list-item>
+                                    <f:list-item text="老大乙" value="1"></f:list-item>
+                                    <f:list-item text="老大丙" value="2"></f:list-item>
+                                    <f:list-item text="老大丁" value="3"></f:list-item>
+                                    <f:list-item text="老大午" value="4"></f:list-item>
+                                    <f:list-item text="老大己" value="5"></f:list-item>
+                                </f:items>
+                            </f:drop-down-list>
+                            <f:number-box id="NumberBox1" block-md="12" label="申请数量" no-decimal="true" no-negative="true" max-value="1000" required="true"
+                                show-red-star="true"></f:number-box>
+                            <f:text-area id="TextArea1" block-md="12" label="描述" show-red-star="true" required="true"></f:text-area>
+                            <f:panel block-md="12" show-border="false" show-header="false">
+                                <f:items>
+                                    <f:button id="btnSubmitForm3" text="验证此表单并提交" validate-forms="Panel3" on-click="btnSubmitForm3_Click"></f:button>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+        </th:block>
+    </body>
+
+</html>

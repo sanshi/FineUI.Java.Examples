@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 编辑框（上下键选中行）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                arrow-key-selection="false">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br /><br />
+            注：
+            <ul>
+                <li><strong>本示例自定义UP/DOWN按键事件，所以禁用表格的ArrowKeySelection属性</strong></li>
+                <li>使用 Enter、Tab 或者 Down 键选中下一行</li>
+                <li>使用 Up 键选中上一行</li>
+                <li>遍历文本框时同时选中所在的行</li>
+                <li>点击输入框会选中文本</li>
+            </ul>
+            <f:button id="Button1" text="获取用户输入的分组值" click-handler="onGetInputsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function renderGroup(value, params) {
+                    return F.formatString('<input class="myinput" value="{0}" style="width:80px;" type="text">', value);
+                }
+
+                var inputselector = 'input.myinput';
+
+                function getUserInputs() {
+                    var result = [];
+
+                    var grid1 = F.ui.Grid1;
+                    grid1.getRowEls().each(function() {
+                        var rowEl = $(this);
+                        var rowData = grid1.getRowData(rowEl);
+
+                        result.push([rowData.id, rowData.text, rowEl.find(inputselector).val()]);
+                    });
+
+                    return F.toJSON(result);
+                }
+
+                function onGetInputsClick(event) {
+                    F.customEvent('GetInputs', getUserInputs());
+                }
+
+                function registerEnterEvent() {
+                    var grid = F.ui.Grid1;
+
+                    grid.el.on('keydown', inputselector, function(event) {
+                        var cnode = $(this),
+                            rowEl = cnode.closest('.f-grid-row');
+
+                        // 如果是 ENTER键 或者 TAB键 或者 向下箭头
+                        if (event.keyCode === F.KEY.ENTER || event.keyCode === F.KEY.TAB || event.keyCode === F.KEY.DOWN) {
+                            var nextRow = rowEl.next();
+                            if (nextRow.length) {
+                                // 选中文本框中的文本
+                                nextRow.find(inputselector).select();
+                                // 选中下一行
+                                grid.selectRow(nextRow);
+                            }
+
+                            // 阻止默认行为
+                            event.preventDefault();
+                        } else if (event.keyCode === F.KEY.UP) {
+                            // 当前选中的行数组
+                            var prevRow = rowEl.prev();
+                            if (prevRow.length) {
+                                // 选中文本框中的文本
+                                prevRow.find(inputselector).select();
+                                // 选中上一行
+                                grid.selectRow(prevRow);
+                            }
+
+                            // 阻止默认行为
+                            event.preventDefault();
+                        }
+                    });
+
+                    grid.el.on('click', inputselector, function(event) {
+                        $(this).select();
+                    });
+                }
+
+                F.ready(function() {
+                    registerEnterEvent();
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

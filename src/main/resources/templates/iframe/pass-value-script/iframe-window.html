@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 选择省份</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" label-align="Top" show-border="false" show-header="false" css-class="f-widget-content" title="SimpleForm"
+                body-padding="10" enable-collapse="false" auto-scroll="true" is-view-port="true">
+                <f:items>
+                    <f:radio-button-list id="ddlSheng" label="请选择省份" column-number="4" show-red-star="true">
+                        <f:listeners>
+                            <f:listener event="change" handler="onDdlShengChange"></f:listener>
+                        </f:listeners>
+                    </f:radio-button-list>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onDdlShengChange(event) {
+                    // 返回当前活动Window对象（浏览器窗口对象通过F.getActiveWindow().window获取）
+                    var activeWindow = F.getActiveWindow();
+                    activeWindow.window.updateProvince(this.getValue());
+                    activeWindow.hide();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

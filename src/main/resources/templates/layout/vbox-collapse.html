@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · VBox 折叠布局</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel2" is-fluid="true" height="550" show-border="true" enable-collapse="true" layout="VBox" box-config-child-margin="0 0 5 0"
+                body-padding="10" show-header="true" title="面板（Layout=VBox）">
+                <f:items>
+                    <f:panel id="Panel3" title="面板1" height="120" body-padding="10" show-border="true" show-header="true" enable-collapse="true">
+                        <f:items>
+                            <f:label id="Label2" text="Height=120px">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel1" title="面板2" box-flex="1" body-padding="10" show-border="true" show-header="true" enable-collapse="true">
+                        <f:items>
+                            <f:label id="Label1" text="BoxFlex=1">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel4" title="面板3" box-flex="2" margin="0" body-padding="10" show-border="true" show-header="true" enable-collapse="true">
+                        <f:items>
+                            <f:label id="Label3" text="BoxFlex=2 Margin=0">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

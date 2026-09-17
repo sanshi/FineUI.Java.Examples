@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataModel 下拉列表</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.datamodel.model.DropDownListForm" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-width="120" show-border="true" show-header="true" title="简单表单">
+                <f:items>
+                    <f:drop-down-list for="form.dropDownList1">
+                        <f:list-item text="可选项1" value="Value1"></f:list-item>
+                        <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
+                        <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
+                        <f:list-item text="可选项4" value="Value4"></f:list-item>
+                        <f:list-item text="可选项5" value="Value5"></f:list-item>
+                        <f:list-item text="可选项6" value="Value6"></f:list-item>
+                        <f:list-item text="可选择项7" value="Value7"></f:list-item>
+                        <f:list-item text="可选择项8" value="Value8"></f:list-item>
+                        <f:list-item text="普通型1 &lt; L &gt; 1.5" value="Value9"></f:list-item>
+                        <f:list-item text="一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的可选择项" value="Value10"></f:list-item>
+                    </f:drop-down-list>
+                    <f:drop-down-list for="form.dropDownList2" enable-multi-select="true">
+                        <f:list-item text="可选项1" value="Value1"></f:list-item>
+                        <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
+                        <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
+                        <f:list-item text="可选项4" value="Value4"></f:list-item>
+                        <f:list-item text="可选项5" value="Value5"></f:list-item>
+                        <f:list-item text="可选项6" value="Value6"></f:list-item>
+                        <f:list-item text="可选择项7" value="Value7"></f:list-item>
+                        <f:list-item text="可选择项8" value="Value8"></f:list-item>
+                        <f:list-item text="普通型1 &lt; L &gt; 1.5" value="Value9"></f:list-item>
+                        <f:list-item text="一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的可选择项" value="Value10"></f:list-item>
+                    </f:drop-down-list>
+                    <f:button id="btnSubmit" text="提交表单" validate-forms="SimpleForm1" on-click="btnSubmit_Click"></f:button>
+                    <f:button id="btnReset" type="Reset" text="重置表单"></f:button>
+                </f:items>
+            </f:simple-form>
+        </th:block>
+    </body>
+
+</html>

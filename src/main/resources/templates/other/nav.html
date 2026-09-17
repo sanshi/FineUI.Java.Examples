@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 站点快速导航</title>
+
+        <style>
+            .mytable {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+
+            .mytable td {
+                padding: 10px;
+                text-align: center;
+                position: relative;
+            }
+
+            .mytable .f-btn {
+                width: 100px;
+            }
+
+            .mytable .f-btn-icon {
+                width: 50px !important;
+                height: 50px !important;
+                padding: 5px !important;
+                margin: 0 !important;
+            }
+
+            .mytable .myicon {
+                width: 40px;
+                font-size: 30px;
+                opacity: .5;
+                filter: alpha(opacity=50);
+                text-align: center;
+            }
+
+            .mytable .td-icon-down {
+                height: 60px;
+            }
+
+            .mytable .td-icon-down .myicon {
+                position: absolute;
+                left: 50%;
+                margin-left: -20px;
+                top: 40px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <table class="mytable">
+                <tbody>
+                    <tr>
+                        <td>
+                            <f:button id="Button1" icon-align="Top" icon="User" text="登陆页面" click-handler="onNavLoginClick">
+                            </f:button>
+                        </td>
+                        <td>
+                            <i class="f-icon f-icon-long-arrow-right myicon"></i>
+                        </td>
+                        <td>
+                            <f:button icon-align="Top" icon="ApplicationForm" text="表单验证" click-handler="onNavFormCompareClick">
+                            </f:button>
+                        </td>
+                        <td>
+                            <i class="f-icon f-icon-long-arrow-right myicon"></i>
+                        </td>
+                        <td>
+                            <f:button icon-align="Top" icon="Table" text="行扩展列" click-handler="onNavRowExpanderClick"></f:button>
+                        </td>
+                        <td>
+                            <i class="f-icon f-icon-long-arrow-right myicon"></i>
+                        </td>
+                        <td>
+                            <f:button icon-align="Top" icon="TableLightning" text="大数据表格" click-handler="onNavLargeDataClick"></f:button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6"></td>
+                        <td class="td-icon-down">
+                            <i class="f-icon f-icon-long-arrow-down myicon"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">
+                            <f:button icon-align="Top" icon="LayoutContent" text="区域布局" click-handler="onNavRegionClick"></f:button>
+                        </td>
+                        <td rowspan="2">
+                            <i class="f-icon f-icon-long-arrow-left myicon"></i>
+                        </td>
+                        <td>
+                            <f:button icon-align="Top" icon="Group" text="分组面板" click-handler="onNavGroupPanelClick"></f:button>
+                        </td>
+                        <td rowspan="2">
+                            <i class="f-icon f-icon-long-arrow-left myicon"></i>
+                        </td>
+                        <td rowspan="2">
+                            <f:button icon-align="Top" icon="Tab" text="选项卡控件" click-handler="onNavTabStripClick"></f:button>
+                        </td>
+                        <td rowspan="2">
+                            <i class="f-icon f-icon-long-arrow-left myicon"></i>
+                        </td>
+                        <td rowspan="2">
+                            <f:button icon-align="Top" icon="ApplicationSideTree" text="智能树控件" click-handler="onNavTreeSmartClick">
+                            </f:button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <f:button icon-align="Top" icon="Application" text="窗体控件" click-handler="onNavWindowClick"></f:button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+            <br />
+            注：本示例新增的选项卡和手工点击右侧菜单新增的选项卡是同一个！
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onNavLoginClick(event) {
+                    top.addExampleTabByHref(F.resolveUrl('/Basic/Login'));
+                }
+
+                function onNavFormCompareClick(event) {
+                    top.addExampleTabByHref(F.resolveUrl('/Form/FormCompare'));
+                }
+
+                function onNavRowExpanderClick(event) {
+                    top.addExampleTabByHref(F.resolveUrl('/Grid/RowExpander'));
+                }
+
+                function onNavLargeDataClick(event) {
+                    top.addExampleTabByHref(F.resolveUrl('/GridDataUrl/LargeData1000'));
+                }
+
+                function onNavRegionClick(event) {
+                    top.addExampleTabByHref(F.resolveUrl('/Layout/Region'));
+                }
+
+                function onNavGroupPanelClick(event) {
+                    top.addExampleTabByHref(F.resolveUrl('/Panel/Group'));
+                }
+
+                function onNavTabStripClick(event) {
+                    top.addExampleTabByHref(F.resolveUrl('/TabStrip/TabStrip'));
+                }
+
+                function onNavTreeSmartClick(event) {
+                    top.addExampleTabByHref(F.resolveUrl('/Tree/TreeSmart'));
+                }
+
+                function onNavWindowClick(event) {
+                    top.addExampleTabByHref(F.resolveUrl('/Window/Window'));
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

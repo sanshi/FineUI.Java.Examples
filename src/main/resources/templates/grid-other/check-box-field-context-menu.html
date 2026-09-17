@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 复选列 + 右键菜单</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name" expand-unused-space="true" min-width="150"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校1" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-check-field header-text="是否在校1" column-id="CheckBoxField1" data-field="AtSchool"></f:render-check-field>
+                    <f:render-check-field header-text="是否在校2" column-id="CheckBoxField2" data-field="AtSchool"></f:render-check-field>
+                    <f:render-check-field header-text="是否在校3" column-id="CheckBoxField3" data-field="AtSchool"></f:render-check-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="beforerowcontextmenu" handler="onRowContextMenu"></f:listener>
+                </f:listeners>
+            </f:grid>
+
+            <f:menu id="Menu1">
+                <f:menu-button id="btnSelectRows" text="全选行" click-handler="onSelectRows"></f:menu-button>
+                <f:menu-button id="btnUnselectRows" text="取消行" click-handler="onUnselectRows"></f:menu-button>
+            </f:menu>
+
+            <br />
+            选中一些行，然后点击鼠标右键。
+            <br />
+            <br />
+
+            <f:button id="Button1" text="选中行复选框的状态" click-handler="onButton1Click"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                // 返回 false，来阻止浏览器右键菜单
+                function onRowContextMenu(event, rowId) {
+                    F.ui.Menu1.show();
+                    return false;
+                }
+
+                function onSelectRows(event) {
+                    $('.f-grid-row-selected .f-grid-checkbox').addClass('f-checked');
+                }
+
+                function onUnselectRows(event) {
+                    $('.f-grid-row-selected .f-grid-checkbox').removeClass('f-checked');
+                }
+
+                function onButton1Click(event) {
+                    var grid1 = F.ui.Grid1;
+                    var selectedRowEls = grid1.getSelectedRowEls();
+
+                    var result = [];
+                    result.push(F.formatString('共选中了 {0} 行：', selectedRowEls.length));
+                    result.push('<table class="result">');
+                    result.push('<tr><th>姓名</th><th>是否在校1</th><th>是否在校2</th><th>是否在校3</th></tr>');
+                    selectedRowEls.each(function() {
+                        var rowEl = $(this);
+                        var rowData = grid1.getRowData(rowEl);
+
+                        result.push('<tr>');
+                        result.push(F.formatString('<td>{0}</td>', rowData.text));
+
+                        var checkField1 = rowEl.find('.f-grid-cell-CheckBoxField1 .f-grid-checkbox')
+                        result.push(F.formatString('<td>{0}</td>', checkField1.hasClass('f-checked') ? '是' : '否'));
+
+                        var checkField1 = rowEl.find('.f-grid-cell-CheckBoxField2 .f-grid-checkbox')
+                        result.push(F.formatString('<td>{0}</td>', checkField1.hasClass('f-checked') ? '是' : '否'));
+
+                        var checkField1 = rowEl.find('.f-grid-cell-CheckBoxField3 .f-grid-checkbox')
+                        result.push(F.formatString('<td>{0}</td>', checkField1.hasClass('f-checked') ? '是' : '否'));
+
+                        result.push('</tr>');
+                    });
+                    result.push('</table>');
+
+                    F.notify({
+                        message: F.rawHtml(result.join('')),
+                        messageIcon: '',
+                        positionX: 'center',
+                        positionY: 'top'
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

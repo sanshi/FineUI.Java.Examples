@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · WebUploaderTabs</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles"
+            content="class:com.fineui.java.examples.thirdparty.WebUploaderController;class:com.fineui.java.examples.web.DownloadController" />
+
+        <style>
+            .webuploader-pick {
+                display: inline-block;
+            }
+
+            .webuploader-element-invisible {
+                position: absolute !important;
+                clip: rect(1px, 1px, 1px, 1px);
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="SimpleForm1" is-fluid="true" enable-tab-close-menu="false" active-tab-index="0" tab-position="Top" show-border="true" height="350">
+                <f:tabs>
+                    <f:tab title="上传文件" body-padding="10" layout="Fit">
+                        <f:items>
+                            <f:grid id="Grid1" show-header="true" show-border="true" title="" enable-collapse="false" enable-check-box-select="false"
+                                empty-text="尚未上传文件" data-id-field="id">
+                                <f:tools>
+                                    <f:tool id="btnSelectFiles" text="上传Excel" icon-font="_Plus"></f:tool>
+                                </f:tools>
+                                <f:columns>
+                                    <f:render-field column-id="FileName" data-field="name" header-text="文件名" expand-unused-space="true"
+                                        min-width="150"></f:render-field>
+                                    <f:render-field column-id="FileSize" data-field="size" header-text="大小" renderer="FileSize"></f:render-field>
+                                    <f:render-field column-id="FileStatus" data-field="status" header-text="状态"
+                                        renderer-function="renderFileStatus"></f:render-field>
+                                    <f:render-field renderer-function="renderDelete"></f:render-field>
+                                </f:columns>
+                            </f:grid>
+                        </f:items>
+                    </f:tab>
+                    <f:tab title="上传图片" body-padding="10" layout="Fit">
+                        <f:items>
+                            <f:grid id="Grid2" show-header="true" show-border="true" title="" enable-collapse="false" enable-check-box-select="false"
+                                empty-text="尚未上传图片" data-id-field="id">
+                                <f:tools>
+                                    <f:tool id="btnSelectFiles2" text="上传图片" icon-font="_Plus"></f:tool>
+                                </f:tools>
+                                <f:columns>
+                                    <f:render-field column-id="FileName" data-field="name" header-text="文件名" expand-unused-space="true"
+                                        min-width="150"></f:render-field>
+                                    <f:render-field column-id="FileSize" data-field="size" header-text="大小" renderer="FileSize"></f:render-field>
+                                    <f:render-field column-id="FileStatus" data-field="status" header-text="状态"
+                                        renderer-function="renderFileStatus"></f:render-field>
+                                    <f:render-field renderer-function="renderDelete"></f:render-field>
+                                </f:columns>
+                            </f:grid>
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+                <f:listeners>
+                    <f:listener event="tabchange" handler="onTabStripChange"></f:listener>
+                </f:listeners>
+            </f:tab-strip>
+            <br />
+            <br />
+            注：由于第三方组件 WebUploader 限制，本示例支持的浏览器版本为：Chrome、Firefox、Safari、IE10+。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/third-party/webuploader/webuploader.nolog.js}"></script>
+            <script>
+                function renderFileStatus(value) {
+                    return value || '已完成';
+                }
+
+                function renderDelete() {
+                    return '<a class="action-btn delete" href="javascript:;"><img class="f-grid-cell-icon" src="' + F.resolveUrl('/res/icon/delete.png') +
+                        '"></a>';
+                }
+
+                function onTabStripChange(event, tab) {
+                    var container = tab.el.find('.webuploader-container');
+                    var pick = container.find('.webuploader-pick');
+                    var file = pick.next();
+                    var pickPos = pick.position();
+                    file.css({
+                        width: pick.width(),
+                        height: pick.height(),
+                        top: pickPos.top,
+                        left: pickPos.left
+                    });
+                }
+
+                function initUploader(gridId, pickerId, ownerId, accept, sizeLimit, success) {
+                    var grid = F(gridId);
+                    var formData = {
+                        owner: ownerId
+                    };
+                    var csrfInput = $('#FineUICsrfToken');
+                    if (csrfInput.length) {
+                        formData[csrfInput.attr('name')] = csrfInput.val();
+                    }
+                    var options = {
+                        runtimeOrder: 'html5',
+                        server: F.resolveUrl('/third-party/upload?handler=Process'),
+                        pick: '#' + pickerId,
+                        resize: false,
+                        auto: true,
+                        formData: formData,
+                        fileSingleSizeLimit: sizeLimit * 1024 * 1024
+                    };
+                    if (accept) {
+                        $.extend(options, {
+                            accept: accept
+                        });
+                    }
+                    var uploader = WebUploader.create(options);
+                    uploader.on('filesQueued', function(files) {
+                        var records = [];
+                        $.each(files, function(index, file) {
+                            records.push({
+                                id: file.id,
+                                values: {
+                                    FileName: file.name,
+                                    FileType: file.ext,
+                                    FileSize: file.size,
+                                    FileStatus: '等待上传'
+                                }
+                            });
+                        });
+                        grid.addNewRecords(records, true);
+                    });
+                    uploader.on('uploadProgress', function(file, percentage) {
+                        var cell = grid.getCellEl(file.id, 'FileStatus').find('.f-grid-cell-text');
+                        var bar = cell.find('.f-progressbar-value');
+                        if (!bar.length) {
+                            cell.html(
+                                '<div class="f-progressbar f-widget-content" style="height:12px;"><div class="f-progressbar-value f-widget-header" style="width:0%"></div></div>'
+                            );
+                            bar = cell.find('.f-progressbar-value');
+                        }
+                        bar.css('width', percentage * 100 + '%');
+                    });
+                    uploader.on('uploadSuccess', function(file) {
+                        grid.getCellEl(file.id, 'FileStatus').find('.f-grid-cell-text').text('上传成功');
+                    });
+                    uploader.on('uploadError', function(file) {
+                        grid.getCellEl(file.id, 'FileStatus').find('.f-grid-cell-text').text('上传出错');
+                    });
+                    uploader.on('uploadComplete', function(file) {
+                        uploader.removeFile(file, true);
+                    });
+                    uploader.on('uploadFinished', function() {
+                        success.call(uploader);
+                    });
+                    uploader.on('error', function(type, arg, file) {
+                        if (type === 'F_EXCEED_SIZE') {
+                            F.alert('文件[' + file.name + ']大小超出限制值（' + F.format.fileSize(arg) + '）');
+                        } else if (type === 'Q_TYPE_DENIED') {
+                            // 这个类型有两种成因：空文件、扩展名不在 accept 白名单里。
+                            // 注意它派发时第二个参数就是 file 本身（不是大小上限），别照上面那条的签名去取。
+                            F.alert(arg.size ?
+                                '文件[' + arg.name + ']的类型不允许上传。' :
+                                '文件[' + arg.name + ']是空文件，无法上传。');
+                        }
+                    });
+                    grid.el.on('click', 'a.action-btn.delete', function() {
+                        var row = grid.getRowData($(this).closest('.f-grid-row'));
+                        F.confirm({
+                            message: '你确定要删除这个文件吗？',
+                            target: '_top',
+                            ok: function() {
+                                F.customEvent(gridId === 'Grid1' ? 'DeleteRow_Grid1' : 'DeleteRow_Grid2', row.id);
+                            }
+                        });
+                    });
+                }
+
+                F.ready(function() {
+                    initUploader('Grid1', 'btnSelectFiles', 'webuploader.webuploader_tabs.1', {
+                        mimeTypes: '.xls,.xlsx'
+                    }, 10, function() {
+                        F.customEvent('RebindGrid_Grid1');
+                    });
+                    initUploader('Grid2', 'btnSelectFiles2', 'webuploader.webuploader_tabs.2', {
+                        title: 'Images',
+                        extensions: 'gif,jpg,jpeg,bmp,png',
+                        mimeTypes: 'image/*'
+                    }, 1, function() {
+                        F.customEvent('RebindGrid_Grid2');
+                    });
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

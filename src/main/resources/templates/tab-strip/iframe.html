@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · IFrame选项卡</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="500" show-border="true" active-tab-index="1">
+                <f:tabs>
+                    <f:tab id="Tab1" body-padding="10" title="标签一">
+                        <f:items>
+                            <f:label id="Label1" text="文本"></f:label>
+                            <f:panel id="ContentPanel1" body-padding="10" show-border="true" show-header="true" title="内容面板" content="这是内容面板中的内容。"></f:panel>
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab2" enable-iframe="true" iframe-url="/panel/group" title="标签二（IFrame）">
+                        <f:listeners>
+                            <f:listener event="iframeload" handler="onTab2IFrameLoad" />
+                        </f:listeners>
+                        <f:attributes>
+                            <f:attribute key="data-source-key" value="source1"></f:attribute>
+                        </f:attributes>
+                    </f:tab>
+                    <f:tab id="Tab3" enable-iframe="true" iframe-url="/panel/panel" title="标签三（IFrame）">
+                        <f:listeners>
+                            <f:listener event="iframeload" handler="onTab3IFrameLoad" />
+                        </f:listeners>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+            <br>
+            <br>
+            <f:button id="Button1" text="修改标签二的内联网址" css-class="marginr" on-click="Button1_Click"></f:button>
+            <br>
+            <br>
+            注：标签二 和 标签三 中的IFrame加载完毕时，会在右下角显示提示框。
+            <br>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onTab2IFrameLoad(event) {
+                    F.notify('标签二中的IFrame加载完毕！');
+                }
+
+                function onTab3IFrameLoad(event) {
+                    F.notify('标签三中的IFrame加载完毕！');
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

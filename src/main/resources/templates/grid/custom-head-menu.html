@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 自定义列头菜单</title>
+
+        <style>
+            .custom-filter {
+                position: absolute;
+                margin-left: 2px;
+                cursor: pointer;
+            }
+
+            .f-grid-colheader.custom-filtered .f-grid-colheader-text {
+                font-weight: bold;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-header-menu="false">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text-raw-html="入学年份<i class='f-icon f-iconfont f-iconfont-filter custom-filter'></i>" data-field="EntranceYear"
+                        field-type="Int"></f:render-field>
+                    <f:render-check-field header-text-raw-html="是否在校<i class='f-icon f-iconfont f-iconfont-filter custom-filter'></i>" data-field="AtSchool"
+                        render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"></f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="dataload" handler="checkGridColheaderStyle"></f:listener>
+                </f:listeners>
+            </f:grid>
+            <br />
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+
+            <f:menu id="Menu1">
+                <f:menu-check-box id="btnSelectAll" group-name="AtSchool" checked="true" text="全部"
+                    on-checked-changed="btnAtSchool_CheckedChanged"></f:menu-check-box>
+                <f:menu-check-box id="btnSelectAtSchool" group-name="AtSchool" text="在校" on-checked-changed="btnAtSchool_CheckedChanged"></f:menu-check-box>
+                <f:menu-check-box id="btnSelectNotAtSchool" group-name="AtSchool" text="离校" on-checked-changed="btnAtSchool_CheckedChanged"></f:menu-check-box>
+            </f:menu>
+            <f:menu id="Menu2">
+                <f:menu-check-box id="btnEntranceYearAll" group-name="EntranceYear" checked="true" text="全部"
+                    on-checked-changed="btnEntranceYear_CheckedChanged"></f:menu-check-box>
+                <f:menu-check-box id="btnEntranceYearGreatThan2002" group-name="EntranceYear" text="入学年份大于2002"
+                    on-checked-changed="btnEntranceYear_CheckedChanged"></f:menu-check-box>
+            </f:menu>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function checkGridColheaderStyle(event) {
+                    var grid1El = F.ui.Grid1.el;
+                    var colheaderEntranceYearEl = grid1El.find('.f-grid-colheader-EntranceYear');
+                    var colheaderAtSchoolEl = grid1El.find('.f-grid-colheader-AtSchool');
+
+                    var btnSelectAll = F.ui.btnSelectAll;
+                    var btnEntranceYearAll = F.ui.btnEntranceYearAll;
+
+                    if (btnSelectAll.isChecked()) {
+                        colheaderAtSchoolEl.removeClass('custom-filtered');
+                    } else {
+                        colheaderAtSchoolEl.addClass('custom-filtered');
+                    }
+
+                    if (btnEntranceYearAll.isChecked()) {
+                        colheaderEntranceYearEl.removeClass('custom-filtered');
+                    } else {
+                        colheaderEntranceYearEl.addClass('custom-filtered');
+                    }
+                }
+
+                F.ready(function() {
+
+                    F.ui.Grid1.el.on('click', '.f-grid-colheader .custom-filter', function(event) {
+                        var colHeaderEl = $(this).parents('.f-grid-colheader');
+                        if (colHeaderEl.hasClass('f-grid-colheader-AtSchool')) {
+                            F.ui.Menu1.show();
+                        } else if (colHeaderEl.hasClass('f-grid-colheader-EntranceYear')) {
+                            F.ui.Menu2.show();
+                        }
+                    });
+
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

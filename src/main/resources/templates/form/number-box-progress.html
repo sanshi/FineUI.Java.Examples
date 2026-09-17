@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · NumberBox 进度条</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:number-box id="NumberBox1" width="500" value="25" display-type="Progress"></f:number-box>
+            <br />
+            <br />
+            <f:number-box id="NumberBox2" width="500" value="50" display-type="Progress"></f:number-box>
+            <br />
+            <br />
+            <f:number-box id="NumberBox3" width="500" value="75" display-type="Progress" progress-text-visible="true"></f:number-box>
+            <br />
+            <br />
+            <f:number-box id="NumberBox4" width="500" value="95" display-type="Progress" progress-text-visible="true" progress-height="15"></f:number-box>
+            <br />
+            <br />
+            <br />
+            <f:number-box id="NumberBox5" width="500" value="25" display-type="Progress" progress-text-visible="true" progress-text-inside="true"
+                progress-height="15"></f:number-box>
+            <br />
+            <br />
+            <f:number-box id="NumberBox6" width="500" value="50" display-type="Progress" progress-text-visible="true" progress-text-inside="true"
+                progress-height="15"></f:number-box>
+            <br />
+            <br />
+            <f:number-box id="NumberBox7" width="500" value="75" display-type="Progress" progress-text-visible="true" progress-text-inside="true"
+                progress-height="15"></f:number-box>
+            <br />
+            <br />
+            <f:number-box id="NumberBox8" width="500" value="95" display-type="Progress" progress-text-visible="true" progress-text-inside="true"
+                progress-height="15"></f:number-box>
+            <br />
+            <br />
+            <br />
+            <f:button text="0%" click-handler="onChangeTo0Click" margin-right="5"></f:button>
+            <f:button text="25%" click-handler="onChangeTo25Click" margin-right="5"></f:button>
+            <f:button text="50%" click-handler="onChangeTo50Click" margin-right="5"></f:button>
+            <f:button text="75%" click-handler="onChangeTo75Click" margin-right="5"></f:button>
+            <f:button text="100%" click-handler="onChangeTo100Click" margin-right="5"></f:button>
+            <br />
+            <br />
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function changeTo(num) {
+                    F.ui.NumberBox1.setValue(num);
+                    F.ui.NumberBox2.setValue(num);
+                    F.ui.NumberBox3.setValue(num);
+                    F.ui.NumberBox4.setValue(num);
+                    F.ui.NumberBox5.setValue(num);
+                    F.ui.NumberBox6.setValue(num);
+                    F.ui.NumberBox7.setValue(num);
+                    F.ui.NumberBox8.setValue(num);
+                }
+
+                function onChangeTo0Click(event) {
+                    changeTo(0);
+                }
+
+                function onChangeTo25Click(event) {
+                    changeTo(25);
+                }
+
+                function onChangeTo50Click(event) {
+                    changeTo(50);
+                }
+
+                function onChangeTo75Click(event) {
+                    changeTo(75);
+                }
+
+                function onChangeTo100Click(event) {
+                    changeTo(100);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

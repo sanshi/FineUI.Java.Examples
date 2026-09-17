@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 窗体定位（侧边）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 5px 0" body-padding="10px"
+                is-view-port="true">
+                <f:items>
+                    <f:button id="Button1" text="左侧窗体" click-handler="onOpenWindow1Click"></f:button>
+                    <f:button id="Button2" text="右侧窗体" click-handler="onOpenWindow2Click"></f:button>
+                    <f:button id="Button3" text="顶部窗体" click-handler="onOpenWindow3Click"></f:button>
+                    <f:button id="Button4" text="底部窗体" click-handler="onOpenWindow4Click"></f:button>
+                    <f:button id="Button5" text="居中窗体" click-handler="onOpenWindow5Click"></f:button>
+                </f:items>
+            </f:panel>
+
+            <f:window id="Window1" show-header="false" hidden="true" is-modal="true" hide-on-mask-click="true" body-padding="10px" width="150"
+                enable-default-corner="false" position-x="Left">
+                <f:items>
+                    <f:content-panel show-border="false" show-header="false">
+                        <p><a href="http://baike.baidu.com/view/3645.htm" target="_blank"><b>比尔·盖茨</b></a></p>
+                        <p>比尔·盖茨（Bill Gates），全名威廉·亨利·盖茨三世，简称比尔或盖茨。1975年与好友保罗·艾伦一起创办了微软公司，比尔盖茨担任微软公司董事长、CEO和首席软件设计师。</p>
+                    </f:content-panel>
+                </f:items>
+            </f:window>
+            <f:window id="Window2" show-header="false" hidden="true" is-modal="true" hide-on-mask-click="true" body-padding="10px" width="150"
+                enable-default-corner="false" position-x="Right">
+                <f:items>
+                    <f:content-panel show-border="false" show-header="false">
+                        <p><a href="http://baike.baidu.com/view/3645.htm" target="_blank"><b>比尔·盖茨</b></a></p>
+                        <p>比尔·盖茨（Bill Gates），全名威廉·亨利·盖茨三世，简称比尔或盖茨。1975年与好友保罗·艾伦一起创办了微软公司，比尔盖茨担任微软公司董事长、CEO和首席软件设计师。</p>
+                    </f:content-panel>
+                </f:items>
+            </f:window>
+            <f:window id="Window3" show-header="false" hidden="true" is-modal="true" hide-on-mask-click="true" body-padding="10px" layout="Fit" width="300"
+                height="220" enable-default-corner="false" position-y="Top">
+                <f:items>
+                    <f:content-panel show-border="false" show-header="false" auto-scroll="true">
+                        <p><a href="http://baike.baidu.com/view/3645.htm" target="_blank"><b>比尔·盖茨</b></a></p>
+                        <p>比尔·盖茨（Bill Gates），全名威廉·亨利·盖茨三世，简称比尔或盖茨。1975年与好友保罗·艾伦一起创办了微软公司，比尔盖茨担任微软公司董事长、CEO和首席软件设计师。</p>
+                    </f:content-panel>
+                </f:items>
+            </f:window>
+            <f:window id="Window4" show-header="false" hidden="true" is-modal="true" hide-on-mask-click="true" body-padding="10px" layout="Fit" width="300"
+                height="220" enable-default-corner="false" position-y="Bottom">
+                <f:items>
+                    <f:content-panel show-border="false" show-header="false" auto-scroll="true">
+                        <p><a href="http://baike.baidu.com/view/3645.htm" target="_blank"><b>比尔·盖茨</b></a></p>
+                        <p>比尔·盖茨（Bill Gates），全名威廉·亨利·盖茨三世，简称比尔或盖茨。1975年与好友保罗·艾伦一起创办了微软公司，比尔盖茨担任微软公司董事长、CEO和首席软件设计师。</p>
+                    </f:content-panel>
+                </f:items>
+            </f:window>
+            <f:window id="Window5" show-header="false" hidden="true" is-modal="true" hide-on-mask-click="true" body-padding="10px" layout="Fit" width="300"
+                height="220">
+                <f:items>
+                    <f:content-panel show-border="false" show-header="false" auto-scroll="true">
+                        <p><a href="http://baike.baidu.com/view/3645.htm" target="_blank"><b>比尔·盖茨</b></a></p>
+                        <p>比尔·盖茨（Bill Gates），全名威廉·亨利·盖茨三世，简称比尔或盖茨。1975年与好友保罗·艾伦一起创办了微软公司，比尔盖茨担任微软公司董事长、CEO和首席软件设计师。</p>
+                    </f:content-panel>
+                </f:items>
+            </f:window>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onOpenWindow1Click(event) {
+                    F.ui.Window1.show();
+                }
+
+                function onOpenWindow2Click(event) {
+                    F.ui.Window2.show();
+                }
+
+                function onOpenWindow3Click(event) {
+                    F.ui.Window3.show();
+                }
+
+                function onOpenWindow4Click(event) {
+                    F.ui.Window4.show();
+                }
+
+                function onOpenWindow5Click(event) {
+                    F.ui.Window5.show();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

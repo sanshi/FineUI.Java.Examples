@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 垂直按钮分组</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button-group vertical="true">
+                <f:button id="btnIcon1" text="图标在左侧（很长的文本）" icon="Email"></f:button>
+                <f:button id="btnIcon2" text="图标在右侧" icon-align="Right" icon="Star"></f:button>
+                <f:button id="Button7" text="图标在左侧" icon-font="_Home"></f:button>
+                <f:button id="Button8" text="图标在右侧" icon-align="Right" icon-font="_Car"></f:button>
+            </f:button-group>
+            <br />
+            <f:button-group id="ButtonGroup1" vertical="true">
+                <f:button id="btnIcon3" text="图标在上面" icon-align="Top" icon="Email"></f:button>
+                <f:button id="btnIcon4" text="图标在下面" icon-align="Bottom" icon="Star"></f:button>
+                <f:button id="Button9" text="图标在上面" icon-align="Top" icon-font="_Camera"></f:button>
+                <f:button id="Button10" text="图标在下面" icon-align="Bottom" icon-font="_Phone"></f:button>
+            </f:button-group>
+            <br />
+            <f:label text="只有图片的按钮："></f:label>
+            <f:button-group id="ButtonGroup2" vertical="true">
+                <f:button id="Button1" icon-url="/res/images/16/1.png"></f:button>
+                <f:button id="Button2" icon-url="/res/images/16/8.png"></f:button>
+                <f:button id="Button11" icon-font="_Android"></f:button>
+                <f:button id="Button12" icon-font="_Apple"></f:button>
+                <f:button id="Button13" icon-font="_Car"></f:button>
+                <f:button id="Button14" icon-font="_Card"></f:button>
+            </f:button-group>
+            <br />
+            <f:label text="Size（Large）："></f:label>
+            <f:button-group id="ButtonGroup3" vertical="true">
+                <f:button id="Button3" text="图标在上面" size="Large" icon-align="Top" icon="Email"></f:button>
+                <f:button id="Button4" text="图标在下面" size="Large" icon-align="Bottom" icon="Star"></f:button>
+                <f:button id="Button5" text="图标在上面" size="Large" icon-align="Top" icon-font="_Camera"></f:button>
+                <f:button id="Button6" text="图标在下面" size="Large" icon-align="Bottom" icon-font="_Phone"></f:button>
+            </f:button-group>
+
+        </th:block>
+    </body>
+
+</html>

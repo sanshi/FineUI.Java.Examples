@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 自定义按钮</title>
+
+        <style th:inline="css">
+            .bgbtn {
+                background-image: url([(@{/res/images/login.png})]) !important;
+                width: 320px;
+                height: 50px;
+                border-width: 0 !important;
+                background-color: transparent !important;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="Button1" text="普通按钮" size="Large" on-click="Button1_Click"></f:button>
+            <br />
+            <br />
+
+            <f:button id="Button2" text="" css-class="bgbtn" on-click="Button2_Click"></f:button>
+
+        </th:block>
+    </body>
+
+</html>

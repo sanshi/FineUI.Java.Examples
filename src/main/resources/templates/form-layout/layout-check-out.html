@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · LayoutCheckOut</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:window id="Window1" title="账单信息" is-modal="false" enable-close="false" enable-resize="true" width="650" body-padding="10" auto-scroll="true">
+                <f:items>
+                    <f:form id="Form1" label-align="Right" message-target="Qtip" show-border="false" show-header="false">
+                        <f:items>
+                            <f:group-panel id="GroupPanel1" layout="Anchor" title="联系人信息">
+                                <f:items>
+                                    <f:panel id="Panel2" layout="HBox" show-header="false" show-border="false">
+                                        <f:items>
+                                            <f:label id="Label1" show-red-star="true" label="姓名"></f:label>
+                                            <f:text-box id="TextBox2" show-label="false" css-class="marginr" required="true" show-red-star="true"
+                                                box-flex="2"></f:text-box>
+                                            <f:text-box id="TextBox4" show-label="false" required="true" show-red-star="true" box-flex="3"></f:text-box>
+                                        </f:items>
+                                    </f:panel>
+                                    <f:panel id="Panel1" layout="HBox" box-config-align="Stretch" show-header="false" show-border="false">
+                                        <f:items>
+                                            <f:text-box id="TextBox1" required="true" show-red-star="true" label="电子邮箱" regex-pattern="EMAIL"
+                                                regex-message="请输入有效的邮箱地址" box-flex="1"></f:text-box>
+                                            <f:text-box id="TextBox6" label="电话号码" width="200" required="true" show-red-star="true"></f:text-box>
+                                        </f:items>
+                                    </f:panel>
+                                </f:items>
+                            </f:group-panel>
+                            <f:group-panel id="GroupPanel2" layout="Anchor" title="联系人地址">
+                                <f:items>
+                                    <f:text-box id="TextBox7" label="详细地址" required="true" show-red-star="true"></f:text-box>
+                                    <f:panel id="Panel4" layout="HBox" box-config-align="Stretch" show-header="false" show-border="false">
+                                        <f:items>
+                                            <f:text-box id="TextBox9" label="省" box-flex="1" required="true" show-red-star="true"></f:text-box>
+                                            <f:text-box id="TextBox5" label="市" box-flex="1" label-width="50" required="true" show-red-star="true"></f:text-box>
+                                            <f:text-box id="TextBox8" label="邮政编码" width="200" required="true" show-red-star="true"></f:text-box>
+                                        </f:items>
+                                    </f:panel>
+                                </f:items>
+                            </f:group-panel>
+                            <f:group-panel id="GroupPanel3" layout="Anchor" title="账单地址">
+                                <f:items>
+                                    <f:check-box checked="true" id="cbxSameAsContactAddress" text="和联系人地址相同"
+                                        on-checked-changed="cbxSameAsContactAddress_CheckedChanged"></f:check-box>
+                                    <f:text-box id="tbxBillingAddress" enabled="false" label="详细地址" required="true" show-red-star="true"></f:text-box>
+                                    <f:panel id="Panel3" layout="HBox" box-config-align="Stretch" show-header="false" show-border="false">
+                                        <f:items>
+                                            <f:text-box id="tbxBillingProvince" enabled="false" label="省" box-flex="1" required="true"
+                                                show-red-star="true"></f:text-box>
+                                            <f:text-box id="tbxBillingCity" enabled="false" label="市" box-flex="1" label-width="50" required="true"
+                                                show-red-star="true"></f:text-box>
+                                            <f:text-box id="tbxBillingPostCode" enabled="false" label="邮政编码" width="200" required="true"
+                                                show-red-star="true"></f:text-box>
+                                        </f:items>
+                                    </f:panel>
+                                </f:items>
+                            </f:group-panel>
+                            <f:group-panel id="GroupPanel4" layout="Anchor" title="付款方式">
+                                <f:items>
+                                    <f:radio-button-list id="RadioButtonList1" column-number="5" show-label="false">
+                                        <f:radio-item text="银联" value="yinlian" selected="true"></f:radio-item>
+                                        <f:radio-item text="VISA" value="visa"></f:radio-item>
+                                        <f:radio-item text="MasteCard" value="mastercard"></f:radio-item>
+                                    </f:radio-button-list>
+                                    <f:text-box id="TextBox3" label="卡上的名字" required="true" show-red-star="true"></f:text-box>
+                                    <f:panel id="Panel5" layout="HBox" box-config-align="Stretch" show-header="false" show-border="false">
+                                        <f:items>
+                                            <f:text-box id="TextBox14" label="卡号" box-flex="1" required="true" show-red-star="true"></f:text-box>
+                                            <f:drop-down-list id="DropDownList1" label="过期时间" width="180" css-class="marginr" required="true"
+                                                show-red-star="true">
+                                                <f:list-item text="一月" value="1"></f:list-item>
+                                                <f:list-item text="二月" value="2"></f:list-item>
+                                                <f:list-item text="三月" value="3"></f:list-item>
+                                                <f:list-item text="四月" value="4"></f:list-item>
+                                                <f:list-item text="五月" value="5"></f:list-item>
+                                                <f:list-item text="六月" value="6"></f:list-item>
+                                                <f:list-item text="七月" value="7"></f:list-item>
+                                                <f:list-item text="八月" value="8"></f:list-item>
+                                                <f:list-item text="九月" value="9"></f:list-item>
+                                                <f:list-item text="十月" value="10"></f:list-item>
+                                                <f:list-item text="十一月" value="11"></f:list-item>
+                                                <f:list-item text="十二月" value="12"></f:list-item>
+                                            </f:drop-down-list>
+                                            <f:number-box id="TextBox16" show-label="false" no-decimal="true" no-negative="true" text="2014" width="100"
+                                                required="true" show-red-star="true"></f:number-box>
+                                        </f:items>
+                                    </f:panel>
+                                </f:items>
+                            </f:group-panel>
+                        </f:items>
+                    </f:form>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" toolbar-align="Right" position="Bottom">
+                        <f:items>
+                            <f:button id="Button1" icon-font="_Save" text="提交账单" validate-forms="Form1" validate-message-box="false"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:window>
+
+        </th:block>
+    </body>
+
+</html>

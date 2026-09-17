@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataList</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" auto-scroll="true" is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" title="列表" header-style="true"></f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:data-list id="DataList1">
+                        <f:data-list-item text="列表项1" />
+                        <f:data-list-item text="列表项2" />
+                        <f:data-list-item text="列表项3" />
+                        <f:data-list-item text="列表项4" />
+                        <f:data-list-item text="列表项5" />
+                        <f:data-list-item text="列表项6" />
+                        <f:data-list-item text="列表项7" />
+                        <f:data-list-item text="列表项8" />
+                        <f:data-list-item text="一个很长很长很长很长很长很长很长很长很长很长很长很长很长很的列表项" />
+                    </f:data-list>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

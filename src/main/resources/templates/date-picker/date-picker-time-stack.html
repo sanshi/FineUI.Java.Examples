@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DatePickerTimeStack</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="简单表单">
+                <f:items>
+                    <f:date-picker id="DatePicker1" required="true" label="开始日期" empty-text="请选择开始日期" show-red-star="true"
+                        date-format-string="yyyy/MM/dd HH:mm:ss" show-time="true" stack-date-time="true"></f:date-picker>
+                    <f:date-picker id="DatePicker2" required="true" readonly="false" label="结束日期" show-red-star="true" compare-control="DatePicker1"
+                        compare-operator="GreaterThan" compare-message="结束日期应该大于开始日期" date-format-string="yyyy/MM/dd HH:mm:ss" show-time="true"
+                        stack-date-time="true"></f:date-picker>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false" show-label="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

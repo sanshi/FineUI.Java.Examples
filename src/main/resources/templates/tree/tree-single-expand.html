@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 单节点展开</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tree id="Tree1" is-fluid="true" show-header="true" title="树控件（EnableSingleExpand）" enable-collapse="false" enable-single-click-expand="false"
+                enable-single-expand="true">
+                <f:nodes>
+                    <f:tree-node text="中国" expanded="true" node-id="china">
+                        <f:tree-node text="河南省" node-id="henan">
+                            <f:tree-node text="驻马店市" node-id="zhumadian">
+                                <f:tree-node text="遂平县" leaf="false" node-id="suiping">
+                                    <f:tree-node text="槐树乡" leaf="false" node-id="huaishu">
+                                        <f:tree-node text="陈庄村" node-id="chenzhuang"></f:tree-node>
+                                    </f:tree-node>
+                                    <f:tree-node text="嵖岈山乡" node-id="chayashanxiang"></f:tree-node>
+                                </f:tree-node>
+                                <f:tree-node text="西平县" leaf="false" node-id="xiping">
+                                    <f:tree-node text="芦庙乡" node-id="lumiaoxiang"></f:tree-node>
+                                    <f:tree-node text="杨庄乡" node-id="yangzhuangxiang"></f:tree-node>
+                                </f:tree-node>
+                            </f:tree-node>
+                            <f:tree-node text="漯河市" node-id="luohe"></f:tree-node>
+                        </f:tree-node>
+                        <f:tree-node text="安徽省" expanded="true" node-id="anhui">
+                            <f:tree-node text="合肥市" expanded="true" node-id="hefei">
+                                <f:tree-node text="金色池塘小区" node-id="golden"></f:tree-node>
+                                <f:tree-node text="中国科学技术大学" node-id="ustc"></f:tree-node>
+                            </f:tree-node>
+                        </f:tree-node>
+                    </f:tree-node>
+                </f:nodes>
+            </f:tree>
+
+            <br />
+            注：启用了 EnableSingleExpand，也就是说同一级节点同时只能展开一个（初始状态除外）。
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 选择省市县</title>
+
+        <style th:inline="css">
+            .mybgpanel>.f-panel-bodyct>.f-panel-body {
+                background-color: #FEF3D5;
+                background-image: url([(@{/res/images/bg/small/3.jpg})]);
+                background-position: right bottom;
+                background-repeat: no-repeat;
+            }
+
+            .mywindow,
+            .mywindow>.f-panel-bodyct>.f-panel-body {
+                background-image: none;
+                background-color: transparent;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" css-class="mybgpanel" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 5px 0"
+                body-padding="10px" is-view-port="true">
+                <f:items>
+                    <f:button id="btnOpenWindow" text="选择省市县" click-handler="onOpenWindow1Click"></f:button>
+                </f:items>
+            </f:panel>
+
+            <f:window id="Window1" css-class="mywindow" show-header="false" show-border="false" hidden="true" hide-on-mask-click="true" is-modal="true"
+                body-padding="10px" layout="VBox" box-config-child-margin="0 0 5px 0" percent-width="100%" enable-default-corner="false" position-y="Bottom">
+                <f:items>
+                    <f:simple-form id="SimpleForm1" show-border="true" show-header="false" body-padding="10px" css-class="f-corner-all" layout="VBox"
+                        message-target="None" label-align="Right">
+                        <f:items>
+                            <f:drop-down-list id="ddlSheng" persist-items="false" label="省份" show-red-star="true" compare-type="String" compare-value="-1"
+                                compare-operator="NotEqual" compare-message="请选择省份！"
+                                on-selected-index-changed="ddlSheng_SelectedIndexChanged"></f:drop-down-list>
+                            <f:drop-down-list id="ddlShi" persist-items="false" label="地区市" show-red-star="true" compare-type="String" compare-value="-1"
+                                compare-operator="NotEqual" compare-message="请选择地区市！" enabled="false" on-selected-index-changed="ddlShi_SelectedIndexChanged">
+                                <f:items>
+                                    <f:list-item text="选择地区市" value="-1"></f:list-item>
+                                </f:items>
+                            </f:drop-down-list>
+                            <f:drop-down-list id="ddlXian" persist-items="false" show-red-star="true" compare-type="String" compare-value="-1"
+                                compare-operator="NotEqual" compare-message="请选择县区市！" label="县区市" enabled="false">
+                                <f:items>
+                                    <f:list-item text="选择县区市" value="-1"></f:list-item>
+                                </f:items>
+                            </f:drop-down-list>
+                            <f:panel show-border="false" show-header="false" layout="HBox">
+                                <f:items>
+                                    <f:button id="Button3" width="100" text="取消" margin-right="10" click-handler="onCloseWindow1Click"></f:button>
+                                    <f:button id="Button1" box-flex="1" text="选择" validate-forms="SimpleForm1" validate-message-box-plain="true"
+                                        on-click="Button1_Click"></f:button>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+            </f:window>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/common.js}"></script>
+            <script>
+                function onOpenWindow1Click(event) {
+                    F.ui.Window1.show();
+                }
+
+                function onCloseWindow1Click(event) {
+                    F.ui.Window1.hide();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

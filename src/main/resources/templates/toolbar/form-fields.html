@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 工具栏中的表单字段</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" data-id-field="Id" is-fluid="true" show-border="true" show-header="true" title="表格" height="500" enable-collapse="false">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" toolbar-align="Right">
+                        <f:items>
+                            <f:date-picker id="dpStartDate" width="300" required="true" date-format-string="yyyy/MM/dd" label-width="120" label-align="Right"
+                                label="销毁统计时间段" empty-text="请选择开始日期" enable-edit="false"></f:date-picker>
+                            <f:date-picker id="dpEndDate" width="180" required="true" readonly="false" compare-control="dpStartDate"
+                                date-format-string="yyyy/MM/dd" compare-operator="GreaterThan" compare-message="结束日期应该大于开始日期" empty-text="请选择结束日期"
+                                show-label="false" label="销毁统计时间段" enable-edit="false"></f:date-picker>
+                            <f:button id="btnClearDate" text="重置起止时间" on-click="btnClearDate_Click"></f:button>
+                            <f:toolbar-separator></f:toolbar-separator>
+                            <f:button id="btnSearch" text="查询" validate-forms="Toolbar1" on-click="btnSearch_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"></f:render-field>
+                </f:columns>
+            </f:grid>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

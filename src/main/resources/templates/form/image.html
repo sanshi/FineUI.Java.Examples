@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 图片</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            icon="World"：
+            <br />
+            <f:image id="Image1" icon="World"></f:image>
+            <br />
+            image-url="/res/icon/world.png"：
+            <br />
+            <f:image id="Image2" image-url="/res/icon/world.png"></f:image>
+            <br />
+            image-url="/res/images/newlogo/favicon.ico" image-css-style="border:solid 1px #ccc;padding:5px;"：
+            <br />
+            <f:image id="Image3" image-width="32" image-height="32" image-css-style="border:solid 1px #ccc;padding:5px;"
+                image-url="/res/images/newlogo/favicon.ico"></f:image>
+            <br />
+            <f:button id="Button1" text="改变图片的大小" on-click="Button1_Click"></f:button>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Anchor 布局</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel3" is-fluid="true" title="面板一（Height=300px)" height="300" enable-collapse="false" body-padding="10" show-border="true"
+                show-header="true">
+                <f:items>
+                    <f:panel id="Panel1" show-border="true" margin="0 0 5 0" body-padding="10" show-header="false" title="面板">
+                        <f:items>
+                            <f:label id="Label5" text="Margin=0 0 5 0"></f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:form id="Form3" show-border="true" body-padding="10" show-header="false" title="表单">
+                        <f:rows>
+                            <f:form-row>
+                                <f:items>
+                                    <f:label id="Label2" label="文本" text="文本内容"></f:label>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox2" label="输入框"></f:text-box>
+                                    <f:button id="Button2" text="按钮"></f:button>
+                                </f:items>
+                            </f:form-row>
+                        </f:rows>
+                    </f:form>
+                </f:items>
+            </f:panel>
+            <br>
+
+            <f:panel id="Panel2" is-fluid="true" height="300" show-border="true" enable-collapse="false" body-padding="10" layout="Anchor" show-header="true"
+                title="面板二（Height=300px Width=750px Layout=Anchor）">
+                <f:items>
+                    <f:panel id="Panel4" anchor-value="60% 30%" margin="0 0 5 0" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label id="Label3" text="AnchorValue=60% 30% Margin=0 0 5 0"></f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:form id="Form2" anchor-value="100% 70%" body-padding="10" show-border="true" show-header="false">
+                        <f:rows>
+                            <f:form-row>
+                                <f:items>
+                                    <f:label id="Label1" text="AnchorValue=100% 70%"></f:label>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox1" label="输入框"></f:text-box>
+                                    <f:button id="Button7" text="按钮"></f:button>
+                                </f:items>
+                            </f:form-row>
+                        </f:rows>
+                    </f:form>
+                </f:items>
+            </f:panel>
+            <br>
+
+            <f:panel id="Panel5" is-fluid="true" title="面板三（Width=750px）" enable-collapse="false" body-padding="10" show-border="true" show-header="true">
+                <f:items>
+                    <f:form id="Form4" show-border="false" show-header="false">
+                        <f:rows>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox3" label="用户名"></f:text-box>
+                                    <f:button id="Button6" text="搜索"></f:button>
+                                </f:items>
+                            </f:form-row>
+                        </f:rows>
+                    </f:form>
+                    <f:panel id="Panel6" show-border="true" show-header="false">
+                        <f:toolbars>
+                            <f:toolbar id="Toolbar1">
+                                <f:items>
+                                    <f:button id="Button4" text="按钮一"></f:button>
+                                    <f:button id="Button5" text="按钮二"></f:button>
+                                </f:items>
+                            </f:toolbar>
+                        </f:toolbars>
+                        <f:items>
+                            <f:grid id="Grid1" title="表格" page-size="3" show-border="false" show-header="false" data-id-field="Id" data-text-field="Name"
+                                enable-check-box-select="true">
+                                <f:columns>
+                                    <f:row-number-field></f:row-number-field>
+                                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                                        min-width="150"></f:render-field>
+                                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                                </f:columns>
+                            </f:grid>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+            <br>
+
+            <f:panel id="Panel7" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" show-header="true" height="350"
+                title="面板四（Width=750px Height=350px Layout=Anchor）" layout="Anchor">
+                <f:items>
+                    <f:form id="Form5" show-border="false" anchor-value="100%" show-header="false">
+                        <f:rows>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox5" label="用户名"></f:text-box>
+                                    <f:text-box id="TextBox8" label="所在班级"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox6" label="所在年级"></f:text-box>
+                                    <f:button id="Button11" text="搜索"></f:button>
+                                </f:items>
+                            </f:form-row>
+                        </f:rows>
+                    </f:form>
+                    <f:panel id="Panel8" show-border="true" show-header="false" anchor-value="100% -72" layout="Fit">
+                        <f:toolbars>
+                            <f:toolbar id="Toolbar2">
+                                <f:items>
+                                    <f:button id="Button8" text="按钮一"></f:button>
+                                    <f:button id="Button9" text="按钮二"></f:button>
+                                </f:items>
+                            </f:toolbar>
+                        </f:toolbars>
+                        <f:items>
+                            <f:grid id="Grid2" title="Grid2" page-size="3" show-border="false" show-header="false" data-id-field="Id" data-text-field="Name"
+                                enable-check-box-select="true">
+                                <f:columns>
+                                    <f:row-number-field></f:row-number-field>
+                                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                                        min-width="150"></f:render-field>
+                                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                                </f:columns>
+                            </f:grid>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+            <br />
+            <br />
+            <br />
+            <strong>【推荐】</strong>使用 VBox 布局实现与上例相同的界面：
+            <br />
+            <hr />
+            <br />
+
+            <f:panel id="Panel9" is-fluid="true" layout="VBox" enable-collapse="false" body-padding="10" box-config-child-margin="0" show-border="true"
+                show-header="true" height="350" title="面板五（Layout=VBox BoxConfigChildMargin=0）">
+                <f:items>
+                    <f:form id="Form6" show-border="false" show-header="false">
+                        <f:rows>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox4" label="用户名"></f:text-box>
+                                    <f:text-box id="TextBox7" label="所在班级"></f:text-box>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox9" label="所在年级"></f:text-box>
+                                    <f:button id="Button10" text="搜索"></f:button>
+                                </f:items>
+                            </f:form-row>
+                        </f:rows>
+                    </f:form>
+                    <f:panel id="Panel10" show-border="true" show-header="false" box-flex="1" layout="Fit">
+                        <f:toolbars>
+                            <f:toolbar id="Toolbar3">
+                                <f:items>
+                                    <f:button id="Button12" text="按钮一"></f:button>
+                                    <f:button id="Button13" text="按钮二"></f:button>
+                                </f:items>
+                            </f:toolbar>
+                        </f:toolbars>
+                        <f:items>
+                            <f:grid id="Grid3" title="Grid3" page-size="3" show-border="false" show-header="false" data-id-field="Id" data-text-field="Name"
+                                enable-check-box-select="true">
+                                <f:columns>
+                                    <f:row-number-field></f:row-number-field>
+                                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                                        min-width="150"></f:render-field>
+                                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                                </f:columns>
+                            </f:grid>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

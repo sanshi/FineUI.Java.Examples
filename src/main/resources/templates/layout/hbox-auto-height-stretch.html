@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · HBox 自动高度拉伸布局</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel is-fluid="true" show-border="true" enable-collapse="false" layout="HBox" body-padding="10" box-config-child-margin="0 5 0 0"
+                show-header="true" title="面板（Layout=HBox）（默认值：BoxConfigAlign=Stretch）">
+                <f:items>
+                    <f:panel title="面板1" width="200" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text="Width=200">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel title="面板2" width="200" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text-raw-html="Width=200<br><br><br><br><br><br><br><br>bottom line">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel title="面板3" box-flex="1" body-padding="10" margin="0" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text="BoxFlex=1">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+            <br />
+            <br />
+            <f:panel is-fluid="true" show-border="true" enable-collapse="false" layout="HBox" body-padding="10" box-config-child-margin="0 5 0 0"
+                show-header="true" title="面板（Layout=HBox）（默认值：BoxConfigAlign=Stretch）">
+                <f:items>
+                    <f:panel title="面板1" width="200" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text="Width=200">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel title="面板2" width="200" height="250" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text="Width=200 Height=250">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel title="面板3" box-flex="1" body-padding="10" margin="0" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text="BoxFlex=1">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+            <br />
+            <br />
+
+            <f:panel is-fluid="true" show-border="true" enable-collapse="false" layout="HBox" box-config-align="Start" body-padding="10"
+                box-config-child-margin="0 5 0 0" show-header="true" title="面板（Layout=HBox BoxConfigAlign=Start）">
+                <f:items>
+                    <f:panel title="面板1" width="200" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text="Width=200">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel title="面板2" width="200" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text-raw-html="Width=200<br><br><br><br><br><br><br><br>bottom line">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel title="面板3" box-flex="1" body-padding="10" margin="0" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text="BoxFlex=1">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+            <br />
+            <br />
+            <f:panel is-fluid="true" show-border="true" enable-collapse="false" layout="HBox" box-config-align="Start" body-padding="10"
+                box-config-child-margin="0 5 0 0" show-header="true" title="面板（Layout=HBox BoxConfigAlign=Start）">
+                <f:items>
+                    <f:panel title="面板1" width="200" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text="Width=200">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel title="面板2" width="200" height="250" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text="Width=200 Height=250">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel title="面板3" box-flex="1" body-padding="10" margin="0" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label text="BoxFlex=1">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+            <br />
+            <br />
+
+        </th:block>
+    </body>
+
+</html>

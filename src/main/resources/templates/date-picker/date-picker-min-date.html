@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DatePickerMinDate</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" title="简单表单">
+                <f:items>
+                    <f:date-picker id="DatePicker1" required="true" label="日期" empty-text="限制范围的日期" show-red-star="true"></f:date-picker>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false" show-label="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

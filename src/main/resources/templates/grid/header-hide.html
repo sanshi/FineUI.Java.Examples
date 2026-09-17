@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 隐藏标题栏</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name" height="200"
+                show-grid-header="false" enable-row-lines="false" enable-alternate-row-color="false">
+                <f:columns>
+                    <f:render-field header-text="姓名" data-field="Name" expand-unused-space="true" min-width="150"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            注：本表格隐藏了表头、行分隔线、间隔行背景色。
+
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+            <br />
+            <br />
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

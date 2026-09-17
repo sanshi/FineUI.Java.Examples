@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TableStyleFileUpload</title>
+
+        <style>
+            .result img {
+                border: 1px solid #CCCCCC;
+                max-width: 550px;
+                padding: 3px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="表单" show-header="true"
+                message-target="Qtip">
+                <f:items>
+                    <f:simple-form show-border="false" show-header="false" enable-table-style="true">
+                        <f:items>
+                            <f:text-box id="tbxUserName" label="用户名" empty-text="请输入用户名" required="true" show-red-star="true"></f:text-box>
+                            <f:file-upload id="filePhoto" empty-text="请选择一张照片" label="个人头像" required="true" show-red-star="true"></f:file-upload>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+            </f:simple-form>
+            <f:button id="btnSubmit" on-click="btnSubmit_Click" validate-forms="SimpleForm1" text="提交" margin-top="5"></f:button>
+            <br />
+            <f:label id="labResult" encode-text="false" css-class="result"></f:label>
+            <br />
+            <br />
+            注：由于浏览器安全限制，部分浏览器下只显示文件名（1.png）或者假路径（C:\fakepath\1.png）。
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 工具栏自定义背景</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" show-border="true" body-padding="10" title="面板" enable-collapse="false"
+                content='<p><a href="http://tech.163.com/special/jobsdead/" target="_blank"><b>乔布斯</b></a></p><p>乔布斯于1955年2月24日出生，苹果创始人之一。今年8月苹果超越埃克森美孚成为全球最大市值企业，截止上季度持有现金达到762亿美金，甚至超过了美国政府国库存款。</p><p>遗憾的是，苹果的取得巨大成功还是无法给乔布斯一个健康的身体，乔布斯2003年被发现患有胰脏癌，随后又查出肝癌，危在旦夕的乔布斯在经历了8年的抗癌斗争、3次病休、若干次手术后，于2011年8月25日正式宣布从CEO位置辞职。2011年10月6日，乔布斯在苹果发布iPhone 4S后的第二天与世长辞。</p>'>
+                <f:toolbars>
+                    <f:toolbar toolbar-align="Right" css-class="f-state-default">
+                        <f:items>
+                            <f:button id="Button1" enable-default-state="false" icon="Table" text="按钮一"></f:button>
+                            <f:button id="Button2" enabled="false" enable-default-state="false" icon="New" text="按钮二"></f:button>
+                            <f:toolbar-separator></f:toolbar-separator>
+                            <f:button id="Button3" enabled="false" enable-default-state="false" icon="DatabaseSave" text="按钮三"></f:button>
+                            <f:button id="Button4" enable-default-state="false" icon-font="_User" text="按钮四"></f:button>
+                            <f:toolbar-separator></f:toolbar-separator>
+                            <f:button id="Button5" enable-default-state="false" icon-font="_Phone" text="按钮五"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

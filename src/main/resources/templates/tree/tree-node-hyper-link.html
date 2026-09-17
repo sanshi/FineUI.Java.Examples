@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 节点渲染为超链接</title>
+
+        <style>
+            .lefttree {
+                border-top-width: 0;
+                border-left-width: 0;
+                border-bottom-width: 0;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <th:block layout:fragment="body">
+
+            <f:panel id="RegionPanel1" is-fluid="true" layout="Region" height="500" show-header="true" title="将树节点渲染为超链接（点击节点空白处也能打开链接）" show-border="true">
+                <f:items>
+                    <f:tree id="Tree1" region-split="false" region-position="Left" width="200" css-class="lefttree" show-header="false" show-border="true"
+                        enable-node-hyper-link="true">
+                        <f:nodes>
+                            <f:tree-node text="基本用法" expanded="true">
+                                <f:tree-node text="你好 FineUI" navigate-url="/basic/hello" target="treemainframe"></f:tree-node>
+                                <f:tree-node text="登陆页面" navigate-url="/basic/login" target="treemainframe"></f:tree-node>
+                            </f:tree-node>
+                            <f:tree-node text="表单控件" expanded="true">
+                                <f:tree-node text="简单按钮" navigate-url="/button/button" target="treemainframe"></f:tree-node>
+                                <f:tree-node text="文本输入框" navigate-url="/form/text-box" target="treemainframe"></f:tree-node>
+                            </f:tree-node>
+                        </f:nodes>
+                    </f:tree>
+                    <f:panel id="Panel1" iframe-name="treemainframe" show-header="false" enable-iframe="true" show-border="false" region-position="Center">
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

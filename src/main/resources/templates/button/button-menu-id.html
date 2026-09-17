@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 菜单按钮（MenuID属性）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:menu id="Menu1">
+                <f:menu-hyper-link id="MenuHyperLink1" icon="TagGreen" target="_blank" navigate-url="http://scms.ustc.edu.cn/"
+                    text="化学与材料科学学院"></f:menu-hyper-link>
+                <f:menu-button id="MenuButton1" icon="TagBlue" text="管理学院">
+                    <f:menu>
+                        <f:menu-hyper-link id="MenuHyperLink3" icon="TagPink" target="_blank" navigate-url="http://is.ustc.edu.cn/"
+                            text="工商管理系"></f:menu-hyper-link>
+                        <f:menu-hyper-link id="MenuHyperLink4" icon="TagPurple" target="_blank" navigate-url="http://stat.ustc.edu.cn/"
+                            text="统计与金融系"></f:menu-hyper-link>
+                    </f:menu>
+                </f:menu-button>
+            </f:menu>
+
+            <f:button id="btnMenu" text="中国科学技术大学" menu-id="Menu1"></f:button>
+            <br />
+            <br />
+            <f:button id="Button1" text="中国科学技术大学（和上一个按钮共享同一个菜单）" menu-id="Menu1"></f:button>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Region 百分比布局</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" margin="24" show-border="false" show-header="false" layout="Region" is-view-port="true">
+                <f:items>
+                    <f:panel id="panelTopRegion" region-position="Top" region-split="true" enable-collapse="true" region-percent="20%" title="顶部面板"
+                        show-border="true" show-header="false" body-padding="10" icon-font="_PullUp">
+                        <f:items>
+                            <f:label id="Label1" text="顶部面板的内容（RegionPercent=20%）">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="panelLeftRegion" region-position="Left" region-split="true" enable-collapse="true" region-percent="30%" title="左侧面板（有提示信息）"
+                        title-tool-tip="左侧面板（有提示信息）" show-border="true" show-header="false" body-padding="10" icon-font="_PullLeft">
+                        <f:items>
+                            <f:label id="Label2" text-raw-html="左侧面板的内容<br>（RegionPercent=30%）">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="panelCenterRegion" region-position="Center" title="中间面板" show-border="true" show-header="false" body-padding="10"
+                        icon-font="_RoundPlus">
+                        <f:items>
+                            <f:label id="Label3" text="中间面板的内容">
+                            </f:label>
+                            <f:label id="Label6">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="panelRightRegion" region-position="Right" region-split="true" enable-collapse="true" region-percent="30%" title="右侧面板"
+                        show-border="true" show-header="false" body-padding="10" icon-font="_PullRight">
+                        <f:items>
+                            <f:label id="Label4" text-raw-html="右侧面板的内容<br>（RegionPercent=30%）">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="panelBottomRegion" region-position="Bottom" region-split="true" enable-collapse="true" region-percent="20%" title="底部面板"
+                        show-border="true" show-header="false" body-padding="10" icon-font="_PullDown">
+                        <f:items>
+                            <f:label id="Label5" text="底部面板的内容（RegionPercent=20%）">
+                            </f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · PanelIFrame</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-header="false" show-border="false" enable-iframe="true" iframe-url="/mobile/button/button" is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar2" title="面板（IFrame）" header-style="true"></f:toolbar>
+                    <f:toolbar id="Toolbar1" position="Bottom" css-class="f-state-default">
+                        <f:items>
+                            <f:toolbar-fill></f:toolbar-fill>
+                            <f:button text="转到其他页面" size="Small" enable-default-state="false" show-menu-icon="false">
+                                <f:menu>
+                                    <f:menu-button text="首页" attribute-data-tag="/mobile/button/button" click-handler="onMyMenuButtonClick"></f:menu-button>
+                                    <f:menu-button text="按钮分组" attribute-data-tag="/mobile/button/button-group"
+                                        click-handler="onMyMenuButtonClick"></f:menu-button>
+                                    <f:menu-button text="按钮分组（垂直）" attribute-data-tag="/mobile/button/button-group-vertical"
+                                        click-handler="onMyMenuButtonClick"></f:menu-button>
+                                    <f:menu-button text="按钮分组（与选项卡交互）" attribute-data-tag="/mobile/button/button-group-tab-strip"
+                                        click-handler="onMyMenuButtonClick"></f:menu-button>
+                                </f:menu>
+                            </f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onMyMenuButtonClick(event) {
+                    var iframeUrl = this.getAttr('data-tag');
+                    F.ui.Panel1.setIFrameUrl(F.resolveUrl(iframeUrl));
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

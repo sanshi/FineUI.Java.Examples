@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataModel 登录页面</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <div style="padding:10px">用户名：admin<br />密码：admin888<br /><br /><br />注意：在任意输入框内按回车键都会触发表单的提交（相当于点击【登录】按钮）。</div>
+            <f:window id="Window1" width="350" window-position="GoldenSection" enable-close="false" is-modal="false" title="登录表单">
+                <f:items>
+                    <f:simple-form id="SimpleForm1" show-header="false" body-padding="10" remove-last-fields-margin="true" show-border="false">
+                        <f:items>
+                            <f:text-box id="tbxUserName" show-red-star="true" required="true" label="用户名" max-length="20"></f:text-box>
+                            <f:text-box id="tbxPassword" show-red-star="true" required="true" text-mode="Password" required-message="密码不能为空！"
+                                enable-validate-trim="false" label="密码" max-length="9" max-length-message="密码最大为 9 个字符！" min-length="3"
+                                min-length-message="密码最小为 3 个字符！" regex="^(?:[0-9]+[a-zA-Z]|[a-zA-Z]+[0-9])[a-zA-Z0-9]*$"
+                                regex-message="密码至少包含一个字母和数字！"></f:text-box>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="btnLogin" type="Submit" text="登录" validate-target="Top" validate-forms="SimpleForm1" on-click="btnLogin_Click">
+                            </f:button>
+                            <f:button id="btnReset" type="Reset" text="重置"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:window>
+        </th:block>
+    </body>
+
+</html>

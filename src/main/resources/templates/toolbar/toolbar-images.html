@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 工具栏图片</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" title="面板" height="250" enable-collapse="false">
+                <f:toolbars>
+                    <f:toolbar position="Top">
+                        <f:items>
+                            <f:image id="Image1" image-width="16" icon="ArrowRight"></f:image>
+                            <f:link-button id="Button1" text="按钮一" click-handler="onButton1Click"></f:link-button>
+                            <f:image id="Image2" image-width="16" icon="World"></f:image>
+                            <f:link-button id="Button2" text="按钮二" click-handler="onButton2Click"></f:link-button>
+                            <f:image id="Image3" image-width="16" icon="Cake"></f:image>
+                            <f:link-button id="Button3" text="按钮三" click-handler="onButton3Click"></f:link-button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+            <br>
+            <br>
+            注：
+            <ul>
+                <li>由于页面布局时图片尚未加载，所以会造成布局错乱</li>
+                <li>需要自己通过脚本在所有图片加载完毕后，重新对面板进行布局</li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                // 布局时图片尚未加载，所以需要在图片完成加载后重新布局
+                F.ready(function() {
+
+                    // 返回 Deferred 对象数组
+                    var imagdefs = $('.toobar-img img').map(function() {
+                        var imgEl = $(this);
+                        return $.Deferred(function(def) {
+                            imgEl.on('load', function() {
+                                //console.log('load img:' + imgEl.attr('src'));
+                                def.resolve();
+                            });
+                        }).promise();
+                    });
+
+                    // 等工具栏上的全部图片加载完毕后，再重新布局
+                    $.when.apply($, $.makeArray(imagdefs)).done(function() {
+                        F.ui.Panel1.doLayout();
+                        //console.log('OK');
+                    });
+
+                });
+
+                function onButton1Click(event) {
+                    alert('Button1');
+                }
+
+                function onButton2Click(event) {
+                    alert('Button2');
+                }
+
+                function onButton3Click(event) {
+                    alert('Button3');
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

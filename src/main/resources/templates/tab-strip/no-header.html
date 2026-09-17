@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 隐藏选项卡标题栏</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="350" enable-tab-close-menu="true" show-border="true" show-tab-header="false"
+                active-tab-index="1">
+                <f:tabs>
+                    <f:tab id="Tab1" title="标签一" enable-close="false" body-padding="10">
+                        <f:items>
+                            <f:label id="Label5" text="标签一中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab2" title="标签二" body-padding="10" enable-close="true">
+                        <f:items>
+                            <f:label id="Label4" text="标签二中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab3" title="标签三" body-padding="10" enable-close="true" layout="VBox">
+                        <f:items>
+                            <f:label id="Label3" text="标签三中的文本" />
+                            <f:tab-strip id="TabStrip2" box-flex="1" enable-tab-close-menu="true" show-border="true" active-tab-index="1">
+                                <f:tabs>
+                                    <f:tab id="Tab4" title="标签四" enable-close="false" body-padding="10">
+                                        <f:items>
+                                            <f:label id="Label1" text="标签四中的文本" />
+                                        </f:items>
+                                    </f:tab>
+                                    <f:tab id="Tab5" title="标签五" enable-close="false" body-padding="10">
+                                        <f:items>
+                                            <f:label id="Label2" text="标签五中的文本" />
+                                        </f:items>
+                                    </f:tab>
+                                </f:tabs>
+                            </f:tab-strip>
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+            <br />
+
+            <f:button id="btnShowActiveTab1" text="激活标签一" css-class="marginr" click-handler="onShowActiveTab1Click"></f:button>
+
+            <f:button id="btnShowActiveTab2" text="激活标签二" css-class="marginr" click-handler="onShowActiveTab2Click"></f:button>
+
+            <f:button id="btnShowActiveTab3" text="激活标签三" css-class="marginr" click-handler="onShowActiveTab3Click"></f:button>
+            <br />
+            <br />
+            <br />
+            <br />
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onShowActiveTab1Click(event) {
+                    F.ui.Tab1.activate();
+                }
+
+                function onShowActiveTab2Click(event) {
+                    F.ui.Tab2.activate();
+                }
+
+                function onShowActiveTab3Click(event) {
+                    F.ui.Tab3.activate();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

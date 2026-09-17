@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 模拟树列（全选反选）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-check-box-select="true" enable-simulate-tree="true" row-data-bound-function="onGrid1RowDataBound">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="地区" data-field="Name" data-simulate-tree-level-field="TreeLevel" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:group-field text-align="Center" header-text="这是多表头">
+                        <f:columns>
+                            <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                            <f:render-check-field header-text="复选框列" data-field="IsChecked" render-as-static-field="false"></f:render-check-field>
+                        </f:columns>
+                    </f:group-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <br />
+            注：
+            <ul>
+                <li>初始选中 安徽省 合肥市 黄山市 的复选框列；</li>
+                <li>选中（或取消）父级的复选框，会同时选中（或取消）所有的子级复选框。</li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function onGrid1RowDataBound(rowData) {
+                    var rowId = rowData.id;
+
+                    // 默认选中的节点
+                    if (rowId === '105' || rowId === '106' || rowId === '107') {
+                        rowData.values.IsChecked = true;
+                    }
+                }
+
+                var checkboxSelector = '.f-grid-cell-IsChecked .f-grid-checkbox';
+
+                F.ready(function() {
+
+                    var grid = F.ui.Grid1;
+
+                    function getRowLevel(rowEl) {
+                        var rowData = grid.getRowData(rowEl);
+                        // 当前行的层级
+                        return $(rowData.values.Name).filter('.f-smtree-icon').length;
+                    }
+
+                    grid.el.on('click', checkboxSelector, function(event) {
+                        var rowEl = $(this).closest('.f-grid-row');
+                        var rowLevel = getRowLevel(rowEl);
+                        var rowChecked = rowEl.find(checkboxSelector).hasClass('f-checked');
+
+                        var nextRowEl = rowEl;
+                        while ((nextRowEl = nextRowEl.next()).length) {
+                            if (getRowLevel(nextRowEl) > rowLevel) {
+                                var checkboxEl = nextRowEl.find(checkboxSelector);
+                                rowChecked ? checkboxEl.addClass('f-checked') : checkboxEl.removeClass('f-checked');
+                            } else {
+                                break;
+                            }
+                        }
+                    });
+
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

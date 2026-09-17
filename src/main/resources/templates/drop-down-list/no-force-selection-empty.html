@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · NoForceSelectionEmpty</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="下拉列表（用户输入值，初始值，下拉选项为空）"
+                show-header="true">
+                <f:items>
+                    <f:drop-down-list id="DropDownList1" enable-edit="true" auto-select-first-item="false" force-selection="false"
+                        text="初始自定义值"></f:drop-down-list>
+                    <f:button id="btnRebindData" text="重新绑定数据" css-class="marginr" on-click="btnRebindData_Click"></f:button>
+                    <f:button id="btnSetText" text="更新为[用户输入值]" css-class="marginr" on-click="btnSetText_Click"></f:button>
+                    <f:button id="btnGetSelection" text="获取此下拉列表的选中项" on-click="btnGetSelection_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

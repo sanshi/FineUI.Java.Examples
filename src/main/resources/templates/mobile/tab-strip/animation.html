@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 选项卡（切换动画类型）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" show-border="false" active-tab-index="0" show-tab-header="false" is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar header-style="true" layout="HBox" box-config-child-margin="0 5 0 0">
+                        <f:button-group id="ButtonGroup1" enable-press-group="true" box-flex="1" layout="HBox">
+                            <f:button id="Button1" text="标签一" box-flex="1" enable-press="true" pressed="true"></f:button>
+                            <f:button id="Button2" text="标签二" box-flex="1" enable-press="true"></f:button>
+                            <f:button id="Button3" text="标签三" box-flex="1" enable-press="true"></f:button>
+                            <f:listeners>
+                                <f:listener event="presschange" handler="onButtonGroupPressChange" />
+                            </f:listeners>
+                        </f:button-group>
+                        <f:button id="Button4" margin="0" icon-font="_List" show-menu-icon="false">
+                            <f:menu>
+                                <f:menu-check-box id="cbxNone" text="无动画" attribute-data-tag="none" group-name="Animation"></f:menu-check-box>
+                                <f:menu-check-box id="cbxSlide" text="水平滑动" attribute-data-tag="slideX" checked="true"
+                                    group-name="Animation"></f:menu-check-box>
+                                <f:menu-check-box id="MenuCheckBox1" text="垂直滑动" attribute-data-tag="slideY" group-name="Animation"></f:menu-check-box>
+                                <f:menu-check-box id="cbxFade" text="淡出" attribute-data-tag="fade" group-name="Animation"></f:menu-check-box>
+                                <f:menu-check-box id="cbxPop" text="弹出" attribute-data-tag="pop" group-name="Animation"></f:menu-check-box>
+                                <f:menu-check-box id="cbxFlip" text="翻转" attribute-data-tag="flip" group-name="Animation"></f:menu-check-box>
+                                <f:listeners>
+                                    <f:listener event="checkchange" handler="onAnimationCheckChange" />
+                                </f:listeners>
+                            </f:menu>
+                        </f:button>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:tabs>
+                    <f:tab id="Tab1" body-padding="10px" layout="VBox" box-config-child-margin="0 0 10 0">
+                        <f:items>
+                            <f:content-panel id="ContentPanel3" show-border="false" show-header="false">
+                                <p>
+                                    <a href="http://baike.baidu.com/view/1299586.htm" target="_blank"><b>马克·扎克伯格</b></a>
+                                </p>
+                                <p>
+                                    马克·艾略特·扎克伯格（Mark Elliot
+                                    Zuckerberg），美国社交网站Facebook的创办人，被人们冠以“第二盖茨”的美誉。哈佛大学计算机和心理学专业辍学生。据《福布斯》杂志保守估计，马克·扎克伯格拥有135亿美元身家，是2008年全球最年轻的巨富，也是历来全球最年轻的自行创业亿万富豪。
+                                </p>
+                                <p>
+                                    2014年2月10日，马克·扎克伯格及其华裔妻子普莉希拉·陈登上美国《慈善纪事报》2013年年度慈善排行榜榜首。
+                                </p>
+                            </f:content-panel>
+                            <f:button id="Button5" text="按钮一"></f:button>
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab2" body-padding="10px" layout="VBox" box-config-child-margin="0 0 10 0">
+                        <f:items>
+                            <f:content-panel id="ContentPanel2" show-border="false" show-header="false">
+                                <p>
+                                    <a href="http://baike.baidu.com/view/3645.htm" target="_blank"><b>比尔·盖茨</b></a>
+                                </p>
+                                <p>
+                                    比尔·盖茨（Bill
+                                    Gates），全名威廉·亨利·盖茨三世，简称比尔或盖茨。1955年10月28日出生于美国华盛顿州西雅图，13岁开始计算机编程设计，18岁考入哈佛大学，一年后从哈佛退学，1975年与好友保罗·艾伦一起创办了微软公司，比尔盖茨担任微软公司董事长、CEO和首席软件设计师。
+                                </p>
+                                <p>
+                                    比尔·盖茨1995-2007年连续13年成为《福布斯》全球富翁榜首富，连续20年成为《福布斯》美国富翁榜首富。
+                                </p>
+                            </f:content-panel>
+                            <f:button id="Button6" text="按钮二"></f:button>
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab3" body-padding="10px" layout="VBox" box-config-child-margin="0 0 10 0">
+                        <f:items>
+                            <f:content-panel id="ContentPanel1" show-border="false" show-header="false">
+                                <p>
+                                    <a href="http://tech.163.com/special/jobsdead/" target="_blank"><b>乔布斯</b></a>
+                                </p>
+                                <p>
+                                    乔布斯于1955年2月24日出生，苹果创始人之一。今年8月苹果超越埃克森美孚成为全球最大市值企业，截止上季度持有现金达到762亿美金，甚至超过了美国政府国库存款。
+                                </p>
+                                <p>
+                                    遗憾的是，苹果的取得巨大成功还是无法给乔布斯一个健康的身体，乔布斯2003年被发现患有胰脏癌，随后又查出肝癌，危在旦夕的乔布斯在经历了8年的抗癌斗争、3次病休、若干次手术后，于2011年8月25日正式宣布从CEO位置辞职。2011年10月6日，乔布斯在苹果发布iPhone
+                                    4S后的第二天与世长辞。
+                                </p>
+                            </f:content-panel>
+                            <f:button id="Button7" text="按钮三"></f:button>
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onButtonGroupPressChange(event, btn) {
+                    var btnIndex = btn.el.index('.f-btn');
+
+                    // 激活相应的选项卡
+                    F.ui.TabStrip1.getItem(btnIndex).activate();
+                }
+
+                // 更改选项卡的动画类型
+                function onAnimationCheckChange(event, menucheckbox, checked) {
+                    var tabstrip = F.ui.TabStrip1;
+                    var animationType = menucheckbox.getAttr('data-tag');
+
+                    if (animationType === 'none') {
+                        tabstrip.enableAnimation = false;
+                    } else {
+                        tabstrip.enableAnimation = true;
+                        tabstrip.animationType = animationType;
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

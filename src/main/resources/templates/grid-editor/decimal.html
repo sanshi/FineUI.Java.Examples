@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 数字编辑框（初始为空，允许小数）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（单击编辑）" data-id-field="Id" data-text-field="Name"
+                allow-cell-editing="true" clicks-to-edit="1">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name">
+                        <f:editor>
+                            <f:text-box id="tbxName" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender">
+                        <f:editor>
+                            <f:drop-down-list id="ddlGender" required="true">
+                                <f:list-item text="男" value="1"></f:list-item>
+                                <f:list-item text="女" value="0"></f:list-item>
+                            </f:drop-down-list>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="所学专业" column-id="Major" data-field="Major" expand-unused-space="true" min-width="150">
+                        <f:editor>
+                            <f:text-box id="tbxMajor" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="语文成绩" column-id="ChineseScore" data-field="ChineseScore" field-type="Float">
+                        <f:editor>
+                            <f:number-box id="nbChineseScore" no-decimal="false" no-negative="true"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field header-text="数学成绩" column-id="MathScore" data-field="MathScore" field-type="Float">
+                        <f:editor>
+                            <f:number-box id="nbMathScore" no-decimal="false" no-negative="true"></f:number-box>
+                        </f:editor>
+                    </f:render-field>
+                </f:columns>
+            </f:grid>
+            <br>
+
+            <f:button id="btnSubmit" text="保存数据" on-click="btnSubmit_Click"></f:button>
+
+            <br>
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <br>
+            注：
+            <ul>
+                <li>成绩可以为小数</li>
+                <li>默认[刘国]和[康颖颖]的成绩未定义（空值）</li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

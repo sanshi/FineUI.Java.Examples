@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · IFrame 窗体</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:iframe/window/iframe-window" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="Button1" text="弹出窗体" click-handler="onOpenWindow1Click"></f:button>
+            <!--/* 注意：本页 iframe 地址刻意保留 PascalCase（/IFrame/Window/IFrameWindow），
+                test-playwright 的 Window.spec 用 frame.url().includes('Window/IFrameWindow') 定位 iframe；
+                路由归一（小写+去连字符）仍能命中 iframe/window/iframe-window。勿改 kebab，否则共享测试挂。 */-->
+            <f:window id="Window1" hidden="true" enable-iframe="true" target="Top" iframe-url="/IFrame/Window/IFrameWindow" enable-maximize="true"
+                enable-resize="true" height="500" width="800" title="窗体一">
+            </f:window>
+            <br />
+
+            页面加载时间：<span th:text="${page.loadTime}">00:00:00</span>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onOpenWindow1Click(event) {
+                    F.ui.Window1.show();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

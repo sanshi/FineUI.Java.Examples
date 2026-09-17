@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 客户端事件处理（新增与删除）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:button id="btnTest" text="测试按钮" size="Large" click-handler="onTestClick"></f:button>
+            <br />
+            <br />
+            <hr />
+            <f:button id="btnCustomEvent" text="注册点击事件（1）" click-handler="onCustomEventClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnSpecialEvent" text="注册特殊点击事件" click-handler="onSpecialEventClick"></f:button>
+            <f:button id="btnDeleteSpecialEvent" text="删除特殊点击事件" enabled="false" click-handler="onDeleteSpecialEventClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnDeleteAll" text="删除全部点击事件" click-handler="onDeleteAllClick"></f:button>
+            <br />
+            <br />
+            触发的事件列表（<a id="clearResult" href="javascript:;">clear</a>）：
+            <ul id="result"></ul>
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                var customEventNumber = 1;
+                var theSpecialEventCallback = function(event) {
+                    $('#result').append('<li>特殊点击事件</li>');
+                };
+
+                function onClearResultClick(event) {
+                    event.preventDefault();
+                    $('#result').empty();
+                }
+
+                function onTestClick(event) {
+                    $('#result').append('<li>点击事件（default）</li>');
+                }
+
+                function onCustomEventClick(event) {
+                    (function(number) {
+                        F.ui.btnTest.on('click', function() {
+                            $('#result').append('<li>点击事件（' + number + '）</li>');
+                        });
+                    })(customEventNumber);
+
+                    customEventNumber++;
+                    F.ui.btnCustomEvent.setText('注册点击事件（' + customEventNumber + '）');
+                }
+
+                function onSpecialEventClick(event) {
+                    F.ui.btnTest.on('click', theSpecialEventCallback);
+                    F.ui.btnSpecialEvent.disable();
+                    F.ui.btnDeleteSpecialEvent.enable();
+                }
+
+                function onDeleteSpecialEventClick(event) {
+                    F.ui.btnTest.off('click', theSpecialEventCallback);
+                    F.ui.btnSpecialEvent.enable();
+                    F.ui.btnDeleteSpecialEvent.disable();
+                }
+
+                function onDeleteAllClick(event) {
+                    F.ui.btnTest.off('click');
+                    F.ui.btnSpecialEvent.enable();
+                    F.ui.btnDeleteSpecialEvent.disable();
+                }
+
+                F.ready(function() {
+                    $('#clearResult').on('click', onClearResultClick);
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

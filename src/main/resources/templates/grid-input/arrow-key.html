@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 编辑框（方向键导航）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="语文" data-field="ChineseScore" renderer-function="renderChineseScore"></f:render-field>
+                    <f:render-field header-text="数学" data-field="MathScore" renderer-function="renderMathScore"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br /><br />
+            注：
+            <ul>
+                <li>上下左右键遍历文本框</li>
+            </ul>
+            <f:button id="Button1" text="获取用户输入的分组值" click-handler="onGetInputsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function renderChineseScore(value, params) {
+                    return F.formatString('<input class="myinput group1" value="{0}" style="width:80px;" type="text">', value);
+                }
+
+                function renderMathScore(value, params) {
+                    return F.formatString('<input class="myinput group2" value="{0}" style="width:80px;" type="text">', value);
+                }
+
+                var inputselector = 'input.myinput';
+
+                function getUserInputs() {
+                    var result = [];
+
+                    var grid1 = F.ui.Grid1;
+                    grid1.getRowEls().each(function() {
+                        var rowEl = $(this);
+                        var rowData = grid1.getRowData(rowEl);
+
+                        var inputValues = [];
+                        rowEl.find(inputselector).each(function() {
+                            inputValues.push($(this).val());
+                        });
+
+                        result.push([rowData.id, rowData.text, inputValues]);
+                    });
+
+                    return F.toJSON(result);
+                }
+
+                function onGetInputsClick(event) {
+                    F.customEvent('GetInputs', getUserInputs());
+                }
+
+                function registerEnterEvent() {
+                    var grid = F.ui.Grid1;
+
+                    grid.el.on('keydown', inputselector, function(event) {
+                        var inputEl = $(this);
+
+                        // 约定优于配置：group1, group2, group3
+                        var inputRegex = /group(\d+)/.exec(inputEl.attr('class'));
+                        if (!inputRegex || !inputRegex.length) {
+                            return;
+                        }
+                        var inputCls = inputRegex[0];
+                        var inputNum = parseInt(inputRegex[1], 10);
+
+
+                        var row = $(this).closest('.f-grid-row');
+                        switch (event.keyCode) {
+                            case F.KEY.UP:
+                                var prevRow = row.prev();
+                                if (prevRow.length) {
+                                    prevRow.find('.' + inputCls).select();
+                                }
+                                event.preventDefault();
+                                break;
+                            case F.KEY.DOWN:
+                                var nextRow = row.next();
+                                if (nextRow.length) {
+                                    nextRow.find('.' + inputCls).select();
+                                }
+                                event.preventDefault();
+                                break;
+                            case F.KEY.LEFT:
+                                inputNum--;
+                                if (inputNum >= 1) {
+                                    row.find('.group' + inputNum).select();
+                                }
+                                event.preventDefault();
+                                break;
+                            case F.KEY.RIGHT:
+                                inputNum++;
+                                if (inputNum <= 2) {
+                                    row.find('.group' + inputNum).select();
+                                }
+                                event.preventDefault();
+                                break;
+                        }
+
+                    });
+
+                    grid.el.on('click', inputselector, function(event) {
+                        $(this).select();
+                    });
+                }
+
+
+                F.ready(function() {
+                    registerEnterEvent();
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

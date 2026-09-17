@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 窄屏自动简洁分页</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" title="表格" enable-collapse="false" show-border="true" show-header="true" allow-paging="true"
+                is-database-paging="true" page-size="10" show-page-size-selector="true" data-id-field="Id" on-page-index-changed="Grid1_PageIndexChanged">
+                <f:columns>
+                    <f:row-number-field enable-paging-number="true" width="60"></f:row-number-field>
+                    <f:render-field data-field="Id" header-text="ID" width="150"></f:render-field>
+                    <f:render-field expand-unused-space="true" min-width="150" data-field="EntranceTime" header-text="时间"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <div class="f-help-block" style="line-height: 1.8;">
+                本页已在 PageManager 级别开启窄屏自动简洁分页。请缩小浏览器宽度（或在移动端/窄屏查看）：当分页栏放不下时，完整分页器会自动降级为简洁形态（上一页 + 当前/总页 + 下一页）；拉宽后自动还原。
+            </div>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

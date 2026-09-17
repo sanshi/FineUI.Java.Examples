@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 行高固定（手工设置行高，自动换行）</title>
+
+        <style>
+            .f-grid-row .f-grid-cell-text {
+                white-space: normal;
+                word-break: break-all;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-check-box-select="true" fixed-row-height="true" row-height="60" row-height-compact="48" row-height-small="48" row-height-large-space="72"
+                row-height-large="72">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field column-id="Desc" width="400" data-field="Desc" header-text="个人简介"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+            <br />
+            <br />
+            手工设置行高时：
+            <ul>
+                <li>尽量将行高设置为默认行高的整数倍，防止文字换行时被部分遮挡的问题。</li>
+                <li>需要为所有显示模式设置行高（RowHeight、RowHeightCompact、RowHeightSmall、RowHeightLargeSpace、RowHeightLarge）。</li>
+                <li>推荐使用 RowHeightLines 属性快速为所有显示模式设置行高。</li>
+            </ul>
+            <br />
+            <br />
+            <table class="result" style="width: 850px;">
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th>默认行高（px）</th>
+                        <th>设置的行高（px）</th>
+                    </tr>
+                    <tr>
+                        <td>紧凑模式</td>
+                        <td>16</td>
+                        <td>16 * 3 = 48</td>
+                    </tr>
+                    <tr>
+                        <td>小字体模式</td>
+                        <td>16</td>
+                        <td>16 * 3 = 48</td>
+                    </tr>
+                    <tr>
+                        <td>普通模式</td>
+                        <td>20</td>
+                        <td>20 * 3 = 60</td>
+                    </tr>
+                    <tr>
+                        <td>大间距模式</td>
+                        <td>24</td>
+                        <td>24 * 3 = 72</td>
+                    </tr>
+                    <tr>
+                        <td>大字体模式</td>
+                        <td>24</td>
+                        <td>24 * 3 = 72</td>
+                    </tr>
+                </tbody>
+            </table>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

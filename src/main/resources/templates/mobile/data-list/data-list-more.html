@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataListMore</title>
+
+        <link th:href="@{/res/css/datalist.css}" rel="stylesheet" />
+        <style>
+            .item-desc {
+                word-break: break-all;
+                white-space: normal;
+            }
+
+            .morebutton {
+                width: 100%;
+                text-align: center;
+                margin: 8px 0;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" auto-scroll="true" is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" title="列表" header-style="true"></f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:data-list id="DataList1"></f:data-list>
+                    <f:link-button id="btnMore" css-class="morebutton" text="加载更多..." on-click="btnMore_Click"></f:link-button>
+                    <f:hidden-field id="hfIndex"></f:hidden-field>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

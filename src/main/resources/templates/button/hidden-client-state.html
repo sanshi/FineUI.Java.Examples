@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Hidden 客户端状态</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnShowInitiallyHiddenOnClient" text="客户端显示初始隐藏按钮" click-handler="onShowInitiallyHiddenClick" css-class="marginr">
+            </f:button>
+            <f:button id="btnHideInitiallyVisibleOnClient" text="客户端隐藏初始显示按钮" click-handler="onHideInitiallyVisibleClick"></f:button>
+            <f:button id="btnShowOverrideOnClient" text="客户端显示初始隐藏 Label" click-handler="onShowOverrideClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnHideOnServer" text="服务端隐藏第三个按钮" on-click="btnHideOnServer_Click" css-class="marginr"></f:button>
+            <f:button id="btnShowServerChangedOnClient" text="客户端显示第三个按钮" click-handler="onShowServerChangedClick"></f:button>
+            <f:button id="btnReadOnServer" text="服务端读取当前 Hidden 状态" on-click="btnReadOnServer_Click"></f:button>
+            <br />
+            <br />
+            <f:button id="TargetInitiallyHidden" text="模板初始隐藏按钮" hidden="true" css-class="marginr"></f:button>
+            <f:button id="TargetInitiallyVisible" text="模板初始显示按钮" css-class="marginr"></f:button>
+            <f:button id="TargetServerChanged" text="服务端改动按钮"></f:button>
+            <f:label id="TargetOverride" text="模板初始隐藏的 Label" hidden="true"></f:label>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onShowInitiallyHiddenClick(event) {
+                    F.ui.TargetInitiallyHidden.show();
+                }
+
+                function onHideInitiallyVisibleClick(event) {
+                    F.ui.TargetInitiallyVisible.hide();
+                }
+
+                function onShowOverrideClick(event) {
+                    F.ui.TargetOverride.show();
+                }
+
+                function onShowServerChangedClick(event) {
+                    F.ui.TargetServerChanged.show();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

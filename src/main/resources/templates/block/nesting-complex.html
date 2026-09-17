@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Block 复杂嵌套</title>
+
+        <style>
+            body.f-body {
+                overflow-x: hidden;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel is-fluid="true" layout="Block" block-config-space="20" show-border="false" show-header="false">
+                <f:items>
+                    <f:panel block-md="12" block-lg="4" layout="Block" block-config-space="20" show-border="false" show-header="false">
+                        <f:items>
+                            <f:panel title="1" block-md="6" block-lg="12" height="200"></f:panel>
+                            <f:panel title="2" block-md="6" block-lg="12" height="200"></f:panel>
+                        </f:items>
+                    </f:panel>
+                    <f:panel block-md="12" block-lg="8" layout="Block" block-config-space="20" show-border="false" show-header="false">
+                        <f:items>
+                            <f:panel title="3" block-sm="6" block-md="3" height="150"></f:panel>
+                            <f:panel title="4" block-sm="6" block-md="3" height="150"></f:panel>
+                            <f:panel title="5" block-sm="6" block-md="3" height="150"></f:panel>
+                            <f:panel title="6" block-sm="6" block-md="3" height="150"></f:panel>
+                            <f:panel title="7" block="12" height="250"></f:panel>
+                        </f:items>
+                    </f:panel>
+                    <f:panel block-md="12" layout="Block" block-config-space="20" show-border="false" show-header="false">
+                        <f:items>
+                            <f:panel title="8" block-md="4" height="200"></f:panel>
+                            <f:panel title="9" block-md="4" height="200"></f:panel>
+                            <f:panel title="10" block-md="4" height="200"></f:panel>
+                            <f:panel title="11" block="12" height="300"></f:panel>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+        </th:block>
+    </body>
+
+</html>

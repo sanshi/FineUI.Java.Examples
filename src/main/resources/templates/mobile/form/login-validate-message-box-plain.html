@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 系统登录（简洁校验框）</title>
+
+        <style>
+            .mypic {
+                text-align: center;
+            }
+
+            .mypic img {
+                border-radius: 50%;
+                width: 100px;
+                height: 100px;
+            }
+
+            .myhyperlinkcontainer {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .myhyperlink {
+                display: inline-block !important;
+                margin-right: 5px;
+            }
+
+            .myhyperlink a {
+                font-size: 0.8em;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="Fit" body-padding="20px" is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" title="系统登录" header-style="true"></f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:simple-form id="SimpleForm1" show-border="false" show-header="false" layout="VBox" message-target="None">
+                        <f:items>
+                            <f:image css-class="mypic" image-url="/res/images/my_face_80.jpg"></f:image>
+                            <f:text-box id="tbxUserName" label="用户名" show-label="false" empty-text="请输入用户名" required="true"></f:text-box>
+                            <f:text-box id="tbxPassword" label="密码" show-label="false" text-mode="Password" empty-text="请输入密码" required="true"></f:text-box>
+                            <f:button id="btnLogin" text="登录" type="Submit" validate-forms="SimpleForm1" validate-message-box-plain="true"
+                                on-click="btnLogin_Click"></f:button>
+                            <f:panel css-class="myhyperlinkcontainer" show-border="false" show-header="false">
+                                <f:items>
+                                    <f:hyper-link id="HyperLink1" css-class="myhyperlink" navigate-url="http://fineui.com/bbs/" text="新用户注册"></f:hyper-link>
+                                    <f:hyper-link id="HyperLink2" css-class="myhyperlink" navigate-url="http://fineui.com/bbs/" text="忘记密码？"></f:hyper-link>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/common.js}"></script>
+        </th:block>
+    </body>
+
+</html>

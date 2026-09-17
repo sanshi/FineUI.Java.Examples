@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · LayoutMultiLineButtons</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form is-fluid="true" body-padding="10" id="Form1" label-width="100" enable-collapse="false" title="表单">
+                <f:items>
+                    <f:label id="Label1" label="标签" text="标签的值"></f:label>
+                    <f:check-box id="CheckBox1" text="复选框" label="复选框"></f:check-box>
+                    <f:drop-down-list id="DropDownList1" label="下拉列表" empty-text="请选择一项" required="true" show-red-star="true" auto-select-first-item="false">
+                        <f:list-item text="可选项 1" value="0"></f:list-item>
+                        <f:list-item text="可选项 2" value="1"></f:list-item>
+                    </f:drop-down-list>
+                    <f:text-box id="TextBox1" show-red-star="true" label="文本框" required="true" text=""></f:text-box>
+                    <f:panel id="Panel1" css-class="f-field" show-border="false" show-header="false">
+                        <f:items>
+                            <f:button css-class="marginr" text="按钮一"></f:button>
+                            <f:button id="Button3" css-class="marginr" text="按钮二"></f:button>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel2" show-border="false" show-header="false">
+                        <f:items>
+                            <f:button text="验证此表单并提交" css-class="marginr" validate-forms="Form1" id="btnSubmit" on-click="btnSubmit_Click"></f:button>
+                            <f:button id="btnResetForm1" css-class="marginr" text="重置表单" click-handler="onResetClick"></f:button>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <br />
+            注：第一行按钮所在的面板设置了样式：css-class="f-field"。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onResetClick(event) {
+                    F.ui.Form1.reset();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · ToolbarIconTop</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" show-border="true" body-padding="10" title="面板" enable-collapse="false">
+                <f:toolbars>
+                    <f:toolbar css-class="f-state-default">
+                        <f:items>
+                            <f:button id="Button1" icon-align="Top" enable-default-state="false" icon-font="_Refresh" text="刷新"></f:button>
+                            <f:button id="Button2" enabled="false" icon-align="Top" enable-default-state="false" icon-font="_Folder" text="新建文件夹"></f:button>
+                            <f:button id="Button3" icon-align="Top" enable-default-state="false" icon-font="_File" text="新建文件"></f:button>
+                            <f:button id="Button5" icon-align="Top" enable-default-state="false" icon-font="_Download" text="下载"></f:button>
+                            <f:file-upload id="filePhoto" button-icon-font="_Upload" button-only="true" button-text="上传" button-icon-align="Top"
+                                button-default-state="false" on-file-selected="filePhoto_FileSelected"></f:file-upload>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:image id="imgPhoto" image-height="150" show-label="false" image-url="/res/images/blank.png"></f:image>
+                    <f:label id="LabInfo"
+                        text-raw-html="<p><b>乔布斯</b></p><p>乔布斯于1955年2月24日出生，苹果创始人之一。今年8月苹果超越埃克森美孚成为全球最大市值企业，截止上季度持有现金达到762亿美金，甚至超过了美国政府国库存款。</p><p>遗憾的是，苹果的取得巨大成功还是无法给乔布斯一个健康的身体，乔布斯2003年被发现患有胰脏癌，随后又查出肝癌，于2011年10月5日与世长辞。</p>">
+                    </f:label>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

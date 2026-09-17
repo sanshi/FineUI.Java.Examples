@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataModel 展示型字段的值</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.datamodel.model.Student;class:com.fineui.java.examples.datamodel.model.StudentStore" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" show-border="true" show-header="true" title="展示型字段的值跨回发保持">
+                <f:items>
+                    <!--/* 展示型：内容由服务端驱动，用户改不了。它的 for 初值会随回发保住，
+                           事件处理器里读到的与浏览器上显示的一致 */-->
+                    <f:label for="student.group"></f:label>
+                    <!--/* 提交型：用户能改，值随回发带回，服务端读到的是用户当前输入 */-->
+                    <f:text-box for="student.name"></f:text-box>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar position="Bottom">
+                        <f:items>
+                            <f:button id="btnRead" text="读取服务端当前值" on-click="btnRead_Click"></f:button>
+                            <f:button id="btnChangeGroup" text="服务端把分组改为 9" on-click="btnChangeGroup_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+        </th:block>
+    </body>
+
+</html>

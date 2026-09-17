@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 动作面板（垂直按钮组）</title>
+
+        <style th:inline="css">
+            .mybgpanel>.f-panel-bodyct>.f-panel-body {
+                background-color: #FEF3D5;
+                background-image: url([(@{/res/images/bg/small/3.jpg})]);
+                background-position: right bottom;
+                background-repeat: no-repeat;
+            }
+
+            .mywindow,
+            .mywindow>.f-panel-bodyct>.f-panel-body {
+                background-image: none;
+                background-color: transparent;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" css-class="mybgpanel" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 5px 0"
+                body-padding="10px" is-view-port="true">
+                <f:items>
+                    <f:button id="btnOpenWindow" text="动作面板" click-handler="onOpenWindow1Click"></f:button>
+                </f:items>
+            </f:panel>
+
+            <f:window id="Window1" css-class="mywindow" show-header="false" show-border="false" hidden="true" hide-on-mask-click="true" is-modal="true"
+                body-padding="10px" layout="VBox" box-config-child-margin="0 0 5px 0" percent-width="100%" enable-default-corner="false" position-y="Bottom">
+                <f:items>
+                    <f:button-group margin-bottom="10" layout="VBox" vertical="true">
+                        <f:items>
+                            <f:button id="Button1" size="Large" text="相册" click-handler="onOpenAlbumClick"></f:button>
+                            <f:button id="Button2" size="Large" text="拍照" click-handler="onTakeAPictureClick"></f:button>
+                        </f:items>
+                    </f:button-group>
+                    <f:button id="Button3" text="取消" margin="0" click-handler="onCloseWindow1Click"></f:button>
+                </f:items>
+            </f:window>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/common.js}"></script>
+            <script>
+                function onOpenWindow1Click(event) {
+                    F.ui.Window1.show();
+                }
+
+                function onCloseWindow1Click(event) {
+                    F.ui.Window1.hide();
+                }
+
+                function onOpenAlbumClick(event) {
+                    F.ui.Window1.hide();
+                    showCenterNotify('你点击了 [相册] 按钮！');
+                }
+
+                function onTakeAPictureClick(event) {
+                    F.ui.Window1.hide();
+                    showCenterNotify('你点击了 [拍照] 按钮！');
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

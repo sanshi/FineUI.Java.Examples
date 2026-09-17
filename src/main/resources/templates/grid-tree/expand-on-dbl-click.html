@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 树表格（双击展开改为双击回发）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="树表格" data-id-field="Id" data-text-field="Name"
+                data-parent-id-field="ParentId" enable-tree="true" tree-column="Name" on-row-double-click="Grid1_RowDoubleClick" data-key-names="Id,Name"
+                tree-expand-on-dbl-click="false">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field column-id="Name" header-text="名称" data-field="Name" expand-unused-space="true" min-width="150"></f:render-field>
+                    <f:render-field header-text="类型" data-field="Type" width="150"></f:render-field>
+                    <f:render-field header-text="大小" data-field="Size" width="150"></f:render-field>
+                    <f:render-field header-text="修改日期" data-field="ModifyDate" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"
+                        width="150"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+
+            <br />
+            <br />
+            注：本示例启用了行双击事件，禁用了双击展开树节点（tree-expand-on-dbl-click）。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 弹出 IFrame 窗体（自定义渲染）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:grid/iframe-window" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="窗口列" renderer-function="renderWindowField1"></f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="rowdblclick" handler="onGridRowDblClick"></f:listener>
+                </f:listeners>
+            </f:grid>
+
+            <br />
+            <br />
+            注：本示例需要自行定义列渲染函数并注册行内按钮事件，实现复杂。推荐方案：表格/行命令/弹出窗体列。
+
+            <f:window id="Window1" title="编辑" hidden="true" enable-iframe="true" close-action="HidePostBack" enable-maximize="true" enable-resize="true"
+                on-close="Window1_Close" target="Top" is-modal="true" width="850" height="500">
+            </f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function renderWindowField1(value, params) {
+                    return '<a href="javascript:;" class="mywindowfield">编辑</a>';
+                }
+
+                // 打开窗体
+                function openWindow(rowData) {
+                    var iframeUrl = F.resolveUrl('/grid/iframe-window?id=') + rowData.id + '&name=' + encodeURIComponent(rowData.text);
+                    F.ui.Window1.show(iframeUrl, '详细信息 - ' + rowData.text);
+                }
+
+                // 双击行
+                function onGridRowDblClick(event, rowId) {
+                    openWindow(F.ui.Grid1.getRowData(rowId));
+                }
+
+                F.ready(function() {
+
+                    var grid = F.ui.Grid1;
+
+                    // 点击表格行中的编辑按钮
+                    grid.el.on('click', 'a.mywindowfield', function(event) {
+                        var rowEl = $(this).closest('.f-grid-row');
+                        var rowData = grid.getRowData(rowEl);
+                        openWindow(rowData);
+                    });
+
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

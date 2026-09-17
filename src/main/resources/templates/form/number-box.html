@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · NumberBox</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-align="Top" enable-collapse="false" title="简单表单" label-width="120"
+                show-header="true">
+                <f:items>
+                    <f:number-box id="NumberBox1" label="0 到 9 的整数" max-value="9" min-value="0" no-decimal="true" no-negative="true" required="true"
+                        empty-text="比如 8" show-red-star="true"></f:number-box>
+                    <f:number-box id="NumberBox3" label="非负整数" empty-text="比如 99" no-decimal="true" no-negative="true" required="true"
+                        show-red-star="true"></f:number-box>
+                    <f:number-box id="NumberBox4" label="0 到 1 之间的小数（Increment=0.01）" empty-text="精度为 2，比如 0.35" max-value="1" min-value="0" no-decimal="false"
+                        no-negative="true" decimal-precision="2" required="true" show-red-star="true" increment="0.01"></f:number-box>
+                    <f:number-box id="NumberBox5" label="任意整数（ShowTrigger=false）" no-decimal="true" show-trigger="false"></f:number-box>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+    </body>
+
+</html>

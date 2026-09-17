@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FileUploadLoading</title>
+
+        <style type="text/css">
+            .result img {
+                border: 1px solid #CCCCCC;
+                max-width: 550px;
+                padding: 3px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="表单" show-header="true">
+                <f:items>
+                    <f:text-box id="tbxUserName" label="用户名" empty-text="请输入用户名" required="true" show-red-star="true"></f:text-box>
+                    <f:file-upload id="filePhoto" empty-text="请选择一张照片" label="个人头像" required="true" button-icon="Add" show-red-star="true"></f:file-upload>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交" on-click="btnSubmit_Click" ajax-loading-type="Mask"
+                        show-ajax-loading-mask-text="true" ajax-loading-mask-text="正在导入数据，请稍后..."></f:button>
+                </f:items>
+            </f:simple-form>
+            <f:label id="labResult" encode-text="false" css-class="result"></f:label>
+            <br />
+            <br />
+            <br />
+            注：为了观察Ajax提示信息，提交按钮动作在后台都会睡眠 1 秒钟。
+
+        </th:block>
+    </body>
+
+</html>

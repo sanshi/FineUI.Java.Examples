@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CSP 按钮</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button text="缺省按钮" css-class="marginr"></f:button>
+            <f:button id="btnPrimary" text="主按钮" button-color="Primary"></f:button>
+            <br />
+            <br />
+            <f:button id="btnChangeEnable" text="启用后面的按钮" on-click="btnChangeEnable_Click" css-class="marginr"></f:button>
+            <f:button id="btnEnable" text="禁用的按钮" on-click="btnEnable_Click" enabled="false"></f:button>
+            <br />
+            <br />
+            <f:button id="btnChangePressed" text="改变后面按钮的按下状态" on-click="btnChangePressed_Click" css-class="marginr"></f:button>
+            <f:button id="btnPressed" text="按下的按钮" enable-press="true" pressed="true"></f:button>
+            <br />
+            <br />
+            <f:button id="btnTooltip" text="这个按钮有提示信息（点击改变提示信息）" tool-tip="这是按钮的提示信息" on-click="btnTooltip_Click"></f:button>
+            <br />
+            <br />
+            <br />
+            <f:button id="Button4" text="小按钮" size="Small" css-class="marginr"></f:button>
+            <f:button id="Button1" text="普通按钮" css-class="marginr"></f:button>
+            <f:button id="Button2" text="中等按钮" size="Medium" css-class="marginr"></f:button>
+            <f:button id="Button3" text="大按钮" size="Large"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <!--/* 页面自带的内联脚本：带 nonce 才被 CSP 放行（nonce 由服务端在渲染前生成、经 page.cspScriptsNonceValue 取用） */-->
+            <script th:attr="nonce=${page.cspScriptsNonceValue}">
+                console.log('Hello world!');
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

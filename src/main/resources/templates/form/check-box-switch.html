@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CheckBoxSwitch</title>
+
+        <style>
+            .mycheckbox .f-field-checkbox-switch .f-field-checkbox-switch-text {
+                min-width: 40px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="简单表单" label-width="200">
+                <f:items>
+                    <f:check-box id="CheckBox1" show-label="false" text="复选框" checked="true" display-type="Switch"></f:check-box>
+                    <f:button id="btnSelectCheckBox" css-class="marginr" text="选择/反选复选框" on-click="btnSelectCheckBox_Click"></f:button>
+                    <f:button id="btnChangeCheckStatus" css-class="marginr" text="选择/反选复选框（客户端脚本）" click-handler="onChangeCheckStatusClick"></f:button>
+                    <f:button id="btnChangeEnabled" css-class="marginr" text="禁用/启用复选框（客户端脚本）" click-handler="onChangeEnabledClick"></f:button>
+                    <f:button id="btnDisable" css-class="marginr" text="启用/禁用复选框" on-click="btnDisableCheckBox_Click"></f:button>
+                    <f:label id="Label1"></f:label>
+                    <f:check-box id="CheckBox2" show-label="false" checked="true" display-type="Switch" text="复选框（OnCheckedChanged）"
+                        on-checked-changed="CheckBox2_CheckedChanged"></f:check-box>
+                    <f:label id="Label2"></f:label>
+                    <f:check-box id="CheckBox3" label="开关文本" checked="true" display-type="Switch" switch-text-visible="true"></f:check-box>
+                    <f:check-box id="CheckBox4" label="开关文本（自定义）" display-type="Switch" switch-text-visible="true" switch-on-text="1"
+                        switch-off-text="0"></f:check-box>
+                    <f:check-box id="CheckBox5" label="开关文本（图标字体）" display-type="Switch" switch-text-visible="true"></f:check-box>
+                    <f:check-box id="CheckBox6" css-class="mycheckbox" label="开关文本（自定义）" display-type="Switch" switch-text-visible="true" switch-on-text="开启"
+                        switch-off-text="关闭"></f:check-box>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onChangeCheckStatusClick(event) {
+                    var checkbox = F.ui.CheckBox1;
+                    checkbox.setValue(!checkbox.getValue());
+                }
+
+                function onChangeEnabledClick(event) {
+                    var checkbox = F.ui.CheckBox1;
+                    checkbox.setDisabled(!checkbox.isDisabled());
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

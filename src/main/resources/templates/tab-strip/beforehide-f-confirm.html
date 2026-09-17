@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 关闭前 F.confirm</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="500" enable-tab-close-menu="true" show-border="true" active-tab-index="2">
+                <f:tabs>
+                    <f:tab id="Tab1" title="标签一" enable-close="false" body-padding="10">
+                        <f:items>
+                            <f:label id="Label5" text="标签一中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab2" title="标签二" body-padding="10" enable-close="true">
+                        <f:items>
+                            <f:label id="Label4" text="标签二中的文本" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab id="Tab3" title="标签三（关闭前弹出确认框）" body-padding="10" enable-close="true">
+                        <f:items>
+                            <f:label id="Label3" text="标签三中的文本" />
+                        </f:items>
+                        <f:listeners>
+                            <f:listener event="beforehide" handler="onTab3Beforehide" />
+                        </f:listeners>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onTab3Beforehide(event) {
+                    // this代表当前选项卡
+                    var tab = this;
+
+                    // F.confirm是异步函数，直接返回
+                    F.confirm({
+                        message: '关闭标签三？',
+                        ok: function() {
+                            // 关闭选项卡（本过程中不触发事件）
+                            F.noEvent(function() {
+                                tab.hide();
+                            });
+                        },
+                        cancel: function() {
+                            // 啥也不做
+                        }
+                    });
+
+                    // 需要显式的返回 false，来阻止执行返回的脚本
+                    return false;
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

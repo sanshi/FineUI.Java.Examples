@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 系统登录（自定义错误提示）</title>
+
+        <style>
+            .mypic {
+                text-align: center;
+            }
+
+            .mypic img {
+                border-radius: 50%;
+                width: 100px;
+                height: 100px;
+            }
+
+            .myhyperlinkcontainer {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .myhyperlink {
+                display: inline-block !important;
+                margin-right: 5px;
+            }
+
+            .myhyperlink a {
+                font-size: 0.8em;
+            }
+
+            .myerrorlist {
+                margin: 0;
+                padding: 0 0 0 30px;
+            }
+
+            .myerrorlist li {
+                margin: 10px 0;
+            }
+
+            .myerrorlist-errorfield {
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            .myerrorlist-errormsg {
+                font-size: 14px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="Fit" body-padding="20px" is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" title="系统登录" header-style="true"></f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:simple-form id="SimpleForm1" show-border="false" show-header="false" layout="VBox" message-target="None">
+                        <f:items>
+                            <f:image css-class="mypic" image-url="/res/images/my_face_80.jpg"></f:image>
+                            <f:text-box id="tbxUserName" label="电子邮箱" show-label="false" empty-text="请输入电子邮箱" required="true" regex-pattern="EMAIL"
+                                regex-message="请输入有效的邮箱地址"></f:text-box>
+                            <f:text-box id="tbxPassword" label="密码" show-label="false" text-mode="Password" empty-text="请输入密码" required="true"></f:text-box>
+                            <f:button id="btnLogin" text="登录" type="Submit" click-handler="onLoginClick" on-click="btnLogin_Click">
+                            </f:button>
+                            <f:panel css-class="myhyperlinkcontainer" show-border="false" show-header="false">
+                                <f:items>
+                                    <f:hyper-link id="HyperLink1" css-class="myhyperlink" navigate-url="http://fineui.com/bbs/" text="新用户注册"></f:hyper-link>
+                                    <f:hyper-link id="HyperLink2" css-class="myhyperlink" navigate-url="http://fineui.com/bbs/" text="忘记密码？"></f:hyper-link>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/common.js}"></script>
+            <script>
+                // 验证表单
+                function validateTheForm() {
+                    var form1 = F.ui.SimpleForm1;
+
+                    // 检查表单字段是否有效
+                    var validResult = form1.isValid();
+                    if (validResult[0]) {
+                        // 验证通过
+                        return true;
+                    }
+
+                    // 验证失败的字段（包含多个）
+                    var alertHtml = ['<ul class="myerrorlist">'],
+                        loopItem;
+                    for (var i = 1, count = validResult.length; i < count; i++) {
+                        loopItem = validResult[i];
+                        alertHtml.push('<li><div class="myerrorlist-errorfield">' + F.htmlEncode(loopItem.fieldLabel) + '</div>' +
+                            '<div class="myerrorlist-errormsg">' + F.htmlEncode(loopItem.bodyEl.attr('data-errormsg')) + '</div></li>');
+                    }
+                    alertHtml.push('</ul>');
+
+                    // 自定义提示框
+                    F.alert({
+                        message: F.rawHtml(alertHtml.join('')),
+                        messageIcon: '',
+                        header: false,
+                        buttonPlain: true,
+                        ok: function() {
+                            // 让第一个验证失败的字段获取焦点
+                            validResult[1].focus(true, 200);
+                        }
+                    });
+                }
+
+                function onLoginClick(event) {
+                    // 校验不通过时必须显式 return false，才能中断后续的服务端回发。
+                    if (!validateTheForm()) {
+                        return false;
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

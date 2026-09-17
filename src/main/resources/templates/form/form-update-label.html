@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 更新标签和校验规则</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:form id="Form1" is-fluid="true" label-width="100" body-padding="10" enable-collapse="false" title="表单">
+                <f:rows>
+                    <f:form-row>
+                        <f:items>
+                            <f:label id="labTitle" label="标题" hide-mode="Display" text="申请单"></f:label>
+                            <f:label id="labLiuShuiHao" label="流水号" text="123456789"></f:label>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:label id="labPhone" label="固定电话" text="0551-1234567"></f:label>
+                            <f:label id="Label16" label="申请人" text="admin"></f:label>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:label id="Label4" label="编号" text="200804170006"></f:label>
+                            <f:text-box id="tbxEmail" required="true" show-red-star="true" label="电子邮箱" empty-text="请输入常用电子邮箱" regex-pattern="EMAIL"
+                                regex-message="请输入有效的邮箱地址！"></f:text-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:drop-down-list id="DropDownList3" label="审批人" required="true" empty-text="请选择审批人" show-red-star="true"
+                                auto-select-first-item="false">
+                                <f:list-item text="老大甲" value="0"></f:list-item>
+                                <f:list-item text="老大乙" value="1"></f:list-item>
+                                <f:list-item text="老大丙" value="2"></f:list-item>
+                            </f:drop-down-list>
+                            <f:date-picker required="true" label="审批时间" empty-text="请输入审批时间" id="dpApplyTime" show-red-star="true"
+                                date-format-string="yyyy/MM/dd"></f:date-picker>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:number-box id="nbxApplyNumber" label="申请数量" no-decimal="true" no-negative="true" empty-text="请输入申请数量" max-value="100"
+                                required="true" show-red-star="true"></f:number-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:text-area id="taDescription" label="描述" show-red-star="true" required="true" min-length="5"></f:text-area>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:panel id="Panel2" show-border="false" show-header="false">
+                                <f:items>
+                                    <f:button id="btnSubmitForm1" text="验证表单并提交" css-class="marginr" on-click="btnSubmit_Click" validate-forms="Form1">
+                                    </f:button>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:form-row>
+                </f:rows>
+            </f:form>
+            <br />
+            <f:button id="btnUpdateLabel" text="更新[固定电话]标签" css-class="marginr" click-handler="onUpdateLabelClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnRemoveRequired" text="去除[电子邮箱]必填项" css-class="marginr" click-handler="onRemoveRequiredClick"></f:button>
+            <f:button id="btnRemoveRegex" text="去除[电子邮箱]的正则表达式验证" css-class="marginr" click-handler="onRemoveRegexClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnRemoveMinLength" text="去除[描述]的最少5个字符限制" css-class="marginr" click-handler="onRemoveMinLengthClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnRemoveValue" text="将[申请数量]的最大值100改为10" css-class="marginr" click-handler="onChangeMaxValueClick"></f:button>
+            <br />
+            <br />
+            <f:button id="btnModifyMinDate" text="限制[审批时间]的最大时间为今天" css-class="marginr" click-handler="onModifyMaxValueClick"></f:button>
+            <br />
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onUpdateLabelClick(event) {
+                    var labPhone = F.ui.labPhone;
+
+                    var labPhoneFieldLabel = labPhone.getFieldLabel();
+                    if (labPhoneFieldLabel == "移动电话") {
+                        labPhone.setFieldLabel("固定电话");
+                    } else {
+                        labPhone.setFieldLabel("移动电话");
+                    }
+                }
+
+                function onRemoveRequiredClick(event) {
+                    F.ui.tbxEmail.setRequired(false);
+                    F.ui.tbxEmail.setRedStar(false);
+                }
+
+                function onRemoveRegexClick(event) {
+                    F.ui.tbxEmail.setRegex('');
+                }
+
+                function onRemoveMinLengthClick(event) {
+                    F.ui.taDescription.setMinLength(undefined);
+                }
+
+                function onChangeMaxValueClick(event) {
+                    F.ui.nbxApplyNumber.setMaxValue(10);
+                }
+
+                function onModifyMaxValueClick(event) {
+                    var datestr = F.formatDate('yyyy/MM/dd', new Date());
+                    F.ui.dpApplyTime.setMaxValue('2016-11-22');
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

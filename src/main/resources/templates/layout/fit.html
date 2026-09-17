@@ -1,0 +1,84 @@
+<!doctype html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Fit 布局</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel id="Panel3" is-fluid="true" title="面板一（未设置Layout属性）" height="300" enable-collapse="false" body-padding="10" show-border="true"
+                show-header="true">
+                <f:items>
+                    <f:form id="Form3" show-border="true" body-padding="10" show-header="false" title="表单">
+                        <f:rows>
+                            <f:form-row>
+                                <f:items>
+                                    <f:label id="Label2" label="文本" text="文本内容"></f:label>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox2" label="输入框"></f:text-box>
+                                    <f:button id="Button2" text="按钮"></f:button>
+                                </f:items>
+                            </f:form-row>
+                        </f:rows>
+                    </f:form>
+                </f:items>
+            </f:panel>
+            <br />
+            <f:panel id="Panel1" is-fluid="true" title="面板二（Layout=Fit）" layout="Fit" height="300" enable-collapse="false" body-padding="10" show-border="true"
+                show-header="true">
+                <f:items>
+                    <f:form id="Form2" show-border="true" body-padding="10" show-header="false" title="表单">
+                        <f:rows>
+                            <f:form-row>
+                                <f:items>
+                                    <f:label id="Label1" label="文本" text="文本内容"></f:label>
+                                </f:items>
+                            </f:form-row>
+                            <f:form-row>
+                                <f:items>
+                                    <f:text-box id="TextBox1" label="输入框"></f:text-box>
+                                    <f:button id="Button1" text="按钮"></f:button>
+                                </f:items>
+                            </f:form-row>
+                        </f:rows>
+                    </f:form>
+                </f:items>
+            </f:panel>
+            <br />
+            <f:panel id="Panel2" is-fluid="true" title="面板三（Layout=Fit）" layout="Fit" height="300" enable-collapse="false" body-padding="10" show-border="true"
+                show-header="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1">
+                        <f:items>
+                            <f:button id="Button4" text="按钮一"></f:button>
+                            <f:button id="Button5" text="按钮二"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:grid id="Grid1" title="表格" show-border="true" show-header="false" data-id-field="Id" data-text-field="Name"
+                        enable-check-box-select="true">
+                        <f:columns>
+                            <f:row-number-field></f:row-number-field>
+                            <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                            <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                            <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                            <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                            <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                                min-width="150"></f:render-field>
+                            <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                        </f:columns>
+                    </f:grid>
+                </f:items>
+            </f:panel>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

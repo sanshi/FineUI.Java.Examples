@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 网址数据源 · 弹出 IFrame 窗体</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.gridurl.GridDataUrlDataController" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                data-url="/grid-data-url/grid-data-url-data">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field column-id="Actions" renderer-function="renderEditAction"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <br />
+
+            <f:window id="Window1" title="审批" hidden="true" enable-iframe="true" enable-maximize="true" enable-resize="true" target="Top"
+                on-close="Window1_Close" is-modal="true" width="850" height="500">
+            </f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function renderEditAction(value, params) {
+                    return $('<a>').addClass('action editit').attr('href', 'javascript:;')
+                        .append($('<img>').addClass('f-grid-imagefield').attr('src', F.resolveUrl('/res/icon/pencil.png')));
+                }
+
+                F.ready(function() {
+
+                    var grid1 = F.ui.Grid1;
+                    if (!grid1) return;
+                    var window1 = F.ui.Window1;
+                    var baseUrl = F.resolveUrl('/grid/iframe-window');
+
+                    grid1.el.on('click', '.f-grid-cell-Actions .action.editit', function(event) {
+                        var targetEl = $(this);
+                        var rowEl = targetEl.closest('.f-grid-row');
+                        var rowData = grid1.getRowData(rowEl);
+                        var rowId = rowData.id;
+                        var rowText = rowData.text;
+
+                        var iframeUrl = baseUrl + '?id=' + rowId + '&name=' + encodeURIComponent(rowText);
+                        // 显示窗体
+                        window1.show(iframeUrl, '审批 - ' + rowText);
+                    });
+
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

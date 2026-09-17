@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 关闭时移除实例</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="500" show-border="true" active-tab-index="0">
+                <f:tabs>
+                    <f:tab title="FineUI官网" enable-iframe="true" iframe-url="https://fineui.com/"></f:tab>
+                </f:tabs>
+            </f:tab-strip>
+            <br>
+
+            <f:button id="btnAddTab1" text="DeepSeek官网（客户端代码）" click-handler="onAddTab1Click"></f:button>
+
+            <f:button id="btnAddTab2" text="Spring 官网（客户端代码）" click-handler="onAddTab2Click"></f:button>
+
+            <f:button id="btnRemoveTab1" text="删除DeepSeek官网（客户端代码）" click-handler="onRemoveTab1Click"></f:button>
+
+            <f:button id="btnRemoveTab2" text="删除Spring 官网（客户端代码）" click-handler="onRemoveTab2Click"></f:button>
+            <br>
+            <br>
+
+            <f:button id="btnAddTab3" text="DeepSeek官网（服务端代码）" on-click="btnAddTab3_Click"></f:button>
+
+            <f:button id="btnAddTab4" text="Spring 官网（服务端代码）" on-click="btnAddTab4_Click"></f:button>
+
+            <f:button id="btnRemoveTab3" text="删除DeepSeek官网（服务端代码）" on-click="btnRemoveTab3_Click"></f:button>
+
+            <f:button id="btnRemoveTab4" text="删除Spring 官网（服务端代码）" on-click="btnRemoveTab4_Click"></f:button>
+            <br>
+            <br>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onAddTab1Click(event) {
+                    F.ui.TabStrip1.addTab({
+                        id: 'dynamic_tab1',
+                        iframe: true,
+                        iframeUrl: 'https://deepseek.com/',
+                        title: 'DeepSeek官网',
+                        closable: true,
+                        icon: F.resolveUrl('/res/icon/application.png'),
+                        removeOnClose: true
+                    });
+                }
+
+                function onAddTab2Click(event) {
+                    F.ui.TabStrip1.addTab({
+                        id: 'dynamic_tab2',
+                        iframe: true,
+                        iframeUrl: 'https://spring.io/',
+                        title: 'Spring 官网',
+                        closable: true,
+                        icon: F.resolveUrl('/res/icon/application_add.png'),
+                        removeOnClose: true
+                    });
+                }
+
+                function onRemoveTab1Click(event) {
+                    F.ui.TabStrip1.closeTab('dynamic_tab1');
+                }
+
+                function onRemoveTab2Click(event) {
+                    F.ui.TabStrip1.closeTab('dynamic_tab2');
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

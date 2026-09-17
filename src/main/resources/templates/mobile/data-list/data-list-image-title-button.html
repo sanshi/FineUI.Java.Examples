@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataListImageTitleButton</title>
+
+        <link th:href="@{/res/css/datalist.css}" rel="stylesheet" />
+        <style>
+            .item-table .actions {
+                width: 60px;
+                text-align: right;
+                vertical-align: middle;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" auto-scroll="true" is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" title="列表" header-style="true"></f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:data-list id="DataList1"></f:data-list>
+                </f:items>
+            </f:panel>
+
+            <f:panel id="Panel2" show-header="false" show-border="false" hidden="true" body-padding="10px" is-view-port="true" layout="Fit">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar2" title="Panel2" header-style="true">
+                        <f:items>
+                            <f:button id="Button4" size="Small" text="后退" click-handler="onBacktoPanel1Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:label id="Label2" encode-text="false"></f:label>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onBacktoPanel1Click(event) {
+                    F.slideRight('Panel2', 'Panel1');
+                }
+
+                F.ready(function() {
+
+                    var dataList1 = F.ui.DataList1;
+                    if (!dataList1) return;
+
+                    // 为每项右侧的操作单元格动态创建「详情」按钮
+                    dataList1.el.find('.f-datalist-item-inner .item-table .actions').each(function() {
+                        F.create({
+                            type: 'Button',
+                            text: '详情',
+                            scale: 'small',
+                            cls: 'mybtn',
+                            renderTo: this
+                        });
+                    });
+
+                    // 点「详情」：读取该项信息填入 Panel2 后左滑进入详情
+                    dataList1.el.on('click', '.f-datalist-item-inner .mybtn', function(event) {
+                        var btnEl = $(this),
+                            innerEl = btnEl.parents('.f-datalist-item-inner');
+
+                        var text = innerEl.find('.item-text').text();
+                        var desc = innerEl.find('.item-desc').text();
+                        var imageUrl = innerEl.find('.item-img').attr('src');
+                        F.ui.Toolbar2.setTitle(text);
+                        F.ui.Label2.setValue('<div style="text-align:center;margin-bottom:15px;"><img style="width:60px;" src="' + imageUrl +
+                            '"/></div>' + desc);
+
+                        F.slideLeft('Panel1', 'Panel2');
+                    });
+
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

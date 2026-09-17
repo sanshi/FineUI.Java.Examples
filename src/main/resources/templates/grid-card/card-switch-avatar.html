@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 卡片模式（显示模式切换，个人头像）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="res:static/res/js/gridcard.js" />
+
+        <style>
+            .f-grid-card .f-grid-card-list {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 30px;
+                padding: 30px;
+            }
+
+            .f-grid-card .f-grid-card-list .f-grid-card-row {
+                margin: 0;
+                padding: 0;
+                text-align: center;
+                border-radius: 12px;
+                box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);
+            }
+
+            .f-grid-card .f-grid-card-list .f-grid-card-row .f-grid-checkselectionfield {
+                top: 6px;
+                left: 6px;
+            }
+
+            .f-grid-card .f-grid-card-list .f-grid-card-row .user-card {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .f-grid-card-row .user-profile {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                flex-direction: column;
+                padding: 40px 20px 20px;
+            }
+
+            .f-grid-card-row .user-profile .avatar {
+                position: relative;
+            }
+
+            .f-grid-card-row .user-profile .avatar img {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+            }
+
+            .f-grid-card-row .user-profile .avatar .f-badge-ct {
+                top: auto;
+                bottom: 0;
+                right: 0;
+                transform: translate(50%, 50%);
+                margin-right: 10px;
+                margin-bottom: 10px;
+            }
+
+            .f-grid-card-row .user-profile .avatar .f-badge-ct .f-badge {
+                width: 12px;
+                height: 12px;
+                border: solid 2px #fff;
+            }
+
+            .f-grid-card-row .user-profile .name {
+                font-weight: bold;
+            }
+
+            .f-grid-card-row .user-profile .desc {
+                font-size: 0.9em;
+            }
+
+            .f-grid-card-row .score {
+                display: flex;
+                gap: 20px;
+                align-items: center;
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            .f-grid-card-row .score-item {
+                padding: 4px 16px;
+                display: flex;
+                gap: 3px;
+                flex-direction: column;
+                border-style: dashed;
+                border-width: 1px;
+                border-radius: 6px;
+                border-color: rgba(0, 0, 0, 0.2);
+            }
+
+            .f-grid-card-row .score-item .score-value {
+                font-size: 1.2em;
+            }
+
+            .f-grid-card-row .score-item .score-title {
+                font-size: 0.8em;
+            }
+
+            .f-grid-card-row .user-actions {
+                padding: 12px;
+                font-size: 0.9em;
+                border-top-style: solid;
+                border-top-width: 1px;
+                border-top-color: rgba(0, 0, 0, 0.08);
+            }
+
+            .f-grid-card-row .user-actions a {
+                text-decoration: none;
+            }
+
+            body.f-theme-darkbg .f-grid-card-row .score-item {
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+
+            body.f-theme-darkbg .f-grid-card-row .user-actions {
+                border-top-color: rgba(255, 255, 255, 0.2);
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name" display-type="Card"
+                card-renderer-function="renderCardWithAvatar" data-attribute-fields="Name,Gender,Avatar,EntranceYear,Status">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field column-id="UserProfile" width="250" renderer-function="renderUserProfile" header-text="基本信息"></f:render-field>
+                    <f:render-check-field column-id="AtSchool" data-field="AtSchool" render-as-static-field="true" header-text="是否在校"></f:render-check-field>
+                    <f:render-field column-id="Major" data-field="Major" renderer-function="renderMajor" expand-unused-space="true" min-width="150"
+                        header-text="所学专业"></f:render-field>
+                    <f:render-field column-id="ChineseScore" data-field="ChineseScore" header-text="语文成绩"></f:render-field>
+                    <f:render-field column-id="MathScore" data-field="MathScore" header-text="数学成绩"></f:render-field>
+                    <f:render-field column-id="TotalScore" data-field="TotalScore" header-text="总成绩"></f:render-field>
+                    <f:render-field column-id="Status" data-field="Status" renderer-function="renderStatus" header-text="状态"></f:render-field>
+                </f:columns>
+                <f:toolbars>
+                    <f:toolbar position="Top">
+                        <f:items>
+                            <f:toolbar-fill></f:toolbar-fill>
+                            <f:button icon-font="_Table" id="btnDisplayDefault" enable-press="true" pressed="false" click-handler="onDisplayDefaultClick">
+                            </f:button>
+                            <f:button icon-font="_Gallery" id="btnDisplayCard" enable-press="true" pressed="true" click-handler="onDisplayCardClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:grid>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function onDisplayDefaultClick(event) {
+                    F.ui.btnDisplayDefault.setPressed(true);
+                    F.ui.btnDisplayCard.setPressed(false);
+                    F.ui.Grid1.setDisplayType("default");
+                }
+
+                function onDisplayCardClick(event) {
+                    F.ui.btnDisplayDefault.setPressed(false);
+                    F.ui.btnDisplayCard.setPressed(true);
+                    F.ui.Grid1.setDisplayType("card");
+                }
+
+                function renderCardWithAvatar(params) {
+                    var rowId = params.rowData.id;
+                    var rowAttrs = params.rowData.attrs;
+                    var rowValues = params.rowData.values;
+
+                    var badgeType, badgeText;
+                    switch (rowAttrs["Status"]) {
+                        case 1:
+                            badgeType = "success";
+                            badgeText = "优秀";
+                            break;
+                        case 2:
+                            badgeType = "processing";
+                            badgeText = "良好";
+                            break;
+                        case 3:
+                            badgeType = "warning";
+                            badgeText = "补考";
+                            break;
+                        case 4:
+                            badgeType = "error";
+                            badgeText = "重修";
+                            break;
+                    }
+
+                    var badgeEl = $("<div>").addClass("f-badge");
+                    if (badgeType === "success") {
+                        badgeEl.addClass("f-badge-animation-processing");
+                    } else if (badgeType === "error") {
+                        badgeEl.addClass("f-badge-animation-fade");
+                    }
+
+                    var avatarEl = $("<div>").addClass("avatar")
+                        .append($("<img>").attr("src", F.resolveUrl(rowAttrs["Avatar"])))
+                        .append($("<div>").addClass("f-badge-ct f-badge-type-" + badgeType).append(badgeEl));
+
+                    function createScoreEl(scoreValue, scoreType) {
+                        var scoreTitle = scoreType === "chinese" ? "语文" : (scoreType === "math" ? "数学" : "总分");
+                        return $("<div>").addClass("score-item").addClass(scoreType.toLowerCase())
+                            .append($("<span>").addClass("score-value").text(scoreValue))
+                            .append($("<span>").addClass("score-title").text(scoreTitle));
+                    }
+
+                    var userProfileEl = $("<div>").addClass("user-profile")
+                        .append(avatarEl)
+                        .append($("<div>").addClass("name").text(rowAttrs["Name"]))
+                        .append($("<div>").addClass("desc").text(rowValues["Major"] + " · " + rowAttrs["EntranceYear"] + "级" + " · " + badgeText))
+                        .append($("<div>").addClass("score")
+                            .append(createScoreEl(rowValues["ChineseScore"], "chinese"))
+                            .append(createScoreEl(rowValues["MathScore"], "math"))
+                            .append(createScoreEl(rowValues["TotalScore"], "total")));
+
+                    var userActionsEl = $("<div>").addClass("user-actions")
+                        .append($("<a>").attr("href", "javascript:;").text("查看详情"));
+
+                    return $("<div>").addClass("user-card").append(userProfileEl).append(userActionsEl);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

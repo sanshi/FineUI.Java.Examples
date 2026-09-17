@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 分页工具栏（改变每页记录数，内存分页）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（内存分页）" height="350" data-id-field="Id" data-text-field="Name"
+                enable-check-box-select="true" allow-paging="true" page-size="5">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"></f:render-field>
+                </f:columns>
+                <f:page-items>
+                    <f:toolbar-text text="每页记录数："></f:toolbar-text>
+                    <f:drop-down-list id="ddlPageSize" width="100">
+                        <f:list-item text="5" value="5"></f:list-item>
+                        <f:list-item text="10" value="10"></f:list-item>
+                        <f:list-item text="15" value="15"></f:list-item>
+                        <f:list-item text="20" value="20"></f:list-item>
+                        <f:listeners>
+                            <f:listener event="change" handler="onDdlPageSizeChange"></f:listener>
+                        </f:listeners>
+                    </f:drop-down-list>
+                </f:page-items>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                // 内存分页：客户端直接改每页记录数并重载当前页数据（无服务端回发）
+                function onDdlPageSizeChange(event) {
+                    var grid1 = F.ui.Grid1;
+                    var pageSize = parseInt(F.ui.ddlPageSize.getValue(), 10);
+                    grid1.setPageSize(pageSize);
+                    grid1.loadPageData();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

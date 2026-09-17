@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 选择日期</title>
+
+        <style th:inline="css">
+            .mybgpanel>.f-panel-bodyct>.f-panel-body {
+                background-color: #FEF3D5;
+                background-image: url([(@{/res/images/bg/small/3.jpg})]);
+                background-position: right bottom;
+                background-repeat: no-repeat;
+            }
+
+            .mywindow,
+            .mywindow>.f-panel-bodyct>.f-panel-body {
+                background-image: none;
+                background-color: transparent;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" css-class="mybgpanel" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 5px 0"
+                body-padding="10px" is-view-port="true">
+                <f:items>
+                    <f:button id="btnOpenWindow" text="选择日期" click-handler="onOpenWindow1Click"></f:button>
+                </f:items>
+            </f:panel>
+
+            <f:window id="Window1" css-class="mywindow" show-header="false" show-border="false" hidden="true" hide-on-mask-click="true" is-modal="true"
+                body-padding="10px" layout="VBox" box-config-child-margin="0 0 5px 0" percent-width="100%" enable-default-corner="false" position-y="Bottom">
+                <f:items>
+                    <f:calendar id="Calendar1" date-format-string="yyyy/MM/dd" margin-bottom="10">
+                        <f:listeners>
+                            <f:listener event="select" handler="onCalendar1Select" />
+                        </f:listeners>
+                    </f:calendar>
+                    <f:button id="Button3" text="取消" margin="0" click-handler="onCloseWindow1Click"></f:button>
+                </f:items>
+            </f:window>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/common.js}"></script>
+            <script>
+                function onOpenWindow1Click(event) {
+                    F.ui.Window1.show();
+                }
+
+                function onCloseWindow1Click(event) {
+                    F.ui.Window1.hide();
+                }
+
+                function onCalendar1Select(event) {
+                    F.ui.Window1.hide();
+                    showCenterNotify('你选择的日期是：' + F.ui.Calendar1.getText());
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

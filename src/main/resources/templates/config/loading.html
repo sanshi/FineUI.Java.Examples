@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>Config/Loading</title>
+
+        <style>
+            body.f-body {
+                padding: 10px;
+            }
+
+            ul.loading {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            ul.loading li {
+                display: inline-block;
+                margin: 0 10px 10px 0;
+                text-align: center;
+                border-style: solid;
+                border-width: 1px;
+                width: 150px;
+                padding: 10px;
+            }
+
+            ul.loading li .title {
+                margin-top: 15px;
+                font-size: 1.2em;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <ul class="loading">
+                <li class="f-widget-content" th:each="url, stat : ${page.imageUrls}">
+                    <img th:src="${url}">
+                    <div class="title" th:text="${stat.count}"></div>
+                </li>
+            </ul>
+
+        </th:block>
+    </body>
+
+</html>

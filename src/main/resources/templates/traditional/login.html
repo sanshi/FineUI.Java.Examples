@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title th:text="${title}">登录表单（传统 Spring MVC）</title>
+        <!-- CSRF：示例站开启了 Spring Security CSRF，传统写法需自己把令牌带上，否则 POST 会 403。
+         令牌由服务端渲染进 meta，供下面手写的 JS 读取后放进请求头。 -->
+        <meta name="_csrf" th:content="${_csrf.token}" />
+        <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+        <!--
+      ============================================================================
+      下面这一大段 CSS，是为了「手工逼近」FineUI.Java 里一句 <f:window> + <f:simple-form>
+      + <f:button button-color="Primary"> 开箱即得的现代观感：居中模态窗口、标题栏、
+      右对齐标签、必填红星、底部右对齐工具栏、主/次按钮、聚焦与悬停态、必填校验与结果提示……
+      在 FineUI.Java 里这些全部由控件默认样式与主题提供，业务代码里一行 CSS 都不用写。
+      这正是对照的第三个维度：不只是更少的 Java / JavaScript，也是更少的 CSS。
+      ============================================================================
+    -->
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+                font: 14px/1.6 -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+                color: #1f2937;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 16px;
+            }
+
+            .tip {
+                max-width: 420px;
+                text-align: center;
+                color: #6b7280;
+                margin: 0 0 24px;
+            }
+
+            .tip a {
+                color: #1890ff;
+            }
+
+            /* —— 模态窗口（对应 <f:window width="350" title="登录表单">）—— */
+            .win {
+                width: 350px;
+                background: #fff;
+                border: 1px solid #e5e7eb;
+                border-radius: 10px;
+                box-shadow: 0 12px 40px -12px rgba(15, 23, 42, 0.25);
+                overflow: hidden;
+            }
+
+            .win__header {
+                display: flex;
+                align-items: center;
+                height: 42px;
+                padding: 0 16px;
+                font-weight: 600;
+                color: #1f2937;
+                background: #f7fafc;
+                border-bottom: 1px solid #eef0f2;
+            }
+
+            .win__body {
+                padding: 20px 20px 8px;
+            }
+
+            /* 结果提示条（对应 FineUI.Java 的 F.notify / showNotify） */
+            .msg {
+                display: none;
+                margin-bottom: 16px;
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 13px;
+            }
+
+            .msg.show {
+                display: block;
+            }
+
+            .msg.ok {
+                background: #f6ffed;
+                border: 1px solid #b7eb8f;
+                color: #389e0d;
+            }
+
+            .msg.err {
+                background: #fff2f0;
+                border: 1px solid #ffccc7;
+                color: #cf1322;
+            }
+
+            /* —— 表单行（对应 label-align=right / label-width=100 / 红星在前）—— */
+            .form-row {
+                display: flex;
+                align-items: center;
+                margin-bottom: 16px;
+            }
+
+            .form-row label {
+                width: 100px;
+                flex: none;
+                text-align: right;
+                padding-right: 8px;
+                color: #374151;
+            }
+
+            .form-row label .req {
+                color: #f5222d;
+                margin-right: 2px;
+            }
+
+            .form-row .control {
+                flex: 1;
+            }
+
+            .form-row input {
+                width: 100%;
+                height: 32px;
+                padding: 0 10px;
+                border: 1px solid #d1d5db;
+                border-radius: 6px;
+                font-size: 14px;
+                color: #1f2937;
+                transition: border-color .15s, box-shadow .15s;
+            }
+
+            .form-row input:hover {
+                border-color: #91caff;
+            }
+
+            .form-row input:focus {
+                outline: none;
+                border-color: #1890ff;
+                box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.15);
+            }
+
+            /* 必填校验错误态（对应 required="true" 的自动校验提示） */
+            .form-row.is-error input {
+                border-color: #f5222d;
+            }
+
+            .form-row .err-msg {
+                display: none;
+                margin: 4px 0 0 100px;
+                font-size: 12px;
+                color: #f5222d;
+            }
+
+            .form-row.is-error .err-msg {
+                display: block;
+            }
+
+            /* —— 底部工具栏（对应 <f:toolbar position="Bottom" toolbar-align="Right">）—— */
+            .win__footer {
+                display: flex;
+                justify-content: flex-end;
+                gap: 8px;
+                padding: 12px 20px 18px;
+            }
+
+            .btn {
+                height: 32px;
+                padding: 0 18px;
+                border: 1px solid #d1d5db;
+                border-radius: 6px;
+                background: #fff;
+                color: #374151;
+                font-size: 14px;
+                cursor: pointer;
+                transition: all .15s;
+            }
+
+            .btn:hover {
+                border-color: #91caff;
+                color: #1890ff;
+            }
+
+            /* 主按钮（对应 button-color="Primary"） */
+            .btn--primary {
+                border-color: #1890ff;
+                background: #1890ff;
+                color: #fff;
+            }
+
+            .btn--primary:hover {
+                background: #40a9ff;
+                border-color: #40a9ff;
+                color: #fff;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <p class="tip">
+            用户名 / 密码均为 <strong>admin</strong>。本页是「传统 Spring MVC + Thymeleaf」写法，
+            用于和 FineUI.Java 的 <a th:href="@{/basic/login}">/basic/login</a> 直接对照。
+        </p>
+
+        <!-- 手写界面：普通 div / input / button，没有控件抽象，样式全靠上面的手写 CSS -->
+        <div class="win" role="dialog" aria-label="登录表单">
+            <div class="win__header">登录表单</div>
+            <div class="win__body">
+                <div class="msg" id="msg"></div>
+                <div class="form-row" id="row-user">
+                    <label><span class="req">*</span>用户名：</label>
+                    <div class="control">
+                        <input type="text" id="tbxUserName" autocomplete="username" />
+                        <div class="err-msg">用户名不能为空</div>
+                    </div>
+                </div>
+                <div class="form-row" id="row-pwd">
+                    <label><span class="req">*</span>密码：</label>
+                    <div class="control">
+                        <input type="password" id="tbxPassword" autocomplete="current-password" />
+                        <div class="err-msg">密码不能为空</div>
+                    </div>
+                </div>
+            </div>
+            <div class="win__footer">
+                <button class="btn btn--primary" id="btnLogin" type="button">登录</button>
+                <button class="btn" id="btnReset" type="button">重置</button>
+            </div>
+        </div>
+
+        <!-- 手写 JavaScript：必填校验 → 从 DOM 收集参数 → 处理 CSRF → 发 AJAX → 把结果写回界面。
+         这一整段（含校验、传参、CSRF、DOM 更新）在 FineUI.Java 里对应的是控件的
+         required="true" / validate-forms 与一句 on-click="btnLogin_Click"（业务侧零 JS）。 -->
+        <script>
+            (function() {
+                var csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+                var csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+
+                var rowUser = document.getElementById('row-user');
+                var rowPwd = document.getElementById('row-pwd');
+                var tbxUserName = document.getElementById('tbxUserName');
+                var tbxPassword = document.getElementById('tbxPassword');
+                var msg = document.getElementById('msg');
+
+                function showMsg(ok, text) {
+                    msg.textContent = text;
+                    msg.className = 'msg show ' + (ok ? 'ok' : 'err');
+                }
+
+                // 手写必填校验（对应 FineUI.Java 的 required="true"）
+                function validate() {
+                    var ok = true;
+                    if (!tbxUserName.value) {
+                        rowUser.classList.add('is-error');
+                        ok = false;
+                    } else {
+                        rowUser.classList.remove('is-error');
+                    }
+                    if (!tbxPassword.value) {
+                        rowPwd.classList.add('is-error');
+                        ok = false;
+                    } else {
+                        rowPwd.classList.remove('is-error');
+                    }
+                    return ok;
+                }
+
+                document.getElementById('btnLogin').addEventListener('click', function() {
+                    msg.className = 'msg';
+                    if (!validate()) {
+                        return;
+                    }
+
+                    // 手动带上 CSRF 令牌
+                    var headers = {
+                        'Content-Type': 'application/json'
+                    };
+                    headers[csrfHeader] = csrfToken;
+
+                    // 手动拼请求、发 AJAX（JSON 键名必须和后端 LoginForm 字段一字不差）
+                    fetch('/traditional/login', {
+                            method: 'POST',
+                            headers: headers,
+                            body: JSON.stringify({
+                                userName: tbxUserName.value,
+                                password: tbxPassword.value
+                            })
+                        })
+                        .then(function(resp) {
+                            return resp.json();
+                        })
+                        .then(function(result) {
+                            // 手动把结果更新回界面
+                            showMsg(result.success, result.success ? '成功登录！' : '用户名或密码错误！');
+                        })
+                        .catch(function() {
+                            showMsg(false, '请求失败');
+                        });
+                });
+
+                document.getElementById('btnReset').addEventListener('click', function() {
+                    tbxUserName.value = '';
+                    tbxPassword.value = '';
+                    rowUser.classList.remove('is-error');
+                    rowPwd.classList.remove('is-error');
+                    msg.className = 'msg';
+                });
+            })();
+
+        </script>
+    </body>
+
+</html>

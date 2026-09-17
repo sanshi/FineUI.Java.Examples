@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 下拉框嵌套</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="下拉框嵌套" show-header="true">
+                <f:items>
+                    <f:drop-down-box id="DropDownBox1" empty-text="请从下拉表格中选择" data-control-id="Grid1" match-field-width="false">
+                        <f:pop-panel>
+                            <f:panel id="Panel1" width="550" height="300" show-header="false" body-padding="5" layout="VBox" hidden="true">
+                                <f:items>
+                                    <f:form id="Form1" label-width="50" label-align="Right" show-border="false" show-header="false">
+                                        <f:rows>
+                                            <f:form-row column-widths="150 100%">
+                                                <f:items>
+                                                    <f:drop-down-list id="ddlGender" label="性别" empty-text="请选择" auto-select-first-item="false"
+                                                        auto-show-clear-icon="true" on-selected-index-changed="ddlGender_SelectedIndexChanged">
+                                                        <f:items>
+                                                            <f:list-item text="男" value="1"></f:list-item>
+                                                            <f:list-item text="女" value="0"></f:list-item>
+                                                        </f:items>
+                                                    </f:drop-down-list>
+                                                    <f:drop-down-box id="ddbMajor" label="专业" empty-text="请选择" data-control-id="CheckBoxList1"
+                                                        match-field-width="true" enable-multi-select="true" auto-show-clear-icon="true"
+                                                        on-text-changed="ddbMajor_TextChanged">
+                                                        <f:pop-panel>
+                                                            <f:simple-form id="SimpleForm2" body-padding="10" auto-scroll="true" show-border="true"
+                                                                show-header="false" hidden="true">
+                                                                <f:items>
+                                                                    <f:label id="Label1" text="请选择专业："></f:label>
+                                                                    <f:check-box-list id="CheckBoxList1" column-number="2">
+                                                                        <f:check-item text="化学系" value="化学系"></f:check-item>
+                                                                        <f:check-item text="数学系" value="数学系"></f:check-item>
+                                                                        <f:check-item text="物理系" value="物理系"></f:check-item>
+                                                                        <f:check-item text="自动化系" value="自动化系"></f:check-item>
+                                                                        <f:check-item text="材料科学与工程系" value="材料科学与工程系"></f:check-item>
+                                                                    </f:check-box-list>
+                                                                </f:items>
+                                                            </f:simple-form>
+                                                        </f:pop-panel>
+                                                    </f:drop-down-box>
+                                                </f:items>
+                                            </f:form-row>
+                                        </f:rows>
+                                    </f:form>
+                                    <f:grid id="Grid1" box-flex="1" show-border="true" show-header="false" data-id-field="Id" data-text-field="Name"
+                                        enable-multi-select="false">
+                                        <f:columns>
+                                            <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                                            <f:render-field header-text="性别" data-field="Gender" field-type="Int"
+                                                renderer-function="renderGender"></f:render-field>
+                                            <f:render-field header-text="所学专业" data-field="Major" expand-unused-space="true" min-width="150"></f:render-field>
+                                        </f:columns>
+                                    </f:grid>
+                                </f:items>
+                            </f:panel>
+                        </f:pop-panel>
+                    </f:drop-down-box>
+                    <f:button id="btnGetSelection" text="获取下拉框的选中值" css-class="marginr" on-click="btnGetSelection_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br>
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TableStyleFormCompare</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-width="200" enable-collapse="false" show-border="true" show-header="true"
+                message-target="Qtip" title="简单表单">
+                <f:items>
+                    <f:simple-form id="SimpleForm3" show-border="false" show-header="false" enable-table-style="true" margin-bottom="10">
+                        <f:items>
+                            <f:date-picker id="DatePicker1" label="开始日期" required="true"></f:date-picker>
+                            <f:date-picker id="DatePicker2" label="结束日期（大于开始日期）" required="true" compare-control="DatePicker1" compare-operator="GreaterThan"
+                                compare-message="结束日期应该大于开始日期！"></f:date-picker>
+                        </f:items>
+                    </f:simple-form>
+                    <f:simple-form id="SimpleForm2" show-border="false" show-header="false" enable-table-style="true" margin-bottom="10">
+                        <f:items>
+                            <f:text-box id="TextBox1" required="true" label="文本框 1" text="FineUI.Java"></f:text-box>
+                            <f:text-box id="TextBox2" required="true" label="文本框 2（等于文本框 1）" compare-control="TextBox1" compare-operator="Equal"
+                                compare-message="文本框 2 应该等于文本框 1！"></f:text-box>
+                        </f:items>
+                    </f:simple-form>
+                    <f:simple-form id="SimpleForm4" show-border="false" show-header="false" enable-table-style="true" margin-bottom="10">
+                        <f:items>
+                            <f:number-box id="NumberBox1" required="true" label="数字框 1" text="30"></f:number-box>
+                            <f:number-box id="NumberBox2" required="true" label="数字框 2（大于等于数字框 1）" compare-control="NumberBox1"
+                                compare-operator="GreaterThanEqual" compare-message="数字框 2 应该大于等于数字框 1!"></f:number-box>
+                        </f:items>
+                    </f:simple-form>
+                    <f:simple-form id="SimpleForm5" show-border="false" show-header="false" enable-table-style="true">
+                        <f:items>
+                            <f:label id="Label1" label="标签 1" text="88"></f:label>
+                            <f:number-box id="NumberBox3" required="true" label="文本框 3（大于等于标签 1）" compare-control="Label1" compare-operator="GreaterThanEqual"
+                                compare-type="Int" compare-message="文本框 3 应该大于等于标签 1！"></f:number-box>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar position="Bottom">
+                        <f:items>
+                            <f:button id="btnSubmit" on-click="btnSubmit_Click" validate-forms="SimpleForm1" css-class="marginr" text="提交表单"></f:button>
+                            <f:button id="btnReset" text="重置表单" click-handler="onResetClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onResetClick(event) {
+                    F.ui.SimpleForm1.reset();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

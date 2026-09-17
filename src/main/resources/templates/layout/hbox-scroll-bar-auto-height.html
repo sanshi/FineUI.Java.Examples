@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · HBox 布局（自适应高度）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel5" is-fluid="true" show-border="true" enable-collapse="false" layout="HBox" auto-scroll="true" show-header="true"
+                title="面板（Layout=HBox AutoScroll=true），宽度变小时可能出现横向滚动条" box-config-child-margin="0 5 0 0" body-padding="5">
+                <f:items>
+                    <f:panel id="Panel1" title="面板1" width="600" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label id="Label1" text="Width=600"></f:label>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel2" title="面板2" box-flex="1" min-width="600" margin="0" body-padding="10" show-border="true" show-header="false">
+                        <f:items>
+                            <f:label id="Label3" text="BoxFlex=1 Margin=0 MinWidth=600"></f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+            <br />
+            <br />
+            注：反复缩小页面宽度，使得面板出现横向滚动条，此时面板的高度应保持不变。
+
+        </th:block>
+    </body>
+
+</html>

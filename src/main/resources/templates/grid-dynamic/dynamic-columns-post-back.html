@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 动态创建列（回发）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:drop-down-list id="DropDownList1" label="切换表格" width="500" on-selected-index-changed="DropDownList1_SelectedIndexChanged">
+                <f:list-item text="表格一（单选，行扩展列）" value="table1" selected="true"></f:list-item>
+                <f:list-item text="表格二（多选，多表头，全选列）" value="table2"></f:list-item>
+            </f:drop-down-list>
+            <br /><br />
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格一（单选，行扩展列）" data-id-field="Id" data-text-field="Name">
+            </f:grid>
+            <br /><br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+            <br /><br />
+            注：此功能有很大的局限性，不支持单元格编辑，不支持在回发时改变是否排序、是否分页和是否过滤等属性。
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 工具栏与内嵌页面</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" title="面板" height="500" enable-iframe="true" iframe-name="main">
+                <f:toolbars>
+                    <f:toolbar position="Top">
+                        <f:items>
+                            <f:button id="Button1" text="打开页面一" click-handler="onOpenPage1Click"></f:button>
+                            <f:button id="Button2" text="打开页面二" click-handler="onOpenPage2Click"></f:button>
+                            <f:button id="Button3" text="打开页面三" click-handler="onOpenIndexClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                // 直接设置面板内嵌 iframe 的地址
+                function updateIFrameUrl(url) {
+                    F.ui.Panel1.setIFrameUrl(url);
+                }
+                // 用命名 iframe（name="main"）的方式打开页面
+                function updateIFrameUrl2(url) {
+                    window.open(url, 'main');
+                }
+
+                function onOpenPage1Click(event) {
+                    updateIFrameUrl2(F.resolveUrl('/basic/hello'));
+                }
+
+                function onOpenPage2Click(event) {
+                    updateIFrameUrl2(F.resolveUrl('/config/modify-web-config'));
+                }
+
+                function onOpenIndexClick(event) {
+                    updateIFrameUrl(F.resolveUrl('/index'));
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

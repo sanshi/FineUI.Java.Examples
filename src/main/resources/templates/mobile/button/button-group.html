@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 按钮分组</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 30px 0" body-padding="10px"
+                auto-scroll="true" is-view-port="true">
+                <f:items>
+                    <f:button-group id="ButtonGroup1" enable-press-group="true">
+                        <f:button id="Button1" text="按钮一" enable-press="true" pressed="true"></f:button>
+                        <f:button id="Button2" text="按钮二" enable-press="true"></f:button>
+                        <f:button id="Button3" text="按钮三" enable-press="true"></f:button>
+                    </f:button-group>
+                    <f:button-group id="ButtonGroup4" layout="HBox" box-config-position="Center" enable-press-group="true">
+                        <f:button id="Button10" text="按钮一" enable-press="true"></f:button>
+                        <f:button id="Button11" text="按钮二" enable-press="true" pressed="true"></f:button>
+                        <f:button id="Button12" text="按钮三" enable-press="true"></f:button>
+                    </f:button-group>
+                    <f:button-group id="ButtonGroup5" layout="HBox" box-config-position="End" enable-press-group="true">
+                        <f:button id="Button13" text="按钮一" enable-press="true"></f:button>
+                        <f:button id="Button14" text="按钮二" enable-press="true"></f:button>
+                        <f:button id="Button15" text="按钮三" enable-press="true" pressed="true"></f:button>
+                    </f:button-group>
+                    <f:button-group id="ButtonGroup3" layout="HBox" enable-press-group="true">
+                        <f:button id="Button7" box-flex="1" text="按钮一" enable-press="true"></f:button>
+                        <f:button id="Button8" box-flex="1" text="按钮二" enable-press="true" pressed="true"></f:button>
+                        <f:button id="Button9" box-flex="1" text="按钮三" enable-press="true"></f:button>
+                    </f:button-group>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

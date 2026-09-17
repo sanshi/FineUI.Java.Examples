@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 点遮罩关闭窗体</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 5px 0" body-padding="10px"
+                is-view-port="true">
+                <f:items>
+                    <f:button id="btnOpenWindow" text="打开窗体一" click-handler="onOpenWindow1Click"></f:button>
+                </f:items>
+            </f:panel>
+
+            <f:window id="Window1" show-header="false" width="300" hidden="true" is-modal="true" hide-on-mask-click="true" body-padding="10px" layout="VBox">
+                <f:items>
+                    <f:content-panel id="ContentPanel1" show-border="false" show-header="false">
+                        <p>
+                            <a href="http://baike.baidu.com/view/3645.htm" target="_blank"><b>比尔·盖茨</b></a>
+                        </p>
+                        <p>
+                            比尔·盖茨（Bill
+                            Gates），全名威廉·亨利·盖茨三世，简称比尔或盖茨。1955年10月28日出生于美国华盛顿州西雅图，13岁开始计算机编程设计，18岁考入哈佛大学，一年后从哈佛退学，1975年与好友保罗·艾伦一起创办了微软公司，比尔盖茨担任微软公司董事长、CEO和首席软件设计师。
+                        </p>
+                    </f:content-panel>
+                    <f:button id="Button1" text="打开窗体二" click-handler="onOpenWindow2Click"></f:button>
+                </f:items>
+            </f:window>
+
+            <f:window id="Window2" show-header="false" width="300" hidden="true" is-modal="true" hide-on-mask-click="true" body-padding="10px">
+                <f:items>
+                    <f:content-panel id="ContentPanel2" show-border="false" show-header="false">
+                        <p>
+                            <a href="http://tech.163.com/special/jobsdead/" target="_blank"><b>乔布斯</b></a>
+                        </p>
+                        <p>
+                            乔布斯于1955年2月24日出生，苹果创始人之一，近年来多次被评为全美最佳CEO，业界评论“苹果就是乔布斯，乔布斯就是苹果”。
+                        </p>
+                    </f:content-panel>
+                </f:items>
+            </f:window>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onOpenWindow1Click(event) {
+                    F.ui.Window1.show();
+                }
+
+                function onOpenWindow2Click(event) {
+                    F.ui.Window2.show();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

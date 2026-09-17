@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多行客户端合计</title>
+
+        <style>
+            .f-grid-row-summary .f-grid-cell-Major .f-grid-cell-text {
+                text-align: right;
+            }
+
+            .f-grid-row-summary .f-grid-cell-text {
+                font-weight: bold;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name" height="500"
+                allow-paging="true" page-size="15" is-database-paging="true" on-page-index-changed="Grid1_PageIndexChanged" enable-summary="true"
+                summary-position="Bottom" summary-row-count="3">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" column-id="Major" renderer-function="renderMajor" min-width="150"
+                        expand-unused-space="true" summary-renderer-function="majorSummaryRenderer"></f:render-field>
+                    <f:render-field header-text="学费" data-field="Fee" column-id="Fee" summary-type="Min"
+                        summary-renderer-function="feeSummaryRenderer"></f:render-field>
+                    <f:render-field header-text="学杂费" data-field="ExtraFee" column-id="ExtraFee"
+                        summary-renderer-function="donateSummaryRenderer"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function majorSummaryRenderer(summaryRowIndex) {
+                    if (summaryRowIndex == 0) {
+                        return "最小值：";
+                    } else if (summaryRowIndex == 1) {
+                        return "最大值：";
+                    } else if (summaryRowIndex == 2) {
+                        return "平均值：";
+                    }
+                }
+
+                function feeSummaryRenderer(summaryRowIndex) {
+                    var grid1 = this;
+                    if (summaryRowIndex == 0) {
+                        return grid1.calcSummaryValue('Fee', 'min');
+                    } else if (summaryRowIndex == 1) {
+                        return grid1.calcSummaryValue('Fee', 'max');
+                    } else if (summaryRowIndex == 2) {
+                        return grid1.calcSummaryValue('Fee', 'avg', 'N2');
+                    }
+                }
+
+                function donateSummaryRenderer(summaryRowIndex) {
+                    var grid1 = this;
+                    if (summaryRowIndex == 0) {
+                        return grid1.calcSummaryValue('ExtraFee', 'min');
+                    } else if (summaryRowIndex == 1) {
+                        return grid1.calcSummaryValue('ExtraFee', 'max');
+                    } else if (summaryRowIndex == 2) {
+                        return grid1.calcSummaryValue('ExtraFee', 'avg', 'N2');
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 动态创建列（排序）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            暂不支持！
+
+            <f:panel id="Panel1" show-header="false" show-border="false" layout="VBox" is-view-port="true" body-padding="20">
+                <f:items>
+                    <f:drop-down-list id="DropDownList1" label="切换表格" width="500" on-selected-index-changed="DropDownList1_SelectedIndexChanged">
+                        <f:list-item text="表格一（班级）" value="table1" selected="true"></f:list-item>
+                        <f:list-item text="表格二（学生，排序）" value="table2"></f:list-item>
+                    </f:drop-down-list>
+                    <f:grid id="Grid1" data-id-field="Id" box-flex="1" is-fluid="true" show-border="true" show-header="true" title="表格（动态创建列）" height="500"
+                        paging-toolbar-visible="true" on-sort="Grid1_Sort" on-page-index-changed="Grid1_PageIndexChanged">
+                        <f:toolbars>
+                            <f:toolbar>
+                                <f:items>
+                                    <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+                                </f:items>
+                            </f:toolbar>
+                        </f:toolbars>
+                    </f:grid>
+                </f:items>
+            </f:panel>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

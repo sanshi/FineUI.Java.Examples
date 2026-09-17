@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Label 的 Text 属性（回发）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:label id="lblSec1" text="① handler 清空文本（setText(null)，走 set 明确清空）——present 与 absent 都回传 value:null："></f:label>
+            <br />
+            <f:label id="lblDescA" text="声明标签（模板 text=模板文本）：" css-class="marginr"></f:label>
+            <f:label id="lblDeclared" text="模板文本"></f:label>
+            <br />
+            <f:label id="lblDescB" text="未声明标签（缺失）：" css-class="marginr"></f:label>
+            <f:label id="lblAbsent"></f:label>
+            <br />
+            <br />
+            <f:label id="lblSec2" text="② Page_Load 清空文本（模板声明文本，但 Page_Load 首屏清空）——首屏即空、回发不复活："></f:label>
+            <br />
+            <f:label id="lblDescC" text="Page_Load 标签（模板 text=模板文本）：" css-class="marginr"></f:label>
+            <f:label id="lblPageLoad" text="模板文本"></f:label>
+            <br />
+            <br />
+            <f:button id="btnReset" text="清空三个标签的文本（回发）" on-click="btnReset_Click"></f:button>
+            <br />
+            <br />
+            <f:label id="lblResult" text="（等待回发结果）"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

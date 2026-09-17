@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 表单字段的Label样式</title>
+
+        <style>
+            .red .f-field-fieldlabel {
+                color: Red;
+                font-weight: bold;
+            }
+
+            .blue .f-field-fieldlabel {
+                color: Blue;
+                font-weight: normal;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" label-align="Right" title="简单表单">
+                <f:items>
+                    <f:text-box id="tbxUserName" label="用户名" empty-text="输入用户名" text="张三" css-class="red"></f:text-box>
+                    <f:text-box id="tbxPassword" label="密码" text-mode="Password" css-class="red"></f:text-box>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar toolbar-align="Right" position="Bottom">
+                        <f:items>
+                            <f:button id="btnSwitchClass" text="改变 Label 的样式" on-click="btnSwitchClass_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+        </th:block>
+    </body>
+
+</html>

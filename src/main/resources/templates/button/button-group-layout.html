@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 按钮分组（布局）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" margin="24" show-border="false" show-header="false" css-class="f-widget-content" auto-scroll="true" layout="VBox"
+                box-config-align="Start" box-config-child-margin="0 0 10px 0" body-padding="10" is-view-port="true">
+                <f:items>
+                    <f:button-group layout="HBox" width="600">
+                        <f:button id="btnIcon1" text="图标在左侧" box-flex="1" icon="Email"></f:button>
+                        <f:button id="btnIcon2" text="图标在右侧" box-flex="1" icon-align="Right" icon="Star"></f:button>
+                        <f:button id="Button7" text="图标在左侧" box-flex="1" icon-font="_Home"></f:button>
+                        <f:button id="Button8" text="图标在右侧" box-flex="1" icon-align="Right" icon-font="_Car"></f:button>
+                    </f:button-group>
+                    <f:button-group layout="HBox" width="600">
+                        <f:button id="btnIcon3" text="图标在上面" box-flex="1" icon-align="Top" icon="Email"></f:button>
+                        <f:button id="btnIcon4" text="图标在下面" box-flex="1" icon-align="Bottom" icon="Star"></f:button>
+                        <f:button id="Button9" text="图标在上面" box-flex="1" icon-align="Top" icon-font="_Camera"></f:button>
+                        <f:button id="Button10" text="图标在下面" box-flex="1" icon-align="Bottom" icon-font="_Phone"></f:button>
+                    </f:button-group>
+                    <f:button-group layout="VBox" vertical="true" width="200" margin-top="50">
+                        <f:button id="Button1" text="图标在左侧" icon="Email"></f:button>
+                        <f:button id="Button2" text="图标在右侧" icon-align="Right" icon="Star"></f:button>
+                        <f:button id="Button3" text="图标在左侧" icon-font="_Home"></f:button>
+                        <f:button id="Button4" text="图标在右侧" icon-align="Right" icon-font="_Car"></f:button>
+                    </f:button-group>
+                    <f:button-group layout="VBox" vertical="true" width="200">
+                        <f:button id="Button5" text="图标在上面" icon-align="Top" icon="Email"></f:button>
+                        <f:button id="Button6" text="图标在下面" icon-align="Bottom" icon="Star"></f:button>
+                        <f:button id="Button11" text="图标在上面" icon-align="Top" icon-font="_Camera"></f:button>
+                        <f:button id="Button12" text="图标在下面" icon-align="Bottom" icon-font="_Phone"></f:button>
+                    </f:button-group>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

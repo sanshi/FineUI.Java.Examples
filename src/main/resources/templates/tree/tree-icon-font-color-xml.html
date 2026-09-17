@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 字体图标随机颜色（XML）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="res:data/tree/tree_iconfont_randomcolor.xml" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tree id="Tree1" is-fluid="true" show-header="true" title="树控件" enable-collapse="false"></f:tree>
+            <br />
+
+            <f:button id="btnGetSelectedNode" on-click="btnGetSelectedNode_Click" css-class="marginr" text="获取选中的节点"></f:button>
+            <br />
+
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

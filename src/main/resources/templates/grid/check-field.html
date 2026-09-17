@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 复选框列</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-check-field header-text="是否在校" column-id="AtSchool2" data-field="AtSchool" render-as-static-field="false"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" margin-right="5" click-handler="onNotifySelectedRowsClick"></f:button>
+            <f:button text="选中行复选框的状态" click-handler="onNotifyCheckFieldStatusClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                // 读取选中行的「是否在校2」复选框状态，以表格形式通知
+                function onNotifyCheckFieldStatusClick(event) {
+                    var grid1 = F.ui.Grid1;
+                    var rowEls = grid1.getSelectedRowEls();
+                    if (!rowEls.length) {
+                        F.alert('没有选中项！');
+                        return;
+                    }
+                    var result = ['<table class="result">'];
+                    result.push('<tr>');
+                    result.push('<th>ID</th>');
+                    result.push('<th>姓名</th>');
+                    result.push('<th>是否在校</th>');
+                    result.push('</tr>');
+                    rowEls.each(function() {
+                        var cnode = $(this);
+                        var rowData = grid1.getRowData(cnode);
+                        var isChecked = cnode.find('.f-grid-cell-AtSchool2 .f-grid-checkbox').hasClass('f-checked');
+                        result.push('<tr>');
+                        result.push('<td>' + rowData.id + '</td>');
+                        result.push('<td>' + rowData.text + '</td>');
+                        result.push('<td>' + (isChecked ? '在校' : '不在校') + '</td>');
+                        result.push('</tr>');
+                    });
+                    result.push('</table>');
+                    F.notify({
+                        message: F.rawHtml(result.join('')),
+                        target: '_top',
+                        header: false,
+                        messageIcon: '',
+                        positionX: 'center',
+                        positionY: 'top'
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

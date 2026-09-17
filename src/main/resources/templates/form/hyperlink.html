@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 超链接</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:hyper-link id="HyperLink3" text="新窗口打开百度首页" target="_blank" navigate-url="http://www.baidu.com/"></f:hyper-link>
+            <br />
+            <f:hyper-link id="HyperLink1" text-raw-html="新窗口打开 <span style='color:red;'>Google</span> 首页" target="_blank"
+                navigate-url="http://www.google.com/"></f:hyper-link>
+            <br />
+            <f:hyper-link id="HyperLink2" enabled="false" text="点击弹出对话框" navigate-url="javascript:;" click-handler="onHyperLink2Click"></f:hyper-link>
+            <br />
+            <f:button id="btnChangeEnable" text="启用/禁用最后一个链接" on-click="btnChangeEnable_Click"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                // 超链接的客户端点击回调（返回 false 可阻止默认导航）
+                function onHyperLink2Click(event) {
+                    F.alert({
+                        message: '这是链接的客户端提示',
+                        messageIcon: 'information',
+                        target: '_parent'
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

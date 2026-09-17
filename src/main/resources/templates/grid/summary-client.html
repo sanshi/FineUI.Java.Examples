@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 客户端合计</title>
+
+        <style>
+            .f-grid-row-summary .f-grid-cell-Major .f-grid-cell-text {
+                text-align: right;
+            }
+
+            .f-grid-row-summary .f-grid-cell-text {
+                font-weight: bold;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name" height="500"
+                allow-paging="true" page-size="15" is-database-paging="true" on-page-index-changed="Grid1_PageIndexChanged" enable-summary="true"
+                summary-position="Bottom">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" column-id="Major" renderer-function="renderMajor" min-width="150"
+                        expand-unused-space="true" summary-text="合计："></f:render-field>
+                    <f:render-field header-text="学费" data-field="Fee" summary-type="Sum"></f:render-field>
+                    <f:render-field header-text="学杂费" data-field="ExtraFee" summary-type="Sum"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

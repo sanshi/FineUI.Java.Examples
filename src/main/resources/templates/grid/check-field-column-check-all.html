@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 复选框列（列快速全选）</title>
+
+        <style>
+            .f-field-body-checkboxlabel {
+                white-space: nowrap;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-check-field header-text="是否在校2" column-id="AtSchool2" data-field="AtSchool" render-as-static-field="false"></f:render-check-field>
+                    <f:render-check-field header-text="是否在校3" column-id="AtSchool3" data-field="AtSchool" render-as-static-field="false"></f:render-check-field>
+                    <f:render-check-field header-text="是否在校4" column-id="AtSchool4" data-field="AtSchool" render-as-static-field="false"></f:render-check-field>
+                </f:columns>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1">
+                        <f:items>
+                            <f:label text="快速设定："></f:label>
+                            <f:check-box text="是否在校2" margin-right="10" attribute-data-tag="AtSchool2">
+                                <f:listeners>
+                                    <f:listener event="change" handler="onQuickSetCheckChange"></f:listener>
+                                </f:listeners>
+                            </f:check-box>
+                            <f:check-box text="是否在校3" margin-right="10" attribute-data-tag="AtSchool3">
+                                <f:listeners>
+                                    <f:listener event="change" handler="onQuickSetCheckChange"></f:listener>
+                                </f:listeners>
+                            </f:check-box>
+                            <f:check-box text="是否在校4" margin-right="10" attribute-data-tag="AtSchool4">
+                                <f:listeners>
+                                    <f:listener event="change" handler="onQuickSetCheckChange"></f:listener>
+                                </f:listeners>
+                            </f:check-box>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:grid>
+            <br />
+            <br />
+            <f:button text="选中行复选框的状态" click-handler="onNotifyCheckFieldStatusClick"></f:button>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function onQuickSetCheckChange(event) {
+                    var grid1 = F.ui.Grid1;
+                    var checkboxFieldID = this.getAttr('data-tag'),
+                        checked = this.getValue();
+
+                    var checkboxEls = grid1.el.find('.f-grid-cell-' + checkboxFieldID + ' .f-grid-checkbox');
+                    checkboxEls.toggleClass('f-checked', checked);
+                }
+
+                function onNotifyCheckFieldStatusClick(event) {
+                    var grid1 = F.ui.Grid1;
+
+                    var rowEls = grid1.getSelectedRowEls();
+                    if (!rowEls.length) {
+                        F.alert('没有选中项！');
+                        return;
+                    }
+
+                    var result = ['<table class="result">'];
+                    result.push('<tr>');
+                    result.push('<th>ID</th>');
+                    result.push('<th>姓名</th>');
+                    result.push('<th>是否在校2</th>');
+                    result.push('<th>是否在校3</th>');
+                    result.push('<th>是否在校4</th>');
+                    result.push('</tr>');
+                    rowEls.each(function() {
+                        var cnode = $(this);
+                        var rowData = grid1.getRowData(cnode);
+                        var isChecked2 = cnode.find('.f-grid-cell-AtSchool2 .f-grid-checkbox').hasClass('f-checked');
+                        var isChecked3 = cnode.find('.f-grid-cell-AtSchool3 .f-grid-checkbox').hasClass('f-checked');
+                        var isChecked4 = cnode.find('.f-grid-cell-AtSchool4 .f-grid-checkbox').hasClass('f-checked');
+
+                        result.push('<tr>');
+                        result.push('<td>' + rowData.id + '</td>');
+                        result.push('<td>' + rowData.text + '</td>');
+                        result.push('<td>' + (isChecked2 ? '在校' : '不在校') + '</td>');
+                        result.push('<td>' + (isChecked3 ? '在校' : '不在校') + '</td>');
+                        result.push('<td>' + (isChecked4 ? '在校' : '不在校') + '</td>');
+                        result.push('</tr>');
+                    });
+                    result.push('</table>');
+
+                    F.notify({
+                        message: F.rawHtml(result.join('')),
+                        target: '_top',
+                        header: false,
+                        messageIcon: '',
+                        positionX: 'center',
+                        positionY: 'top'
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

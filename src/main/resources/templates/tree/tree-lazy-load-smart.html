@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 延迟加载（微型模式）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tree id="Tree1" width="300" height="400" enable-collapse="false" show-header="false" auto-leaf-identification="false"
+                enable-single-click-expand="true" on-node-lazy-load="Tree1_NodeLazyLoad">
+                <f:nodes>
+                    <f:tree-node text="中国" expanded="true" icon-font="_Home">
+                        <f:tree-node text="河南省" expanded="true">
+                            <f:tree-node text="驻马店市（延迟加载）" node-id="zhumadian"></f:tree-node>
+                            <f:tree-node text="漯河" node-id="luohe" leaf="true"></f:tree-node>
+                        </f:tree-node>
+                        <f:tree-node text="安徽省" expanded="true" node-id="anhui">
+                            <f:tree-node text="合肥市" node-id="hefei">
+                                <f:tree-node text="金色池塘小区" node-id="golden" leaf="true"></f:tree-node>
+                                <f:tree-node text="中国科学技术大学" node-id="ustc" leaf="true"></f:tree-node>
+                            </f:tree-node>
+                        </f:tree-node>
+                    </f:tree-node>
+                    <f:tree-node text="美国" expanded="true" node-id="mg" icon-font="_Plane" icon="Cake">
+                        <f:tree-node text="加利福尼亚州" leaf="true" node-id="mg-jlfny"></f:tree-node>
+                        <f:tree-node text="马萨诸塞州" leaf="true" node-id="mg-mszs"></f:tree-node>
+                    </f:tree-node>
+                </f:nodes>
+            </f:tree>
+            <br />
+
+            <f:check-box id="cbxMiniMode" show-label="false" text="启用微型模式">
+                <f:listeners>
+                    <f:listener event="change" handler="onMiniModeCheckChanged"></f:listener>
+                </f:listeners>
+            </f:check-box>
+
+            <br />
+            <br />
+            <f:button id="btnGetSelectedNode" on-click="btnGetSelectedNode_Click" css-class="marginr" text="获取选中的节点"></f:button>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onMiniModeCheckChanged(event, checked) {
+                    var tree1 = F.ui.Tree1;
+
+                    tree1.miniMode = checked;
+
+                    // 如果启用微型模式，则强制启用其他属性（建议微型模式的最小宽度为60px）
+                    if (checked) {
+                        tree1.width = 60;
+
+                        tree1.hideHScrollbar = true;
+                        tree1.hideVScrollbar = true;
+                        tree1.expanderToRight = true;
+                        tree1.headerStyle = true;
+                    } else {
+                        tree1.width = 300;
+
+                        tree1.hideHScrollbar = false;
+                        tree1.hideVScrollbar = false;
+                        tree1.expanderToRight = false;
+                        tree1.headerStyle = false;
+                    }
+
+                    // 重新加载树控件
+                    tree1.loadData();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

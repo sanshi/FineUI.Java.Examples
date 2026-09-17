@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TableStyleFormEmptyLabel</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:form id="Form1" is-fluid="true" show-border="false" show-header="false" enable-table-style="true" message-target="Qtip">
+                <f:rows>
+                    <f:form-row>
+                        <f:items>
+                            <f:label id="Label3" label="电话" text="0551-1234567"></f:label>
+                            <f:label id="Label16" label="申请人" text="admin"></f:label>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:label id="Label4" label="编号" text="200804170006"></f:label>
+                            <f:label></f:label>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:drop-down-list id="DropDownList3" label="审批人" force-selection="false" required="true" show-red-star="true" empty-text="请选择审批人"
+                                auto-select-first-item="false">
+                                <f:list-item text="老大甲" value="0"></f:list-item>
+                                <f:list-item text="老大乙" value="1"></f:list-item>
+                                <f:list-item text="老大丙" value="2"></f:list-item>
+                            </f:drop-down-list>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:number-box id="NumberBox1" label="申请数量" no-decimal="true" no-negative="true" max-value="1000" required="true"
+                                show-red-star="true"></f:number-box>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row>
+                        <f:items>
+                            <f:text-area id="TextArea1" label="描述" show-red-star="true" required="true"></f:text-area>
+                        </f:items>
+                    </f:form-row>
+                </f:rows>
+            </f:form>
+            <f:button id="btnSubmitForm1" text="验证此表单并提交" css-class="marginr" on-click="btnSubmitForm1_Click" validate-forms="Form1" margin-top="5"></f:button>
+            <br />
+            <br />
+            <f:form id="Form2" is-fluid="true" show-border="false" show-header="false" layout="HBox" enable-table-style="true" message-target="Qtip">
+                <f:items>
+                    <f:panel show-border="false" show-header="false" box-flex="1" layout="VBox">
+                        <f:items>
+                            <f:text-box required="true" label="国家"></f:text-box>
+                            <f:text-box required="true" label="邮编"></f:text-box>
+                        </f:items>
+                    </f:panel>
+                    <f:panel show-border="false" show-header="false" box-flex="1" layout="VBox">
+                        <f:items>
+                            <f:text-box required="true" label="省份"></f:text-box>
+                            <f:text-box required="true" label="城市"></f:text-box>
+                        </f:items>
+                    </f:panel>
+                    <f:panel show-border="false" show-header="false" box-flex="1" layout="VBox">
+                        <f:items>
+                            <f:text-box required="true" label="地址"></f:text-box>
+                            <f:label></f:label>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:form>
+            <f:button id="btnSubmitForm2" text="验证此表单并提交" css-class="marginr" on-click="btnSubmitForm2_Click" validate-forms="Form2" margin-top="5"></f:button>
+
+        </th:block>
+    </body>
+
+</html>

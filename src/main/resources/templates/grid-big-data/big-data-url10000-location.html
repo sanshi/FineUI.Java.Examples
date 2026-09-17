@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 大数据（网址数据源，10000，行定位）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.gridbigdata.BigDataDataController" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（网址数据源，10,000行）" data-id-field="Id" data-text-field="Name"
+                data-url="/grid-big-data/big-data-url-data?total=10000&type=simple" enable-check-box-select="true" height="500" enable-big-data="true"
+                fixed-row-height="true" enable-big-data-row-tip="false" paging-toolbar-visible="false">
+                <f:columns>
+                    <f:row-number-field width="50"></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name" width="150"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                </f:columns>
+                <f:toolbars>
+                    <f:toolbar position="Bottom">
+                        <f:items>
+                            <f:label text="转到行："></f:label>
+                            <f:number-box id="nbRowNumber" min-value="1" max-value="10000" text="1000" increment="100" enable-commas="true"></f:number-box>
+                            <f:button text="Go" click-handler="onGotoRow"></f:button>
+                            <f:toolbar-fill></f:toolbar-fill>
+                            <f:label id="labCurrentPosition"></f:label>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:grid>
+            <br /><br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function onGotoRow(event) {
+                    F.ui.Grid1.scrollToRow(F.ui.nbRowNumber.getValue() - 1);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多表头列拖拽排序</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" enable-column-move="true">
+                <f:columns>
+                    <f:render-field column-id="Year" data-field="Year" header-text="统计年份"></f:render-field>
+                    <f:group-field column-id="anhui" header-text="安徽省" text-align="Center">
+                        <f:columns>
+                            <f:group-field column-id="hefei" header-text="合肥市" text-align="Center">
+                                <f:columns>
+                                    <f:render-field column-id="AHData1" data-field="AHData1" header-text="数据一"></f:render-field>
+                                    <f:render-field column-id="AHData2" data-field="AHData2" header-text="数据二"></f:render-field>
+                                </f:columns>
+                            </f:group-field>
+                        </f:columns>
+                    </f:group-field>
+                    <f:group-field column-id="henan" header-text="河南省" text-align="Center">
+                        <f:columns>
+                            <f:group-field column-id="zhumadian" header-text="驻马店市" text-align="Center">
+                                <f:columns>
+                                    <f:render-field column-id="HZData1" data-field="HZData1" header-text="数据一"></f:render-field>
+                                    <f:render-field column-id="HZData2" data-field="HZData2" header-text="数据二"></f:render-field>
+                                </f:columns>
+                            </f:group-field>
+                            <f:group-field column-id="luohe" header-text="漯河市" text-align="Center">
+                                <f:columns>
+                                    <f:render-field column-id="HLData1" data-field="HLData1" header-text="数据一"></f:render-field>
+                                    <f:render-field column-id="HLData2" data-field="HLData2" header-text="数据二"></f:render-field>
+                                </f:columns>
+                            </f:group-field>
+                        </f:columns>
+                    </f:group-field>
+                    <f:render-field box-flex="1" text-align="Center" column-id="LogTime" data-field="LogTime" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy/MM/dd" header-text="记录时间"></f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="columnmove" handler="onGridColumnMove"></f:listener>
+                </f:listeners>
+            </f:grid>
+            <br /><br />
+            <f:button id="btnRefresh" text="刷新本页面（保持列顺序）" click-handler="onRefreshClick"></f:button>
+            <br /><br />
+            注：拖动列头可调整列顺序，刷新后仍保持。
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function onRefreshClick(event) {
+                    window.location.reload();
+                }
+
+                function onGridColumnMove(event, targetColumnId, sourceColumnId, operation) {
+                    var grid = this;
+
+                    function getColumnIds(columns) {
+                        return $.map(columns, function(item, index) {
+                            var itemObj = {
+                                columnId: item.columnId
+                            };
+                            if (item.columns) {
+                                itemObj['columns'] = getColumnIds(item.columns);
+                            }
+                            return itemObj;
+                        });
+                    }
+
+                    // 列拖拽排序后的列顺序数组
+                    var columnIds = getColumnIds(grid.columns);
+
+                    // 触发后台事件
+                    F.customEvent('Grid1_ColumnMove', {
+                        columnIds: columnIds
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

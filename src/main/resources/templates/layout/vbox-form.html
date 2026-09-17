@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · VBox（表单）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:form id="Panel1" is-fluid="true" title="表单（Layout=VBox）" height="400" label-align="Right" body-padding="10" show-border="true" show-header="true"
+                layout="VBox" box-config-child-margin="0 0 5 0" box-config-last-child-margin="0" remove-fields-margin="true">
+                <f:items>
+                    <f:text-box id="TextBox1" label="姓名" show-red-star="true" required="true"></f:text-box>
+                    <f:drop-down-list id="DropDownList1" label="性别" show-red-star="true" required="true">
+                        <f:list-item text="男" value="男" selected="true" />
+                        <f:list-item text="女" value="女" />
+                    </f:drop-down-list>
+                    <f:text-area id="TextArea1" label="个人简介" box-flex="1"></f:text-area>
+                </f:items>
+            </f:form>
+            <br>
+            <br>
+            注：为表单设置 remove-fields-margin="true" 来移除表单字段的底部外边距。
+
+        </th:block>
+    </body>
+
+</html>

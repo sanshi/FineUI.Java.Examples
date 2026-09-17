@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 限制标题文字宽度</title>
+
+        <style>
+            .f-tab-header.tab-maxwidth {
+                max-width: 150px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tab-strip id="TabStrip1" is-fluid="true" height="350" show-border="true" tab-position="Top" enable-tab-close-menu="false" active-tab-index="1">
+                <f:tabs>
+                    <f:tab css-class="tab-maxwidth" title="标签一（这个标签的标题文字超长，真的很长很长很长很长很长很长很长，非常非常长，够长了吧）"
+                        title-tool-tip="标签一（这个标签的标题文字超长，真的很长很长很长很长很长很长很长，非常非常长，够长了吧）" body-padding="10">
+                        <f:items>
+                            <f:label id="Label1" text="第一个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab title="标签二，这个标题也很长，但是没有截断" body-padding="10">
+                        <f:items>
+                            <f:label id="Label2" text="第二个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                    <f:tab title="标签三" body-padding="10">
+                        <f:items>
+                            <f:label id="Label3" text="第三个标签的内容" />
+                        </f:items>
+                    </f:tab>
+                </f:tabs>
+            </f:tab-strip>
+
+        </th:block>
+    </body>
+
+</html>

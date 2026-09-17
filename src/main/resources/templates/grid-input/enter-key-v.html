@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 编辑框（回车纵向遍历）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="语文" data-field="ChineseScore" renderer-function="renderChineseScore"></f:render-field>
+                    <f:render-field header-text="数学" data-field="MathScore" renderer-function="renderMathScore"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br /><br />
+            注：
+            <ul>
+                <li>Tab/Enter遍历文本框时，先遍历一列的文本框，然后再遍历下一列的文本框</li>
+            </ul>
+            <f:button id="Button1" text="获取用户输入的分组值" click-handler="onGetInputsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function renderChineseScore(value, params) {
+                    return F.formatString('<input class="myinput" value="{0}" style="width:80px;" type="text">', value);
+                }
+
+                function renderMathScore(value, params) {
+                    return F.formatString('<input class="myinput" value="{0}" style="width:80px;" type="text">', value);
+                }
+
+                var inputselector = 'input.myinput';
+
+                function getUserInputs() {
+                    var result = [];
+
+                    var grid1 = F.ui.Grid1;
+                    grid1.getRowEls().each(function() {
+                        var rowEl = $(this);
+                        var rowData = grid1.getRowData(rowEl);
+
+                        var inputValues = [];
+                        rowEl.find(inputselector).each(function() {
+                            inputValues.push($(this).val());
+                        });
+
+                        result.push([rowData.id, rowData.text, inputValues]);
+                    });
+
+                    return F.toJSON(result);
+                }
+
+                function onGetInputsClick(event) {
+                    F.customEvent('GetInputs', getUserInputs());
+                }
+
+                function registerEnterEvent() {
+                    var grid = F.ui.Grid1;
+
+                    grid.el.on('keydown', inputselector, function(event) {
+                        if (event.keyCode === F.KEY.ENTER || event.keyCode === F.KEY.TAB) {
+                            var row = $(this).closest('.f-grid-row');
+
+                            var inputs = row.find(inputselector);
+                            // 一行中有多少个输入框
+                            var inputCount = inputs.length;
+                            // 当前输入框在本行中的序号（用来标示那一列）
+                            var inputIndex = inputs.index(this);
+
+                            // 查找下一行
+                            var nextRow = row.next();
+                            if (nextRow.length) {
+                                // 选中下一行同列的的输入框
+                                nextRow.find(inputselector).eq(inputIndex).select();
+                            } else {
+                                // 如果本行是最后一行，则选择下一列第一行的输入框
+                                inputIndex++;
+                                if (inputIndex >= inputCount) {
+                                    inputIndex = 0;
+                                }
+                                row.prevAll(':last').find(inputselector).eq(inputIndex).select();
+                            }
+
+                            // 阻止 Enter 或者 Tab 的默认行为
+                            event.preventDefault();
+                        }
+                    });
+
+                    grid.el.on('click', inputselector, function(event) {
+                        $(this).select();
+                    });
+                }
+
+
+                F.ready(function() {
+                    registerEnterEvent();
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

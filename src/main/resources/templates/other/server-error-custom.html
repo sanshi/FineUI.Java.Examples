@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 服务器错误（自行拦截）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:button id="Button5" text="服务器异常（500）" on-click="Button5_Click"></f:button>
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                F.beforeAjaxError(function(data) {
+                    var errormsg = 'Unknown';
+
+                    // 如果返回的数据包含<title>...</title>标签
+                    //（注：Java 示例未配置自定义 500 错误页，Spring Boot 默认 Whitelabel 页无 <title>，
+                    //  故此处通常解析不到、回退为 'Unknown'；spec 断言的是固定文本「这是自定义错误处理！」）
+                    var result = /<title>([^<]+)<\/title>/ig.exec(data);
+                    if (result && result.length === 2) {
+                        errormsg = result[1];
+                    }
+
+                    F.alert({
+                        message: F.rawHtml('<strong>这是自定义错误处理！</strong><br/>服务器返回的错误：' + errormsg),
+                        messageIcon: 'error'
+                    });
+
+                    // 需要显式的返回 false，来阻止默认的错误处理
+                    return false;
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

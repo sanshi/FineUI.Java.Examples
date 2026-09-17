@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FormValidateValidatorParams</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="用户注册表单">
+                <f:items>
+                    <f:text-box id="TextBox1" label="输入框一" required="true" show-red-star="true" validator-function="inputValidator">
+                        <f:attributes>
+                            <f:attribute key="data-maxlength" value="3"></f:attribute>
+                        </f:attributes>
+                    </f:text-box>
+                    <f:text-box id="TextBox2" label="输入框二" required="true" show-red-star="true" validator-function="inputValidator">
+                        <f:attributes>
+                            <f:attribute key="data-maxlength" value="6"></f:attribute>
+                        </f:attributes>
+                    </f:text-box>
+                    <f:button id="btnRegister" text="注册" validate-forms="SimpleForm1" on-click="btnRegister_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <br />
+            注：
+            <ul>
+                <li>[输入框一]的最大长度为 3 个字符。</li>
+                <li>[输入框二]的最大长度为 6 个字符。</li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function inputValidator() {
+                    var inputCmp = this;
+                    var value = $.trim(inputCmp.getValue());
+                    var maxLength = parseInt(inputCmp.getAttr('data-maxlength'), 10);
+
+                    if (value.length <= maxLength) {
+                        return true;
+                    } else {
+                        return '最多只能输入 ' + maxLength + ' 个字符！';
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 行分组（隐藏特定的分组合计）</title>
+
+        <style>
+            .f-grid-rowgroup-summary .f-grid-cell-Major .f-grid-cell-text {
+                text-align: right;
+            }
+
+            .f-grid-rowgroup-summary .f-grid-cell-text {
+                font-style: italic;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" height="500" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-row-group="true" data-row-group-field="EntranceYear" row-group-summary="true" row-renderer-function="grid1RowRenderer">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" column-id="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150" row-group-summary-text="平均（分组）："></f:render-field>
+                    <f:render-field header-text="语文成绩" data-field="ChineseScore" column-id="ChineseScore" field-type="Int"
+                        row-group-summary-type="Avg"></f:render-field>
+                    <f:render-field header-text="数学成绩" data-field="MathScore" column-id="MathScore" field-type="Int"
+                        row-group-summary-type="Avg"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+            <br />
+            <br />
+            注：如果分组中只有一行数据，则隐藏分组合计。
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function linesInRowGroup(rowGroup) {
+                    var lines = 0;
+                    $.each(F.ui.Grid1.data, function(index, rowData) {
+                        if (rowData.isRowGroup && rowData.rowGroup === rowGroup) {
+                            lines = rowData.children.length - 1;
+                            return false;
+                        }
+                    });
+                    return lines;
+                }
+
+                function grid1RowRenderer(params) {
+                    if (params.rowData.isRowGroupSummary) {
+                        if (linesInRowGroup(params.rowData.rowGroup) === 1) {
+                            params.rowCls = "f-hidden";
+                        }
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

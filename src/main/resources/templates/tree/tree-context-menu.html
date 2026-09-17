@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 节点右键菜单</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:tree id="Tree1" is-fluid="true" show-header="true" title="树控件（右键菜单）" enable-collapse="false" enable-single-click-expand="false">
+                <f:nodes>
+                    <f:tree-node text="中国" expanded="true" node-id="china">
+                        <f:tree-node text="河南省" node-id="henan">
+                            <f:tree-node text="驻马店市" node-id="zhumadian">
+                                <f:tree-node text="遂平县" leaf="false" node-id="suiping">
+                                    <f:tree-node text="槐树乡" leaf="false" node-id="huaishu">
+                                        <f:tree-node text="陈庄村" node-id="chenzhuang"></f:tree-node>
+                                    </f:tree-node>
+                                    <f:tree-node text="嵖岈山乡" node-id="chayashanxiang"></f:tree-node>
+                                </f:tree-node>
+                                <f:tree-node text="西平县" leaf="false" node-id="xiping">
+                                    <f:tree-node text="芦庙乡" node-id="lumiaoxiang"></f:tree-node>
+                                    <f:tree-node text="杨庄乡" node-id="yangzhuangxiang"></f:tree-node>
+                                </f:tree-node>
+                            </f:tree-node>
+                            <f:tree-node text="漯河市" node-id="luohe"></f:tree-node>
+                        </f:tree-node>
+                        <f:tree-node text="安徽省" expanded="true" node-id="anhui">
+                            <f:tree-node text="合肥市" expanded="true" node-id="hefei">
+                                <f:tree-node text="金色池塘小区" node-id="golden"></f:tree-node>
+                                <f:tree-node text="中国科学技术大学" node-id="ustc"></f:tree-node>
+                            </f:tree-node>
+                        </f:tree-node>
+                    </f:tree-node>
+                </f:nodes>
+                <f:listeners>
+                    <f:listener event="beforenodecontextmenu" handler="onTreeNodeContextMenu"></f:listener>
+                </f:listeners>
+            </f:tree>
+
+            <f:menu id="Menu1">
+                <f:menu-button id="btnExpandNode" text="展开全部" click-handler="onExpandNode"></f:menu-button>
+                <f:menu-button id="btnCollapseNode" text="折叠全部" click-handler="onCollapseNode"></f:menu-button>
+                <f:listeners>
+                    <f:listener event="show" handler="onMenuShow"></f:listener>
+                </f:listeners>
+            </f:menu>
+
+            <br />
+            注：在叶子节点上点击右键，则弹出菜单的菜单项都是禁用状态。
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                // 保存当前菜单对应的树节点ID
+                var currentNodeId;
+
+                // 返回false，来阻止浏览器右键菜单
+                function onTreeNodeContextMenu(event, nodeId) {
+                    currentNodeId = nodeId;
+                    F.ui.Menu1.show();
+                    return false;
+                }
+
+                // 设置所有菜单项的禁用状态
+                function setMenuItemsDisabled(disabled) {
+                    var menu = F.ui.Menu1;
+                    $.each(menu.items, function(index, item) {
+                        item.setDisabled(disabled);
+                    });
+                }
+
+                // 显示菜单后，检查是否禁用菜单项
+                function onMenuShow(event) {
+                    if (currentNodeId) {
+                        var tree = F.ui.Tree1;
+                        var nodeData = tree.getNodeData(currentNodeId);
+                        if (nodeData.leaf) {
+                            setMenuItemsDisabled(true);
+                        } else {
+                            setMenuItemsDisabled(false);
+                        }
+                    }
+                }
+
+                function onExpandNode(event) {
+                    if (currentNodeId) {
+                        F.ui.Tree1.expandNode(currentNodeId, true);
+                    }
+                }
+
+                function onCollapseNode(event) {
+                    if (currentNodeId) {
+                        F.ui.Tree1.collapseNode(currentNodeId, true);
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · UMEditor</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-align="Top" enable-collapse="false" title="表单">
+                <f:items>
+                    <f:html-editor id="HtmlEditor1" label="文本编辑器" readonly="true" editor="UMEditor" base-path="/res/third-party/umeditor/" toolbar-set="Full"
+                        height="350"></f:html-editor>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:button id="Button2" css-class="marginr" text="设置编辑器的值" on-click="Button2_Click"></f:button>
+            <f:button id="Button1" text="获取编辑器的值" on-click="Button1_Click"></f:button>
+            <br />
+            <br />
+            <f:button id="Button3" css-class="marginr" text="设置编辑器只读" click-handler="onSetReadonlyClick"></f:button>
+            <f:button id="Button4" text="取消编辑器只读" click-handler="onCancelReadonlyClick"></f:button>
+            <br />
+            <br />
+            注：
+            <ul>
+                <li>默认编辑器处于只读状态。</li>
+                <li>本示例不支持文件上传，请根据UEditor官网文档自行配置。</li>
+            </ul>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onSetReadonlyClick(event) {
+                    F.ui.HtmlEditor1.setReadonly(true);
+                }
+
+                function onCancelReadonlyClick(event) {
+                    F.ui.HtmlEditor1.setReadonly(false);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataModel 快速排序列</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" enable-check-box-select="true" row-type-from="students"
+                data-id-field="id" data-text-field="name" allow-sorting="true" sort-field="gender" sort-direction="ASC" on-sort="Grid1_Sort">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field for="name" quick-sort-field="true"></f:render-field>
+                    <f:render-field for="gender" quick-sort-field="true" renderer-function="renderGender"></f:render-field>
+                    <f:render-field for="entranceYear" quick-sort-field="true"></f:render-field>
+                    <f:render-check-field for="atSchool" quick-sort-field="true" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field for="major" renderer-function="renderMajor" expand-unused-space="true" min-width="150"></f:render-field>
+                    <f:render-field for="group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field for="entranceDate"></f:render-field>
+                </f:columns>
+            </f:grid><br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

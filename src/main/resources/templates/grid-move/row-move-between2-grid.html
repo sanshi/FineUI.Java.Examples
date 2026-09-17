@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 两个表格间移动行</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:window id="Window1" title="选择用户窗体" is-modal="false" enable-close="false" icon-font="_Group" width="500" height="350" layout="HBox"
+                body-padding="10">
+                <f:items>
+                    <f:group-panel box-flex="1" title="数据源" layout="Fit" body-padding="0">
+                        <f:items>
+                            <f:grid id="Grid1" show-border="false" show-header="false" enable-collapse="false" data-id-field="Id" show-grid-header="false"
+                                enable-row-lines="false" enable-alternate-row-color="false">
+                                <f:columns>
+                                    <f:render-field column-id="Name" data-field="Name" header-text="姓名" box-flex="1"></f:render-field>
+                                </f:columns>
+                            </f:grid>
+                        </f:items>
+                    </f:group-panel>
+                    <f:panel show-border="false" show-header="false" width="60" layout="VBox" box-config-position="Center" body-padding="10">
+                        <f:items>
+                            <f:button id="Button3" icon-font="_DoubleRight" margin-bottom="5" click-handler="onMoveRightAllClick"></f:button>
+                            <f:button id="Button1" icon-font="_Right" margin-bottom="5" click-handler="onMoveRightClick"></f:button>
+                            <f:button id="Button2" icon-font="_Left" margin-bottom="5" click-handler="onMoveLeftClick"></f:button>
+                            <f:button id="Button4" icon-font="_DoubleLeft" margin-bottom="5" click-handler="onMoveLeftAllClick"></f:button>
+                        </f:items>
+                    </f:panel>
+                    <f:group-panel id="GroupPanel1" box-flex="1" title="已选择" layout="Fit" body-padding="0">
+                        <f:items>
+                            <f:grid id="Grid2" box-flex="1" show-border="false" show-header="false" enable-collapse="false" data-id-field="Id"
+                                show-grid-header="false" enable-row-lines="false" enable-alternate-row-color="false">
+                                <f:columns>
+                                    <f:render-field column-id="Name" data-field="Name" header-text="姓名" box-flex="1"></f:render-field>
+                                </f:columns>
+                            </f:grid>
+                        </f:items>
+                    </f:group-panel>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar toolbar-align="Right" position="Bottom">
+                        <f:items>
+                            <f:button id="btnCheckSelected" text="选择了那些用户（自定义回发）" type="Submit" click-handler="onCheckSelectedClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:window>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="none">
+                function onRefreshClick(event) {
+                    window.location.reload();
+                }
+
+                // 向右移动
+                function moveRight(rowIds) {
+                    if (!rowIds.length) {
+                        return;
+                    }
+
+                    var gridLeft = F.ui.Grid1;
+                    var gridRight = F.ui.Grid2;
+
+                    // 添加到右侧
+                    var rowDatas = [];
+                    $.each(rowIds, function(index, item) {
+                        rowDatas.push(gridLeft.getRowData(item));
+                    });
+                    gridRight.addNewRecords(rowDatas, true);
+
+                    // 从左侧删除
+                    gridLeft.deleteRows(rowIds, true);
+                }
+
+                function onMoveRightAllClick(event) {
+                    var gridLeft = F.ui.Grid1;
+
+                    var rowIds = $.map(gridLeft.data, function(item, index) {
+                        return item.id;
+                    });
+
+                    // 全部行
+                    moveRight(rowIds);
+                }
+
+                function onMoveRightClick(event) {
+                    var gridLeft = F.ui.Grid1;
+
+                    // 选择的行
+                    moveRight(gridLeft.getSelectedRows());
+                }
+
+                // 向左移动
+                function moveLeft(rowIds) {
+                    if (!rowIds.length) {
+                        return;
+                    }
+
+                    var gridLeft = F.ui.Grid1;
+                    var gridRight = F.ui.Grid2;
+
+                    // 添加到左侧
+                    var rowDatas = [];
+                    $.each(rowIds, function(index, item) {
+                        rowDatas.push(gridRight.getRowData(item));
+                    });
+                    gridLeft.addNewRecords(rowDatas, true);
+
+                    // 从右侧删除
+                    gridRight.deleteRows(rowIds, true);
+                }
+
+                function onMoveLeftClick(event) {
+                    var gridRight = F.ui.Grid2;
+
+                    // 选择的行
+                    moveLeft(gridRight.getSelectedRows());
+                }
+
+                function onMoveLeftAllClick(event) {
+                    var gridRight = F.ui.Grid2;
+
+                    var rowIds = $.map(gridRight.data, function(item, index) {
+                        return item.id;
+                    });
+
+                    // 全部行
+                    moveLeft(rowIds);
+                }
+
+                function onCheckSelectedClick(event) {
+                    var gridRight = F.ui.Grid2;
+
+                    // 姓名列表
+                    var columnNames = $.map(gridRight.data, function(item, index) {
+                        return {
+                            id: item.id,
+                            name: item.values['Name']
+                        };
+                    });
+
+                    // 触发后台事件
+                    F.customEvent('CheckSelected_Click', {
+                        columnNames: columnNames
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

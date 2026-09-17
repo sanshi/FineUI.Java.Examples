@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 编辑框（下拉列表）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br /><br />
+            <f:button id="Button1" text="获取用户输入的分组值" click-handler="onGetInputsClick"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function renderGender(value, params) {
+                    var selectedHtml = ' selected="selected" ';
+                    var manHtml = F.formatString('<option {0}value="男">男</option>', value === 1 ? selectedHtml : '');
+                    var womanHtml = F.formatString('<option {0}value="女">女</option>', value !== 1 ? selectedHtml : '');
+                    return F.formatString('<select class="myselect">{0}{1}</select>', manHtml, womanHtml);
+                }
+
+                var inputselector = 'select.myselect';
+
+                function getUserInputs() {
+                    var result = [];
+
+                    var grid1 = F.ui.Grid1;
+                    grid1.getRowEls().each(function() {
+                        var rowEl = $(this);
+                        var rowData = grid1.getRowData(rowEl);
+
+                        result.push([rowData.id, rowData.text, rowEl.find(inputselector).val()]);
+                    });
+
+                    return F.toJSON(result);
+                }
+
+                function onGetInputsClick(event) {
+                    F.customEvent('GetInputs', getUserInputs());
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

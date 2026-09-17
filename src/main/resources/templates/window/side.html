@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 窗体（贴边）</title>
+
+        <style th:inline="css">
+            body {
+                background: url([(@{/res/images/bg/small/3.jpg})]) !important;
+                overflow: hidden;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:window id="Window1" hidden="true" position-x="Left" width="200" percent-height="100%" is-modal="true" hide-on-mask-click="true"
+                auto-scroll="true" body-padding="10" show-header="false" enable-default-corner="false"
+                content="PositionX=Left Width=200px PercentHeight=100% IsModal=true HideOnMaskClick=true">
+            </f:window>
+
+            <f:window id="Window2" hidden="true" position-x="Right" width="200" percent-height="100%" is-modal="true" hide-on-mask-click="true"
+                auto-scroll="true" body-padding="10" show-header="false" enable-default-corner="false"
+                content="PositionX=Right Width=200px PercentHeight=100% IsModal=true HideOnMaskClick=true">
+            </f:window>
+
+            <f:window id="Window3" hidden="true" position-y="Top" height="100" percent-width="100%" is-modal="true" hide-on-mask-click="true" auto-scroll="true"
+                body-padding="10" show-header="false" enable-default-corner="false"
+                content="PositionY=Top Height=100px PercentWidth=100% IsModal=true HideOnMaskClick=true">
+            </f:window>
+
+            <f:window id="Window4" hidden="true" position-y="Bottom" height="100" percent-width="100%" is-modal="true" hide-on-mask-click="true"
+                auto-scroll="true" body-padding="10" show-header="false" enable-default-corner="false"
+                content="PositionY=Bottom Height=100px PercentWidth=100% IsModal=true HideOnMaskClick=true">
+            </f:window>
+
+            <f:window id="Window5" width="300" layout="VBox" box-config-child-margin="0 0 5px 0" position-x="Center" position-y="Center" auto-scroll="true"
+                body-padding="10" show-header="false" is-modal="false">
+                <f:items>
+                    <f:button id="Button1" text="左侧窗体" click-handler="onOpenWindow1Click"></f:button>
+                    <f:button id="Button2" text="右侧窗体" click-handler="onOpenWindow2Click"></f:button>
+                    <f:button id="Button3" text="顶部窗体" click-handler="onOpenWindow3Click"></f:button>
+                    <f:button id="Button4" text="底部窗体" margin="0" click-handler="onOpenWindow4Click"></f:button>
+                </f:items>
+            </f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onOpenWindow1Click(event) {
+                    F.ui.Window1.show();
+                }
+
+                function onOpenWindow2Click(event) {
+                    F.ui.Window2.show();
+                }
+
+                function onOpenWindow3Click(event) {
+                    F.ui.Window3.show();
+                }
+
+                function onOpenWindow4Click(event) {
+                    F.ui.Window4.show();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

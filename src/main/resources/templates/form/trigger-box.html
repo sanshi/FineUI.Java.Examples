@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · TriggerBox</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="表单" show-header="true">
+                <f:items>
+                    <f:trigger-box id="TriggerBox1" show-label="false" readonly="false" trigger-icon="Search" empty-text="打开弹出窗口" enable-click-action="true">
+                        <f:listeners>
+                            <f:listener event="triggerclick" handler="onTriggerBox1TriggerClick"></f:listener>
+                        </f:listeners>
+                    </f:trigger-box>
+                </f:items>
+            </f:simple-form>
+            <f:window id="Window1" title="弹出窗口" body-padding="10" is-modal="true" hidden="true" target="Top" width="450" height="300">
+                <f:items>
+                    <f:button id="btnCloseWindow" text="关闭当前窗口" on-click="btnCloseWindow_Click"></f:button>
+                </f:items>
+            </f:window>
+            <br />
+            <br />
+            注：点击输入框即可弹出窗体（enable-click-action=true）。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onTriggerBox1TriggerClick(event) {
+                    F.ui.Window1.show();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

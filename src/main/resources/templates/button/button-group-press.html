@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 按钮分组（按下状态分组）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button-group enable-press-group="true">
+                <f:button id="btnIcon1" text="图标在左侧" enable-press="true" pressed="true" icon="Email"></f:button>
+                <f:button id="btnIcon2" text="图标在右侧" enable-press="true" icon-align="Right" icon="Star"></f:button>
+                <f:button id="Button7" text="图标在左侧" enable-press="true" icon-font="_Home"></f:button>
+                <f:button id="Button8" text="图标在右侧" enable-press="true" icon-align="Right" icon-font="_Car"></f:button>
+            </f:button-group>
+            <br />
+            <f:button-group id="ButtonGroup1" enable-press-group="true">
+                <f:button id="btnIcon3" text="图标在上面" enable-press="true" icon-align="Top" icon="Email"></f:button>
+                <f:button id="btnIcon4" text="图标在下面" enable-press="true" pressed="true" icon-align="Bottom" icon="Star"></f:button>
+                <f:button id="Button9" text="图标在上面" enable-press="true" icon-align="Top" icon-font="_Camera"></f:button>
+                <f:button id="Button10" text="图标在下面" enable-press="true" icon-align="Bottom" icon-font="_Phone"></f:button>
+            </f:button-group>
+            <br />
+            <f:label text="只有图片的按钮："></f:label>
+            <f:button-group id="ButtonGroup2" enable-press-group="true">
+                <f:button id="Button1" enable-press="true" icon-url="/res/images/16/1.png"></f:button>
+                <f:button id="Button2" enable-press="true" icon-url="/res/images/16/8.png"></f:button>
+                <f:button id="Button11" enable-press="true" pressed="true" icon-font="_Android"></f:button>
+                <f:button id="Button12" enable-press="true" icon-font="_Apple"></f:button>
+                <f:button id="Button13" enable-press="true" icon-font="_Car"></f:button>
+                <f:button id="Button14" enable-press="true" icon-font="_Card"></f:button>
+            </f:button-group>
+            <br />
+            <f:label text="下面的按钮分组的按下状态改变时，会触发自定义回发事件："></f:label>
+            <f:button-group id="ButtonGroup3" enable-press-group="true" on-press-changed="ButtonGroup3_PressChanged">
+                <f:button id="Button3" text="按钮一" enable-press="true" size="Large" icon-align="Top" icon="Email"></f:button>
+                <f:button id="Button4" text="按钮二" enable-press="true" pressed="true" size="Large" icon-align="Bottom" icon="Star"></f:button>
+                <f:button id="Button5" text="按钮三" enable-press="true" size="Large" icon-align="Top" icon-font="_Camera"></f:button>
+                <f:button id="Button6" text="按钮四" enable-press="true" size="Large" icon-align="Bottom" icon-font="_Phone"></f:button>
+            </f:button-group>
+            <br />
+            <f:label text="可以不选（AllowNonePress=true）："></f:label>
+            <f:button-group id="ButtonGroup4" enable-press-group="true" allow-none-press="true" on-press-changed="ButtonGroup4_PressChanged">
+                <f:button id="Button15" text="按钮一" enable-press="true" size="Large" icon-align="Top" icon="Email"></f:button>
+                <f:button id="Button16" text="按钮二" enable-press="true" size="Large" icon-align="Bottom" icon="Star"></f:button>
+                <f:button id="Button17" text="按钮三" enable-press="true" pressed="true" size="Large" icon-align="Top" icon-font="_Camera"></f:button>
+                <f:button id="Button18" text="按钮四" enable-press="true" size="Large" icon-align="Bottom" icon-font="_Phone"></f:button>
+            </f:button-group>
+            <br />
+            <f:label text="可以多选（AllowMultiPress=true）："></f:label>
+            <f:button-group id="ButtonGroup5" enable-press-group="true" allow-multi-press="true" on-press-changed="ButtonGroup5_PressChanged">
+                <f:button id="Button19" text="按钮一" enable-press="true" size="Large" icon-align="Top" icon="Email"></f:button>
+                <f:button id="Button20" text="按钮二" enable-press="true" size="Large" icon-align="Bottom" icon="Star"></f:button>
+                <f:button id="Button21" text="按钮三" enable-press="true" size="Large" icon-align="Top" icon-font="_Camera"></f:button>
+                <f:button id="Button22" text="按钮四" enable-press="true" pressed="true" size="Large" icon-align="Bottom" icon-font="_Phone"></f:button>
+            </f:button-group>
+
+        </th:block>
+    </body>
+
+</html>

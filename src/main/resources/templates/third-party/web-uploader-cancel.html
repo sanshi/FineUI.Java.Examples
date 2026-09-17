@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · WebUploaderCancel</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles"
+            content="class:com.fineui.java.examples.thirdparty.WebUploaderController;class:com.fineui.java.examples.web.DownloadController" />
+
+        <style>
+            .webuploader-element-invisible {
+                position: absolute !important;
+                clip: rect(1px, 1px, 1px, 1px);
+            }
+
+            .webuploader-pick-disable {
+                opacity: 0.6;
+                pointer-events: none;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-header="true" show-border="true" title="文件上传" height="350" enable-collapse="false"
+                enable-check-box-select="false" empty-text="尚未上传文件" data-id-field="id">
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="btnSelectFiles" text="选择文件上传" icon-font="_Plus"></f:button>
+                            <f:toolbar-separator></f:toolbar-separator>
+                            <f:button id="btnDelete" text="删除选中文件" icon-font="_Close" click-handler="onDeleteSelectedClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:columns>
+                    <f:render-field column-id="FileName" data-field="name" header-text="文件名" expand-unused-space="true" min-width="150"></f:render-field>
+                    <f:render-field column-id="FileType" data-field="type" header-text="类型"></f:render-field>
+                    <f:render-field column-id="FileSize" data-field="size" header-text="大小" renderer="FileSize"></f:render-field>
+                    <f:render-field column-id="FileStatus" data-field="status" header-text="状态" renderer-function="renderFileStatus"></f:render-field>
+                    <f:render-field column-id="FileDelete" renderer-function="renderDelete"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <br />
+            注：由于第三方组件 WebUploader 限制，本示例支持的浏览器版本为：Chrome、Firefox、Safari、IE10+。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/third-party/webuploader/webuploader.nolog.js}"></script>
+            <script>
+                function renderFileStatus(value) {
+                    return value || '已完成';
+                }
+
+                function renderDelete(value) {
+                    if (value === 'cancel') {
+                        return '<a href="javascript:;" class="thecanceluploadbutton">取消上传</a>';
+                    }
+                    return '<a class="action-btn delete" href="javascript:;"><img class="f-grid-cell-icon" src="' + F.resolveUrl('/res/icon/delete.png') +
+                        '"></a>';
+                }
+
+                function onDeleteSelectedClick(event) {
+                    var grid = F.ui.Grid1;
+                    if (!grid.hasSelection()) {
+                        F.alert('请至少选择一项！');
+                        return;
+                    }
+                    F.confirm({
+                        message: F.rawHtml('你确定要删除选中的&nbsp;<b>' + grid.getSelectedRows().length + '</b>&nbsp;个文件吗？'),
+                        target: '_top',
+                        ok: function() {
+                            F.customEvent('DeleteRows', grid.getSelectedRows());
+                        }
+                    });
+                }
+
+                F.ready(function() {
+                    var grid = F.ui.Grid1;
+                    grid.el.on('click', 'a.action-btn.delete', function() {
+                        var row = grid.getRowData($(this).closest('.f-grid-row'));
+                        F.confirm({
+                            message: '你确定要删除这个文件吗？',
+                            target: '_top',
+                            ok: function() {
+                                F.customEvent('DeleteRow', row.id);
+                            }
+                        });
+                    });
+
+                    var formData = {
+                        owner: 'webuploader.webuploader_cancel'
+                    };
+                    var csrfInput = $('#FineUICsrfToken');
+                    if (csrfInput.length) {
+                        formData[csrfInput.attr('name')] = csrfInput.val();
+                    }
+                    var uploader = WebUploader.create({
+                        runtimeOrder: 'html5',
+                        server: F.resolveUrl('/third-party/upload?handler=Process'),
+                        pick: '#btnSelectFiles',
+                        resize: false,
+                        auto: true,
+                        formData: formData,
+                        fileSingleSizeLimit: 100 * 1024 * 1024
+                    });
+
+                    uploader.on('filesQueued', function(files) {
+                        var records = [];
+                        $.each(files, function(index, file) {
+                            records.push({
+                                id: file.id,
+                                values: {
+                                    FileName: file.name,
+                                    FileType: file.ext,
+                                    FileSize: file.size,
+                                    FileStatus: '等待上传',
+                                    FileDelete: 'cancel'
+                                }
+                            });
+                        });
+                        grid.addNewRecords(records, true);
+                    });
+                    uploader.on('uploadProgress', function(file, percentage) {
+                        var cell = grid.getCellEl(file.id, 'FileStatus').find('.f-grid-cell-text');
+                        var bar = cell.find('.f-progressbar-value');
+                        if (!bar.length) {
+                            cell.html(
+                                '<div class="f-progressbar f-widget-content" style="height:12px;"><div class="f-progressbar-value f-widget-header" style="width:0%"></div></div>'
+                            );
+                            bar = cell.find('.f-progressbar-value');
+                        }
+                        bar.css('width', percentage * 100 + '%');
+                    });
+                    uploader.on('uploadSuccess', function(file) {
+                        grid.getCellEl(file.id, 'FileStatus').find('.f-grid-cell-text').text('上传成功');
+                    });
+                    uploader.on('uploadError', function(file) {
+                        grid.getCellEl(file.id, 'FileStatus').find('.f-grid-cell-text').text('上传出错');
+                    });
+                    uploader.on('uploadComplete', function(file) {
+                        uploader.removeFile(file, true);
+                        grid.getCellEl(file.id, 'FileDelete').find('.f-grid-cell-text').text('');
+                    });
+                    uploader.on('startUpload', function() {
+                        F.ui.btnDelete.disable();
+                    });
+                    uploader.on('uploadFinished', function() {
+                        F.ui.btnDelete.enable();
+                        F.customEvent('RebindGrid');
+                    });
+                    uploader.on('error', function(type, arg, file) {
+                        if (type === 'F_EXCEED_SIZE') {
+                            F.alert('文件[' + file.name + ']大小超出限制值（' + F.format.fileSize(arg) + '）');
+                        } else if (type === 'Q_TYPE_DENIED') {
+                            // 这个类型有两种成因：空文件、扩展名不在 accept 白名单里。
+                            // 注意它派发时第二个参数就是 file 本身（不是大小上限），别照上面那条的签名去取。
+                            F.alert(arg.size ?
+                                '文件[' + arg.name + ']的类型不允许上传。' :
+                                '文件[' + arg.name + ']是空文件，无法上传。');
+                        }
+                    });
+                    grid.el.on('click', 'a.thecanceluploadbutton', function() {
+                        var row = grid.getRowData($(this).closest('.f-grid-row'));
+                        uploader.cancelFile(row.id);
+                        grid.deleteRow(row.id);
+                    });
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

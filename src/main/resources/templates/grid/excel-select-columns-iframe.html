@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 选择需要导出的列</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" show-border="false" show-header="false" layout="Anchor" body-padding="10" is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="btnClose" text="取消" icon="SystemClose" click-handler="onCloseActiveWindowClick"></f:button>
+                            <f:button id="btnSaveContinue" text="导出" icon="SystemSave" on-click="btnSaveContinue_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:check-box-list id="cblColumns" column-number="3">
+                        <f:check-item text="姓名" value="姓名" selected="true"></f:check-item>
+                        <f:check-item text="性别" value="性别" selected="true"></f:check-item>
+                        <f:check-item text="入学年份" value="入学年份" selected="true"></f:check-item>
+                        <f:check-item text="是否在校" value="是否在校" selected="true"></f:check-item>
+                        <f:check-item text="所学专业" value="所学专业" selected="true"></f:check-item>
+                        <f:check-item text="分组" value="分组" selected="true"></f:check-item>
+                        <f:check-item text="注册日期" value="注册日期" selected="true"></f:check-item>
+                    </f:check-box-list>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onCloseActiveWindowClick(event) {
+                    F.activeWindow.hide();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 动态添加工具栏菜单</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="res:static/content/toolbar/menu.xml" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel is-fluid="true" show-border="true" body-padding="10" height="300" title="面板" enable-collapse="false">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" position="Top"></f:toolbar>
+                </f:toolbars>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 在新标签页中打开（关闭后刷新父选项卡）</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:grid-other/new-tab-hide-refresh-window" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-check-box-select="true">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" box-flex="1" min-width="150"></f:render-field>
+                    <f:render-field header-text="新标签页打开">
+                        <f:commands>
+                            <f:command command-name="Action1" text="编辑" css-class="opennewtab"></f:command>
+                        </f:commands>
+                    </f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="rowcommand" handler="onGrid1RowCommand"></f:listener>
+                </f:listeners>
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="btnNew" text="新增数据" icon="Add" click-handler="onNewClick"></f:button>
+                            <f:button id="btnDelete" text="删除选中行" icon="Delete" click-handler="onDeleteClick"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:grid>
+            <br /><br />
+            注：本目录中的示例仅在主选项卡标签为[多标签页]时有效。
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script th:inline="javascript">
+                var newTabUrl = /*[[@{/grid-other/new-tab-hide-refresh-window}]]*/ '/grid-other/new-tab-hide-refresh-window';
+
+                function onNewClick(event) {
+                    parent.addExampleTab({
+                        id: "grid_newtab_addnew",
+                        title: "新增人员",
+                        iframeUrl: newTabUrl + "?parenttabid=" + parent.getActiveTabId(),
+                        refreshWhenExist: true,
+                        iconFont: "plus"
+                    });
+                }
+
+                function openNewTab(rowId) {
+                    var rowData = F.ui.Grid1.getRowData(rowId),
+                        id = rowData.id,
+                        name = rowData.text;
+                    parent.addExampleTab({
+                        id: "grid_newtab_edit_" + id,
+                        title: "编辑 - " + name,
+                        iframeUrl: F.formatString("{0}?id={1}&name={2}&parenttabid={3}", newTabUrl, id, F.urlEncode(name), parent.getActiveTabId()),
+                        refreshWhenExist: true,
+                        iconFont: "pencil"
+                    });
+                }
+
+                function onDeleteClick(event) {
+                    var grid1 = F.ui.Grid1;
+                    if (!grid1.hasSelection()) {
+                        F.alert('请至少选择一项！');
+                        return;
+                    }
+                    var selectedRows = grid1.getSelectedRows(true);
+                    var selectedRowTexts = $.map(selectedRows, function(item) {
+                        return item.text;
+                    }).join(',');
+                    F.alert('删除行：' + selectedRowTexts);
+                }
+
+                function onGrid1RowCommand(event, rowId, rowIndex, columnId, commandName) {
+                    if (commandName === 'Action1') {
+                        openNewTab(rowId);
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

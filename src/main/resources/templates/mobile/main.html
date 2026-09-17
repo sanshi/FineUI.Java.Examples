@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 移动示例首页</title>
+
+        <style>
+            .mywindow,
+            .mywindow>.f-panel-bodyct>.f-panel-body {
+                background-image: none;
+                background-color: transparent;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+            .themepanel>.f-panel-bodyct>.f-panel-body {
+                background: none;
+                background-color: #000;
+            }
+
+            #themecontainer {
+                background: none;
+                background-color: #000;
+                padding-top: 5px;
+            }
+
+            #themecontainer ul {
+                list-style-type: none;
+                margin: 10px 0 0;
+                padding: 0;
+            }
+
+            #themecontainer ul li {
+                display: inline-block;
+                margin: 0 0 10px 10px;
+                padding: 0;
+            }
+
+            #themecontainer ul li .title {
+                text-align: center;
+                color: #666;
+                font-size: 12px;
+                display: none;
+            }
+
+            #themecontainer ul li.hover,
+            #themecontainer ul li.active {
+                border-bottom-color: #fff;
+            }
+
+            #themecontainer ul li.hover .title,
+            #themecontainer ul li.active .title {
+                color: #fff;
+                font-weight: bold;
+            }
+
+            #themecontainer ul li img {
+                width: 75px;
+                border-radius: 5px;
+            }
+
+            #themecontainer .grouptitle {
+                color: #ccc;
+                font-size: 16px;
+                border-bottom: solid 1px #333;
+                padding: 5px;
+                margin: 10px;
+                margin-top: 0;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" css-class="mypanel" is-view-port="true" auto-scroll="true" show-border="false" show-header="false">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" title="FineUI.Java 移动示例" toolbar-align="Right" header-style="true">
+                        <f:items>
+                            <f:button id="Button1" size="Small" icon-font="_MoreVertical" show-menu-icon="false" enable-default-state="false">
+                                <f:menu>
+                                    <f:menu-button id="mbTheme" text="主题仓库" click-handler="onThemeSelectClick"></f:menu-button>
+                                    <f:menu-separator></f:menu-separator>
+                                    <f:menu-button id="mbHome" text="示例首页" click-handler="onBackToHomeClick"></f:menu-button>
+                                </f:menu>
+                            </f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:data-list id="DataList1" css-class="mydatalist"></f:data-list>
+                </f:items>
+            </f:panel>
+
+            <f:panel id="Panel2" css-class="mypanel" show-header="false" show-border="false" hidden="true" is-view-port="true" auto-scroll="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar2" header-style="true">
+                        <f:items>
+                            <f:button id="Button4" size="Small" text="后退" click-handler="onBacktoPanel1Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:data-list id="DataList2" css-class="mydatalist"></f:data-list>
+                </f:items>
+            </f:panel>
+
+            <f:panel id="Panel3" css-class="mypanel" show-header="false" show-border="false" hidden="true" is-view-port="true" auto-scroll="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar3" header-style="true">
+                        <f:items>
+                            <f:button id="Button2" size="Small" text="后退" click-handler="onBacktoPanel2Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:data-list id="DataList3"></f:data-list>
+                </f:items>
+            </f:panel>
+
+            <f:window id="Window1" css-class="mywindow" show-header="false" show-border="false" hide-on-mask-click="true" is-modal="true" body-padding="10"
+                percent-width="100%" enable-default-corner="false" position-y="Bottom" hidden="true" layout="VBox">
+                <f:items>
+                    <f:content-panel id="ContentPanel1" css-class="themepanel" height="200" auto-scroll="true" show-header="false">
+                        <div id="themecontainer">
+                            <div class="grouptitle">
+                                Pure
+                            </div>
+                            <ul>
+                                <li>
+                                    <a href="javascript:;">
+                                        <img th:src="@{/res/images/themes/pure_black.png}" alt="Pure Black" data-value="Pure_Black" />
+                                    </a>
+                                    <div class="title">Pure Black</div>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <img th:src="@{/res/images/themes/pure_green.png}" alt="Pure Green" data-value="Pure_Green" />
+                                    </a>
+                                    <div class="title">Pure Green</div>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <img th:src="@{/res/images/themes/pure_blue.png}" alt="Pure Blue" data-value="Pure_Blue" />
+                                    </a>
+                                    <div class="title">Pure Blue</div>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <img th:src="@{/res/images/themes/pure_purple.png}" alt="Pure Purple" data-value="Pure_Purple" />
+                                    </a>
+                                    <div class="title">Pure Purple</div>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <img th:src="@{/res/images/themes/pure_orange.png}" alt="Pure Orange" data-value="Pure_Orange" />
+                                    </a>
+                                    <div class="title">Pure Orange</div>
+                                </li>
+                            </ul>
+                            <div class="grouptitle">
+                                jQuery UI
+                            </div>
+                            <ul>
+                                <li>
+                                    <a href="javascript:;">
+                                        <img th:src="@{/res/images/themes/cupertino.png}" alt="Cupertino" data-value="Cupertino" />
+                                    </a>
+                                    <div class="title">Cupertino</div>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <img th:src="@{/res/images/themes/start.png}" alt="Start" data-value="Start" />
+                                    </a>
+                                    <div class="title">Start</div>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <img th:src="@{/res/images/themes/dark_hive.png}" alt="Dark Hive" data-value="Dark_Hive" />
+                                    </a>
+                                    <div class="title">Dark Hive</div>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <img th:src="@{/res/images/themes/flick.png}" alt="Flick" data-value="Flick" />
+                                    </a>
+                                    <div class="title">Flick</div>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <img th:src="@{/res/images/themes/south_street.png}" alt="South Street" data-value="South_Street" />
+                                    </a>
+                                    <div class="title">South Street</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </f:content-panel>
+                </f:items>
+            </f:window>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <!--/* 移动菜单数据源：服务端「移动」子树经 Thymeleaf JS 内联序列化成 JS 对象树注入 */-->
+            <script th:inline="javascript">
+                window.MENUSOURCE = /*[[${page.menuSource}]]*/ [];
+
+            </script>
+            <script>
+                // 从二级菜单返回
+                function onBacktoPanel1Click(event) {
+                    // 改变网址的 HASH 值（hashchange 驱动页面变化）
+                    window.location.hash = '';
+
+                    // 仅桌面版 Chrome：改当前页 hash 为空时父页滚动条会变
+                    if (F.isChrome()) {
+                        parent && parent.$('body').scrollTop(0);
+                    }
+                }
+
+                // 从三级菜单返回
+                function onBacktoPanel2Click(event) {
+                    var level = decodeURIComponent(window.location.hash.substr(1));
+                    var levelItems = level.split('-');
+                    if (levelItems.length) {
+                        window.location.hash = levelItems[0];
+                    }
+
+                    if (F.isChrome()) {
+                        parent && parent.$('body').scrollTop(0);
+                    }
+                }
+
+                // 显示主题设置窗体
+                function onThemeSelectClick(event) {
+                    F.ui.Window1.show();
+                }
+
+                function getMenu(level) {
+                    var data;
+                    if (level) {
+                        var levelItems = level.split('-');
+                        if (levelItems.length === 1) {
+                            data = MENUSOURCE[levelItems[0]];
+                        } else {
+                            data = MENUSOURCE[levelItems[0]].children[levelItems[1]];
+                        }
+                    }
+                    return data;
+                }
+
+                function getMenuData(level) {
+                    var children, data = getMenu(level);
+                    if (!data) {
+                        children = MENUSOURCE;
+                    } else {
+                        children = data.children;
+                    }
+
+                    var subMenus = [];
+                    $.each(children, function(index, menu) {
+                        // fields: ['text', 'href', 'hrefTarget', 'arrow', 'level']
+                        subMenus.push([menu.text, menu.navigateUrl, '_self', true, level ? (level + '-' + index) : index]);
+                    });
+                    return subMenus;
+                }
+
+                function checkHashChange() {
+                    // 根据 HASH 值在顶层菜单和二级菜单之间切换
+                    var level = decodeURIComponent(window.location.hash.substr(1));
+                    var visiblePanelID = $('.mypanel:visible').attr('id');
+
+                    if (!level) {
+                        // 返回顶级菜单
+                        F.slideRight(visiblePanelID, 'Panel1');
+                    } else {
+                        var levelItems = level.split('-');
+                        var levelMenuText = getMenu(level).text;
+
+                        if (levelItems.length === 1) {
+                            // 设置二级菜单的标题
+                            F.ui.Toolbar2.setTitle(levelMenuText);
+
+                            // 绑定二级菜单
+                            F.ui.DataList2.fields = ['text', 'href', 'hrefTarget', 'arrow', 'level'];
+                            F.ui.DataList2.loadData(getMenuData(level));
+
+                            // 转到二级菜单
+                            if (visiblePanelID === "Panel3") {
+                                F.slideRight(visiblePanelID, 'Panel2');
+                            } else {
+                                F.slideLeft(visiblePanelID, 'Panel2');
+                            }
+                        } else {
+                            // 设置三级菜单的标题
+                            F.ui.Toolbar3.setTitle(levelMenuText);
+
+                            // 绑定三级菜单
+                            F.ui.DataList3.fields = ['text', 'href', 'hrefTarget', 'arrow', 'level'];
+                            F.ui.DataList3.loadData(getMenuData(level));
+
+                            // 转到三级菜单
+                            F.slideLeft(visiblePanelID, 'Panel3');
+                        }
+                    }
+                }
+
+                F.ready(function() {
+
+                    // 未启用列表控件时不初始化菜单
+                    if (!F.ui.DataList1) {
+                        return;
+                    }
+
+                    // 点击一级菜单和二级菜单
+                    $('.mydatalist').on('click', '.f-datalist-item', function(event) {
+                        var itemEl = $(this),
+                            datalist = F(itemEl.closest('.f-datalist').attr('id'));
+                        var itemData = datalist.getItemData(itemEl);
+
+                        // 这是一个目录，则改变网址的 HASH 值（hashchange 驱动页面变化）
+                        if (!itemData.href) {
+                            window.location.hash = '#' + encodeURIComponent(itemData.level);
+                        }
+                    });
+
+                    // 绑定一级菜单
+                    F.ui.DataList1.fields = ['text', 'href', 'hrefTarget', 'arrow', 'level'];
+                    F.ui.DataList1.loadData(getMenuData(''));
+
+                    // 页面第一次加载时，转到二级菜单不需要动画效果
+                    F.noAnimation(function() {
+                        checkHashChange();
+                    });
+
+                    // hashchange 驱动页面变化
+                    $(window).on('hashchange', function(event) {
+                        checkHashChange();
+                    });
+
+                    // 选中某个主题
+                    $('#themecontainer li').on('click', function(event) {
+                        var imgNode = $(this).find('img');
+
+                        var themeName = imgNode.attr('data-value');
+                        F.cookie('Theme', themeName, {
+                            expires: 100 // 单位：天
+                        });
+
+                        var themeTitle = imgNode.attr('alt');
+                        F.cookie('Theme_Title', themeTitle, {
+                            expires: 100 // 单位：天
+                        });
+
+                        top.window.location.reload();
+                    });
+                });
+
+                function onBackToHomeClick(event) {
+                    top.window.location.href = '../';
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

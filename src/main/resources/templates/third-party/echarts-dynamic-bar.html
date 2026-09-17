@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · EChartsDynamicBar</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:third-party/echarts-dynamic-bar-iframe" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-view-port="true" title="当前生产销售情况" show-border="true" margin="10px" show-header="false" enable-iframe="true"
+                iframe-url="/third-party/echarts-dynamic-bar-iframe">
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:radio-button-list id="rblChartType" label="选择图表类型" label-width="150">
+                                <f:items>
+                                    <f:radio-item text="销售" value="sales" selected="true"></f:radio-item>
+                                    <f:radio-item text="产量" value="output"></f:radio-item>
+                                </f:items>
+                                <f:listeners>
+                                    <f:listener event="change" handler="onChartTypeChange"></f:listener>
+                                </f:listeners>
+                            </f:radio-button-list>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onChartTypeChange(event) {
+                    F.ui.Panel1.setIFrameUrl('/third-party/echarts-dynamic-bar-iframe?type=' +
+                        encodeURIComponent(this.getValue()));
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

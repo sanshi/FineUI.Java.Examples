@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 树表格（行扩展列共存）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="树表格" data-id-field="Id" data-text-field="Name"
+                data-parent-id-field="ParentId" enable-tree="true" tree-column="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field column-id="Name" header-text="名称" data-field="Name" expand-unused-space="true" min-width="150"></f:render-field>
+                    <f:render-field header-text="类型" data-field="Type" width="150"></f:render-field>
+                    <f:render-field header-text="大小" data-field="Size" width="150"></f:render-field>
+                    <f:render-field header-text="修改日期" data-field="ModifyDate" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"
+                        width="150"></f:render-field>
+                    <f:render-field render-as-row-expander="true" renderer-function="renderExpander"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+
+            <br />
+            注：行扩展列和树表格同时存在时，需要禁用行扩展列的 ExpandOnDblClick 属性，以避免与树表格的双击展开节点功能冲突。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function renderExpander(value, params) {
+                    var rowData = params.rowData;
+                    return $('<div>').addClass('expander')
+                        .append($('<p>').html(`<strong>名称：</strong>${rowData.values['Name']}（${rowData.values['Type']}）`))
+                        .append($('<p>').html(`<strong>日期：</strong>${rowData.values['ModifyDate']}`));
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

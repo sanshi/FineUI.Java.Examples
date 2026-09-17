@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DatePickerDateSelect</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="简单表单（OnTextChanged）">
+                <f:items>
+                    <f:date-picker id="DatePicker1" required="true" label="开始日期" empty-text="请选择开始日期" show-red-star="true"
+                        on-text-changed="DatePicker1_TextChanged" date-format-string="yyyy/MM/dd"></f:date-picker>
+                    <f:date-picker id="DatePicker2" required="true" readonly="false" compare-control="DatePicker1" date-format-string="yyyy/MM/dd"
+                        compare-operator="GreaterThan" compare-message="结束日期应该大于开始日期" label="结束日期" show-red-star="true"></f:date-picker>
+                    <f:button id="Button1" validate-forms="SimpleForm1" text="提交表单" on-click="Button1_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult1" show-label="false"></f:label>
+            <br />
+            <f:simple-form id="SimpleForm2" is-fluid="true" body-padding="10" enable-collapse="false" title="简单表单（OnDateSelect）">
+                <f:items>
+                    <f:date-picker id="DatePicker3" required="true" label="开始日期" empty-text="请选择开始日期" show-red-star="true"
+                        on-date-select="DatePicker3_DateSelect" date-format-string="yyyy/MM/dd"></f:date-picker>
+                    <f:date-picker id="DatePicker4" required="true" readonly="false" compare-control="DatePicker3" date-format-string="yyyy/MM/dd"
+                        compare-operator="GreaterThan" compare-message="结束日期应该大于开始日期" label="结束日期" show-red-star="true"></f:date-picker>
+                    <f:button id="Button2" validate-forms="SimpleForm2" text="提交表单" on-click="Button2_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult2" show-label="false"></f:label>
+            <br />
+
+        </th:block>
+    </body>
+
+</html>

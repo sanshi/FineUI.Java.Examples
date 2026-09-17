@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 分页工具栏类型</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" title="表格" enable-collapse="false" show-border="true" show-header="true" allow-paging="true" page-size="10"
+                is-database-paging="true" enable-check-box-select="true" data-id-field="Id" data-text-field="Name"
+                on-page-index-changed="Grid1_PageIndexChanged">
+                <f:columns>
+                    <f:row-number-field enable-paging-number="true" width="60"></f:row-number-field>
+                    <f:render-field data-field="Id" header-text="ID" width="150"></f:render-field>
+                    <f:render-field expand-unused-space="true" min-width="150" data-field="EntranceTime" header-text="时间"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <f:label id="labPostBackQuery" text="翻页后，这里会显示服务端在回发中读取到的 URL 参数。"></f:label>
+            <br /><br />
+            <f:check-box id="cbxShowPagingMessage" text="显示分页信息">
+                <f:listeners>
+                    <f:listener event="change" handler="OnCheckBoxChange"></f:listener>
+                </f:listeners>
+            </f:check-box>
+            <br /><br />
+            分页工具栏的类型：
+            <br /><br />
+            <f:button-group id="bgPagingType" enable-press-group="true">
+                <f:button id="btnPtArrow" text="Arrow" enable-press="true"></f:button>
+                <f:button id="btnPtNumberBox" text="NumberBox" enable-press="true"></f:button>
+                <f:button id="btnPtArrowNumberBox" text="ArrowNumberBox" enable-press="true"></f:button>
+                <f:button id="btnPtNumberButton" text="NumberButton" enable-press="true"></f:button>
+                <f:button id="btnPtArrowNumberButton" text="ArrowNumberButton" enable-press="true"></f:button>
+                <f:listeners>
+                    <f:listener event="presschange" handler="onButtonGroupPressChange"></f:listener>
+                </f:listeners>
+            </f:button-group>
+            <br />
+            数字分页按钮的个数：
+            <br /><br />
+            <f:drop-down-list id="ddlMaxPagingNumberButton" width="120">
+                <f:list-item text="5" value="5" selected="true"></f:list-item>
+                <f:list-item text="8" value="8"></f:list-item>
+                <f:list-item text="10" value="10"></f:list-item>
+                <f:listeners>
+                    <f:listener event="change" handler="onDropDownListChange"></f:listener>
+                </f:listeners>
+            </f:drop-down-list>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                function getPressedPaingType() {
+                    var pressedPaingType = '';
+                    $.each(F.ui.bgPagingType.items, function(index, item) {
+                        if (item.isPressed()) {
+                            pressedPaingType = item.getText();
+                            return false; // break
+                        }
+                    });
+                    return pressedPaingType;
+                }
+
+                function reloadPage() {
+                    var pressedPaingType = getPressedPaingType();
+                    window.location.href = F.resolveUrl('/grid-paging/paging-type?type=') + pressedPaingType + '&message=' + F.ui.cbxShowPagingMessage
+                        .isChecked() +
+                        '&maxnumberbutton=' + F.ui.ddlMaxPagingNumberButton.getValue();
+                }
+
+                function OnCheckBoxChange(event, checked) {
+                    reloadPage();
+                }
+
+                function onButtonGroupPressChange(event, btnObj, btnChecked) {
+                    reloadPage();
+                }
+
+                function onDropDownListChange(event) {
+                    reloadPage();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · FormPrefixSuffix</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-align="Right" title="简单表单">
+                <f:items>
+                    <f:number-box id="NumberBox2" label="人民币金额" no-decimal="true" no-negative="true" required="true" enable-suffix="true"
+                        suffix="万元"></f:number-box>
+                    <f:number-box id="NumberBox6" label="美元金额" no-decimal="true" no-negative="true" required="true" enable-prefix="true"
+                        prefix="$"></f:number-box>
+                    <f:text-box id="TextBox1" label="文本输入框" required="true" enable-prefix="true" prefix="前缀" enable-suffix="true" suffix="后缀"></f:text-box>
+                    <f:drop-down-list id="DropDownList1" label="下拉列表" enable-prefix="true" prefix="前缀" enable-suffix="true" suffix="后缀"
+                        auto-select-first-item="false" required="true">
+                        <f:items>
+                            <f:list-item text="可选项1" value="Value1"></f:list-item>
+                            <f:list-item text="可选项2" value="Value2"></f:list-item>
+                            <f:list-item text="可选项3" value="Value3"></f:list-item>
+                        </f:items>
+                    </f:drop-down-list>
+                    <f:file-upload id="filePhoto" empty-text="请选择一张照片" label="个人头像" required="true" button-icon="Add" show-red-star="true" enable-suffix="true"
+                        suffix="后缀"></f:file-upload>
+                    <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+    </body>
+
+</html>

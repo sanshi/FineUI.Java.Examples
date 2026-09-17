@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 表格为空的提示（绝对定位）</title>
+        <style>
+            .grid-empty-text {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 500px;
+                margin-left: -250px;
+                margin-top: -15px;
+                font-size: 24px;
+                text-align: center;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" height="350" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                empty-text-raw-html="<div class='grid-empty-text'>Oops...一条数据也没有找到！</div>">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true" hidden="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true" min-width="150"
+                        hidden="true"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup" hidden="true"></f:render-field>
+                    <f:render-field header-text="注册日期" data-field="LogTime" field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd"
+                        hidden="true"></f:render-field>
+                </f:columns>
+                <f:attributes>
+                    <f:attribute key="data-source-key" value="source1"></f:attribute>
+                </f:attributes>
+            </f:grid>
+            <br />
+            <f:hidden-field id="hfState"></f:hidden-field>
+            <f:button id="Button1" text="重新绑定表格" css-class="marginr" on-click="Button1_Click"></f:button>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+        </th:block>
+    </body>
+
+</html>

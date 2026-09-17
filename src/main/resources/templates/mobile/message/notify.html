@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 通知对话框</title>
+
+        <style>
+            .mynotify .f-messagebox-message {
+                margin: 0;
+            }
+
+            .mynotify .f-loading {
+                position: static;
+                margin: 0;
+                text-align: center;
+            }
+
+            .mynotify .f-loading .f-loading-img {
+                display: inline-block;
+                vertical-align: top;
+            }
+
+            .mynotify .f-loading-message {
+                font-size: 14px;
+                margin: 5px 10px 0;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 10px 0" body-padding="10px"
+                is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" title="通知对话框" header-style="true"></f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:button id="Button1" text="通知对话框" on-click="Button1_Click"></f:button>
+                    <f:button id="Button2" text="通知对话框（正在加载）" click-handler="onButton2Click"></f:button>
+                    <f:button id="Button3" text="通知对话框（正在加载，不显示文字）" click-handler="onButton3Click"></f:button>
+                    <f:button id="Button4" text="通知对话框（正在加载，自定义样式）" click-handler="onButton4Click"></f:button>
+                    <f:label text=""></f:label>
+                    <f:panel show-border="false" show-header="false" layout="HBox" box-config-child-margin="0 10 0 0">
+                        <f:items>
+                            <f:button id="Button5" text="显示通知对话框" box-flex="1" click-handler="onShowNotifyWindowClick"></f:button>
+                            <f:button id="Button6" text="关闭通知对话框" box-flex="1" margin="0" click-handler="onHideNotifyWindowClick"></f:button>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                // 正在加载（居中模态）
+                function onButton2Click(event) {
+                    F.notify({
+                        message: '正在加载...',
+                        messageIcon: '',
+                        header: false,
+                        showLoading: true,
+                        positionX: 'center',
+                        positionY: 'center',
+                        minWidth: 0,
+                        modal: true,
+                        hideOnMaskClick: true
+                    });
+                }
+
+                // 正在加载（不显示文字）
+                function onButton3Click(event) {
+                    F.notify({
+                        cls: 'mynotify-notext',
+                        messageIcon: '',
+                        header: false,
+                        showLoading: true,
+                        positionX: 'center',
+                        positionY: 'center',
+                        minWidth: 0,
+                        modal: true,
+                        hideOnMaskClick: true,
+                        displayMilliseconds: 1000000
+                    });
+                }
+
+                // 正在加载（自定义样式）
+                function onButton4Click(event) {
+                    F.notify({
+                        cls: 'mynotify',
+                        message: F.rawHtml(
+                            '<div class="f-loading"><div class="f-loading-img"><img src="' + F.resolveUrl('/res/images/loading/loading_32.gif') +
+                            '"/></div></div><div class="f-loading-message">正在加载</div>'
+                        ),
+                        messageIcon: '',
+                        header: false,
+                        positionX: 'center',
+                        positionY: 'center',
+                        minWidth: 0,
+                        modal: true,
+                        hideOnMaskClick: true,
+                        displayMilliseconds: 1000000
+                    });
+                }
+
+                function onShowNotifyWindowClick(event) {
+                    // 注意：id 属性是通知对话框的标识符
+                    var mynotifywindow = F('mynotifywindow');
+                    if (!mynotifywindow) {
+                        F.notify({
+                            id: 'mynotifywindow',
+                            message: '正在加载...',
+                            messageIcon: '',
+                            header: false,
+                            positionX: 'center',
+                            positionY: 'top',
+                            showLoading: true,
+                            minWidth: 100,
+                            displayMilliseconds: 60000 // 1分钟才关闭
+                        });
+                    }
+                }
+
+                function onHideNotifyWindowClick(event) {
+                    var mynotifywindow = F('mynotifywindow');
+                    if (mynotifywindow) {
+                        mynotifywindow.hide();
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

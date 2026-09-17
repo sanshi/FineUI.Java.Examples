@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 日期列编辑（重选同一天不标记为已修改）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="计划日期（单击编辑，重选同一天不标记为已修改）" data-id-field="Id" data-text-field="Name"
+                allow-cell-editing="true" clicks-to-edit="1" store-date-as-string="false">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" column-id="Name" data-field="Name"></f:render-field>
+                    <f:render-field header-text="计划日期" column-id="PlanDate" data-field="PlanDate" field-type="Date" renderer="Date"
+                        renderer-argument="yyyy-MM-dd" width="200">
+                        <f:editor>
+                            <f:date-picker id="dpPlanDate" required="true"></f:date-picker>
+                        </f:editor>
+                    </f:render-field>
+                </f:columns>
+            </f:grid>
+
+            <br>
+            <f:button id="btnShowModified" text="显示已修改的数据（getModifiedData）" click-handler="onShowModifiedClick"></f:button>
+
+            <br>
+            <br>
+            <f:label id="labResult" encode-text="false"></f:label>
+
+            <p>
+                可编辑日期列示例（本表格设置了 <code>store-date-as-string="false"</code>，单元格里存的是 Date 对象）。
+                <br>
+                数据以带时区偏移的 UTC ISO 字符串（<code>2026-06-19T00:00:00+00:00</code>）下发，在东八区会被解析为本地 <b>08:00</b>。<br>
+                <b>历史问题</b>：用鼠标重新选择“同一天”（未做任何修改），加载值（本地 08:00）与日历选出的值（本地 00:00）按时间戳比较不相等，会被<b>误标为已修改</b>（左上角小红标）。<br>
+                <b>现已修复</b>：日期列的脏值判定改为按列的显示格式（此处为 <code>yyyy-MM-dd</code>，只到“天”）比较，重选同一天不再被标记为已修改。
+            </p>
+            <p>
+                <b>说明</b>：<code>store-date-as-string</code> 的全局默认值为 <code>true</code>，也是<b>推荐</b>的方式——此时单元格存的是格式化后的日期字符串，天然规避本例的时区问题，<b>不建议修改</b>。本示例仅为演示
+                <code>false</code> 场景下的问题与修复，才特意设为 <code>false</code>。
+            </p>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onShowModifiedClick(event) {
+                    var data = F.ui.Grid1.getModifiedData();
+                    F.ui.labResult.setValue('已修改的行数：<b>' + data.length + '</b><pre>' + JSON.stringify(data, null, 2) + '</pre>');
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

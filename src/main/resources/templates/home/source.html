@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>源代码</title>
+
+        <style>
+            iframe {
+                padding: 0;
+                margin: 0;
+            }
+
+            .f-tab-header .f-panel-title-text {
+                font-family: Consolas, Courier New, monospace;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <!--/* 每个源文件一个选项卡（IFrame 承载 source-file 子页做单文件高亮）。选项卡由 Source 在 Page_Load 动态创建。 */-->
+            <f:tab-strip id="TabStrip1" is-view-port="true" show-border="false" show-ink-bar="true" ink-bar-position="Bottom"></f:tab-strip>
+        </th:block>
+    </body>
+
+</html>

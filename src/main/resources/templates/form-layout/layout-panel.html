@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · LayoutPanel</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:form id="SimpleForm1" is-fluid="true" body-padding="10" remove-last-fields-margin="true" label-align="Left" title="表单">
+                <f:rows>
+                    <f:form-row id="FormRow5">
+                        <f:items>
+                            <f:text-box id="TextBox1" label="文本一"></f:text-box>
+                            <f:button id="Button4" css-class="btn-in-form" text="按钮一"></f:button>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row id="FormRow6">
+                        <f:items>
+                            <f:text-box id="TextBox2" label="文本二"></f:text-box>
+                            <f:button id="Button3" css-class="btn-in-form" text="按钮二"></f:button>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row id="FormRow7">
+                        <f:items>
+                            <f:text-box id="TextBox3" label="文本三"></f:text-box>
+                            <f:button id="Button1" css-class="btn-in-form" text="按钮三"></f:button>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row id="FormRow8">
+                        <f:items>
+                            <f:text-box id="TextBox4" label="文本四"></f:text-box>
+                            <f:button id="Button2" css-class="btn-in-form" text="按钮四"></f:button>
+                        </f:items>
+                    </f:form-row>
+                </f:rows>
+            </f:form>
+            <br />
+            <br />
+            注：为表单设置 remove-last-fields-margin="true" 来移除最后一行表单字段的底部外边距。
+
+        </th:block>
+    </body>
+
+</html>

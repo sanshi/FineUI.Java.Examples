@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 默认值省略</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <div style="padding:10px">
+                <p>演示：模板<b>声明「默认值」</b>的枚举属性，首屏配置<b>不产出</b>对应 wire key（客户端用自己的默认）；
+                    声明<b>非默认</b>才产出。用浏览器「查看网页源代码」找到 <code>F.render(...)</code> 载荷即可核对每个按钮的配置。</p>
+
+                <f:button id="btnNormalSize" text="size=Normal（默认 → 载荷无 scale）" size="Normal" css-class="marginr"></f:button>
+                <f:button id="btnLargeSize" text="size=Large（非默认 → scale:large）" size="Large"></f:button>
+                <br /><br />
+
+                <f:button id="btnQtip" text="tool-tip-type=Qtip（默认 → 无 tooltipType）" tool-tip-type="Qtip" tool-tip="提示" css-class="marginr"></f:button>
+                <f:button id="btnTitleTip" text="tool-tip-type=Title（非默认 → tooltipType:title）" tool-tip-type="Title" tool-tip="提示"></f:button>
+                <br /><br />
+
+                <f:button id="btnLeftAlign" text="icon-align=Left（默认 → 无 iconAlign）" icon="Add" icon-align="Left" css-class="marginr"></f:button>
+                <f:button id="btnRightAlign" text="icon-align=Right（非默认 → iconAlign:right）" icon="Add" icon-align="Right"></f:button>
+                <br /><br />
+
+                <p>同一规则适用于<b>字段类控件</b>：表单级 <code>label-align</code>（默认 Left → 载荷无 <code>fieldDefaults</code>）、
+                    文本框 <code>text-mode</code>（默认 Text → 载荷无 <code>inputType</code>）。查看两个表单的 <code>F.render</code> 载荷对比。</p>
+
+                <f:simple-form id="FormDefault" is-fluid="true" body-padding="10" show-header="true" title="全默认（载荷无 fieldDefaults、无 inputType）"
+                    label-align="Left">
+                    <f:items>
+                        <f:text-box id="tbxTextMode" label="text-mode=Text（默认 → 无 inputType）" text-mode="Text"></f:text-box>
+                    </f:items>
+                </f:simple-form>
+
+                <f:simple-form id="FormNonDefault" is-fluid="true" body-padding="10" show-header="true"
+                    title="非默认（fieldDefaults:{labelAlign:right}、inputType:password）" label-align="Right">
+                    <f:items>
+                        <f:text-box id="tbxPassword" label="text-mode=Password（非默认 → inputType:password）" text-mode="Password"></f:text-box>
+                    </f:items>
+                </f:simple-form>
+            </div>
+
+        </th:block>
+    </body>
+
+</html>

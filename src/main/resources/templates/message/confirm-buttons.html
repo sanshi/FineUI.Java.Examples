@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 自定义对话框按钮文本</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnOperation1" text="操作一（自定义对话框按钮文本）" click-handler="onOperation1Click"></f:button>
+
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onOperation1Click(event) {
+
+                    F.create({
+                        type: 'MessageBox',
+                        message: '您即将直接退出，如果您修改了相关信息，请先保存！',
+                        title: '确认退出',
+                        buttons: [{
+                            buttonId: 'ok',
+                            text: '直接退出'
+                        }, {
+                            buttonId: 'cancel',
+                            text: '不退出'
+                        }],
+                        handler: function(event, buttonId) {
+                            if (buttonId === 'ok') {
+                                F.customEvent('ConfirmOK');
+                            } else {
+                                F.customEvent('ConfirmCancel');
+                            }
+                        }
+                    });
+
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

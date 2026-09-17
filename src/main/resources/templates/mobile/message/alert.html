@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 提示对话框</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 10 0" body-padding="10px"
+                is-view-port="true">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" title="提示对话框" header-style="true"></f:toolbar>
+                </f:toolbars>
+                <f:items>
+                    <f:button id="Button1" text="提示对话框" on-click="Button1_Click"></f:button>
+                    <f:button id="Button2" text="提示对话框（ButtonFill）" on-click="Button2_Click"></f:button>
+                    <f:button id="Button3" text="提示对话框（ButtonPlain）" on-click="Button3_Click"></f:button>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · AutoCompleteInline</title>
+
+        <link rel="stylesheet" th:href="@{/res/third-party/jqueryuiautocomplete/jquery-ui.css}" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" title="简单表单">
+                <f:items>
+                    <f:text-box id="TextBox1" show-label="false" empty-text="输入字母 a 试试"></f:text-box>
+                </f:items>
+            </f:simple-form>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/third-party/jqueryuiautocomplete/jquery-ui.js}"></script>
+            <script>
+                F.ready(function() {
+                    var availableTags = [
+                        'ActionScript', 'AppleScript', 'Asp', 'BASIC', 'C', 'C++', 'Clojure',
+                        'COBOL', 'ColdFusion', 'Erlang', 'Fortran', 'Groovy', 'Haskell', 'Java',
+                        'JavaScript', 'Lisp', 'Perl', 'PHP', 'Python', 'Ruby', 'Scala', 'Scheme'
+                    ];
+
+                    $('#TextBox1 input').autocomplete({
+                        source: availableTags
+                    });
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · SimulateTree</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="模拟树的下拉列表" show-header="true">
+                <f:items>
+                    <f:drop-down-list id="DropDownList1" required="true" enable-simulate-tree="true" show-red-star="true"></f:drop-down-list>
+
+                    <f:button id="btnGetSelection" text="获取选中项" css-class="marginr" on-click="btnGetSelection_Click"></f:button>
+                    <f:button id="btnDataBind" text="重新绑定数据" css-class="marginr" on-click="btnDataBind_Click"></f:button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <f:label id="labResult" encode-text="false"></f:label>
+
+        </th:block>
+    </body>
+
+</html>

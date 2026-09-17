@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 图片热区选择省份</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:iframe/select-province/iframe-window" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" title="表单" body-padding="10" enable-collapse="false">
+                <f:items>
+                    <f:drop-down-list label="你所在的省份" id="ddlProvince" selected-value="安徽"></f:drop-down-list>
+                    <f:button id="Button1" text="从列表中选择" click-handler="onButton1Click"></f:button>
+                </f:items>
+            </f:simple-form>
+
+            <f:window id="Window1" title="编辑" hidden="true" enable-iframe="true" enable-maximize="true" enable-resize="true" target="Parent"
+                on-close="Window1_Close" is-modal="true" width="562" height="470">
+            </f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onButton1Click(event) {
+                    // 注意：url 刻意保留 PascalCase（/IFrame/SelectProvince/IFrameWindow），
+                    // SelectProvince.spec 用 frame.url().includes('SelectProvince/IFrameWindow') 定位 iframe；
+                    // 路由归一仍能命中 iframe/select-province/iframe-window。勿改 kebab，否则共享测试挂。
+                    var url = '/IFrame/SelectProvince/IFrameWindow';
+                    var openUrl = F.formatString("{0}?selected={1}", url, F.urlEncode(F.ui.ddlProvince.getValue()));
+
+                    F.ui.Window1.show(openUrl);
+                }
+
+                function updateProvince(val) {
+                    F.ui.ddlProvince.setValue(val);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

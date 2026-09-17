@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 分部视图</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="template:partial/partial-view.html" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <!--/* 同一张公共卡片（partial/partial-view 片段）在几种面板结构中各引用一次，参数注入序号与用户信息。
+                 面板一把片段直接写在内容面板主体里；面板二/三改为把片段作为面板子项嵌入。 */-->
+            <f:content-panel id="Panel1" is-fluid="true" enable-collapse="false" body-padding="10" height="200" title="面板一（Panel->PartialView）">
+                <th:block th:replace="~{partial/partial-view :: card('Panel1', 1, '陈萍萍', 20, '合肥')}"></th:block>
+            </f:content-panel>
+
+            <br />
+            <f:panel id="Panel2" is-fluid="true" enable-collapse="false" body-padding="10" height="200" title="面板二（Panel->Items->PartialView）">
+                <f:items>
+                    <th:block th:replace="~{partial/partial-view :: card('Panel2', 1, '陈萍萍', 20, '合肥')}"></th:block>
+                </f:items>
+            </f:panel>
+
+            <br />
+            <f:panel id="Panel3" is-fluid="true" enable-collapse="false" body-padding="10" height="200" layout="Fit"
+                title="面板三（Layout=Fit, Panel->Items->PartialView）">
+                <f:items>
+                    <th:block th:replace="~{partial/partial-view :: card('Panel3', 1, '陈萍萍', 20, '合肥')}"></th:block>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

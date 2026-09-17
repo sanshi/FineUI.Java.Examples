@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · MatchFieldWidthRight</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" show-border="true" enable-collapse="false" layout="HBox" body-padding="10" box-config-position="End"
+                box-config-align="Start" show-header="true" title="面板（Layout=HBox BoxConfigPosition=End）" is-view-port="true">
+                <f:items>
+                    <f:simple-form id="SimpleForm1" body-padding="10" width="400" enable-collapse="false" show-border="true" title="下拉列表（MatchFieldWidth）"
+                        show-header="true">
+                        <f:items>
+                            <f:drop-down-list id="DropDownList1" match-field-width="false">
+                                <f:list-item text="可选项1" value="Value1" selected="true"></f:list-item>
+                                <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
+                                <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
+                                <f:list-item text="可选项4" value="Value4"></f:list-item>
+                                <f:list-item text="可选项5" value="Value5"></f:list-item>
+                                <f:list-item text="可选项6" value="Value6"></f:list-item>
+                                <f:list-item text="可选择项7" value="Value7"></f:list-item>
+                                <f:list-item text="可选择项8" value="Value8"></f:list-item>
+                                <f:list-item text="普通型1 < L > 1.5" value="普通型1 < L > 1.5"></f:list-item>
+                                <f:list-item text="一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的可选择项" value="Value11"></f:list-item>
+                                <f:list-item text="二个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的可选择项" value="Value12"></f:list-item>
+                                <f:list-item text="三个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的可选择项" value="Value13"></f:list-item>
+                                <f:list-item text="四个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的可选择项" value="Value14"></f:list-item>
+                                <f:list-item text="五个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的可选择项" value="Value15"></f:list-item>
+                                <f:list-item text="六个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的可选择项" value="Value16"></f:list-item>
+                                <f:list-item text="七个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的可选择项" value="Value17"></f:list-item>
+                                <f:list-item text="八个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的可选择项" value="Value18"></f:list-item>
+                                <f:list-item text="九个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的可选择项" value="Value19"></f:list-item>
+                                <f:list-item text="十个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的可选择项" value="Value20"></f:list-item>
+                            </f:drop-down-list>
+                            <f:button id="btnSelectItem6" text="选中[可选项6]" css-class="marginr" on-click="btnSelectItem6_Click"></f:button>
+                            <f:button id="btnGetSelection" text="获取此下拉列表的选中项" on-click="btnGetSelection_Click"></f:button>
+                            <f:label id="labResult" encode-text="false"></f:label>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · VBox 嵌套 HBox 布局</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel2" is-fluid="true" show-border="true" margin="24px" layout="VBox" show-header="true" title="面板（改变页面大小来观察面板的变化）" body-padding="5"
+                is-view-port="true">
+                <f:items>
+                    <f:panel id="Panel1" box-flex="1" show-border="false" show-header="false" layout="HBox" box-config-child-margin="0 5 0 0" margin-bottom="5">
+                        <f:items>
+                            <f:panel id="Panel3" box-flex="1" show-border="true" show-header="false">
+                                <f:items>
+                                    <f:label id="Label1" text="Label1">
+                                    </f:label>
+                                </f:items>
+                            </f:panel>
+                            <f:panel id="Panel4" box-flex="1" show-border="true" show-header="false">
+                                <f:items>
+                                    <f:label id="Label2" text="Label2">
+                                    </f:label>
+                                </f:items>
+                            </f:panel>
+                            <f:panel id="Panel6" box-flex="1" show-border="true" show-header="false" margin="0">
+                                <f:items>
+                                    <f:label id="Label3" text="Label3">
+                                    </f:label>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel5" box-flex="1" show-border="false" show-header="false" layout="HBox" box-config-child-margin="0 5 0 0">
+                        <f:items>
+                            <f:panel id="Panel7" box-flex="1" show-border="true" show-header="false">
+                                <f:items>
+                                    <f:label id="Label4" text="Label4">
+                                    </f:label>
+                                </f:items>
+                            </f:panel>
+                            <f:panel id="Panel8" box-flex="1" show-border="true" show-header="false">
+                                <f:items>
+                                    <f:label id="Label5" text="Label5">
+                                    </f:label>
+                                </f:items>
+                            </f:panel>
+                            <f:panel id="Panel9" box-flex="1" show-border="true" show-header="false" margin="0">
+                                <f:items>
+                                    <f:label id="Label6" text="Label6">
+                                    </f:label>
+                                </f:items>
+                            </f:panel>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

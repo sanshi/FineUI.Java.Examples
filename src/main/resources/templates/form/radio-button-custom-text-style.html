@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · RadioButton 自定义文字样式</title>
+
+        <style>
+            /* 选中的单选框，其所在字段单元格内的文字标签变红（纯 CSS :has() + :checked，随选中项切换跟随） */
+            .f-field-body-cell:has(input.f-field-checkbox:checked) .f-field-body-checkboxlabel {
+                color: red;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" label-width="150" title="简单表单" enable-collapse="false" body-padding="10" show-border="true"
+                show-header="true">
+                <f:items>
+                    <f:radio-button id="rbtnSingleRadio" label="单选框" text="可选项"></f:radio-button>
+                    <f:button id="btnSelectSingleRadio" css-class="marginr" text="选择/反选单选框" on-click="btnSelectSingleRadio_Click"></f:button>
+                    <f:button id="btnChangeCheckStatus" css-class="marginr" text="选择/反选单选框（客户端脚本）" click-handler="onChangeCheckStatusClick"></f:button>
+                    <f:label id="lblSpacer1"></f:label>
+
+                    <f:radio-button id="rbtnFirst" label="单选框（分组）" checked="true" group-name="MyRadioGroup1" text="可选项 1"></f:radio-button>
+                    <f:radio-button id="rbtnSecond" group-name="MyRadioGroup1" show-empty-label="true" text="可选项 2"></f:radio-button>
+                    <f:radio-button id="rbtnThird" group-name="MyRadioGroup1" show-empty-label="true" text="可选项 3"></f:radio-button>
+                    <f:button id="btnSelectSecondRadio" text="选中分组单选框中的下一个" on-click="btnSelectSecondRadio_Click"></f:button>
+                    <f:label id="lblSpacer2"></f:label>
+
+                    <f:radio-button id="rbtnFirstAuto" label="单选框（选中改变事件）" checked="true" group-name="MyRadioGroup2" text="可选项 1"
+                        on-checked-changed="rbtnAuto_CheckedChanged"></f:radio-button>
+                    <f:radio-button id="rbtnSecondAuto" group-name="MyRadioGroup2" show-empty-label="true" text="可选项 2"
+                        on-checked-changed="rbtnAuto_CheckedChanged"></f:radio-button>
+                    <f:radio-button id="rbtnThirdAuto" group-name="MyRadioGroup2" show-empty-label="true" text="可选项 3"
+                        on-checked-changed="rbtnAuto_CheckedChanged"></f:radio-button>
+                </f:items>
+            </f:simple-form>
+            <br />
+            <p>注：本示例使用 CSS 关系伪类 <code>:has()</code> 让「选中」的单选框文字变红。</p>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onChangeCheckStatusClick(event) {
+                    var radio = F.ui.rbtnSingleRadio;
+                    radio.setValue(!radio.getValue());
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

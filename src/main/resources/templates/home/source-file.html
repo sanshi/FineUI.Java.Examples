@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>源代码文件</title>
+
+        <!--/* prettify 皮肤随主题输出，放在自定义 <style> 之前，让下面的自定义样式覆盖皮肤默认样式 */-->
+        <link rel="stylesheet" th:href="${page.prettifySkinHref}" />
+        <style type="text/css">
+            body.f-body {
+                padding: 10px;
+            }
+
+            body {
+                margin: 0;
+                font-size: 13px;
+            }
+
+            pre.prettyprint {
+                border: none;
+                margin: 0;
+                color: #666;
+                font-family: Consolas, Courier New, monospace;
+                -webkit-font-smoothing: subpixel-antialiased;
+                /* 使用主题背景色 */
+                background-color: transparent;
+            }
+
+            li.L0,
+            li.L1,
+            li.L2,
+            li.L3,
+            li.L4,
+            li.L5,
+            li.L6,
+            li.L7,
+            li.L8,
+            li.L9 {
+                /* 使用主题背景色 */
+                background-color: transparent;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <!--/* 单文件高亮：SourceFile 现取现算的 HTML（含随主题选择的 prettify 皮肤 link + <pre>）直接输出到 body，
+       不套任何控件/面板。th:block 不产生包裹元素，等效于直出原始 HTML。 */-->
+        <th:block layout:fragment="body" th:utext="${page.sourceHtml}"></th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/google-code-prettify/prettify.js}"></script>
+            <script>
+                F.ready(function() {
+                    if (window.PR && PR.prettyPrint) {
+                        PR.prettyPrint();
+                    }
+                });
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

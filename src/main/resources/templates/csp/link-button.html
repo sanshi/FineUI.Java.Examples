@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · CSP 链接按钮与超链接</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:link-button id="lbServer" text="链接按钮 - 服务器端事件" on-click="lbServer_Click"></f:link-button>
+            <br />
+            <br />
+            <f:link-button id="lbConfirm" text="链接按钮 - 确认后回发" on-click="lbConfirm_Click" confirm-text="确定要继续吗？"></f:link-button>
+            <br />
+            <br />
+            <!--/* 严格 CSP 下客户端事件使用具名函数（click-handler / <f:listener>），无需 'unsafe-eval'。 */-->
+            <f:link-button id="lbClient" text="链接按钮 - 客户端脚本（listener）" click-handler="onShowClientMsgClick"></f:link-button>
+            <br />
+            <br />
+            <f:hyper-link id="hlNav" text="超链接 - 新窗口导航" target="_blank" navigate-url="https://www.fineui.com/"></f:hyper-link>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <!--/* 页面自带的内联脚本：带 nonce 才被 CSP 放行（nonce 由服务端在渲染前生成、经 page.cspScriptsNonceValue 取用） */-->
+            <script th:attr="nonce=${page.cspScriptsNonceValue}">
+                function onShowClientMsgClick(event) {
+                    top.F.alert('链接控件客户端脚本已执行');
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

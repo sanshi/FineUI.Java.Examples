@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · IconFontFontAwesome</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:button id="btnIcon1" text="图标在左侧" icon-font="Tags" css-class="marginr"></f:button>
+            <f:button id="btnIcon2" text="图标在右侧" icon-align="Right" icon-font="Star"></f:button>
+            <br />
+            <br />
+            <f:button id="btnIcon3" text="图标在上面" icon-align="Top" icon-font="ShoppingCart" css-class="marginr"></f:button>
+            <f:button id="btnIcon4" text="图标在下面" icon-align="Bottom" icon-font="Cloud"></f:button>
+            <br />
+            <br />
+            只有图片的按钮：
+            <br />
+            <br />
+            <f:button id="Button1" icon-font="Share" css-class="marginr"></f:button>
+            <f:button id="Button2" icon-font="Key" css-class="marginr"></f:button>
+            <f:button id="Button7" icon-font="Lock" css-class="marginr"></f:button>
+            <f:button id="Button8" icon-font="Trash" css-class="marginr"></f:button>
+            <br />
+            <br />
+            <f:panel id="Panel1" width="500" title="面板" height="250" body-padding="10" enable-collapse="true" icon-font="List">
+                <f:items>
+                    <f:label text="面板内容"></f:label>
+                </f:items>
+                <f:tools>
+                    <f:tool icon-font="Cog" tool-tip="设置" click-handler="onToolIconClick"></f:tool>
+                    <f:tool icon-font="CloudDownload" tool-tip="下载" click-handler="onToolIconClick"></f:tool>
+                </f:tools>
+                <f:toolbars>
+                    <f:toolbar position="Bottom" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="btnMenu" text="操作" icon-font="Pencil">
+                                <f:menu>
+                                    <f:menu-button icon-font="Trash" text="删除选中项"></f:menu-button>
+                                    <f:menu-button icon-font="Ban" text="禁用选中项"></f:menu-button>
+                                </f:menu>
+                            </f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+            <br />
+            <f:tree id="Tree1" width="500" show-header="true" title="树控件" enable-collapse="false">
+                <f:nodes>
+                    <f:tree-node text="中国" expanded="true">
+                        <f:tree-node text="河南省" expanded="true">
+                            <f:tree-node text="驻马店市" expanded="true" icon-font="Flag" node-id="Zhumadian">
+                                <f:tree-node text="遂平县" icon-font="Tag" node-id="Suiping"></f:tree-node>
+                                <f:tree-node text="西平县" icon-font="Book" node-id="Xiping"></f:tree-node>
+                            </f:tree-node>
+                            <f:tree-node text="漯河市" node-id="Luohe" icon-font="Bookmark"></f:tree-node>
+                        </f:tree-node>
+                        <f:tree-node text="安徽省" node-id="Anhui"></f:tree-node>
+                    </f:tree-node>
+                </f:nodes>
+            </f:tree>
+            <br />
+            <br />
+            <a href="https://fontawesome.com/" target="_blank">https://fontawesome.com/</a>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onToolIconClick(event) {
+                    var iconFont = this.iconFont;
+                    F.notify({
+                        message: '你点击了标题栏工具图标：' + iconFont,
+                        messageIconFont: iconFont,
+                        displayMilliseconds: 300000,
+                        positionX: 'center',
+                        positionY: 'center'
+                    });
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

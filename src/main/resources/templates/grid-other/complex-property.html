@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 绑定到二级属性</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="MyText"
+                enable-check-box-select="true">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="MyText"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="Year"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="MyCheckBox"></f:render-check-field>
+                    <f:render-field header-text="是否在校" data-field="MyCheckBox" renderer-function="renderAtSchool"></f:render-field>
+                    <f:render-field header-text="老师（二级属性）" data-field="Info.UserName" expand-unused-space="true" min-width="150"></f:render-field>
+                </f:columns>
+            </f:grid>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                // 文本 - 是否在校
+                function renderAtSchool(value, params) {
+                    return value ? '是' : '否';
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

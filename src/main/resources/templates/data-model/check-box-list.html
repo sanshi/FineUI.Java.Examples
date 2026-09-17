@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataModel 复选列表</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.datamodel.model.CheckBoxListForm" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" label-width="150" show-border="true" show-header="true" title="简单表单">
+                <f:items>
+                    <f:check-box for="form.checked" text="复选框"></f:check-box>
+                    <f:check-box-list for="form.checkBoxList1" column-number="3">
+                        <f:check-item text="可选项 1" value="Value1"></f:check-item>
+                        <f:check-item text="可选项 2" value="Value2"></f:check-item>
+                        <f:check-item text="可选项 3" value="Value3"></f:check-item>
+                    </f:check-box-list>
+                    <f:radio-button-list for="form.radioButtonList1" column-number="3">
+                        <f:radio-item text="可选项 1" value="Value1"></f:radio-item>
+                        <f:radio-item text="可选项 2" value="Value2"></f:radio-item>
+                        <f:radio-item text="可选项 3" value="Value3"></f:radio-item>
+                    </f:radio-button-list>
+                    <f:radio-button-list for="form.gender" column-number="3">
+                        <f:radio-item text="男" value="1"></f:radio-item>
+                        <f:radio-item text="女" value="0"></f:radio-item>
+                    </f:radio-button-list>
+                    <f:radio-button-list for="form.genderType" column-number="3">
+                        <f:radio-item text="男" value="1"></f:radio-item>
+                        <f:radio-item text="女" value="0"></f:radio-item>
+                    </f:radio-button-list>
+                    <!-- 下方 DropDownList 与本 RadioButtonList 绑定同一属性 form.genderType：两个控件值须一致（绑定歧义检查）；
+                         两控件由同一绑定字段派生的 id 会撞车，故第二个控件显式加 _2 后缀消歧 -->
+                    <f:drop-down-list for="form.genderType" id="form_genderType_2" name="form_genderType_2">
+                        <f:list-item text="男" value="1"></f:list-item>
+                        <f:list-item text="女" value="0"></f:list-item>
+                    </f:drop-down-list>
+                    <f:button id="btnSubmit" text="提交表单" validate-forms="SimpleForm1" on-click="btnSubmit_Click"></f:button>
+                    <f:button id="btnReset" type="Reset" text="重置表单"></f:button>
+                </f:items>
+            </f:simple-form>
+        </th:block>
+    </body>
+
+</html>

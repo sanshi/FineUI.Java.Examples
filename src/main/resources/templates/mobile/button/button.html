@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · Button</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 5px 0" body-padding="10px"
+                auto-scroll="true" is-view-port="true">
+                <f:items>
+                    <f:button id="Button1" text="普通按钮"></f:button>
+                    <f:button id="Button2" text="按下按钮" enable-press="true" pressed="true"></f:button>
+                    <f:button id="Button3" text="禁用按钮" enabled="false" margin-bottom="30"></f:button>
+                    <f:panel show-border="false" show-header="false" layout="HBox" box-config-child-margin="0 5px 0 0" margin-bottom="30">
+                        <f:items>
+                            <f:button id="Button4" text="普通按钮" box-flex="1"></f:button>
+                            <f:button id="Button5" text="按下按钮" box-flex="1" enable-press="true" pressed="true"></f:button>
+                            <f:button id="Button6" text="禁用按钮" box-flex="1" enabled="false" margin="0"></f:button>
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="Panel2" show-border="false" show-header="false" layout="HBox" box-config-child-margin="0 5px 0 0" margin-bottom="30">
+                        <f:items>
+                            <f:button id="Button7" text="普通按钮" box-flex="1" icon="Star" icon-align="Top"></f:button>
+                            <f:button id="Button8" text="按下按钮" box-flex="1" icon-font="_Mail" icon-align="Top" enable-press="true" pressed="true"></f:button>
+                            <f:button id="Button9" text="禁用按钮" box-flex="1" icon-font="_Refresh" icon-align="Top" enabled="false" margin="0"></f:button>
+                        </f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

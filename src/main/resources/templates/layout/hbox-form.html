@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · HBox（横向表单）</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" height="350" show-border="true" enable-collapse="false" layout="VBox" body-padding="10"
+                box-config-child-margin="0 0 5 0" show-header="true" title="面板（SimpleForm - Layout=HBox）">
+                <f:items>
+                    <f:simple-form id="SimpleForm1" show-border="false" enable-collapse="true" show-header="false" layout="HBox"
+                        box-config-child-margin="0 5 0 0" box-config-last-child-margin="0" remove-fields-margin="true">
+                        <f:items>
+                            <f:label text="销毁统计时间段："></f:label>
+                            <f:date-picker id="dpStartDate" width="150" required="true" date-format-string="yyyy/MM/dd" empty-text="请选择开始日期" show-label="false"
+                                label="销毁统计开始时间" enable-edit="false"></f:date-picker>
+                            <f:date-picker id="dpEndDate" width="150" required="true" readonly="false" compare-control="dpStartDate"
+                                date-format-string="yyyy/MM/dd" compare-operator="GreaterThan" compare-message="结束日期应该大于开始日期" empty-text="请选择结束日期"
+                                show-label="false" label="销毁统计结束时间" enable-edit="false"></f:date-picker>
+                            <f:button id="btnClearDate" text="重置起止时间" click-handler="onClearDateClick"></f:button>
+                            <f:button id="btnSearch" text="查询" validate-forms="SimpleForm1"></f:button>
+                        </f:items>
+                    </f:simple-form>
+                    <f:panel id="Panel3" box-flex="1" margin="0" show-border="true" show-header="false">
+                        <f:items></f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+            <br />
+            <br />
+            <br />
+            下面使用 Column 布局实现相同的效果：
+            <br />
+            <f:panel id="Panel2" is-fluid="true" height="350" show-border="true" enable-collapse="false" layout="VBox" body-padding="10"
+                box-config-child-margin="0 0 5 0" show-header="true" title="面板（SimpleForm - Layout=Column）">
+                <f:items>
+                    <f:simple-form id="SimpleForm2" show-border="false" enable-collapse="true" show-header="false" layout="Column" remove-fields-margin="true">
+                        <f:items>
+                            <f:label id="Label1" text="销毁统计时间段："></f:label>
+                            <f:date-picker id="DatePicker1" width="150" css-class="marginr" required="true" date-format-string="yyyy/MM/dd" empty-text="请选择开始日期"
+                                show-label="false" label="销毁统计开始时间" enable-edit="false"></f:date-picker>
+                            <f:date-picker id="DatePicker2" width="150" css-class="marginr" required="true" readonly="false" compare-control="DatePicker1"
+                                date-format-string="yyyy/MM/dd" compare-operator="GreaterThan" compare-message="结束日期应该大于开始日期" empty-text="请选择结束日期"
+                                show-label="false" label="销毁统计结束时间" enable-edit="false"></f:date-picker>
+                            <f:button id="Button1" css-class="marginr" text="重置起止时间" click-handler="onClearDateClick"></f:button>
+                            <f:button id="Button2" text="查询" validate-forms="SimpleForm2"></f:button>
+                        </f:items>
+                    </f:simple-form>
+                    <f:panel box-flex="1" margin="0" show-border="true" show-header="false">
+                        <f:items></f:items>
+                    </f:panel>
+                </f:items>
+            </f:panel>
+            <br>
+            <br>
+            注：为表单设置 remove-fields-margin="true" 来移除表单字段的底部外边距。
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onClearDateClick(event) {
+                    // this -> 按钮实例；获取按钮所在的表单ID
+                    var formId = this.el.parents('.f-form').attr('id');
+                    F(formId).reset();
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

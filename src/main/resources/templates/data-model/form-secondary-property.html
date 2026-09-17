@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · DataModel 嵌套属性</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles"
+            content="class:com.fineui.java.examples.datamodel.model.StudentForm;class:com.fineui.java.examples.datamodel.model.ScoreForm" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" show-border="true" show-header="true" title="简单表单">
+                <f:items>
+                    <f:hidden-field for="student.id"></f:hidden-field>
+                    <f:text-box for="student.name"></f:text-box>
+                    <f:radio-button-list for="student.gender" column-number="3">
+                        <f:radio-item text="男" value="1"></f:radio-item>
+                        <f:radio-item text="女" value="0"></f:radio-item></f:radio-button-list>
+                    <f:check-box for="student.atSchool"></f:check-box>
+                    <f:text-box for="student.major"></f:text-box>
+                    <f:date-picker for="student.entranceDate"></f:date-picker>
+                    <f:group-panel id="gpScore" title="考试成绩" enable-collapse="true" css-class="f-field">
+                        <f:items>
+                            <f:number-box for="student.score.chinese"></f:number-box>
+                            <f:number-box for="student.score.math"></f:number-box>
+                            <f:number-box for="student.score.physics"></f:number-box>
+                            <f:number-box for="student.score.chemistry"></f:number-box>
+                        </f:items>
+                    </f:group-panel>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar position="Bottom">
+                        <f:items>
+                            <f:button id="btnSubmit" text="提交表单" validate-forms="SimpleForm1" on-click="btnSubmit_Click"></f:button>
+                            <f:button id="btnReset" type="Reset" text="重置表单"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+        </th:block>
+    </body>
+
+</html>

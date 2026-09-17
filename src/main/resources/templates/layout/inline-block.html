@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 行内块布局</title>
+
+        <style>
+            .mypanel {
+                display: inline-block !important;
+                margin-right: 5px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" show-border="true" enable-collapse="false" body-padding="10" show-header="true" title="面板" auto-scroll="true"
+                margin="20" is-view-port="true">
+                <f:items>
+                    <f:panel id="Panel2" title="面板1" css-class="mypanel" width="300" height="200" body-padding="10" show-border="true">
+                    </f:panel>
+                    <f:panel id="Panel3" title="面板2" css-class="mypanel" width="300" height="200" body-padding="10" show-border="true">
+                    </f:panel>
+                    <f:panel id="Panel4" title="面板3" css-class="mypanel" width="300" height="200" body-padding="10" show-border="true">
+                    </f:panel>
+                    <f:panel id="Panel5" title="面板4" css-class="mypanel" width="300" height="200" body-padding="10" show-border="true">
+                    </f:panel>
+                    <f:panel id="Panel6" title="面板5" css-class="mypanel" width="300" height="200" body-padding="10" show-border="true">
+                    </f:panel>
+                    <f:panel id="Panel7" title="面板6" css-class="mypanel" width="300" height="200" body-padding="10" show-border="true">
+                    </f:panel>
+                    <f:panel id="Panel8" title="面板7" css-class="mypanel" width="300" height="200" body-padding="10" show-border="true">
+                    </f:panel>
+                    <f:panel id="Panel9" title="面板8" css-class="mypanel" width="300" height="200" body-padding="10" show-border="true">
+                    </f:panel>
+                    <f:panel id="Panel10" title="面板9" css-class="mypanel" width="300" height="200" body-padding="10" show-border="true">
+                    </f:panel>
+                    <f:panel id="Panel11" title="面板10" css-class="mypanel" width="300" height="200" body-padding="10" show-border="true">
+                    </f:panel>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+    </body>
+
+</html>

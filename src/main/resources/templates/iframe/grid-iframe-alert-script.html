@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 子页保存经脚本路径回发</title>
+        <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
+        <meta name="sourcefiles" content="route:iframe/grid-iframe-alert-script/iframe-window" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:grid id="Grid1" title="表格" is-fluid="true" page-size="10" show-border="true" allow-paging="true" show-header="true"
+                enable-check-box-select="true" data-id-field="Id" data-text-field="Name" height="550">
+                <f:toolbars>
+                    <f:toolbar id="Toolbar2">
+                        <f:items>
+                            <f:button id="btnDeleteRows" text="删除选中行"></f:button>
+                            <f:toolbar-fill></f:toolbar-fill>
+                            <f:button id="btnAddUser" text="新增用户"></f:button>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                    <f:render-field header-text="分组" data-field="Group" renderer-function="renderGroup"></f:render-field>
+                    <f:render-field header-text="窗口列" enable-header-menu="false">
+                        <f:commands>
+                            <f:command command-name="Action1" icon="Pencil" tool-tip="编辑" css-class="mywindowfield" window-id="Window1"
+                                window-iframe-url-format-string="/iframe/grid-iframe-alert-script/iframe-window?id={0}&name={1}"
+                                window-iframe-url-fields="Id,Name" window-title-format-string="编辑 - {0}" window-title-fields="Name"></f:command>
+                        </f:commands>
+                    </f:render-field>
+                </f:columns>
+            </f:grid>
+
+            <f:window id="Window1" title="弹出窗体" hidden="true" enable-iframe="true" enable-maximize="true" target="Top" enable-resize="true" is-modal="true"
+                width="800" height="550" close-action="HidePostBack" on-close="Window1_Close"></f:window>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+
+            <script>
+                function closeWindow1(closeArgument) {
+                    F.customEvent('CloseWindow1', closeArgument);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>
