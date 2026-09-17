@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "auditStatus": "complete",
-  "productVersion": "16.0.0-beta.1",
+  "productVersion": "16.0.0-beta.2",
   "targetPath": "src/main/resources/static/res",
   "resourceTreeSha256": "e1e11c42ff721451114c23665d5306238222804748a07ecdb25d597b16eea7ae",
   "thirdPartyAssets": [
