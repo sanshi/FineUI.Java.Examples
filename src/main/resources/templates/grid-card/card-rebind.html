@@ -10,7 +10,8 @@
     <body>
         <th:block layout:fragment="body">
             <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name" height="500"
-                display-type="Card" card-renderer-function="renderCard" empty-text-raw-html="<img src='/res/images/no_data_found.png' alt='No Data Found!'/>">
+                display-type="Card" card-renderer-function="renderCard"
+                empty-text-raw-html="|<img src='@{/res/images/no_data_found.png}' alt='No Data Found!'/>|">
                 <f:columns>
                     <f:row-number-field></f:row-number-field>
                     <f:render-field header-text="姓名" data-field="Name"></f:render-field>
