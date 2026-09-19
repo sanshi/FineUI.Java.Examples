@@ -1233,6 +1233,16 @@
 			<TreeNode Text="合并列（列锁定）" NavigateUrl="/grid-merge/columns-lock-column" IsEnterprise="true">
 			</TreeNode>
 		</TreeNode>
+		<TreeNode Text="表格与表单">
+			<TreeNode Text="表格与表单" NavigateUrl="/grid/form">
+			</TreeNode>
+			<TreeNode Text="表格与表单（弹出窗体，表单中保存）" NavigateUrl="/grid/form-window">
+			</TreeNode>
+			<TreeNode Text="表格与表单（弹出窗体，表格中保存）" NavigateUrl="/grid/form-window-cell-edit">
+			</TreeNode>
+			<TreeNode Text="表格与表单（弹出窗体，表格中保存，省市联动）" NavigateUrl="/grid/form-window-cell-edit-sheng-shi">
+			</TreeNode>
+		</TreeNode>
 		<TreeNode Text="树表格">
 			<TreeNode Text="树表格" NavigateUrl="/grid-tree/grid-tree">
 			</TreeNode>

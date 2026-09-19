@@ -2,11 +2,138 @@
 <html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
 
     <head>
-        <title>Grid/Form</title>
+        <title>FineUI.Java · 表格与表单</title>
+        <style>
+            /* 表格与表单左右分栏，给表格右侧留一条分隔线 */
+            .maingrid {
+                border-width: 0 1px 0 0;
+            }
+        </style>
     </head>
 
     <body>
         <th:block layout:fragment="body">
+
+            <f:panel id="Panel1" is-fluid="true" show-border="true" title="表格与表单" layout="HBox" height="500">
+                <f:items>
+                    <f:grid id="Grid1" show-border="true" show-header="false" enable-collapse="false" box-flex="1" css-class="maingrid"
+                        data-id-field="Id" allow-cell-editing="true" clicks-to-edit="2">
+                        <f:columns>
+                            <!--/* 可编辑的列必须各自声明 <f:editor>：列带不带编辑器就决定了它能不能进入单元格编辑，没有编辑器的列一律只读 */-->
+                            <f:row-number-field width="60"></f:row-number-field>
+                            <f:render-field header-text="姓名" column-id="Name" data-field="Name">
+                                <f:editor>
+                                    <f:text-box id="tbxEditorName"></f:text-box>
+                                </f:editor>
+                            </f:render-field>
+                            <f:render-field header-text="性别" column-id="Gender" data-field="Gender" field-type="Int" renderer-function="renderGender"
+                                hidden="true">
+                                <f:editor>
+                                    <f:drop-down-list id="ddlEditorGender">
+                                        <f:list-item text="男" value="1"></f:list-item>
+                                        <f:list-item text="女" value="0"></f:list-item>
+                                    </f:drop-down-list>
+                                </f:editor>
+                            </f:render-field>
+                            <f:render-field header-text="入学年份" column-id="EntranceYear" data-field="EntranceYear" field-type="Int">
+                                <f:editor>
+                                    <f:number-box id="nbxEditorEntranceYear" no-decimal="true" no-negative="true" min-value="2000" max-value="2025"></f:number-box>
+                                </f:editor>
+                            </f:render-field>
+                            <f:render-field header-text="入学日期" column-id="EntranceDate" data-field="EntranceDate" field-type="Date" renderer="Date"
+                                renderer-argument="yyyy/MM/dd" width="150" hidden="true">
+                                <f:editor>
+                                    <f:date-picker id="dpEditorEntranceDate"></f:date-picker>
+                                </f:editor>
+                            </f:render-field>
+                            <f:render-check-field header-text="是否在校" column-id="AtSchool" data-field="AtSchool"
+                                enable-column-edit="false"></f:render-check-field>
+                            <f:render-field header-text="所学专业" column-id="Major" data-field="Major" expand-unused-space="true" min-width="150">
+                                <f:editor>
+                                    <f:text-box id="tbxEditorMajor"></f:text-box>
+                                </f:editor>
+                            </f:render-field>
+                        </f:columns>
+                        <f:listeners>
+                            <f:listener event="rowselect" handler="onGridRowSelect"></f:listener>
+                        </f:listeners>
+                    </f:grid>
+                    <f:simple-form id="SimpleForm1" show-border="false" show-header="false" body-padding="10" width="300">
+                        <f:items>
+                            <f:hidden-field id="hfFormID"></f:hidden-field>
+                            <f:text-box id="tbxFormUserName" label="姓名" show-red-star="true" required="true"></f:text-box>
+                            <f:radio-button-list id="rblFormGender" label="性别" show-red-star="true" required="true">
+                                <f:radio-item text="男" value="1"></f:radio-item>
+                                <f:radio-item text="女" value="0"></f:radio-item>
+                            </f:radio-button-list>
+                            <f:number-box id="nbFormEntranceYear" label="入学年份" no-decimal="true" no-negative="true" min-value="2000"
+                                max-value="2025" show-red-star="true" required="true"></f:number-box>
+                            <f:date-picker id="dpFormEntranceDate" label="入学日期" show-red-star="true" required="true"></f:date-picker>
+                            <f:check-box id="cbFormAtSchool" label="是否在校"></f:check-box>
+                            <f:drop-down-list id="ddlFormMajor" label="所学专业" show-red-star="true" required="true" auto-select-first-item="false">
+                                <f:list-item text="材料科学与工程系" value="材料科学与工程系"></f:list-item>
+                                <f:list-item text="化学系" value="化学系"></f:list-item>
+                                <f:list-item text="数学系" value="数学系"></f:list-item>
+                                <f:list-item text="物理系" value="物理系"></f:list-item>
+                                <f:list-item text="自动化系" value="自动化系"></f:list-item>
+                                <f:list-item text="计算机科学与工程系" value="计算机科学与工程系"></f:list-item>
+                            </f:drop-down-list>
+                        </f:items>
+                        <f:toolbars>
+                            <f:toolbar position="Bottom">
+                                <f:items>
+                                    <f:button id="btnNew" icon="Add" click-handler="onNewButtonClick"></f:button>
+                                    <f:button id="btnDelete" enabled="false" icon="Delete" confirm-text="确定删除当前数据？" on-click="btnDelete_Click"></f:button>
+                                    <f:toolbar-fill></f:toolbar-fill>
+                                    <f:button id="btnSave" icon="SystemSave" text="保存数据（新增）" validate-forms="SimpleForm1" on-click="btnSave_Click"></f:button>
+                                </f:items>
+                            </f:toolbar>
+                        </f:toolbars>
+                    </f:simple-form>
+                </f:items>
+            </f:panel>
+
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/res/js/grid.js}"></script>
+            <script>
+                // 选中表格行：用当前行数据填充右侧表单字段，并把保存按钮改成「编辑」语义
+                function onGridRowSelect(event, rowId) {
+                    var grid1 = F.ui.Grid1;
+
+                    // 启用删除按钮（未选中行时删除按钮是禁用的）
+                    F.ui.btnDelete.enable();
+
+                    // 当前行数据
+                    var rowValue = grid1.getRowValue(rowId);
+
+                    // 用当前行数据填充表单字段
+                    F.ui.hfFormID.setValue(rowId);
+                    F.ui.tbxFormUserName.setValue(rowValue['Name']);
+                    F.ui.rblFormGender.setValue(rowValue['Gender']);
+                    F.ui.nbFormEntranceYear.setValue(rowValue['EntranceYear']);
+                    F.ui.dpFormEntranceDate.setValue(rowValue['EntranceDate']);
+                    F.ui.cbFormAtSchool.setValue(rowValue['AtSchool']);
+                    F.ui.ddlFormMajor.setValue(rowValue['Major']);
+
+                    // 更新保存按钮文本
+                    F.ui.btnSave.setText('保存数据（编辑）');
+                }
+
+                // 点击「新增」按钮：清空表单与表格选中行，回到新增状态
+                function onNewButtonClick(event) {
+                    // 重置表单字段（隐藏字段里的行标识也一并清空）
+                    F.ui.SimpleForm1.reset();
+                    // 清空表格选中行
+                    F.ui.Grid1.clearSelection();
+                    // 禁用删除按钮
+                    F.ui.btnDelete.disable();
+
+                    // 更新保存按钮文本
+                    F.ui.btnSave.setText('保存数据（新增）');
+                }
+
+            </script>
         </th:block>
     </body>
 
