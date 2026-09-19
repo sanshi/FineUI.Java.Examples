@@ -22,7 +22,7 @@ mvn package
 mvn spring-boot:run
 ```
 
-启动后打开 **http://localhost:8080/** —— 端口来自 `src/main/resources/application.properties` 里的 `server.port=8080`。
+启动后浏览器打开 <http://localhost:8080/>（端口由 `src/main/resources/application.properties` 的 `server.port` 决定）。
 
 也可以先打包再以独立进程运行：
 
