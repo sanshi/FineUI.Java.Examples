@@ -27,7 +27,7 @@ public class LongPrecision extends PageBase {
         if (!isPostBack()) {
             List<Map<String, Object>> data = getSimpleData();
 
-            // 表格一：默认配置（全局配置项 fineui.grid.convert-long-to-string 为 true），长整型自动转字符串
+            // 表格一：默认配置（全局配置项 fineui.grid-convert-long-to-string 为 true），长整型自动转字符串
             Grid1.setDataSource(data);
             Grid1.dataBind();
 
