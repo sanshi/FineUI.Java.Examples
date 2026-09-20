@@ -4,10 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- 继承 spring-boot-starter-parent 拿依赖版本管理。应用工程直接跑在 FineUI.Java 支持区间的
+         上沿（Boot 4.1.x）；tomcat.version 覆盖托管值 11.0.24，消掉 CVE-2026-65182 等已知漏洞。 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.5</version>
+        <version>4.1.1</version>
         <relativePath/>
     </parent>
 
@@ -21,6 +23,8 @@
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <fineui.version>16.0.0-beta.2</fineui.version>
+        <!-- 覆盖 Boot 4.1.1 托管的 Tomcat 11.0.24：消掉 CVE-2026-65182 等已知漏洞（同 minor patch 级替换） -->
+        <tomcat.version>11.0.26</tomcat.version>
     </properties>
 
     <dependencies>
@@ -51,10 +55,12 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- 测试：点击闭环冒烟（examples 不卡覆盖率门槛，仅作端到端装配回归） -->
+        <!-- 测试：点击闭环冒烟（examples 不卡覆盖率门槛，仅作端到端装配回归）。
+             Boot 4 起 Web MVC 测试基建拆成独立 starter（含 @AutoConfigureMockMvc 的新包名），
+             它会传递带入 starter-test，无需再单列。 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
