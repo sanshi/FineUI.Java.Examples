@@ -110,7 +110,7 @@ public class Index extends PageBase {
         // 而且模板属性里的 __xxx__ 会被 Thymeleaf 当成预处理语法吃掉，占位符根本留不住。
         if (menuTextCopyright != null) {
             HttpServletRequest req = currentRequest();
-            String logoUrl = (req == null ? "" : req.getContextPath()) + "/res/images/newlogo/fineui.png";
+            String logoUrl = (req == null ? "" : req.getContextPath()) + "/res/images/logo/fineui.png";
             menuTextCopyright.setTextRawHtml(new RawHtml(
                     "<div class='copyright'>"
                             + "<div class='version'><a target='_blank' href='http://fineui.com/'><img src='" + logoUrl + "' alt='logo'/></a>"
