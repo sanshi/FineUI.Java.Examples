@@ -1658,6 +1658,8 @@
 			</TreeNode>
 			<TreeNode Text="数字格式化字符串（尾零省略）" NavigateUrl="/grid-other/grid-number-trailing-zero" Version="13.1">
 			</TreeNode>
+			<TreeNode Text="长整型精度（主键为BIGINT）" NavigateUrl="/grid-other/long-precision">
+			</TreeNode>
 		</TreeNode>
 	</TreeNode>
 	<TreeNode Text="导航" IconFont="_Globe">

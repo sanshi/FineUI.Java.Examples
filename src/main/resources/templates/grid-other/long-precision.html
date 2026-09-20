@@ -7,7 +7,7 @@
 
     <body>
         <th:block layout:fragment="body">
-            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="默认配置（全局配置项 fineui.grid.convert-long-to-string 为 true）：Id 完整" data-id-field="Id" data-text-field="Name">
                 <f:columns>
                     <f:row-number-field></f:row-number-field>
                     <f:render-field data-field="Id" width="200" header-text="Id"></f:render-field>
@@ -20,7 +20,21 @@
                 </f:columns>
             </f:grid>
             <br />
-            <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+            <f:grid id="Grid2" convert-long-to-string="false" is-fluid="true" show-border="true" show-header="true" title="表格属性 convert-long-to-string 设为 false（关闭转换）：Id 被 JavaScript 改写" data-id-field="Id" data-text-field="Name">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field data-field="Id" width="200" header-text="Id"></f:render-field>
+                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
+                    <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
+                        min-width="150"></f:render-field>
+                </f:columns>
+            </f:grid>
+            <br />
+            <br />
+            注：两个表格绑定的是同一份数据，Id 在数据库中的实际值是 21956392701267968（17 位，超过 JavaScript 能精确表示的整数范围）。请对比两个表格的 Id 列。
 
         </th:block>
         <th:block layout:fragment="script">
