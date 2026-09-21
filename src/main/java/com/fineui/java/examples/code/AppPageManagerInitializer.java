@@ -1,5 +1,6 @@
 package com.fineui.java.examples.code;
 
+import com.fineui.java.core.BuildConstants;
 import com.fineui.java.core.PageManager;
 import com.fineui.java.web.FineUIPageManagerInitializer;
 import jakarta.servlet.http.Cookie;
@@ -14,10 +15,11 @@ import org.springframework.stereotype.Component;
  * 下次请求本类即读到新值。作为 Spring {@code @Component}，它自动覆盖框架的空默认实现。
  *
  * <pre>
- *   Cookie        对应配置
- *   Theme         主题（如 pure_black；default 为内置默认，可不设）
- *   Language      语言（zh_CN / zh_TW / en）
- *   DisplayMode   显示模式（normal / compact / large）
+ *   Cookie             对应配置
+ *   Theme              主题（如 pure_black；default 为内置默认，可不设）
+ *   Language           语言（zh_CN / zh_TW / en）
+ *   DisplayMode        显示模式（normal / compact / large）
+ *   ShowOnlyCommunity  仅显示社区版示例（true 时禁用企业版特性：全局动画 / 移动自适应）
  * </pre>
  */
 @Component
@@ -38,6 +40,13 @@ public class AppPageManagerInitializer implements FineUIPageManagerInitializer {
         String displayMode = cookie(request, "DisplayMode");
         if (displayMode != null && !displayMode.isEmpty()) {
             pm.displayMode(displayMode);
+        }
+
+        // 1. 仅显示社区版示例，2. 社区版——两种情况都要禁用企业版特性（全局动画 / 移动自适应）
+        boolean showOnlyCommunity = "true".equalsIgnoreCase(cookie(request, "ShowOnlyCommunity"));
+        if (showOnlyCommunity || BuildConstants.IS_COMMUNITY_EDITION) {
+            pm.enableAnimation(false);
+            pm.mobileAdaption(false);
         }
     }
 
