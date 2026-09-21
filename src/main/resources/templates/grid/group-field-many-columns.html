@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 多表头（大量列，列线对齐）</title>
+        <meta name="sourcefiles" content="class:com.fineui.java.examples.code.GroupFieldManyColumnsGridData" />
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <!-- 列结构是 5 个锁定列 + 12 个月 ×（发货 18 列 + 开票 17 列）的规整循环（共 425 个叶子列），
+                 不在模板里逐列声明，由页面类 GroupFieldManyColumns 用代码生成；这里只声明序号列。 -->
+            <f:grid id="Grid1" is-fluid="true" is-view-port="true" show-border="true" show-header="true" title="多级分组表头 + 大量列（约 425 列，验证表头/表体列线对齐）"
+                data-id-field="Id" allow-column-locking="true" enable-column-lines="true">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                </f:columns>
+            </f:grid>
+        </th:block>
+    </body>
+
+</html>
