@@ -1,7 +1,7 @@
 package com.fineui.java.examples.datamodel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
+import tools.jackson.core.type.TypeReference;
 import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.RawHtml;

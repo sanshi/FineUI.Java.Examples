@@ -1,6 +1,6 @@
 package com.fineui.java.examples.datamodel;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
 import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.RawHtml;

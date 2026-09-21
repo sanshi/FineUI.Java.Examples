@@ -1,6 +1,6 @@
 package com.fineui.java.examples.thirdparty;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
 import com.fineui.java.examples.code.Json;
 import com.fineui.java.examples.code.PageBase;
 

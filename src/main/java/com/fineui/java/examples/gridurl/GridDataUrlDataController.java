@@ -1,7 +1,8 @@
 package com.fineui.java.examples.gridurl;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 import com.fineui.java.examples.code.StudentGridData;
 import com.fineui.java.examples.code.StudentGridData2;
 import com.fineui.java.examples.gridfilter.FilterMatchers;
@@ -31,7 +32,7 @@ public class GridDataUrlDataController {
     private static final String[] BASIC_FIELDS = {"Id", "Name", "Gender", "EntranceYear", "AtSchool", "Major", "Group"};
     private static final String[] SUMMARY_FIELDS = {"Id", "Name", "Gender", "EntranceYear", "AtSchool", "Major", "Fee", "ExtraFee"};
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = JsonMapper.builder().build();
 
     // 基础学生数据源：data2=true → GetDataTable2（22 行，陈萍萍…）；否则 GetDataTable（12 行，张萍萍…）。
     private static List<Map<String, Object>> basicSource(Boolean data2) {

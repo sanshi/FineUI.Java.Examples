@@ -1,7 +1,7 @@
 package com.fineui.java.examples.grideditor;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.Grid;
@@ -140,9 +140,8 @@ public class Dynamic extends PageBase {
         String ydStr = ydObj == null ? "" : String.valueOf(ydObj);
         if (!ydStr.isEmpty()) {
             JsonNode node = Json.parse(ydStr);
-            Iterator<String> names = node.fieldNames();
-            while (names.hasNext()) {
-                String n = names.next();
+            // Jackson 3 把取字段名的入口改成了 propertyNames()（旧的 fieldNames() 已删除）
+            for (String n : node.propertyNames()) {
                 yearData.put(n, node.get(n));
             }
         }

@@ -1,6 +1,6 @@
 package com.fineui.java.examples.gridinput;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.databind.JsonNode;
 
 /** 编辑框示例共用：把客户端收集的「每行输入值」数组渲染成结果表格 HTML（供 notify 弹出）。 */
 final class GridInputSupport {

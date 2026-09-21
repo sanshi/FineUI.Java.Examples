@@ -1,7 +1,7 @@
 package com.fineui.java.examples.web;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 import com.fineui.java.examples.code.StudentGridData;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;

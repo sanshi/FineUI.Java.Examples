@@ -1,24 +1,21 @@
 package com.fineui.java.examples.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
-/** 示例共用：把自定义事件回带的 JSON 字符串参数解析成 {@code JsonNode}（供 {@code Page_CustomEvent} 读取字段）。 */
+/**
+ * 示例共用：把自定义事件回带的 JSON 字符串参数解析成 {@code JsonNode}（供 {@code Page_CustomEvent} 读取字段）。
+ *
+ * <p>用的是 Boot 4 应用自带的 Jackson 3（{@code tools.jackson}），所以 pom 里不需要声明任何 Jackson 依赖。
+ * java.time（LocalDate / LocalDateTime 等）由 Jackson 3 自带支持、默认按 ISO 字符串输出，
+ * 不用再注册什么模块——这正是应用侧该走的路；FineUI 库内部的 JSON 收敛固定在 Jackson 2，
+ * 那是库自己的实现细节，与应用代码无关。
+ */
 public final class Json {
 
-    private static final ObjectMapper MAPPER = createMapper();
-
-    private static ObjectMapper createMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        // 注册 Java 8 时间模块：LocalDate/LocalDateTime 等可被序列化（ISO 字符串），
-        // 否则含时间字段的对象（如 UICompareModel）encode 会抛 InvalidDefinitionException。
-        mapper.registerModule(new JavaTimeModule());
-        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        return mapper;
-    }
+    private static final ObjectMapper MAPPER = JsonMapper.builder().build();
 
     private Json() {
     }
@@ -26,8 +23,8 @@ public final class Json {
     public static JsonNode parse(String json) {
         try {
             return MAPPER.readTree(json == null || json.isEmpty() ? "{}" : json);
-        } catch (Exception e) {
-            throw new RuntimeException("解析自定义事件 JSON 参数失败: " + json, e);
+        } catch (RuntimeException e) {
+            throw new IllegalArgumentException("解析自定义事件 JSON 参数失败: " + json, e);
         }
     }
 
@@ -39,8 +36,8 @@ public final class Json {
     public static <T> T parse(String json, TypeReference<T> type) {
         try {
             return MAPPER.readValue(json, type);
-        } catch (Exception e) {
-            throw new RuntimeException("解析自定义事件 JSON 参数失败: " + json, e);
+        } catch (RuntimeException e) {
+            throw new IllegalArgumentException("解析自定义事件 JSON 参数失败: " + json, e);
         }
     }
 
@@ -49,12 +46,7 @@ public final class Json {
      * 典型用法：{@code labResult.setText("用户修改的数据：<pre>" + Json.encode(grid.getModifiedData()) + "</pre>")}。
      */
     public static String encode(Object data) {
-        String json;
-        try {
-            json = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(data);
-        } catch (Exception e) {
-            throw new RuntimeException("序列化 JSON 失败", e);
-        }
+        String json = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(data);
         return json.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
     }
 }
