@@ -20,8 +20,8 @@
 
         </th:block>
         <th:block layout:fragment="script">
-            <!--/* 本内联脚本带 nonce 才被放行；脚本内部尝试 eval / new Function 则会被 CSP 拦截抛错（证明策略生效） */-->
-            <script th:attr="nonce=${page.cspScriptsNonceValue}">
+            <!--/* 框架为模板内联脚本自动添加当前页面 nonce；脚本中的 eval / new Function 仍会被 CSP 拦截。 */-->
+            <script>
                 (function() {
                     var list = document.getElementById('evalResult');
 
