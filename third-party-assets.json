@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "auditStatus": "complete",
+  "auditStatus": "pending",
   "targetPath": "src/main/resources/static/res",
-  "resourceTreeSha256": "262470bb53ce416f38154ac2f9726e27d56bfd3fac1b1df20a9e2b412ce06197",
+  "resourceTreeSha256": "9055e69b0e52315a9e085c48e320d4ef0e3f189184da5c5df90f69dc4cf3b66a",
   "thirdPartyAssets": [
     {
       "name": "FamFamFam Silk Icons",
@@ -185,5 +185,10 @@
       "description": "除第三方清单明确列出的路径外，其余内容为 FineUI 项目维护的代码、样式、主题、语言和品牌资源。"
     }
   ],
-  "unresolvedAssets": []
+  "unresolvedAssets": [
+    {
+      "retainedPath": "src/main/resources/static/res",
+      "reason": "完整资源树与已审计基线不一致，需要确认新增、删除或修改的资源。"
+    }
+  ]
 }
