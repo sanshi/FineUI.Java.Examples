@@ -52,6 +52,37 @@ public class DataChange extends PageBase {
         Grid1.commitChanges();
     }
 
+    public void btnUpdateCells_Click(Object sender, EventArgs e) {
+        // 示例数据的稳定 ID 为 101；两次改值按入队顺序执行，仍只形成一条行修改记录。
+        Grid1.updateCellValue("101", "Name", "服务端修改");
+        Grid1.updateCellValue("101", Map.of("Gender", 0, "Major", "服务端专业"));
+    }
+
+    public void btnAddRecord_Click(Object sender, EventArgs e) {
+        // 显式 ID 每次生成，避免重复点击产生重号；新增只进入客户端编辑状态。
+        Map<String, Object> record = Map.of(
+                "id", "server-" + java.util.UUID.randomUUID(),
+                "values", Map.of("Name", "服务端新增", "Gender", 1, "Major", "新专业"));
+        Grid1.addNewRecord(record, 1, "Name");
+    }
+
+    public void btnAppendRecord_Click(Object sender, EventArgs e) {
+        Grid1.addNewRecord(Map.of("Name", "末尾新增", "Gender", 0, "Major", "新专业"), true);
+    }
+
+    public void btnDeleteRow_Click(Object sender, EventArgs e) {
+        Grid1.deleteRow("101");
+    }
+
+    public void btnForceDeleteRow_Click(Object sender, EventArgs e) {
+        // 强制删除仅移除客户端行，撤销不能恢复；刷新仍可从原数据源加载。
+        Grid1.deleteRow("102", true);
+    }
+
+    public void btnDeleteSelected_Click(Object sender, EventArgs e) {
+        Grid1.deleteSelectedRows();
+    }
+
     public void btnSubmit_Click(Object sender, EventArgs e) {
         List<Map<String, Object>> source = sourceData();
 
