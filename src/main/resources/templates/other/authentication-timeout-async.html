@@ -33,22 +33,23 @@
         <th:block layout:fragment="script">
             <script>
                 function onRegisterHookClick(event) {
-                    F.beforeAjaxSuccess(function(data) {
-                        // 通过返回的字符串，判断当前是否登陆超时，执行跳转
-                        if (data.indexOf('window.location.href=') === 0) {
+                    F.beforeAjaxSuccess(function(data, textStatus, xhr, command) {
+                        // 本例用服务端重定向模拟登录超时，直接读取结构化 URL。
+                        if (command && command.type === 'page.redirect') {
+                            var url = command.url;
                             // F.confirm是异步函数，直接返回
                             F.confirm({
                                 message: '登陆超时，是否跳转到首页？',
                                 ok: function() {
-                                    // 重新执行返回的脚本
-                                    new Function(data)();
+                                    // 确认后直接导航，不把响应文本当作代码执行。
+                                    window.location.assign(url);
                                 },
                                 cancel: function() {
                                     // 继续留在当前页面，啥也不做
                                 }
                             });
 
-                            // 需要显式的返回 false，来阻止执行返回的脚本
+                            // 确认框是异步的，先阻止框架自动跳转，等待用户选择。
                             return false;
                         }
                     });

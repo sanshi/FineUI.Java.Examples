@@ -33,12 +33,12 @@
         <th:block layout:fragment="script">
             <script>
                 function onRegisterHookClick(event) {
-                    F.beforeAjaxSuccess(function(data) {
-                        // 通过返回的字符串，判断当前是否登陆超时，执行跳转
-                        if (data.indexOf('window.location.href=') === 0) {
+                    F.beforeAjaxSuccess(function(data, textStatus, xhr, command) {
+                        // 本例用服务端重定向模拟登录超时，不需要解析响应脚本文本。
+                        if (command && command.type === 'page.redirect') {
                             if (!window.confirm('登陆超时，是否跳转到首页？')) {
                                 // 继续留在当前页面
-                                // 需要显式的返回 false，来阻止执行返回的脚本
+                                // 显式返回 false，阻止框架自动跳转。
                                 return false;
                             }
                         }
