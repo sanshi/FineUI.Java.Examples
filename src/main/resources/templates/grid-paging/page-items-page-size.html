@@ -9,12 +9,12 @@
         <th:block layout:fragment="body">
 
             <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（内存分页）" height="350" data-id-field="Id" data-text-field="Name"
-                enable-check-box-select="true" allow-paging="true" page-size="5">
+                enable-check-box-select="true" allow-paging="true" allow-sorting="true" page-size="5">
                 <f:columns>
                     <f:row-number-field></f:row-number-field>
                     <f:render-field header-text="姓名" data-field="Name"></f:render-field>
                     <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
-                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
+                    <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int" column-id="Year" sort-field="EntranceYear"></f:render-field>
                     <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
                     <f:render-field header-text="所学专业" data-field="Major" renderer-function="renderMajor" expand-unused-space="true"
                         min-width="150"></f:render-field>
@@ -36,6 +36,8 @@
             </f:grid>
             <br />
             <f:button text="选中了哪些行" click-handler="onNotifySelectedRowsClick"></f:button>
+            <f:button id="btnServerPage" text="服务端切到第二页" on-click="btnServerPage_Click"></f:button>
+            <f:button id="btnServerSort" text="服务端按入学年份降序并回首页" on-click="btnServerSort_Click"></f:button>
 
         </th:block>
         <th:block layout:fragment="script">

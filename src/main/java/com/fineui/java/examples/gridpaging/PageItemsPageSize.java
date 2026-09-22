@@ -15,6 +15,15 @@ public class PageItemsPageSize extends PageBase {
 
     Grid Grid1;
 
+    public void btnServerPage_Click(Object sender, EventArgs e) {
+        Grid1.loadPageData(1);
+    }
+
+    public void btnServerSort_Click(Object sender, EventArgs e) {
+        Grid1.loadSortData("EntranceYear", "DESC");
+        Grid1.loadPageData(0);
+    }
+
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
             Grid1.setDataSource(StudentGridData2.rows());
