@@ -47,6 +47,11 @@ public class DataChange extends PageBase {
         labResult.setText("未保存的修改记录数：" + Grid1.getModifiedData().size());
     }
 
+    public void btnCommitChanges_Click(Object sender, EventArgs e) {
+        // 只接受当前客户端编辑结果；故意不写入会话，以便刷新核对数据源仍未变化。
+        Grid1.commitChanges();
+    }
+
     public void btnSubmit_Click(Object sender, EventArgs e) {
         List<Map<String, Object>> source = sourceData();
 
