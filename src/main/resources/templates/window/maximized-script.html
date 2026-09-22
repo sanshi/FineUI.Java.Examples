@@ -27,11 +27,38 @@
             <f:window id="Window1" width="650" height="300" icon-font="_Tag" title="窗体" enable-collapse="false" enable-resize="true" is-modal="false"
                 auto-scroll="true" body-padding="10" enable-maximize="true"
                 content="<p><a href='http://tech.163.com/special/jobsdead/' target='_blank'><b>乔布斯</b></a></p><p>乔布斯于1955年2月24日出生，苹果创始人之一。今年8月苹果超越埃克森美孚成为全球最大市值企业，截止上季度持有现金达到762亿美金，甚至超过了美国政府国库存款。</p><p>遗憾的是，苹果的取得巨大成功还是无法给乔布斯一个健康的身体，乔布斯2003年被发现患有胰脏癌，随后又查出肝癌，危在旦夕的乔布斯在经历了8年的抗癌斗争、3次病休、若干次手术后，于2011年8月25日正式宣布从CEO位置辞职。2011年10月6日，乔布斯在苹果发布iPhone 4S后的第二天与世长辞。</p><br /><br /><strong>注意如下两个示例的差别：</strong><ul><li>窗体（最大化，Maximized）：还原窗体大小，关闭窗体，点击[显示窗体（使用初始值）]按钮，窗体默认最大化。</li><li>窗体（最大化，注册初始最大化脚本）：还原窗体大小，关闭窗体，点击[显示窗体（使用初始值）]按钮，窗体默认650px*300px。</li></ul>">
+                <f:toolbars>
+                    <f:toolbar>
+                        <f:items>
+                            <f:button id="btnServerMaximize" text="服务端最大化" on-click="btnServerMaximize_Click"></f:button>
+                            <f:button id="btnServerRestore" text="服务端还原" on-click="btnServerRestore_Click"></f:button>
+                            <f:button id="btnServerClose" text="服务端关闭" on-click="btnServerClose_Click"></f:button>
+                            <f:check-box id="cbBlockClose" text="阻止关闭"></f:check-box>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:listeners>
+                    <f:listener event="beforeclose" handler="onBeforeServerWindowClose"></f:listener>
+                    <f:listener event="close" handler="onServerWindowClose"></f:listener>
+                </f:listeners>
             </f:window>
+            <f:label id="labWindowEvent"></f:label>
 
         </th:block>
         <th:block layout:fragment="script">
             <script>
+                // 关闭命令遵守 beforeclose 取消；close 回调在窗体隐藏完成后才执行。
+                function onBeforeServerWindowClose(event) {
+                    if (F.ui.cbBlockClose.getValue()) {
+                        F.ui.labWindowEvent.setText('关闭已取消');
+                        return false;
+                    }
+                }
+
+                function onServerWindowClose(event) {
+                    F.ui.labWindowEvent.setText('窗体已关闭');
+                }
+
                 F.ready(function() {
 
                     F.ui.Window1.show();

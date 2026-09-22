@@ -19,6 +19,11 @@ import java.time.format.DateTimeFormatter;
 public class ParentWindowClose extends PageBase {
 
     Label labResult;
+    com.fineui.java.core.controls.Panel Panel1;
+
+    public void btnServerRefresh_Click(Object sender, EventArgs e) {
+        Panel1.refreshIFrame();
+    }
 
     public void Page_Load(Object sender, EventArgs e) {
         labResult.setText(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));

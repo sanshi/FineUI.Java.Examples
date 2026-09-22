@@ -14,6 +14,18 @@ public class MaximizedScript extends PageBase {
 
     com.fineui.java.core.controls.Window Window1;
 
+    public void btnServerMaximize_Click(Object sender, EventArgs e) {
+        Window1.maximize();
+    }
+
+    public void btnServerRestore_Click(Object sender, EventArgs e) {
+        Window1.restore();
+    }
+
+    public void btnServerClose_Click(Object sender, EventArgs e) {
+        Window1.close();
+    }
+
     public void Page_Load(Object sender, EventArgs e) {
     }
 }
