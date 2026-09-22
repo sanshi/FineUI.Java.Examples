@@ -37,6 +37,16 @@ public class DataChange extends PageBase {
         Grid1.dataBind();
     }
 
+    public void btnRejectChanges_Click(Object sender, EventArgs e) {
+        // 只撤销浏览器里未保存的编辑，不重绑，也不修改会话数据源。
+        Grid1.rejectChanges();
+    }
+
+    public void btnReadChanges_Click(Object sender, EventArgs e) {
+        // 再次回发读取，验证浏览器撤销后不再提交旧修改。
+        labResult.setText("未保存的修改记录数：" + Grid1.getModifiedData().size());
+    }
+
     public void btnSubmit_Click(Object sender, EventArgs e) {
         List<Map<String, Object>> source = sourceData();
 
