@@ -17,6 +17,8 @@ import com.fineui.java.examples.code.PageBase;
  */
 @FineUIPage("grid/group-field-many-columns")
 public class GroupFieldManyColumns extends PageBase {
+    // 分组内部使用混合列宽，覆盖跨列分配时的累积舍入。
+    private static final int[] LEAF_WIDTHS = {70, 100, 110, 150};
 
     // 叶子列表头文本：发货用全部 18 个，开票用前 17 个
     private static final String[] SUB_LEAF_NAMES = {
@@ -51,7 +53,7 @@ public class GroupFieldManyColumns extends PageBase {
             fhGroup.setHeaderText("发货");
             fhGroup.setTextAlign(TextAlign.Center);
             for (int i = 0; i < 18; i++) {
-                fhGroup.addColumn(leafColumn(SUB_LEAF_NAMES[i], "m" + month + "_fh_" + i));
+                fhGroup.addColumn(leafColumn(SUB_LEAF_NAMES[i], "m" + month + "_fh_" + i, i));
             }
             monthGroup.addColumn(fhGroup);
 
@@ -59,7 +61,7 @@ public class GroupFieldManyColumns extends PageBase {
             kpGroup.setHeaderText("开票");
             kpGroup.setTextAlign(TextAlign.Center);
             for (int i = 0; i < 17; i++) {
-                kpGroup.addColumn(leafColumn(SUB_LEAF_NAMES[i], "m" + month + "_kp_" + i));
+                kpGroup.addColumn(leafColumn(SUB_LEAF_NAMES[i], "m" + month + "_kp_" + i, i));
             }
             monthGroup.addColumn(kpGroup);
 
@@ -77,12 +79,12 @@ public class GroupFieldManyColumns extends PageBase {
         Grid1.addColumn(column);
     }
 
-    // 月分组下的叶子列：宽 90、右对齐
-    private static RenderField leafColumn(String headerText, String field) {
+    // 月分组下的叶子列：混合列宽、右对齐
+    private static RenderField leafColumn(String headerText, String field, int leafIndex) {
         RenderField column = new RenderField();
         column.setHeaderText(headerText);
         column.setDataField(field);
-        column.setWidth(90);
+        column.setWidth(LEAF_WIDTHS[leafIndex % LEAF_WIDTHS.length]);
         column.setTextAlign(TextAlign.Right);
         return column;
     }
