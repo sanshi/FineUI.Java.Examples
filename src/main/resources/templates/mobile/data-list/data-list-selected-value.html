@@ -17,6 +17,13 @@
                             <f:button id="btnSubmit" text="获取选中项" on-click="btnSubmit_Click"></f:button>
                         </f:items>
                     </f:toolbar>
+                    <f:toolbar id="ToolbarActions">
+                        <f:items>
+                            <f:button id="btnSetSelection" text="设置选择" on-click="btnSetSelection_Click"></f:button>
+                            <f:button id="btnClearSelection" text="清空选择" on-click="btnClearSelection_Click"></f:button>
+                            <f:button id="btnRebindSelection" text="重绑并选中" on-click="btnRebindSelection_Click"></f:button>
+                        </f:items>
+                    </f:toolbar>
                 </f:toolbars>
                 <f:items>
                     <f:data-list id="DataList1" selected-value="fr" enable-select="true" data-value-field="Id"></f:data-list>

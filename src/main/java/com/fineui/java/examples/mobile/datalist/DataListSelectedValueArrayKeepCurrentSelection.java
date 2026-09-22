@@ -26,12 +26,36 @@ public class DataListSelectedValueArrayKeepCurrentSelection extends MobilePageBa
     }
 
     private void loadData() {
+        loadData(false);
+    }
+
+    private void loadData(boolean reverse) {
         DataList1.clearData();
-        for (Map<String, Object> row : DataSourceUtil.getCountryTable()) {
+        java.util.List<Map<String, Object>> source = new java.util.ArrayList<>(DataSourceUtil.getCountryTable());
+        if (reverse) {
+            java.util.Collections.reverse(source);
+        }
+        for (Map<String, Object> row : source) {
             String iconUrl = IconHelper.resolveUrl("/res/icon/flag_" + row.get("Image") + ".png");
             DataList1.addItem(new RawHtml(DATALIST_SIMPLE_ITEM_TEMPLATE, iconUrl, row.get("Name")),
                     String.valueOf(row.get("Id")), true, false, null, null, null, false);
         }
+    }
+
+    /** 服务端设置选择，替换当前可取消的选中项。 */
+    public void btnSetSelection_Click(Object sender, EventArgs e) {
+        DataList1.setSelectedValueArray(java.util.List.of("fr", "us"));
+    }
+
+    /** 服务端清空选择。 */
+    public void btnClearSelection_Click(Object sender, EventArgs e) {
+        DataList1.setSelectedValueArray(java.util.List.of());
+    }
+
+    /** 倒序重绑同一批列表项，并选中美国。 */
+    public void btnRebindSelection_Click(Object sender, EventArgs e) {
+        loadData(true);
+        DataList1.setSelectedValue("us");
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
