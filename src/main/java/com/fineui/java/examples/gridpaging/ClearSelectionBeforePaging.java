@@ -15,6 +15,22 @@ import com.fineui.java.examples.code.StudentGridData2;
 public class ClearSelectionBeforePaging extends PageBase {
 
     Grid Grid1;
+    com.fineui.java.core.controls.Label labServerSelection;
+
+    public void btnSelectCell_Click(Object sender, EventArgs e) {
+        // 106 行在第二页；有序命令选择的是当前客户端渲染页中的单元格。
+        Grid1.selectCell("106", "Name");
+    }
+
+    public void btnClearSelections_Click(Object sender, EventArgs e) {
+        Grid1.clearSelections();
+    }
+
+    public void btnReadSelection_Click(Object sender, EventArgs e) {
+        String[] cell = Grid1.getSelectedCell();
+        String cellText = cell == null || cell.length == 0 ? "空" : String.join(",", cell);
+        labServerSelection.setText("选中行数：" + Grid1.getSelectedRowIdArray().length + "；单元格：" + cellText);
+    }
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {

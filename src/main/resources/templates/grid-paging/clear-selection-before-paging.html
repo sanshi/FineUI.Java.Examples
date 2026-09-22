@@ -13,7 +13,7 @@
                 keep-paged-selection="true">
                 <f:columns>
                     <f:row-number-field></f:row-number-field>
-                    <f:render-field header-text="姓名" data-field="Name"></f:render-field>
+                    <f:render-field header-text="姓名" data-field="Name" column-id="Name"></f:render-field>
                     <f:render-field header-text="性别" data-field="Gender" field-type="Int" renderer-function="renderGender"></f:render-field>
                     <f:render-field header-text="入学年份" data-field="EntranceYear" field-type="Int"></f:render-field>
                     <f:render-check-field header-text="是否在校" data-field="AtSchool" render-as-static-field="true"></f:render-check-field>
@@ -24,6 +24,10 @@
                 </f:columns>
             </f:grid>
             <br />
+            <f:button id="btnSelectCell" text="选择第二页姓名单元格" on-click="btnSelectCell_Click"></f:button>
+            <f:button id="btnClearSelections" text="服务端清空全部选择" on-click="btnClearSelections_Click"></f:button>
+            <f:button id="btnReadSelection" text="服务端读取选择" on-click="btnReadSelection_Click"></f:button>
+            <f:label id="labServerSelection"></f:label>
             <f:button text="选中了哪些行" click-handler="onShowSelectedRowIdsClick"></f:button>
             <br /><br />
             注意设置属性：
