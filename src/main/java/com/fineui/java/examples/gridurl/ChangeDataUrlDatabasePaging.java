@@ -36,6 +36,8 @@ public class ChangeDataUrlDatabasePaging extends PageBase {
 
     public void Button2_Click(Object sender, EventArgs e) {
         loadData();
+        // 页码与地址属性先更新，再发起远程请求，确保请求从新数据源的第一页开始。
+        Grid1.loadDataUrl(Grid1.getDataUrl());
     }
 
     /** 读回带的自定义属性 data-source-key（记住当前处于哪个数据源）。 */

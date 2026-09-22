@@ -34,6 +34,12 @@ public class ChangeDataUrl extends PageBase {
 
     public void Button2_Click(Object sender, EventArgs e) {
         loadData();
+        // 属性保存地址，命令负责真实取数；仅修改 dataUrl 不会重新加载表格。
+        Grid1.loadDataUrl(Grid1.getDataUrl());
+    }
+
+    public void btnReload_Click(Object sender, EventArgs e) {
+        Grid1.loadDataUrl();
     }
 
     /** 读回带的自定义属性 data-source-key（记住当前处于哪个数据源）。 */
