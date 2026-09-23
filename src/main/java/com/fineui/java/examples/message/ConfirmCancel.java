@@ -3,6 +3,7 @@ package com.fineui.java.examples.message;
 import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.MessageBoxIcon;
 import com.fineui.java.examples.code.PageBase;
 
 /**
@@ -25,10 +26,19 @@ public class ConfirmCancel extends PageBase {
             showNotify("执行了操作三！");
         } else if ("Operation3_cancel".equals(name)) {
             showNotify("取消执行操作三！");
+        } else if ("Operation4_ok".equals(name)) {
+            showNotify("服务端确认：已执行操作四！");
+        } else if ("Operation4_cancel".equals(name)) {
+            showNotify("服务端确认：已取消操作四！");
         }
     }
 
     public void btnOperation1_Click(Object sender, EventArgs e) {
         showNotify("执行了操作一！");
+    }
+
+    public void btnOperation4_Click(Object sender, EventArgs e) {
+        showConfirm("确认执行操作四？", "服务端确认框", MessageBoxIcon.Question,
+                "onOperation4Confirmed", "onOperation4Cancelled");
     }
 }

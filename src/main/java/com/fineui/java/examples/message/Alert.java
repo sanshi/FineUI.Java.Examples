@@ -1,5 +1,6 @@
 package com.fineui.java.examples.message;
 
+import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.MessageBoxIcon;
@@ -41,6 +42,17 @@ public class Alert extends PageBase {
         Integer maxWidth = intOrNull(nbMaxWidth.getValue());
 
         showAlert(tbxMessage.getValue(), tbxTitle.getValue(), icon, target, id, enableClose, width, minWidth, maxWidth);
+    }
+
+    public void btnCallback_Click(Object sender, EventArgs e) {
+        showAlert("保存完成，点确定后通知服务端。", "具名回调", MessageBoxIcon.Success,
+                "onAlertAcknowledged");
+    }
+
+    public void Page_CustomEvent(Object sender, CustomEventArgs e) {
+        if ("AlertAcknowledged".equals(e.getEventName())) {
+            showNotify("消息框确定回调已执行");
+        }
     }
 
     /** 单选值（如 "Warning"）→ 消息框图标枚举；无法识别回落无图标。 */

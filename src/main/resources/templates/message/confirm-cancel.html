@@ -15,6 +15,9 @@
             <br />
             <br />
             <f:button id="btnOperation3" text="操作三（ClickHandler，点击取消按钮也回发）" click-handler="onOperation3Click"></f:button>
+            <br />
+            <br />
+            <f:button id="btnOperation4" text="操作四（服务端弹框，具名双回调）" on-click="btnOperation4_Click"></f:button>
 
         </th:block>
 
@@ -44,6 +47,14 @@
                             F.customEvent('Operation3_cancel');
                         }
                     });
+                }
+
+                function onOperation4Confirmed() {
+                    F.customEvent('Operation4_ok');
+                }
+
+                function onOperation4Cancelled() {
+                    F.customEvent('Operation4_cancel');
                 }
 
             </script>

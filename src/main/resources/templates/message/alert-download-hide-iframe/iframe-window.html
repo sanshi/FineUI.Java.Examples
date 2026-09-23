@@ -16,7 +16,16 @@
         <th:block layout:fragment="body">
 
             <f:button id="btnOperation" text="操作（先弹出提示框，点击确定后先关闭弹出窗体，然后下载文件）" on-click="btnOperation_Click"></f:button>
+            <f:button id="btnTopCallback" text="顶层确认框（回调留在子页）" on-click="btnTopCallback_Click"></f:button>
 
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onTopDialogConfirmed() {
+                    window.__topCallbackCount = (window.__topCallbackCount || 0) + 1;
+                    F.customEvent('TopDialogConfirmed');
+                }
+            </script>
         </th:block>
     </body>
 

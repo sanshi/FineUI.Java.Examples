@@ -1,5 +1,6 @@
 package com.fineui.java.examples.message;
 
+import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.MessageBoxIcon;
@@ -53,6 +54,19 @@ public class Prompt extends PageBase {
                 tbxID.getValue(), cbxEnableClose.isChecked(),
                 intOrNull(nbWidth.getValue()), intOrNull(nbMinWidth.getValue()), intOrNull(nbMaxWidth.getValue()),
                 "promptOKCallback");
+    }
+
+    public void btnCallback_Click(Object sender, EventArgs e) {
+        showPrompt("请输入新名称", "具名回调", MessageBoxIcon.Question,
+                "onPromptAccepted", "onPromptDismissed");
+    }
+
+    public void Page_CustomEvent(Object sender, CustomEventArgs e) {
+        if ("PromptAccepted".equals(e.getEventName())) {
+            showNotify("确定输入：" + e.getArgument());
+        } else if ("PromptDismissed".equals(e.getEventName())) {
+            showNotify("取消输入：" + e.getArgument());
+        }
     }
 
     /** 单选值（如 "Warning"）→ 消息框图标枚举；无法识别回落无图标。 */

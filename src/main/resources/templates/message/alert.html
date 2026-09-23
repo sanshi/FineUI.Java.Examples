@@ -47,11 +47,20 @@
                     <f:toolbar position="Bottom" toolbar-align="Right">
                         <f:items>
                             <f:button id="btnHello" text="点击弹出对话框" validate-forms="SimpleForm1" on-click="btnSubmit_Click"></f:button>
+                            <f:button id="btnCallback" text="服务端弹框并回调" on-click="btnCallback_Click"></f:button>
                         </f:items>
                     </f:toolbar>
                 </f:toolbars>
             </f:form>
 
+        </th:block>
+
+        <th:block layout:fragment="script">
+            <script>
+                function onAlertAcknowledged() {
+                    F.customEvent('AlertAcknowledged');
+                }
+            </script>
         </th:block>
     </body>
 

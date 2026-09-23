@@ -57,6 +57,7 @@
                     <f:toolbar position="Bottom" toolbar-align="Right">
                         <f:items>
                             <f:button id="btnHello" text="点击弹出输入对话框" validate-forms="SimpleForm1" on-click="btnSubmit_Click"></f:button>
+                            <f:button id="btnCallback" text="服务端输入框（确定与取消回调）" on-click="btnCallback_Click"></f:button>
                         </f:items>
                     </f:toolbar>
                 </f:toolbars>
@@ -69,6 +70,15 @@
                 function promptOKCallback(message) {
                     var encodedMessage = F.htmlEncode(message).replace(/\r\n/ig, '\n').replace(/\r/ig, '\n').replace(/\n/ig, '<br/>');
                     F.notify(F.rawHtml("你输入的住址是：" + encodedMessage));
+                }
+
+                function onPromptAccepted(value) {
+                    F.customEvent('PromptAccepted', value);
+                }
+
+                function onPromptDismissed(value) {
+                    window.__promptCancelCount = (window.__promptCancelCount || 0) + 1;
+                    F.customEvent('PromptDismissed', value);
                 }
 
                 function onMultiLineChange(event) {
