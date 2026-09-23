@@ -142,72 +142,7 @@
         </th:block>
         <th:block layout:fragment="script">
             <script th:src="@{/res/js/grid.js}"></script>
-            <script>
-                function renderCardWithAvatar(params) {
-                    var rowId = params.rowData.id;
-                    var rowAttrs = params.rowData.attrs;
-                    var rowValues = params.rowData.values;
-
-                    var badgeType, badgeText;
-                    switch (rowAttrs["Status"]) {
-                        case 1:
-                            badgeType = "success";
-                            badgeText = "优秀";
-                            break;
-                        case 2:
-                            badgeType = "processing";
-                            badgeText = "良好";
-                            break;
-                        case 3:
-                            badgeType = "warning";
-                            badgeText = "补考";
-                            break;
-                        case 4:
-                            badgeType = "error";
-                            badgeText = "重修";
-                            break;
-                    }
-
-                    var badgeEl = $("<div>").addClass("f-badge");
-                    if (badgeType === "success") {
-                        badgeEl.addClass("f-badge-animation-processing");
-                    } else if (badgeType === "error") {
-                        badgeEl.addClass("f-badge-animation-fade");
-                    }
-
-                    var avatarEl = $("<div>").addClass("avatar")
-                        .append($("<img>").attr("src", F.resolveUrl(rowAttrs["Avatar"])))
-                        .append($("<div>").addClass("f-badge-ct f-badge-type-" + badgeType).append(badgeEl));
-
-                    function createScoreEl(scoreValue, scoreType) {
-                        var scoreTitle = scoreType === "chinese" ? "语文" : (scoreType === "math" ? "数学" : "总分");
-                        return $("<div>").addClass("score-item").addClass(scoreType.toLowerCase())
-                            .append($("<span>").addClass("score-value").text(scoreValue))
-                            .append($("<span>").addClass("score-title").text(scoreTitle));
-                    }
-
-                    var userProfileEl = $("<div>").addClass("user-profile")
-                        .append(avatarEl)
-                        .append($("<div>").addClass("name").text(rowAttrs["Name"]))
-                        .append($("<div>").addClass("desc").text(rowValues["Major"] + " · " + rowAttrs["EntranceYear"] + "级" + " · " + badgeText))
-                        .append($("<div>").addClass("score")
-                            .append(createScoreEl(rowValues["ChineseScore"], "chinese"))
-                            .append(createScoreEl(rowValues["MathScore"], "math"))
-                            .append(createScoreEl(rowValues["TotalScore"], "total")));
-
-                    var userActionsEl = $("<div>").addClass("user-actions")
-                        .append($("<a>").attr("href", "#").text("查看详情"));
-
-                    return $("<div>").addClass("user-card").append(userProfileEl).append(userActionsEl);
-                }
-
-                F.ready(function() {
-                    F.ui.Grid1.el.on('click', '.user-actions a', function(event) {
-                        event.preventDefault();
-                    });
-                });
-
-            </script>
+            <script th:src="@{/res/js/gridcard.js}"></script>
         </th:block>
     </body>
 

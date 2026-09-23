@@ -48,13 +48,13 @@
                             </f:drop-down-list>
                         </f:editor>
                     </f:render-field>
-                    <f:render-field header-text="工资（整数）" column-id="Salary" data-field="Salary" field-type="Int" renderer-function="renderSalary(0)"
+                    <f:render-field header-text="工资（整数）" column-id="SalaryInteger" data-field="Salary" field-type="Int" renderer-function="renderSalary(0)"
                         text-align="Right" width="150">
                         <f:editor>
                             <f:number-box enable-commas="true" no-decimal="true" required="true"></f:number-box>
                         </f:editor>
                     </f:render-field>
-                    <f:render-field header-text="工资（两位小数）" column-id="Salary" data-field="Salary" field-type="Int" renderer-function="renderSalary(2)"
+                    <f:render-field header-text="工资（两位小数）" column-id="SalaryDecimal" data-field="Salary" field-type="Float" renderer-function="renderSalary(2)"
                         text-align="Right" width="150">
                         <f:editor>
                             <f:number-box enable-commas="true" decimal-precision="2" trim-end-zero="false" required="true"></f:number-box>
