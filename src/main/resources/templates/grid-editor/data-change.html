@@ -70,7 +70,9 @@
             <f:button id="btnReadChanges" text="读取修改记录" on-click="btnReadChanges_Click"></f:button>
             <f:button id="btnCommitChanges" text="仅确认客户端编辑" on-click="btnCommitChanges_Click"></f:button>
             <br>
+            <br>
             <f:button id="btnUpdateCells" text="服务端修改 101 行" on-click="btnUpdateCells_Click"></f:button>
+            <f:button id="btnUpdateAndCommit" text="服务端修改并确认" on-click="btnUpdateAndCommit_Click"></f:button>
             <f:button id="btnAddRecord" text="服务端插入第二行" on-click="btnAddRecord_Click"></f:button>
             <f:button id="btnAppendRecord" text="服务端追加末行" on-click="btnAppendRecord_Click"></f:button>
             <f:button id="btnDeleteRow" text="服务端删除 101 行" on-click="btnDeleteRow_Click"></f:button>
@@ -86,6 +88,7 @@
                 <li>[保存数据]按钮默认禁用，当有数据变化时（删除行，新增行，修改单元格）启用</li>
                 <li>数据重新绑定后，重新检查[保存数据]按钮的启用状态</li>
                 <li>[仅确认客户端编辑]保留当前结果并清除修改记录，不保存数据；之后撤销以该结果为准，刷新页面仍读取原数据源</li>
+                <li>[服务端修改并确认]在一次回发中先修改单元格、再确认编辑基线；可用[读取修改记录]检查命令顺序的结果</li>
                 <li>[服务端撤销编辑]通过回发撤销未保存的修改，不重绑数据或回滚已保存的数据；撤销后可[读取修改记录]核对结果</li>
             </ul>
 

@@ -58,6 +58,12 @@ public class DataChange extends PageBase {
         Grid1.updateCellValue("101", Map.of("Gender", 0, "Major", "服务端专业"));
     }
 
+    public void btnUpdateAndCommit_Click(Object sender, EventArgs e) {
+        // 同一次响应先改值再确认编辑基线；确认不会把结果写入服务端数据源。
+        Grid1.updateCellValue("101", "Name", "服务端修改后确认");
+        Grid1.commitChanges();
+    }
+
     public void btnAddRecord_Click(Object sender, EventArgs e) {
         // 显式 ID 每次生成，避免重复点击产生重号；新增只进入客户端编辑状态。
         Map<String, Object> record = Map.of(
