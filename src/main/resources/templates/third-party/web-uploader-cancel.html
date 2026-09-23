@@ -57,9 +57,9 @@
 
                 function renderDelete(value) {
                     if (value === 'cancel') {
-                        return '<a href="javascript:;" class="thecanceluploadbutton">取消上传</a>';
+                        return '<a href="#" class="thecanceluploadbutton">取消上传</a>';
                     }
-                    return '<a class="action-btn delete" href="javascript:;"><img class="f-grid-cell-icon" src="' + F.resolveUrl('/res/icon/delete.png') +
+                    return '<a class="action-btn delete" href="#"><img class="f-grid-cell-icon" src="' + F.resolveUrl('/res/icon/delete.png') +
                         '"></a>';
                 }
 
@@ -81,7 +81,7 @@
                 F.ready(function() {
                     var grid = F.ui.Grid1;
                     grid.el.on('click', 'a.action-btn.delete', function(event) {
-                        // 删除链接是按钮型占位地址，先取消默认导航，避免执行脚本地址并触发 CSP。
+                        // 删除链接是按钮型占位地址，先取消默认导航，避免改写页面 hash。
                         event.preventDefault();
 
                         var row = grid.getRowData($(this).closest('.f-grid-row'));
