@@ -3,11 +3,11 @@ package com.fineui.java.examples.editor;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.HtmlEditor;
-import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 
 /** UMEditor 富文本编辑器（路由 {@code editor/umeditor}）：默认只读，客户端按钮切换只读；服务端获取/设置编辑器内容。 */
 @FineUIPage("editor/umeditor")
-public class UMEditor extends PageBase {
+public class UMEditor extends ThirdPartyEditorPageBase {
 
     protected HtmlEditor HtmlEditor1;
 

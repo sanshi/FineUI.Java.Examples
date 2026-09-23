@@ -45,6 +45,8 @@
                     var dataList1 = F.ui.DataList1;
                     if (!dataList1) return;
                     dataList1.el.on('click', 'a.f-datalist-item-inner', function(event) {
+                        event.preventDefault();
+
                         var innerEl = $(this);
 
                         var text = innerEl.find('.item-text').text();

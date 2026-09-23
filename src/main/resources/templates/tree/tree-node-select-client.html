@@ -35,13 +35,22 @@
             <f:label id="labResult" encode-text="false"></f:label>
             <br />
             <br />
-            事件列表（<a href="javascript:$('#result').html('');">clear</a>）：
+            事件列表（<a id="clearResult" href="#">clear</a>）：
             <ul id="result"></ul>
 
         </th:block>
 
         <th:block layout:fragment="script">
             <script>
+                F.ready(function() {
+                    $('#clearResult').on('click', onClearResultClick);
+                });
+
+                function onClearResultClick(event) {
+                    event.preventDefault();
+                    $('#result').empty();
+                }
+
                 function onTree1NodeSelect(event, nodeId) {
                     var date = new Date();
                     $('#result').append(F.formatString('<li>[{0}:{1}] nodeselect：{2}</li>',

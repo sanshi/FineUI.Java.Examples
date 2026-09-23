@@ -30,7 +30,7 @@ public class DataListLinkToPanel extends MobilePageBase {
         for (Map<String, Object> row : DataSourceUtil.getCountryTable()) {
             String iconUrl = IconHelper.resolveUrl("/res/icon/flag_" + row.get("Image") + ".png");
             DataList1.addItem(new RawHtml(DATALIST_ITEM_TEMPLATE, iconUrl, row.get("Name"), row.get("Desc")),
-                    null, true, false, null, "javascript:;", null, true);
+                    null, true, false, null, "#", null, true);
         }
     }
 }

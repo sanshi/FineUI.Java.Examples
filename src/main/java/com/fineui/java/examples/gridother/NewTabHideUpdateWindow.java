@@ -3,11 +3,11 @@ package com.fineui.java.examples.gridother;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.Label;
-import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 
 /** 新标签页编辑表单页（含「关闭并更新父选项卡」按钮，带表单校验，路由 {@code grid-other/new-tab-hide-update-window}）：申请人默认「三生石上」，可由 query 参数 name 覆盖。 */
 @FineUIPage("grid-other/new-tab-hide-update-window")
-public class NewTabHideUpdateWindow extends PageBase {
+public class NewTabHideUpdateWindow extends ThirdPartyEditorPageBase {
 
     Label labUserName;
 

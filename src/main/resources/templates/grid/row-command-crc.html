@@ -41,16 +41,16 @@
             <script th:src="@{/res/js/grid.js}"></script>
             <script th:inline="none">
                 function renderAction1(value, params) {
-                    return '<a class="action-btn mybtn1" href="javascript:;">按钮</a>';
+                    return '<a class="action-btn mybtn1" href="#">按钮</a>';
                 }
 
                 function renderAction2(value, params) {
                     var deleteImageUrl = F.resolveUrl('/res/icon/delete.png');
-                    return '<a class="action-btn mybtn2" href="javascript:;"><img class="f-grid-cell-icon" src="' + deleteImageUrl + '"></a>';
+                    return '<a class="action-btn mybtn2" href="#"><img class="f-grid-cell-icon" src="' + deleteImageUrl + '"></a>';
                 }
 
                 function renderAction3(value, params) {
-                    return '<a class="action-btn mybtn3" href="javascript:;"><i class="f-icon f-grid-cell-iconfont f-icon-remove"></i></a>';
+                    return '<a class="action-btn mybtn3" href="#"><i class="f-icon f-grid-cell-iconfont f-icon-remove"></i></a>';
                 }
 
                 function doAction(cnode) {
@@ -73,6 +73,8 @@
                 F.ready(function() {
                     var grid1 = F.ui.Grid1;
                     grid1.el.on('click', 'a.action-btn', function(event) {
+                        event.preventDefault();
+
                         var cnode = $(this);
                         if (cnode.hasClass('mybtn2') || cnode.hasClass('mybtn3')) {
                             F.confirm({

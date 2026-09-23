@@ -25,7 +25,14 @@
 
         <th:block layout:fragment="script">
             <script>
-                function openExampleHello(notifyId) {
+                F.ready(function() {
+                    $(document).on('click', '.addtabcontainer .addtablink', onAddExampleTabClick);
+                });
+
+                function onAddExampleTabClick(event) {
+                    event.preventDefault();
+
+                    var notifyId = event.currentTarget.getAttribute('data-notify-id');
                     parent.addExampleTab({
                         iframeUrl: F.resolveUrl('/basic/hello'),
                         title: '你好 FineUI',

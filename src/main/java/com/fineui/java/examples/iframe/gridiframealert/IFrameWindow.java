@@ -3,7 +3,7 @@ package com.fineui.java.examples.iframe.gridiframealert;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.MessageBoxIcon;
-import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 
 import java.time.LocalTime;
 
@@ -13,7 +13,7 @@ import java.time.LocalTime;
  * 由父页 {@code Window1_Close} 更新表格标题。
  */
 @FineUIPage("iframe/grid-iframe-alert/iframe-window")
-public class IFrameWindow extends PageBase {
+public class IFrameWindow extends ThirdPartyEditorPageBase {
 
     public void Page_Load(Object sender, EventArgs e) {
     }

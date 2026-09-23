@@ -11,8 +11,8 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * 图片热区选择省份（路由 {@code iframe/select-province}）：子页用 HTML 图片热区
- * （{@code <img usemap='#ChinaMap'>} + 各省 {@code <area href="javascript:select('省')">}），
- * {@code select()} 经 {@code F.getActiveWindow().window.updateProvince(省)} 纯脚本回写父页
+ * （{@code <img usemap='#ChinaMap'>} + 带 {@code data-province} 的各省 {@code <area>}），
+ * 热区点击处理函数经 {@code F.getActiveWindow().window.updateProvince(省)} 纯脚本回写父页
  * {@code DropDownList(ddlProvince)} 后隐藏窗体（区别于 {@link PassValueScript} 回写到
  * {@code TextBox}：本页回写目标是下拉框，且选择源是图片热区）。
  */

@@ -3,28 +3,18 @@ package com.fineui.java.examples.csp;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.TextArea;
-import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 
 /**
- * HTML 编辑器（路由 {@code csp/html-editor}）：集成第三方 UEditor 富文本编辑器，
- * 可获取编辑器内容到多行文本框、或把多行文本框内容设置回编辑器。
+ * HTML 编辑器（路由 {@code csp/html-editor}）：集成第三方 UEditor 富文本编辑器，可获取编辑器内容到多行文本框、
+ * 或把多行文本框内容设置回编辑器。本页通过编辑器场景基类关闭 FineUI CSP，演示严格站点中的明确兼容边界。
  */
 @FineUIPage("csp/html-editor")
-public class HtmlEditor extends PageBase {
+public class HtmlEditor extends ThirdPartyEditorPageBase {
 
     // 字段类型用全限定名，避免与本示例页类名 HtmlEditor 冲突。
     protected com.fineui.java.core.controls.HtmlEditor HtmlEditor1;
     protected TextArea TextArea1;
-
-    /**
-     * 渲染前配置 CSP：开启、关闭 nonce、放行内联脚本与 eval。第三方富文本 UEditor 既用了大量内联脚本
-     * （需 {@code cspScriptsAllowUnsafeInline}），又用了 {@code eval}/{@code new Function}（需 {@code cspScriptsAllowUnsafeEval}）。
-     * 这两个逃生舱只为放行这类第三方库——FineUI.Java 自身既不需要内联脚本、也不需要 eval。
-     */
-    public void Page_Get(Object sender, EventArgs e) {
-        getPageManager().cspScripts(true).cspScriptsAllowNonce(false)
-                .cspScriptsAllowUnsafeInline(true).cspScriptsAllowUnsafeEval(true);
-    }
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {

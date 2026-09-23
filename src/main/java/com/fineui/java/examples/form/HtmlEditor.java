@@ -3,7 +3,7 @@ package com.fineui.java.examples.form;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.TextArea;
-import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 
 /**
  * HTML 编辑器（路由 {@code form/html-editor}）：集成 UMEditor 富文本编辑器，
@@ -11,7 +11,7 @@ import com.fineui.java.examples.code.PageBase;
  * UMEditor / UEditor / CKEditor / TinyMCE 之间通过控件属性简单切换。
  */
 @FineUIPage("form/html-editor")
-public class HtmlEditor extends PageBase {
+public class HtmlEditor extends ThirdPartyEditorPageBase {
 
     // 字段类型用全限定名，避免与本示例页类名 HtmlEditor 冲突。
     protected com.fineui.java.core.controls.HtmlEditor HtmlEditor1;

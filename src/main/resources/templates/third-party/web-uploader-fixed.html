@@ -57,11 +57,11 @@
                     if (value === 'uploading') {
                         return '';
                     }
-                    var html = '<a href="javascript:;" class="theuploadbutton">上传</a>';
+                    var html = '<a href="#" class="theuploadbutton">上传</a>';
                     if (params.rowValue.FileStatus === 'uploaded') {
                         html += '&nbsp;&nbsp;<a href="' + F.resolveUrl('/home/download?file=' + encodeURIComponent(params.rowValue.FileSavedName)) +
                             '" target="_blank" class="thedownloadbutton">下载</a>';
-                        html += '&nbsp;&nbsp;<a href="javascript:;" class="thedeletebutton">删除</a>';
+                        html += '&nbsp;&nbsp;<a href="#" class="thedeletebutton">删除</a>';
                     }
                     return html;
                 }
@@ -143,7 +143,13 @@
 
                 F.ready(function() {
                     var grid = F.ui.Grid1;
-                    grid.el.on('click', 'a.thedeletebutton', function() {
+                    // WebUploader 负责启动上传，这里只阻止链接占位地址改变页面位置。
+                    grid.el.on('click', 'a.theuploadbutton', function(event) {
+                        event.preventDefault();
+                    });
+                    grid.el.on('click', 'a.thedeletebutton', function(event) {
+                        event.preventDefault();
+
                         var row = grid.getRowData($(this).closest('.f-grid-row'));
                         F.confirm({
                             message: '你确定要删除这个文件吗？',

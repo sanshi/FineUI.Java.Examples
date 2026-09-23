@@ -74,11 +74,11 @@
                                                 <span class="breadcrumb-last">首页</span>
                                             </div>
                                             <div class="breadcrumb-icons">
-                                                <a data-qtip="查看源代码" href="javascript:onToolSourceCodeClick();"><i
+                                                <a id="breadcrumbSourceCode" data-qtip="查看源代码" href="#"><i
                                                         class="f-icon f-iconfont f-iconfont-code"></i></a>
-                                                <a data-qtip="刷新本页" href="javascript:onToolRefreshClick();"><i
+                                                <a id="breadcrumbRefresh" data-qtip="刷新本页" href="#"><i
                                                         class="f-icon f-iconfont f-iconfont-refresh"></i></a>
-                                                <a data-qtip="在新标签页中打开" href="javascript:onToolNewWindowClick();"><i
+                                                <a id="breadcrumbNewWindow" data-qtip="在新标签页中打开" href="#"><i
                                                         class="f-icon f-iconfont f-iconfont-new-tab"></i></a>
                                             </div>
                                         </div>
@@ -262,6 +262,23 @@
             </script>
             <script th:src="@{/res/js/index.js}"></script>
             <script th:src="@{/res/js/index-examples.js}"></script>
+            <script>
+                F.ready(function() {
+                    $('#breadcrumbSourceCode').on('click', function(event) {
+                        event.preventDefault();
+                        onToolSourceCodeClick(event);
+                    });
+                    $('#breadcrumbRefresh').on('click', function(event) {
+                        event.preventDefault();
+                        onToolRefreshClick(event);
+                    });
+                    $('#breadcrumbNewWindow').on('click', function(event) {
+                        event.preventDefault();
+                        onToolNewWindowClick(event);
+                    });
+                });
+
+            </script>
         </th:block>
 
     </body>

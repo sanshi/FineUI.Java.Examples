@@ -3,14 +3,14 @@ package com.fineui.java.examples.grid;
 import com.fineui.java.core.ActiveWindow;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
-import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 
 /**
  * IFrame 窗体内的详情表单页（路由 {@code grid/iframe-window}）：被表格的「窗口列 / 双击行」弹出到 IFrame 窗体中，
  * 演示关闭窗体、保存后回发弹出窗体的关闭事件、保存后刷新父页、保存后关闭父页当前选项卡等窗体通信方式。
  */
 @FineUIPage("grid/iframe-window")
-public class IFrameWindow extends PageBase {
+public class IFrameWindow extends ThirdPartyEditorPageBase {
 
     public void Page_Load(Object sender, EventArgs e) {
     }

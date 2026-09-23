@@ -21,17 +21,16 @@
             <br />
             注：
             <ul>
-                <li>由于第三方类库（UEditor）使用了内联脚本，因此需要启用 <code>cspScriptsAllowUnsafeInline</code>，允许所有的内联脚本执行。</li>
-                <li>UEditor 还用到了 <code>eval</code>/<code>new Function</code>，因此还需启用 <code>cspScriptsAllowUnsafeEval</code>。这两个开关默认关闭，仅为放行此类第三方库——FineUI.Java
-                    自身既不用内联脚本、也不用 eval。</li>
-                <li>一般情况下推荐启用 <code>cspScriptsAllowNonce</code>，这样更加安全。</li>
+                <li>示例站的普通页面默认启用严格 CSP，并通过 nonce 授权可信模板脚本。</li>
+                <li>UEditor 会动态执行内联脚本和字符串代码。本页继承第三方编辑器场景基类，因此不输出 FineUI 的 CSP 响应头。</li>
+                <li>这个例外只用于保留旧编辑器的完整功能；FineUI.Java 自身无需 <code>unsafe-inline</code> 或 <code>unsafe-eval</code>。</li>
                 <li>文章：<a target="_blank"
                         href="https://fineui.com/docs/#/Questions/5000_CSP_unsafe_inline">https://fineui.com/docs/#/Questions/5000_CSP_unsafe_inline</a></li>
             </ul>
 
         </th:block>
         <th:block layout:fragment="script">
-            <!--/* 页面自带内联脚本：本页用 unsafe-inline 放行（未启用 nonce），故无需 nonce 属性 */-->
+            <!--/* 本页属于明确的第三方编辑器兼容例外，不输出 FineUI CSP。 */-->
             <script>
                 console.log('Hello world!');
 

@@ -218,10 +218,16 @@
                             .append(createScoreEl(rowValues["TotalScore"], "total")));
 
                     var userActionsEl = $("<div>").addClass("user-actions")
-                        .append($("<a>").attr("href", "javascript:;").text("查看详情"));
+                        .append($("<a>").attr("href", "#").text("查看详情"));
 
                     return $("<div>").addClass("user-card").append(userProfileEl).append(userActionsEl);
                 }
+
+                F.ready(function() {
+                    F.ui.Grid1.el.on('click', '.user-actions a', function(event) {
+                        event.preventDefault();
+                    });
+                });
 
             </script>
         </th:block>

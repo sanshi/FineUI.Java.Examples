@@ -39,7 +39,7 @@
             <script th:src="@{/res/js/grid.js}"></script>
             <script th:inline="none">
                 function renderWindowField1(value, params) {
-                    return '<a href="javascript:;" class="mywindowfield">编辑</a>';
+                    return '<a href="#" class="mywindowfield">编辑</a>';
                 }
 
                 // 打开窗体
@@ -59,6 +59,8 @@
 
                     // 点击表格行中的编辑按钮
                     grid.el.on('click', 'a.mywindowfield', function(event) {
+                        event.preventDefault();
+
                         var rowEl = $(this).closest('.f-grid-row');
                         var rowData = grid.getRowData(rowEl);
                         openWindow(rowData);

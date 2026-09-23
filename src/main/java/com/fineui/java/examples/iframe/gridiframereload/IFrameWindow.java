@@ -2,7 +2,7 @@ package com.fineui.java.examples.iframe.gridiframereload;
 
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
-import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 
 import java.time.LocalTime;
 
@@ -13,7 +13,7 @@ import java.time.LocalTime;
  * 全局函数」这条命令，由客户端按名解析执行。
  */
 @FineUIPage("iframe/grid-iframe-reload/iframe-window")
-public class IFrameWindow extends PageBase {
+public class IFrameWindow extends ThirdPartyEditorPageBase {
 
     public void Page_Load(Object sender, EventArgs e) {
     }

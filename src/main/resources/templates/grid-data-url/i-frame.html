@@ -36,7 +36,7 @@
             <script th:src="@{/res/js/grid.js}"></script>
             <script th:inline="none">
                 function renderEditAction(value, params) {
-                    return $('<a>').addClass('action editit').attr('href', 'javascript:;')
+                    return $('<a>').addClass('action editit').attr('href', '#')
                         .append($('<img>').addClass('f-grid-imagefield').attr('src', F.resolveUrl('/res/icon/pencil.png')));
                 }
 
@@ -48,6 +48,8 @@
                     var baseUrl = F.resolveUrl('/grid/iframe-window');
 
                     grid1.el.on('click', '.f-grid-cell-Actions .action.editit', function(event) {
+                        event.preventDefault();
+
                         var targetEl = $(this);
                         var rowEl = targetEl.closest('.f-grid-row');
                         var rowData = grid1.getRowData(rowEl);

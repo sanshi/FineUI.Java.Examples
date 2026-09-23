@@ -4,12 +4,12 @@ import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.HtmlEditor;
 import com.fineui.java.core.controls.TextBox;
-import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 import com.fineui.java.examples.form.FormSummary;
 
 /** TinyMCE 双编辑器（路由 {@code editor/tinymce-two}）：正文/摘要两个编辑器；“更新文章摘要”服务端把正文去标签后回填摘要。 */
 @FineUIPage("editor/tinymce-two")
-public class TinyMCETwo extends PageBase {
+public class TinyMCETwo extends ThirdPartyEditorPageBase {
 
     protected TextBox tbxTitle;
     protected HtmlEditor HtmlEditor1;

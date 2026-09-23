@@ -3,11 +3,11 @@ package com.fineui.java.examples.editor;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.HtmlEditor;
-import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 
 /** CKEditor 自定义配置（路由 {@code editor/ckeditor-config}）：通过 editorOptions 自定义工具栏等；服务端获取/设置内容。 */
 @FineUIPage("editor/ckeditor-config")
-public class CKEditorConfig extends PageBase {
+public class CKEditorConfig extends ThirdPartyEditorPageBase {
 
     protected HtmlEditor HtmlEditor1;
 

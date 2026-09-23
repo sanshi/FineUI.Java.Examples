@@ -3,7 +3,7 @@ package com.fineui.java.examples.iframe.gridiframealertscript;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.MessageBoxIcon;
-import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 
 import java.time.LocalTime;
 
@@ -14,7 +14,7 @@ import java.time.LocalTime;
  * （区别于 Alert 版的 {@code HidePostBack} 走 {@code OnClose}）。
  */
 @FineUIPage("iframe/grid-iframe-alert-script/iframe-window")
-public class IFrameWindow extends PageBase {
+public class IFrameWindow extends ThirdPartyEditorPageBase {
 
     public void Page_Load(Object sender, EventArgs e) {
     }

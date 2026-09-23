@@ -13,7 +13,7 @@
             <f:hyper-link id="HyperLink1" text-raw-html="新窗口打开 <span style='color:red;'>Google</span> 首页" target="_blank"
                 navigate-url="http://www.google.com/"></f:hyper-link>
             <br />
-            <f:hyper-link id="HyperLink2" enabled="false" text="点击弹出对话框" navigate-url="javascript:;" click-handler="onHyperLink2Click"></f:hyper-link>
+            <f:hyper-link id="HyperLink2" enabled="false" text="点击弹出对话框" navigate-url="#" click-handler="onHyperLink2Click"></f:hyper-link>
             <br />
             <f:button id="btnChangeEnable" text="启用/禁用最后一个链接" on-click="btnChangeEnable_Click"></f:button>
 
@@ -27,6 +27,7 @@
                         messageIcon: 'information',
                         target: '_parent'
                     });
+                    return false;
                 }
 
             </script>

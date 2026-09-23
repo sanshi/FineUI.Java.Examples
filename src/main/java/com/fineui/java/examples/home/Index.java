@@ -164,6 +164,10 @@ public class Index extends PageBase {
 
             TreeNode node = new TreeNode();
             node.setId("tn_" + (nodeIndex++));
+            String dataTag = attr(el, "AttributeDataTag");
+            if (!dataTag.isEmpty()) {
+                node.setAttribute("data-tag", dataTag);
+            }
 
             if (isLeaf) {
                 String href = resolveInternalHref(attr(el, "NavigateUrl"));

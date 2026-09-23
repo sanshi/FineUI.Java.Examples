@@ -3,11 +3,11 @@ package com.fineui.java.examples.editor;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.HtmlEditor;
-import com.fineui.java.examples.code.PageBase;
+import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 
 /** TinyMCE 选项卡（路由 {@code editor/tinymce-tab-strip}）：两个编辑器分布在两个选项卡中；服务端获取两个编辑器的值。 */
 @FineUIPage("editor/tinymce-tab-strip")
-public class TinyMCETabStrip extends PageBase {
+public class TinyMCETabStrip extends ThirdPartyEditorPageBase {
 
     protected HtmlEditor HtmlEditor1;
     protected HtmlEditor HtmlEditor2;
