@@ -80,7 +80,10 @@
 
                 F.ready(function() {
                     var grid = F.ui.Grid1;
-                    grid.el.on('click', 'a.action-btn.delete', function() {
+                    grid.el.on('click', 'a.action-btn.delete', function(event) {
+                        // 删除链接是按钮型占位地址，先取消默认导航，避免执行脚本地址并触发 CSP。
+                        event.preventDefault();
+
                         var row = grid.getRowData($(this).closest('.f-grid-row'));
                         F.confirm({
                             message: '你确定要删除这个文件吗？',
@@ -163,7 +166,10 @@
                                 '文件[' + arg.name + ']是空文件，无法上传。');
                         }
                     });
-                    grid.el.on('click', 'a.thecanceluploadbutton', function() {
+                    grid.el.on('click', 'a.thecanceluploadbutton', function(event) {
+                        // 取消上传也是按钮型链接，先阻止占位地址的默认导航。
+                        event.preventDefault();
+
                         var row = grid.getRowData($(this).closest('.f-grid-row'));
                         uploader.cancelFile(row.id);
                         grid.deleteRow(row.id);

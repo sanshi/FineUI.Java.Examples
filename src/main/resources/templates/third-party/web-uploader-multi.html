@@ -5,7 +5,7 @@
         <title>FineUI.Java · WebUploaderMulti</title>
         <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
         <meta name="sourcefiles"
-            content="class:com.fineui.java.examples.thirdparty.WebUploaderController;class:com.fineui.java.examples.web.DownloadController" />
+            content="class:com.fineui.java.examples.thirdparty.WebUploaderController;class:com.fineui.java.examples.web.DownloadController;res:static/res/js/grid.js" />
 
         <style>
             .webuploader-pick {
@@ -35,7 +35,7 @@
                                 min-width="150"></f:render-field>
                             <f:render-field column-id="FileSize" data-field="size" header-text="大小" renderer="FileSize"></f:render-field>
                             <f:render-field column-id="FileStatus" data-field="status" header-text="状态" renderer-function="renderFileStatus"></f:render-field>
-                            <f:render-field renderer-function="renderDelete"></f:render-field>
+                            <f:render-field renderer-function="renderDeleteAction"></f:render-field>
                         </f:columns>
                     </f:grid>
                     <f:grid id="Grid2" show-header="true" show-border="true" title="" box-flex="1" enable-collapse="false" enable-check-box-select="false"
@@ -48,7 +48,7 @@
                                 min-width="150"></f:render-field>
                             <f:render-field column-id="FileSize" data-field="size" header-text="大小" renderer="FileSize"></f:render-field>
                             <f:render-field column-id="FileStatus" data-field="status" header-text="状态" renderer-function="renderFileStatus"></f:render-field>
-                            <f:render-field renderer-function="renderDelete"></f:render-field>
+                            <f:render-field renderer-function="renderDeleteAction"></f:render-field>
                         </f:columns>
                     </f:grid>
                 </f:items>
@@ -60,14 +60,10 @@
         </th:block>
         <th:block layout:fragment="script">
             <script th:src="@{/res/third-party/webuploader/webuploader.nolog.js}"></script>
+            <script th:src="@{/res/js/grid.js}"></script>
             <script>
                 function renderFileStatus(value) {
                     return value || '已完成';
-                }
-
-                function renderDelete() {
-                    return '<a class="action-btn delete" href="javascript:;"><img class="f-grid-cell-icon" src="' + F.resolveUrl('/res/icon/delete.png') +
-                        '"></a>';
                 }
 
                 function initUploader(gridId, pickerId, ownerId, accept, sizeLimit, success) {
@@ -143,7 +139,10 @@
                                 '文件[' + arg.name + ']是空文件，无法上传。');
                         }
                     });
-                    grid.el.on('click', 'a.action-btn.delete', function() {
+                    grid.el.on('click', 'a.action-btn.delete', function(event) {
+                        // 删除链接是按钮型占位地址，先取消默认导航，避免执行脚本地址并触发 CSP。
+                        event.preventDefault();
+
                         var row = grid.getRowData($(this).closest('.f-grid-row'));
                         F.confirm({
                             message: '你确定要删除这个文件吗？',
