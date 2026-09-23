@@ -10,6 +10,9 @@
 
             <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格（双击编辑）" data-id-field="Id" data-text-field="Name"
                 allow-cell-editing="true" clicks-to-edit="2" enable-check-box-select="true">
+                <f:listeners>
+                    <f:listener event="rowcommand" handler="onGrid1RowCommand"></f:listener>
+                </f:listeners>
                 <f:columns>
                     <f:row-number-field></f:row-number-field>
                     <f:render-field header-text="姓名" column-id="Name" data-field="Name">
@@ -134,23 +137,12 @@
                     });
                 }
 
-                F.ready(function() {
-
-                    var grid1 = F.ui.Grid1;
-                    grid1.el.on('click', 'a.action-btn.delete', function(event) {
-                        var cnode = $(this);
-                        var rowData = grid1.getRowData(cnode.closest('.f-grid-row'));
-
-                        F.confirm({
-                            message: '删除选中行？',
-                            target: '_top',
-                            ok: function() {
-                                grid1.deleteRow(rowData);
-                            }
-                        });
-                    });
-
-                });
+                // Grid 在确认后触发行命令；删除当前行会计入尚未保存的更改。
+                function onGrid1RowCommand(event, rowId, rowIndex, columnId, commandName) {
+                    if (commandName === 'Delete') {
+                        F.ui.Grid1.deleteRow(rowId);
+                    }
+                }
 
             </script>
         </th:block>
