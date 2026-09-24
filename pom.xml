@@ -15,14 +15,14 @@
 
     <groupId>com.fineui.samples</groupId>
     <artifactId>fineui-java-examples</artifactId>
-    <version>16.0.0-rc.1</version>
+    <version>16.0.0-rc.2</version>
     <name>FineUI.Java Examples</name>
     <description>FineUI.Java 使用方示例：只依赖 fineui-java 一个库，零 @Configuration 即可跑通标签式有状态服务端组件的完整闭环。</description>
 
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <fineui.version>16.0.0-rc.1</fineui.version>
+        <fineui.version>16.0.0-rc.2</fineui.version>
         <!-- 覆盖 Boot 4.1.1 托管的 Tomcat 11.0.24：消掉 CVE-2026-65182 等已知漏洞（同 minor patch 级替换） -->
         <tomcat.version>11.0.26</tomcat.version>
     </properties>
