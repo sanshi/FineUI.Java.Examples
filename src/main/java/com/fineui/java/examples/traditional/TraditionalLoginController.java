@@ -3,6 +3,7 @@ package com.fineui.java.examples.traditional;
 import java.util.HashMap;
 import java.util.Map;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +39,9 @@ public class TraditionalLoginController {
 
     /** 一、首屏：写一个 Controller 方法，把要显示的数据塞进 Model，再交给模板。 */
     @GetMapping("/traditional/login")
-    public String loginPage(Model model) {
+    public String loginPage(Model model, HttpServletResponse response) {
+        // 传统 MVC 页面不经过 FineUI.PageController，需自行限制脚本只从同源加载。
+        response.setHeader("Content-Security-Policy", "script-src 'self';");
         model.addAttribute("title", "登录表单（传统 Spring MVC）");
         return "traditional/login";
     }
