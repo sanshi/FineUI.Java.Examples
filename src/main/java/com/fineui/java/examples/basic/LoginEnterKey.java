@@ -8,8 +8,8 @@ import com.fineui.java.examples.code.PageBase;
 
 /**
  * 登录回车键（路由 {@code basic/login-enter-key}）：表单内按回车键用
- * {@code next-focus-control} 把焦点导航到下一控件（用户名 → 密码 → 登录按钮），
- * 登录按钮校验并回发判断用户名密码。
+ * {@code next-focus-control} 把焦点从用户名框导航到密码框，
+ * {@code next-click-control} 在密码框按回车时点击登录按钮并回发校验。
  */
 @FineUIPage("basic/login-enter-key")
 public class LoginEnterKey extends PageBase {
