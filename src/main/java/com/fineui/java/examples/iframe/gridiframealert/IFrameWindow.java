@@ -2,7 +2,10 @@ package com.fineui.java.examples.iframe.gridiframealert;
 
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.ActiveWindow;
+import com.fineui.java.core.Alert;
 import com.fineui.java.core.MessageBoxIcon;
+import com.fineui.java.core.enums.Target;
 import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 
 import java.time.LocalTime;
@@ -21,7 +24,12 @@ public class IFrameWindow extends ThirdPartyEditorPageBase {
     public void btnUpdateParentGrid_Click(Object sender, EventArgs e) {
         // 1. 这里放置保存窗体中数据的逻辑
         // 2. 先弹出提示对话框，再回发父窗体
-        showAlertInTopHidePostBack("保存成功！", "", MessageBoxIcon.Success,
-                "参数 - " + LocalTime.now().getNano() / 1_000_000);
+        Alert alert = new Alert();
+        alert.setMessage("保存成功！");
+        alert.setMessageBoxIcon(MessageBoxIcon.Success);
+        alert.setTarget(Target.Top);
+        alert.setOkCommand(ActiveWindow.hidePostBackReference(
+                "参数 - " + LocalTime.now().getNano() / 1_000_000));
+        alert.show();
     }
 }

@@ -34,7 +34,7 @@ public class UICompare extends PageBase {
     public void btnSubmit_Click(Object sender, EventArgs e) {
         if (getModelState().isValid()) {
             // Json.encode 产出缩进 JSON 并做 HTML 转义，可安全放进 <pre> 展示
-            showNotifyRaw(new RawHtml("用户提交的数据：<br/><pre>%s</pre>", Json.encode(form)));
+            showNotify(new RawHtml("用户提交的数据：<br/><pre>%s</pre>", Json.encode(form)));
         }
     }
 }

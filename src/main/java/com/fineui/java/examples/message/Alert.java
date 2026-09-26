@@ -41,12 +41,26 @@ public class Alert extends PageBase {
         Integer minWidth = intOrNull(nbMinWidth.getValue());
         Integer maxWidth = intOrNull(nbMaxWidth.getValue());
 
-        showAlert(tbxMessage.getValue(), tbxTitle.getValue(), icon, target, id, enableClose, width, minWidth, maxWidth);
+        com.fineui.java.core.Alert alert = new com.fineui.java.core.Alert();
+        alert.setMessage(tbxMessage.getValue());
+        alert.setTitle(tbxTitle.getValue());
+        alert.setMessageBoxIcon(icon);
+        alert.setTarget(target);
+        alert.setId(id);
+        alert.setEnableClose(enableClose);
+        alert.setWidth(width);
+        alert.setMinWidth(minWidth);
+        alert.setMaxWidth(maxWidth);
+        alert.show();
     }
 
     public void btnCallback_Click(Object sender, EventArgs e) {
-        showAlert("保存完成，点确定后通知服务端。", "具名回调", MessageBoxIcon.Success,
-                "onAlertAcknowledged");
+        com.fineui.java.core.Alert alert = new com.fineui.java.core.Alert();
+        alert.setMessage("保存完成，点确定后通知服务端。");
+        alert.setTitle("具名回调");
+        alert.setMessageBoxIcon(MessageBoxIcon.Success);
+        alert.setOkFunction("onAlertAcknowledged");
+        alert.show();
     }
 
     public void Page_CustomEvent(Object sender, CustomEventArgs e) {

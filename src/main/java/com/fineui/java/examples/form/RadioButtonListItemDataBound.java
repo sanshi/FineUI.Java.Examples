@@ -1,5 +1,6 @@
 package com.fineui.java.examples.form;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.RadioItemEventArgs;
@@ -52,7 +53,7 @@ public class RadioButtonListItemDataBound extends PageBase {
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
-        showNotifyRaw(FormSummary.of(RadioButtonList1, RadioButtonList2));
+        showNotify(new RawHtml(FormSummary.of(RadioButtonList1, RadioButtonList2)));
     }
 
     /** 演示数据类：Id 为值字段、Name 为文本字段。 */

@@ -1,5 +1,6 @@
 package com.fineui.java.examples.form;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.NumberBox;
@@ -23,7 +24,7 @@ public class ChangeConfirmForm extends PageBase {
     }
 
     public void btnClosePostBack_Click(Object sender, EventArgs e) {
-        showNotifyRaw(FormSummary.ofForm(SimpleForm1));
+        showNotify(new RawHtml(FormSummary.ofForm(SimpleForm1)));
         // 保存数据后，清空面板内表单字段的改变状态
         SimpleForm1.clearDirty();
     }

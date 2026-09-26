@@ -1,5 +1,6 @@
 package com.fineui.java.examples.form;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.examples.code.PageBase;
@@ -18,14 +19,14 @@ public class FormReset extends PageBase {
     }
 
     public void btnSubmitForm1_Click(Object sender, EventArgs e) {
-        showNotifyRaw(FormSummary.ofForm(Form1));
+        showNotify(new RawHtml(FormSummary.ofForm(Form1)));
     }
 
     public void btnSubmitForm2_Click(Object sender, EventArgs e) {
-        showNotifyRaw(FormSummary.ofForm(Form2));
+        showNotify(new RawHtml(FormSummary.ofForm(Form2)));
     }
 
     public void btnSubmitAll_Click(Object sender, EventArgs e) {
-        showNotifyRaw(FormSummary.ofForm(Form1, Form2));
+        showNotify(new RawHtml(FormSummary.ofForm(Form1, Form2)));
     }
 }

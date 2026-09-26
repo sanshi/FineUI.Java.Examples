@@ -1,6 +1,7 @@
 package com.fineui.java.examples.message;
 
 import com.fineui.java.core.CustomEventArgs;
+import com.fineui.java.core.Confirm;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.MessageBoxIcon;
@@ -38,7 +39,12 @@ public class ConfirmCancel extends PageBase {
     }
 
     public void btnOperation4_Click(Object sender, EventArgs e) {
-        showConfirm("确认执行操作四？", "服务端确认框", MessageBoxIcon.Question,
-                "onOperation4Confirmed", "onOperation4Cancelled");
+        Confirm confirm = new Confirm();
+        confirm.setMessage("确认执行操作四？");
+        confirm.setTitle("服务端确认框");
+        confirm.setMessageBoxIcon(MessageBoxIcon.Question);
+        confirm.setOkFunction("onOperation4Confirmed");
+        confirm.setCancelFunction("onOperation4Cancelled");
+        confirm.show();
     }
 }

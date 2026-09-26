@@ -1,10 +1,10 @@
 package com.fineui.java.examples.message;
 
 import com.fineui.java.core.CustomEventArgs;
+import com.fineui.java.core.Confirm;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.MessageBoxIcon;
-import com.fineui.java.core.enums.Target;
 import com.fineui.java.examples.code.PageBase;
 
 /**
@@ -25,9 +25,11 @@ public class AlertDownload extends PageBase {
     }
 
     public void btnOperation_Click(Object sender, EventArgs e) {
-        showConfirm("操作成功！点击确定按钮开始下载文件，点取消按钮弹出对话框",
-                "", MessageBoxIcon.Question, Target.Self,
-                "confirmOKCallback", "confirmCancelCallback",
-                null, true, null, null, null);
+        Confirm confirm = new Confirm();
+        confirm.setMessage("操作成功！点击确定按钮开始下载文件，点取消按钮弹出对话框");
+        confirm.setMessageBoxIcon(MessageBoxIcon.Question);
+        confirm.setOkFunction("confirmOKCallback");
+        confirm.setCancelFunction("confirmCancelCallback");
+        confirm.show();
     }
 }

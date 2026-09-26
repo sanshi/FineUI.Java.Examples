@@ -1,5 +1,6 @@
 package com.fineui.java.examples.gridinput;
 
+import com.fineui.java.core.RawHtml;
 import tools.jackson.databind.JsonNode;
 import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.EventArgs;
@@ -45,7 +46,7 @@ public class Cart extends PageBase {
             }
             sb.append("</ol><hr/>");
             sb.append(String.format("<div style=\"text-align:center;\">共 %d 件商品，总计 ¥%.2f</div>", count, total));
-            showNotifyRaw(sb.toString(), MessageBoxIcon.Information);
+            showNotify(new RawHtml(sb.toString()), MessageBoxIcon.Information);
         }
     }
 }

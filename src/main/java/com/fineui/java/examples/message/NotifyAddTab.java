@@ -1,10 +1,11 @@
 package com.fineui.java.examples.message;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.MessageBoxIcon;
+import com.fineui.java.core.Notify;
 import com.fineui.java.core.enums.Position;
-import com.fineui.java.core.enums.Target;
 import com.fineui.java.examples.code.PageBase;
 
 import java.util.UUID;
@@ -26,6 +27,14 @@ public class NotifyAddTab extends PageBase {
         String notifyId = UUID.randomUUID().toString();
         String html = "<div class=\"addtabcontainer\"><a class=\"addtablink\" href=\"#\" data-notify-id=\""
                 + notifyId + "\">向父页面添加选项卡</a></div>";
-        showNotifyRaw(html, MessageBoxIcon.None, notifyId, Position.Right, Position.Bottom, 0, false);
+        Notify notify = new Notify();
+        notify.setMessageRawHtml(new RawHtml(html));
+        notify.setMessageBoxIcon(MessageBoxIcon.None);
+        notify.setId(notifyId);
+        notify.setPositionX(Position.Right);
+        notify.setPositionY(Position.Bottom);
+        notify.setDisplayMilliseconds(0);
+        notify.setShowHeader(false);
+        notify.show();
     }
 }

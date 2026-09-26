@@ -2,7 +2,10 @@ package com.fineui.java.examples.iframe.gridiframealertscript;
 
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.ActiveWindow;
+import com.fineui.java.core.Alert;
 import com.fineui.java.core.MessageBoxIcon;
+import com.fineui.java.core.enums.Target;
 import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
 
 import java.time.LocalTime;
@@ -23,7 +26,12 @@ public class IFrameWindow extends ThirdPartyEditorPageBase {
         // 1. 这里放置保存窗体中数据的逻辑
         // 2. 先弹出提示对话框，点确定后隐藏窗体、调用父页脚本 closeWindow1(参数) 回发
         //    （无 eval：按名调用父页函数，实现「关闭后执行脚本」的效果）
-        showAlertInTopHideCallParentFn("保存成功！", "", MessageBoxIcon.Success,
-                "closeWindow1", "参数 - " + LocalTime.now().getNano() / 1_000_000);
+        Alert alert = new Alert();
+        alert.setMessage("保存成功！");
+        alert.setMessageBoxIcon(MessageBoxIcon.Success);
+        alert.setTarget(Target.Top);
+        alert.setOkCommand(ActiveWindow.hideCallParentFunctionReference(
+                "closeWindow1", "参数 - " + LocalTime.now().getNano() / 1_000_000));
+        alert.show();
     }
 }

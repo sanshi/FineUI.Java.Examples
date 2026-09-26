@@ -11,7 +11,8 @@ import com.fineui.java.examples.code.StudentGridData2;
 
 /**
  * 子页保存经脚本路径回发（路由 {@code iframe/grid-iframe-alert-script}）：与 {@link GridIFrameAlert} 同样
- * 先在顶层弹「保存成功！」，但子页用 {@code showAlertInTopHideCallParentFn("closeWindow1", 参数)}——点确定后
+ * 先在顶层弹「保存成功！」，子页的 {@code Alert} 确定回调使用
+ * {@code ActiveWindow.hideCallParentFunctionReference("closeWindow1", 参数)}；点确定后
  * 隐藏窗体并调用父页脚本函数 {@code closeWindow1(参数)} -> {@code F.customEvent('CloseWindow1')} 回发
  * （而非 Alert 版的 {@code HidePostBack} 走 {@code OnClose}）。本页独有父页脚本函数 {@code closeWindow1}
  * （Alert 版不定义），回发后 {@code Page_CustomEvent} 把标题改为「表格 - 回发参数：参数 - {ms}」。

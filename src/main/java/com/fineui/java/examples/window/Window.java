@@ -1,5 +1,6 @@
 package com.fineui.java.examples.window;
 
+import com.fineui.java.core.Alert;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.examples.code.PageBase;
@@ -18,7 +19,7 @@ public class Window extends PageBase {
 
     /** 窗体关闭事件：弹出消息框提示。 */
     public void Window1_Close(Object sender, EventArgs e) {
-        showAlert("触发了窗体的关闭事件！");
+        Alert.show("触发了窗体的关闭事件！");
     }
 
     /** 服务端显示窗体。 */

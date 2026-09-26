@@ -49,17 +49,28 @@ public class Notify extends PageBase {
         boolean enableDrag = showHeader && cbxEnableDrag.isChecked();
         boolean enableClose = showHeader && cbxEnableClose.isChecked();
 
-        showNotify(tbxMessage.getValue(), title, messageBoxIcon(ddlMessageBoxIcon.getSelectedValue()),
-                target(ddlTarget.getSelectedValue()),
-                showHeader, enableDrag, enableClose,
-                intValue(nbDisplayMilliseconds.getValue(), 5000), cbxDisplayProgress.isChecked(),
-                position(ddlPositionX.getSelectedValue(), Position.Right),
-                position(ddlPositionY.getSelectedValue(), Position.Bottom),
-                cbxIsModal.isChecked(),
-                tbxBodyPadding.getValue(), textAlign(ddlMessageAlign.getSelectedValue()),
-                cbxShowLoading.isChecked(),
-                intOrNull(nbWidth.getValue()), intOrNull(nbMinWidth.getValue()), intOrNull(nbMaxWidth.getValue()),
-                tbxID.getValue(), "notifyHideCallback");
+        com.fineui.java.core.Notify notify = new com.fineui.java.core.Notify();
+        notify.setMessage(tbxMessage.getValue());
+        notify.setTitle(title);
+        notify.setMessageBoxIcon(messageBoxIcon(ddlMessageBoxIcon.getSelectedValue()));
+        notify.setTarget(target(ddlTarget.getSelectedValue()));
+        notify.setShowHeader(showHeader);
+        notify.setEnableDrag(enableDrag);
+        notify.setEnableClose(enableClose);
+        notify.setDisplayMilliseconds(intValue(nbDisplayMilliseconds.getValue(), 5000));
+        notify.setDisplayProgress(cbxDisplayProgress.isChecked());
+        notify.setPositionX(position(ddlPositionX.getSelectedValue(), Position.Right));
+        notify.setPositionY(position(ddlPositionY.getSelectedValue(), Position.Bottom));
+        notify.setModal(cbxIsModal.isChecked());
+        notify.setBodyPadding(tbxBodyPadding.getValue());
+        notify.setMessageAlign(textAlign(ddlMessageAlign.getSelectedValue()));
+        notify.setShowLoading(cbxShowLoading.isChecked());
+        notify.setWidth(intOrNull(nbWidth.getValue()));
+        notify.setMinWidth(intOrNull(nbMinWidth.getValue()));
+        notify.setMaxWidth(intOrNull(nbMaxWidth.getValue()));
+        notify.setId(tbxID.getValue());
+        notify.setHideFunction("notifyHideCallback");
+        notify.show();
     }
 
     /** 下拉值（如 "Warning"）→ 消息框图标枚举；无法识别回落无图标。 */

@@ -1,5 +1,6 @@
 package com.fineui.java.examples.other;
 
+import com.fineui.java.core.Alert;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.examples.code.PageBase;
@@ -17,6 +18,6 @@ public class ClientValidate extends PageBase {
     }
 
     public void btnRegister_Click(Object sender, EventArgs e) {
-        showAlert("表单验证通过！");
+        Alert.show("表单验证通过！");
     }
 }

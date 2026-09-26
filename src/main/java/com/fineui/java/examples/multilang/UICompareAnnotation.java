@@ -1,5 +1,6 @@
 package com.fineui.java.examples.multilang;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.binding.BindProperty;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
@@ -39,7 +40,7 @@ public class UICompareAnnotation extends MultilangPageBase {
     public void btnSubmit_Click(Object sender, EventArgs e) {
         if (getModelState().isValid()) {
             // 消息含 <br/><pre> 展示缩进 JSON，经可信 HTML 通道输出
-            showNotifyRaw(_R("multilang.uiCompareAnnotation.successMessage", Json.encode(theModel)));
+            showNotify(new RawHtml(_R("multilang.uiCompareAnnotation.successMessage", Json.encode(theModel))));
         }
     }
 }

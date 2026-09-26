@@ -1,5 +1,6 @@
 package com.fineui.java.examples.gridother;
 
+import com.fineui.java.core.Alert;
 import tools.jackson.databind.JsonNode;
 import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.EventArgs;
@@ -41,6 +42,6 @@ public class MultiActionsColumnMenuButton extends PageBase {
     }
 
     public void Window1_Close(Object sender, EventArgs e) {
-        showAlert("触发了窗体的关闭事件！");
+        Alert.show("触发了窗体的关闭事件！");
     }
 }

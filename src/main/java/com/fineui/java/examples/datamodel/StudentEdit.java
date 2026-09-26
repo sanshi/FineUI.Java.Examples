@@ -59,7 +59,7 @@ public class StudentEdit extends PageBase {
         // 未列出的属性（分组 / 状态 / 爱好 / 家庭信息 / 备注）保持原值。
         // 这份清单必须与模板里的 for 保持一致——往表单加字段而忘了补赋值，该字段就永远保存不上。
         // studentId 随 __FSTATE 往返，客户端可以篡改成任意主键——回发路径没有 Page_Get，
-        // 所以「当前用户能不能编辑这条记录」必须在这里再判一次（真实项目：无权则 showAlert + return）。
+        // 所以「当前用户能不能编辑这条记录」必须在这里再判一次（真实项目：无权则 Alert.show + return）。
         Student stored = StudentStore.find(studentId);
         if (stored == null) {
             showNotify("该学生不存在或已被删除！", MessageBoxIcon.Error);

@@ -1,6 +1,7 @@
 package com.fineui.java.examples.message;
 
 import com.fineui.java.core.ActiveWindow;
+import com.fineui.java.core.Confirm;
 import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
@@ -27,8 +28,13 @@ public class IFrameWindow extends PageBase {
     }
 
     public void btnTopCallback_Click(Object sender, EventArgs e) {
-        showConfirm("顶层显示，回调留在子页", "跨窗体回调", MessageBoxIcon.Question,
-                Target.Top, "onTopDialogConfirmed", null);
+        Confirm confirm = new Confirm();
+        confirm.setMessage("顶层显示，回调留在子页");
+        confirm.setTitle("跨窗体回调");
+        confirm.setMessageBoxIcon(MessageBoxIcon.Question);
+        confirm.setTarget(Target.Top);
+        confirm.setOkFunction("onTopDialogConfirmed");
+        confirm.show();
     }
 
     public void Page_CustomEvent(Object sender, CustomEventArgs e) {

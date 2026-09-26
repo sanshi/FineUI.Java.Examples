@@ -1,5 +1,6 @@
 package com.fineui.java.examples.grid;
 
+import com.fineui.java.core.Alert;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.Grid;
@@ -20,6 +21,6 @@ public class IFrameMaximized extends PageBase {
     }
 
     public void Window1_Close(Object sender, EventArgs e) {
-        showAlert("触发了窗体的关闭事件！");
+        Alert.show("触发了窗体的关闭事件！");
     }
 }

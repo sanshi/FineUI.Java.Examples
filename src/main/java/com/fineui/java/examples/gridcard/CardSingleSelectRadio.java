@@ -1,5 +1,6 @@
 package com.fineui.java.examples.gridcard;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.Grid;
@@ -22,7 +23,7 @@ public class CardSingleSelectRadio extends PageBase {
     }
 
     public void Button1_Click(Object sender, EventArgs e) {
-        showNotifyRaw(GridSelectionMessage.howManyRowsAreSelected(Grid1));
+        showNotify(new RawHtml(GridSelectionMessage.howManyRowsAreSelected(Grid1)));
     }
 
     public void Button2_Click(Object sender, EventArgs e) {

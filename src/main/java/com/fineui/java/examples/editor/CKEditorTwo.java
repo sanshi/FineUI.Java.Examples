@@ -1,5 +1,6 @@
 package com.fineui.java.examples.editor;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.HtmlEditor;
@@ -25,8 +26,8 @@ public class CKEditorTwo extends ThirdPartyEditorPageBase {
         if (HtmlEditor1.getText() == null || HtmlEditor1.getText().isEmpty()) {
             showNotify("文章正文不能为空！");
         } else {
-            showNotifyRaw("文章标题：" + htmlEncode(tbxTitle.getValue()) + "<br/>文章正文："
-                    + htmlEncode(HtmlEditor1.getText()) + "<br/>文章摘要：" + htmlEncode(HtmlEditor2.getText()));
+            showNotify(new RawHtml("文章标题：" + htmlEncode(tbxTitle.getValue()) + "<br/>文章正文："
+                    + htmlEncode(HtmlEditor1.getText()) + "<br/>文章摘要：" + htmlEncode(HtmlEditor2.getText())));
         }
     }
 

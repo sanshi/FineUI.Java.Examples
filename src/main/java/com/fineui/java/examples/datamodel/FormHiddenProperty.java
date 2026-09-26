@@ -54,7 +54,8 @@ public class FormHiddenProperty extends PageBase {
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
         if (getModelState().isValid()) {
-            showNotifyRaw(new RawHtml("隐藏属性：<br/>UserRoleId：%d<br/>UserRoleName：%s", userRoleId, userRoleName), MessageBoxIcon.Success);
+            showNotify(new RawHtml("隐藏属性：<br/>UserRoleId：%d<br/>UserRoleName：%s", userRoleId, userRoleName),
+                    MessageBoxIcon.Success);
         }
     }
 }

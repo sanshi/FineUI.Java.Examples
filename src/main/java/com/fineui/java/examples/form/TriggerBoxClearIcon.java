@@ -1,5 +1,6 @@
 package com.fineui.java.examples.form;
 
+import com.fineui.java.core.Alert;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.TriggerBox;
@@ -18,6 +19,6 @@ public class TriggerBoxClearIcon extends PageBase {
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
-        showAlert("文本框的输入值：" + TriggerBox1.getValue());
+        Alert.show("文本框的输入值：" + TriggerBox1.getValue());
     }
 }

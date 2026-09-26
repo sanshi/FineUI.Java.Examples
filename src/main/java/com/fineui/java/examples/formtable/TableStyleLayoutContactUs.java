@@ -1,5 +1,6 @@
 package com.fineui.java.examples.formtable;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.Form;
@@ -16,6 +17,6 @@ public class TableStyleLayoutContactUs extends PageBase {
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
-        showNotifyRaw(FormSummary.ofForm(Form1));
+        showNotify(new RawHtml(FormSummary.ofForm(Form1)));
     }
 }

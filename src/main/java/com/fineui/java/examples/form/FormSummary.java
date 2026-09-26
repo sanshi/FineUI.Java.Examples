@@ -8,7 +8,8 @@ import com.fineui.java.core.controls.SelectionListField;
 
 /**
  * 表单提交后的字段值汇总（可信 HTML）：把若干列表控件的选中值拼成 {@code 表单字段值：<ul><li>id: 值</li>…</ul>}，
- * 供各示例页的「提交表单」按钮 {@code showNotifyRaw} 展示。CheckBoxList（多选）与 RadioButtonList（单选）
+ * 供各示例页的「提交表单」按钮用 {@code showNotify(new RawHtml(...))} 展示。
+ * CheckBoxList（多选）与 RadioButtonList（单选）
  * 均为 {@code SelectionListField} 子类，故都可传入（各自的选中值经 {@code getSelectedValueList} 读出）。
  */
 public final class FormSummary {

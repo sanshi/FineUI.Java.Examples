@@ -1,5 +1,6 @@
 package com.fineui.java.examples.mobile.datalist;
 
+import com.fineui.java.core.Alert;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.IconHelper;
@@ -60,6 +61,6 @@ public class DataListSelectedValue extends MobilePageBase {
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
         String selectedValue = DataList1.getSelectedValue();
-        showAlert("选中项：" + (selectedValue == null ? "" : selectedValue));
+        Alert.show("选中项：" + (selectedValue == null ? "" : selectedValue));
     }
 }

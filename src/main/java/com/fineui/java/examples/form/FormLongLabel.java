@@ -1,5 +1,6 @@
 package com.fineui.java.examples.form;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.DatePicker;
@@ -24,6 +25,6 @@ public class FormLongLabel extends PageBase {
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
-        showNotifyRaw(FormSummary.ofFields(tbxUserName, tbxMyBox1, NumberBox5, DatePicker1));
+        showNotify(new RawHtml(FormSummary.ofFields(tbxUserName, tbxMyBox1, NumberBox5, DatePicker1)));
     }
 }

@@ -27,24 +27,43 @@ public class Confirm extends MobilePageBase {
     }
 
     public void Button1_Click(Object sender, EventArgs e) {
-        showConfirm("您真的要执行删除操作吗？", "确认操作", MessageBoxIcon.Question);
+        com.fineui.java.core.Confirm.show("您真的要执行删除操作吗？", "确认操作",
+                MessageBoxIcon.Question);
     }
 
     public void Button2_Click(Object sender, EventArgs e) {
         // 按钮填满 + 标题居中 + 无关闭按钮
-        showConfirm("您真的要执行删除操作吗？", "确认操作", MessageBoxIcon.Question,
-                true, false, false, "center", false);
+        com.fineui.java.core.Confirm confirm = createConfirm();
+        confirm.setButtonFill(true);
+        confirm.setTitleAlign("center");
+        confirm.setEnableClose(false);
+        confirm.show();
     }
 
     public void Button3_Click(Object sender, EventArgs e) {
         // 简洁按钮 + 取消按钮在前 + 标题居中 + 无关闭按钮
-        showConfirm("您真的要执行删除操作吗？", "确认操作", MessageBoxIcon.Question,
-                false, true, true, "center", false);
+        com.fineui.java.core.Confirm confirm = createConfirm();
+        confirm.setButtonPlain(true);
+        confirm.setCancelButtonAhead(true);
+        confirm.setTitleAlign("center");
+        confirm.setEnableClose(false);
+        confirm.show();
     }
 
     public void Button6_Click(Object sender, EventArgs e) {
         // 简洁按钮 + 标题居中 + 无关闭按钮
-        showConfirm("您真的要执行删除操作吗？", "确认操作", MessageBoxIcon.Question,
-                false, true, false, "center", false);
+        com.fineui.java.core.Confirm confirm = createConfirm();
+        confirm.setButtonPlain(true);
+        confirm.setTitleAlign("center");
+        confirm.setEnableClose(false);
+        confirm.show();
+    }
+
+    private static com.fineui.java.core.Confirm createConfirm() {
+        com.fineui.java.core.Confirm confirm = new com.fineui.java.core.Confirm();
+        confirm.setMessage("您真的要执行删除操作吗？");
+        confirm.setTitle("确认操作");
+        confirm.setMessageBoxIcon(MessageBoxIcon.Question);
+        return confirm;
     }
 }

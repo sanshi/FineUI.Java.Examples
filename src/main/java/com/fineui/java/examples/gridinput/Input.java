@@ -1,5 +1,6 @@
 package com.fineui.java.examples.gridinput;
 
+import com.fineui.java.core.RawHtml;
 import tools.jackson.databind.JsonNode;
 import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.EventArgs;
@@ -25,7 +26,7 @@ public class Input extends PageBase {
     public void Page_CustomEvent(Object sender, CustomEventArgs e) {
         if ("GetInputs".equals(e.getEventName())) {
             JsonNode inputs = Json.parse(e.getArgument());
-            showNotifyRaw(GridInputSupport.buildResultTable(inputs));
+            showNotify(new RawHtml(GridInputSupport.buildResultTable(inputs)));
         }
     }
 }

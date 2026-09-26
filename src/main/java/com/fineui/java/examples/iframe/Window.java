@@ -16,7 +16,13 @@ import java.time.format.DateTimeFormatter;
 @FineUIPage("iframe/window")
 public class Window extends PageBase {
 
+    com.fineui.java.core.controls.Window Window1;
+
     public void Page_Load(Object sender, EventArgs e) {
+    }
+
+    public void btnUpdateIFrameTitle_Click(Object sender, EventArgs e) {
+        Window1.setIFrameAttribute("title", "服务端已更新标题");
     }
 
     public String getLoadTime() {

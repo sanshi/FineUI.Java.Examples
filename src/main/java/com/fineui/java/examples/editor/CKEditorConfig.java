@@ -1,5 +1,6 @@
 package com.fineui.java.examples.editor;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.HtmlEditor;
@@ -32,7 +33,7 @@ public class CKEditorConfig extends ThirdPartyEditorPageBase {
         if (v == null || v.isEmpty()) {
             showNotify("编辑器内容为空！");
         } else {
-            showNotifyRaw(v);
+            showNotify(new RawHtml(v));
         }
     }
 

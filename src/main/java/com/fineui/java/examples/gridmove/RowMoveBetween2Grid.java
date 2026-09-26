@@ -1,5 +1,6 @@
 package com.fineui.java.examples.gridmove;
 
+import com.fineui.java.core.RawHtml;
 import tools.jackson.databind.JsonNode;
 import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.EventArgs;
@@ -40,6 +41,6 @@ public class RowMoveBetween2Grid extends PageBase {
         }
         sb.append("</ul>");
 
-        showNotifyRaw("已选择列表：" + sb);
+        showNotify(new RawHtml("已选择列表：" + sb));
     }
 }

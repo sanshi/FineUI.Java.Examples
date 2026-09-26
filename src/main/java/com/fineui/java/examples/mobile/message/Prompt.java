@@ -16,30 +16,54 @@ public class Prompt extends MobilePageBase {
     }
 
     public void Button1_Click(Object sender, EventArgs e) {
-        showPrompt("请输入你的姓名？", "请输入", MessageBoxIcon.Question, "notifyit");
+        com.fineui.java.core.Prompt prompt = createPrompt("请输入你的姓名？");
+        prompt.show();
     }
 
     public void Button2_Click(Object sender, EventArgs e) {
         // 按钮填满 + 标题居中 + 无关闭按钮
-        showPrompt("请输入你的姓名？", "请输入", MessageBoxIcon.Question, "notifyit",
-                true, false, false, "center", false, null);
+        com.fineui.java.core.Prompt prompt = createPrompt("请输入你的姓名？");
+        prompt.setButtonFill(true);
+        prompt.setTitleAlign("center");
+        prompt.setEnableClose(false);
+        prompt.show();
     }
 
     public void Button3_Click(Object sender, EventArgs e) {
         // 简洁按钮 + 取消按钮在前 + 标题居中 + 无关闭按钮
-        showPrompt("请输入你的姓名？", "请输入", MessageBoxIcon.Question, "notifyit",
-                false, true, true, "center", false, null);
+        com.fineui.java.core.Prompt prompt = createPrompt("请输入你的姓名？");
+        prompt.setButtonPlain(true);
+        prompt.setCancelButtonAhead(true);
+        prompt.setTitleAlign("center");
+        prompt.setEnableClose(false);
+        prompt.show();
     }
 
     public void Button4_Click(Object sender, EventArgs e) {
         // 简洁按钮 + 密码输入框 + 标题居中 + 无关闭按钮
-        showPrompt("请输入你的密码？", "请输入", MessageBoxIcon.Question, "notifyit",
-                false, true, false, "center", false, "password");
+        com.fineui.java.core.Prompt prompt = createPrompt("请输入你的密码？");
+        prompt.setButtonPlain(true);
+        prompt.setTitleAlign("center");
+        prompt.setEnableClose(false);
+        prompt.setInputType("password");
+        prompt.show();
     }
 
     public void Button5_Click(Object sender, EventArgs e) {
         // 简洁按钮 + 标题居中 + 无关闭按钮
-        showPrompt("请输入你的姓名？", "请输入", MessageBoxIcon.Question, "notifyit",
-                false, true, false, "center", false, null);
+        com.fineui.java.core.Prompt prompt = createPrompt("请输入你的姓名？");
+        prompt.setButtonPlain(true);
+        prompt.setTitleAlign("center");
+        prompt.setEnableClose(false);
+        prompt.show();
+    }
+
+    private static com.fineui.java.core.Prompt createPrompt(String message) {
+        com.fineui.java.core.Prompt prompt = new com.fineui.java.core.Prompt();
+        prompt.setMessage(message);
+        prompt.setTitle("请输入");
+        prompt.setMessageBoxIcon(MessageBoxIcon.Question);
+        prompt.setOkFunction("notifyit");
+        return prompt;
     }
 }

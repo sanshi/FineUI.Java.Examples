@@ -48,17 +48,33 @@ public class Prompt extends PageBase {
             inputType = "password";
         }
 
-        showPrompt(tbxMessage.getValue(), tbxTitle.getValue(), icon, target,
-                multiLine, multiLineHeight, inputType,
-                tbxDefaultValue.getValue(), cbxRequired.isChecked(),
-                tbxID.getValue(), cbxEnableClose.isChecked(),
-                intOrNull(nbWidth.getValue()), intOrNull(nbMinWidth.getValue()), intOrNull(nbMaxWidth.getValue()),
-                "promptOKCallback");
+        com.fineui.java.core.Prompt prompt = new com.fineui.java.core.Prompt();
+        prompt.setMessage(tbxMessage.getValue());
+        prompt.setTitle(tbxTitle.getValue());
+        prompt.setMessageBoxIcon(icon);
+        prompt.setTarget(target);
+        prompt.setMultiLine(multiLine);
+        prompt.setMultiLineHeight(multiLineHeight);
+        prompt.setInputType(inputType);
+        prompt.setDefaultValue(tbxDefaultValue.getValue());
+        prompt.setRequired(cbxRequired.isChecked());
+        prompt.setId(tbxID.getValue());
+        prompt.setEnableClose(cbxEnableClose.isChecked());
+        prompt.setWidth(intOrNull(nbWidth.getValue()));
+        prompt.setMinWidth(intOrNull(nbMinWidth.getValue()));
+        prompt.setMaxWidth(intOrNull(nbMaxWidth.getValue()));
+        prompt.setOkFunction("promptOKCallback");
+        prompt.show();
     }
 
     public void btnCallback_Click(Object sender, EventArgs e) {
-        showPrompt("请输入新名称", "具名回调", MessageBoxIcon.Question,
-                "onPromptAccepted", "onPromptDismissed");
+        com.fineui.java.core.Prompt prompt = new com.fineui.java.core.Prompt();
+        prompt.setMessage("请输入新名称");
+        prompt.setTitle("具名回调");
+        prompt.setMessageBoxIcon(MessageBoxIcon.Question);
+        prompt.setOkFunction("onPromptAccepted");
+        prompt.setCancelFunction("onPromptDismissed");
+        prompt.show();
     }
 
     public void Page_CustomEvent(Object sender, CustomEventArgs e) {

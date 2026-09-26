@@ -3,6 +3,7 @@ package com.fineui.java.examples.message;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.IconHelper;
+import com.fineui.java.core.Alert;
 import com.fineui.java.core.MessageBoxIcon;
 import com.fineui.java.core.enums.IconFont;
 import com.fineui.java.core.enums.Target;
@@ -20,17 +21,28 @@ public class AlertCustomIcon extends PageBase {
     }
 
     public void btnHello_Click(Object sender, EventArgs e) {
-        showAlert("你好 FineUI！", null, MessageBoxIcon.None, Target.Self,
-                IconHelper.namedIconUrl("Book"), null);
+        Alert alert = createAlert(Target.Self);
+        alert.setIconUrl(IconHelper.namedIconUrl("Book"));
+        alert.show();
     }
 
     public void btnHello2_Click(Object sender, EventArgs e) {
-        showAlert("你好 FineUI！", null, MessageBoxIcon.None, Target.Top,
-                "/res/images/success.png", null);
+        Alert alert = createAlert(Target.Top);
+        alert.setIconUrl("/res/images/success.png");
+        alert.show();
     }
 
     public void btnHello3_Click(Object sender, EventArgs e) {
-        showAlert("你好 FineUI！", null, MessageBoxIcon.None, Target.Top,
-                null, IconFont._Car.getName());
+        Alert alert = createAlert(Target.Top);
+        alert.setIconFont(IconFont._Car.getName());
+        alert.show();
+    }
+
+    private static Alert createAlert(Target target) {
+        Alert alert = new Alert();
+        alert.setMessage("你好 FineUI！");
+        alert.setMessageBoxIcon(MessageBoxIcon.None);
+        alert.setTarget(target);
+        return alert;
     }
 }

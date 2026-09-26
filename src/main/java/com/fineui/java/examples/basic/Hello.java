@@ -1,5 +1,6 @@
 package com.fineui.java.examples.basic;
 
+import com.fineui.java.core.Alert;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.MessageBoxIcon;
@@ -16,10 +17,10 @@ public class Hello extends PageBase {
     }
 
     public void btnHello_Click(Object sender, EventArgs e) {
-        showAlert("你好 FineUI！", null, MessageBoxIcon.Warning);
+        Alert.show("你好 FineUI！", null, MessageBoxIcon.Warning);
     }
 
     public void btnHello2_Click(Object sender, EventArgs e) {
-        showAlertInTop("你好 FineUI！", null, MessageBoxIcon.Information);
+        Alert.showInTop("你好 FineUI！", null, MessageBoxIcon.Information);
     }
 }

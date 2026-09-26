@@ -1,5 +1,6 @@
 package com.fineui.java.examples.grid;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.Grid;
@@ -35,6 +36,6 @@ public class HeaderCustomMenu extends PageBase {
         }
 
         sb.append("</table>");
-        showNotifyRaw(sb.toString());
+        showNotify(new RawHtml(sb.toString()));
     }
 }

@@ -1,6 +1,11 @@
 package com.fineui.java.examples.code;
 
 import com.fineui.java.core.FineUIPageBase;
+import com.fineui.java.core.MessageBoxIcon;
+import com.fineui.java.core.Notify;
+import com.fineui.java.core.RawHtml;
+import com.fineui.java.core.enums.Position;
+import com.fineui.java.core.enums.Target;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -15,10 +20,54 @@ import java.util.Map;
  * <p>什么该放进来：需要请求上下文的（如取会话），或者绝大多数页面都可能用到的。只服务某一类场景的
  * （上传、多语言、移动端、WebUploader）放到对应的场景基类；入参自足的纯函数放静态工具类。
  *
- * <p>不重复包装框架已经提供的能力：{@code isPostBack()}、{@code showNotify(...)}、{@code showAlert(...)}、
- * {@code getQueryParam(...)} 等都由父类 {@link FineUIPageBase} 直接给出，本类不再转发一层。
+ * <p>通知采用示例站统一的顶部居中样式；其余页面能力由 {@link FineUIPageBase} 提供。
  */
 public abstract class PageBase extends FineUIPageBase {
+
+    /** 用示例站统一样式显示普通文本通知。 */
+    protected void showNotify(String message) {
+        showNotify(message, MessageBoxIcon.Information);
+    }
+
+    /** 用示例站统一样式显示普通文本通知，并指定图标。 */
+    protected void showNotify(String message, MessageBoxIcon icon) {
+        showNotify(message, icon, Target.Top);
+    }
+
+    /** 用示例站统一样式显示普通文本通知，并指定目标窗口。 */
+    protected void showNotify(String message, MessageBoxIcon icon, Target target) {
+        Notify notify = createNotify(icon, target);
+        notify.setMessage(message);
+        notify.show();
+    }
+
+    /** 用示例站统一样式显示可信 HTML 通知。 */
+    protected void showNotify(RawHtml message) {
+        showNotify(message, MessageBoxIcon.Information);
+    }
+
+    /** 用示例站统一样式显示可信 HTML 通知，并指定图标。 */
+    protected void showNotify(RawHtml message, MessageBoxIcon icon) {
+        showNotify(message, icon, Target.Top);
+    }
+
+    /** 用示例站统一样式显示可信 HTML 通知，并指定目标窗口。 */
+    protected void showNotify(RawHtml message, MessageBoxIcon icon, Target target) {
+        Notify notify = createNotify(icon, target);
+        notify.setMessageRawHtml(message);
+        notify.show();
+    }
+
+    private static Notify createNotify(MessageBoxIcon icon, Target target) {
+        Notify notify = new Notify();
+        notify.setTarget(target);
+        notify.setMessageBoxIcon(icon);
+        notify.setPositionX(Position.Center);
+        notify.setPositionY(Position.Top);
+        notify.setDisplayMilliseconds(3000);
+        notify.setShowHeader(false);
+        return notify;
+    }
 
     /** 当前请求的会话。示例里用它把「编辑后的数据」暂存起来，模拟一张能改的数据表。 */
     protected HttpSession session() {

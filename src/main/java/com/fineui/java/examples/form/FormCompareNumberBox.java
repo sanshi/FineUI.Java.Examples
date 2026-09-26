@@ -1,5 +1,6 @@
 package com.fineui.java.examples.form;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.NumberBox;
@@ -22,6 +23,6 @@ public class FormCompareNumberBox extends PageBase {
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
-        showNotifyRaw(FormSummary.ofFields(NumberBox1, NumberBox2, NumberBox3, NumberBox4));
+        showNotify(new RawHtml(FormSummary.ofFields(NumberBox1, NumberBox2, NumberBox3, NumberBox4)));
     }
 }

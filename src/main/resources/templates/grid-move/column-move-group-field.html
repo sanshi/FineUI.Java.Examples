@@ -7,7 +7,8 @@
 
     <body>
         <th:block layout:fragment="body">
-            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" enable-column-move="true">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id"
+                    enable-column-move="true" enable-same-group-column-move="true">
                 <f:columns>
                     <f:render-field column-id="Year" data-field="Year" header-text="统计年份"></f:render-field>
                     <f:group-field column-id="anhui" header-text="安徽省" text-align="Center">
@@ -46,7 +47,7 @@
             <br /><br />
             <f:button id="btnRefresh" text="刷新本页面（保持列顺序）" click-handler="onRefreshClick"></f:button>
             <br /><br />
-            注：拖动列头可调整列顺序，刷新后仍保持。
+            注：表格启用列移动和同组限制，只能在同一分组内调整列顺序；刷新后仍保持。
         </th:block>
         <th:block layout:fragment="script">
             <script th:src="@{/res/js/grid.js}"></script>

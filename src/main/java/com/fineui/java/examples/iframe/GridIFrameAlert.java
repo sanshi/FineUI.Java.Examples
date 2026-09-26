@@ -10,7 +10,8 @@ import com.fineui.java.examples.code.StudentGridData2;
 
 /**
  * 子页保存后顶层提示并回发（路由 {@code iframe/grid-iframe-alert}）：子页「更新父页面表格」服务端
- * {@code showAlertInTopHidePostBack("保存成功！", ..., "参数 - {ms}")}——提示框弹在顶层页面；点确定后
+ * {@code Alert} 指向顶层窗口，确定回调使用 {@code ActiveWindow.hidePostBackReference(...)}；
+ * 提示框弹在顶层页面，点确定后
  * 隐藏窗体并回发（{@code HidePostBack} 走父页 {@code OnClose} 事件），{@code Window1_Close} 把表格标题改为
  * 「表格 - 回发参数：参数 - {ms}」（区别于 Script 版走 {@code customEvent}）。
  */

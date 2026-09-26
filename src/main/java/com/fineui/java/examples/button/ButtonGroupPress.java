@@ -1,5 +1,6 @@
 package com.fineui.java.examples.button;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.Button;
@@ -21,15 +22,15 @@ public class ButtonGroupPress extends PageBase {
     }
 
     public void ButtonGroup3_PressChanged(Object sender, EventArgs e) {
-        showNotifyRaw(getPressedButton("ButtonGroup3", ButtonGroup3));
+        showNotify(new RawHtml(getPressedButton("ButtonGroup3", ButtonGroup3)));
     }
 
     public void ButtonGroup4_PressChanged(Object sender, EventArgs e) {
-        showNotifyRaw(getPressedButton("ButtonGroup4", ButtonGroup4));
+        showNotify(new RawHtml(getPressedButton("ButtonGroup4", ButtonGroup4)));
     }
 
     public void ButtonGroup5_PressChanged(Object sender, EventArgs e) {
-        showNotifyRaw(getPressedButton("ButtonGroup5", ButtonGroup5));
+        showNotify(new RawHtml(getPressedButton("ButtonGroup5", ButtonGroup5)));
     }
 
     private String getPressedButton(String buttonGroupID, ButtonGroup theGroup) {

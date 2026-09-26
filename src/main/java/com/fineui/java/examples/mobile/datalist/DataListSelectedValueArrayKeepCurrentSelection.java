@@ -1,5 +1,6 @@
 package com.fineui.java.examples.mobile.datalist;
 
+import com.fineui.java.core.Alert;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.IconHelper;
@@ -59,6 +60,6 @@ public class DataListSelectedValueArrayKeepCurrentSelection extends MobilePageBa
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
-        showAlert("选中项：" + String.join(", ", DataList1.getSelectedValueArray()));
+        Alert.show("选中项：" + String.join(", ", DataList1.getSelectedValueArray()));
     }
 }

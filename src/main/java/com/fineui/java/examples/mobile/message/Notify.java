@@ -16,6 +16,10 @@ public class Notify extends MobilePageBase {
     }
 
     public void Button1_Click(Object sender, EventArgs e) {
-        showNotify("数据保存成功！", "通知", MessageBoxIcon.Information);
+        com.fineui.java.core.Notify notify = new com.fineui.java.core.Notify();
+        notify.setMessage("数据保存成功！");
+        notify.setTitle("通知");
+        notify.setMessageBoxIcon(MessageBoxIcon.Information);
+        notify.show();
     }
 }

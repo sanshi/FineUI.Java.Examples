@@ -1,5 +1,6 @@
 package com.fineui.java.examples.form;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.CheckItemEventArgs;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
@@ -52,7 +53,7 @@ public class CheckBoxListItemDataBound extends PageBase {
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
-        showNotifyRaw(FormSummary.of(CheckBoxList1, CheckBoxList2));
+        showNotify(new RawHtml(FormSummary.of(CheckBoxList1, CheckBoxList2)));
     }
 
     /** 演示数据类：Id 为值字段、Name 为文本字段。 */

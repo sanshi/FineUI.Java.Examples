@@ -1,5 +1,6 @@
 package com.fineui.java.examples.formtable;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.CheckBoxList;
@@ -39,7 +40,7 @@ public class TableStyleCheckBoxList extends PageBase {
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
-        showNotifyRaw(FormSummary.ofForm(SimpleForm1));
+        showNotify(new RawHtml(FormSummary.ofForm(SimpleForm1)));
     }
 
     public void CheckBoxList3_SelectedIndexChanged(Object sender, EventArgs e) {

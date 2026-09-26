@@ -1,5 +1,6 @@
 package com.fineui.java.examples.other;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
@@ -26,10 +27,10 @@ public class FormAjaxComplete extends PageBase {
             } catch (InterruptedException ie) {
                 Thread.currentThread().interrupt();
             }
-            showNotifyRaw("表单字段值：<ul class=\"result\"><li>电子邮箱: " + esc(TextBox2.getValue())
+            showNotify(new RawHtml("表单字段值：<ul class=\"result\"><li>电子邮箱: " + esc(TextBox2.getValue())
                     + "</li><li>审批人: " + esc(DropDownList3.getText())
                     + "</li><li>申请数量: " + esc(NumberBox1.getValue())
-                    + "</li><li>描述: " + esc(TextArea1.getValue()) + "</li></ul>");
+                    + "</li><li>描述: " + esc(TextArea1.getValue()) + "</li></ul>"));
         }
     }
 

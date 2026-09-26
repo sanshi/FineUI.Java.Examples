@@ -1,5 +1,6 @@
 package com.fineui.java.examples.form;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.examples.code.PageBase;
@@ -50,6 +51,6 @@ public class RadioButtonList extends PageBase {
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
-        showNotifyRaw(FormSummary.of(RadioButtonList1, RadioButtonList2, rblAutoPostBack, RadioButtonList4));
+        showNotify(new RawHtml(FormSummary.of(RadioButtonList1, RadioButtonList2, rblAutoPostBack, RadioButtonList4)));
     }
 }

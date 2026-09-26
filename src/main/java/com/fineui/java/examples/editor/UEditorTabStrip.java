@@ -1,5 +1,6 @@
 package com.fineui.java.examples.editor;
 
+import com.fineui.java.core.RawHtml;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.HtmlEditor;
@@ -20,7 +21,7 @@ public class UEditorTabStrip extends ThirdPartyEditorPageBase {
     }
 
     public void Button1_Click(Object sender, EventArgs e) {
-        showNotifyRaw("编辑器一：" + htmlEncode(HtmlEditor1.getText())
-                + "<br/>编辑器二：" + htmlEncode(HtmlEditor2.getText()));
+        showNotify(new RawHtml("编辑器一：" + htmlEncode(HtmlEditor1.getText())
+                + "<br/>编辑器二：" + htmlEncode(HtmlEditor2.getText())));
     }
 }

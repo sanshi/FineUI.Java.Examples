@@ -55,7 +55,7 @@ public class DisplayFieldValue extends PageBase {
 
         // ⚠️ 三个值都来自客户端（随回发带回，用户能改），拼进可信 HTML 前必须逐个 HTML 编码——
         // RawHtml 挡的是"用户输入伪造出可信 HTML 实例"，挡不住"我们自己把用户输入拼进去"。
-        showNotifyRaw(new RawHtml(
+        showNotify(new RawHtml(
                 "服务端此刻读到的值：<br/>"
                         + "① 展示型 Label（分组）：<b>%s</b><br/>"
                         + "② 提交型 TextBox（姓名）：<b>%s</b><br/>"
