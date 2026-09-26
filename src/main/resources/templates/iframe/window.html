@@ -13,10 +13,7 @@
             <f:button id="Button1" text="弹出窗体" click-handler="onOpenWindow1Click"></f:button>
             <f:button id="btnUpdateIFrameTitle" text="服务端更新 IFrame 标题"
                 on-click="btnUpdateIFrameTitle_Click"></f:button>
-            <!--/* 注意：本页 iframe 地址刻意保留 PascalCase（/IFrame/Window/IFrameWindow），
-                test-playwright 的 Window.spec 用 frame.url().includes('Window/IFrameWindow') 定位 iframe；
-                路由归一（小写+去连字符）仍能命中 iframe/window/iframe-window。勿改 kebab，否则共享测试挂。 */-->
-            <f:window id="Window1" hidden="true" enable-iframe="true" target="Top" iframe-url="/IFrame/Window/IFrameWindow" enable-maximize="true"
+            <f:window id="Window1" hidden="true" enable-iframe="true" target="Top" iframe-url="/iframe/window/iframe-window" enable-maximize="true"
                 enable-resize="true" height="500" width="800" title="窗体一">
                 <f:iframe-attributes>
                     <f:iframe-attribute key="title" value="窗体内的编辑页面"></f:iframe-attribute>
@@ -25,6 +22,8 @@
                 </f:iframe-attributes>
             </f:window>
             <br />
+            注：title、sandbox 和 referrerpolicy 设置在窗体内部的 iframe 元素上，不改变页面外观。打开浏览器开发者工具查看 Window1 下的 iframe；点击服务端更新按钮后，title 会由“窗体内的编辑页面”变为“服务端已更新标题”，其他属性保留。
+            <br /><br />
 
             页面加载时间：<span th:text="${page.loadTime}">00:00:00</span>
 

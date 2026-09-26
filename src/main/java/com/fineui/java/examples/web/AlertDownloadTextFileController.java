@@ -16,8 +16,7 @@ import java.nio.charset.StandardCharsets;
 @RestController
 public class AlertDownloadTextFileController {
 
-    // GET /Message/AlertDownloadTextFile（PascalCase 路径，测试与页面脚本按此访问；路由对大小写不敏感）
-    @GetMapping("/Message/AlertDownloadTextFile")
+    @GetMapping("/message/alert-download-text-file")
     public ResponseEntity<byte[]> download() {
         byte[] bytes = "这是下载文件的内容！".getBytes(StandardCharsets.UTF_8);
         return ResponseEntity.ok()

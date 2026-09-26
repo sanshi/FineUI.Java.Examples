@@ -25,10 +25,7 @@
         <th:block layout:fragment="script">
             <script>
                 function onButton1Click(event) {
-                    // 注意：url 刻意保留 PascalCase（/IFrame/SelectProvince/IFrameWindow），
-                    // SelectProvince.spec 用 frame.url().includes('SelectProvince/IFrameWindow') 定位 iframe；
-                    // 路由归一仍能命中 iframe/select-province/iframe-window。勿改 kebab，否则共享测试挂。
-                    var url = '/IFrame/SelectProvince/IFrameWindow';
+                    var url = F.resolveUrl('/iframe/select-province/iframe-window');
                     var openUrl = F.formatString("{0}?selected={1}", url, F.urlEncode(F.ui.ddlProvince.getValue()));
 
                     F.ui.Window1.show(openUrl);

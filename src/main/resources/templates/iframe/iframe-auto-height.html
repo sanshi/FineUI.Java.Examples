@@ -13,7 +13,7 @@
             <f:button id="Button6" css-class="marginr" text="垂直分组按钮页面" click-handler="onButtonClick"></f:button>
             <br />
             <br />
-            <f:panel id="Panel1" is-fluid="true" show-border="true" enable-iframe="true" iframe-url="/Button/Button" show-header="true"
+            <f:panel id="Panel1" is-fluid="true" show-border="true" enable-iframe="true" iframe-url="/button/button" show-header="true"
                 title="面板一（面板高度随IFrame的高度自适应）">
                 <f:listeners>
                     <f:listener event="iframeload" handler="onIFrameLoad"></f:listener>
@@ -37,10 +37,13 @@
                     // 重置面板一的高度
                     panel1.setHeight('auto');
 
-                    // 设置面板一的IFrameUrl（PascalCase URL 也能照常命中：路由对大小写和连字符不敏感）
-                    var iframeUrl = me.id === 'Button1' ? '/Button/Button' :
-                        me.id === 'Button2' ? '/Button/ButtonGroup' : '/Button/ButtonGroupVertical';
-                    panel1.setIFrameUrl(iframeUrl);
+                    // 按按钮选择 Java 页面路由，并在当前站点路径下打开。
+                    var iframeUrls = {
+                        Button1: '/button/button',
+                        Button2: '/button/button-group',
+                        Button6: '/button/button-group-vertical'
+                    };
+                    panel1.setIFrameUrl(F.resolveUrl(iframeUrls[me.id]));
                 }
 
 

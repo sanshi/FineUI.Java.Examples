@@ -23,8 +23,8 @@ import java.util.Map;
  * {@code {recordCount, data}}；③ 带合计 {@code {data, summaryData}}。字段严格投影到各示例所需的列，
  * 避免把演示数据里无关字段（及日期对象）一并下发。
  *
- * <p>REST 端点为精确路径匹配（不像页面路由那样大小写/连字符归一化），故每个接口同时登记
- * kebab 与 PascalCase 两种拼写，页面 {@code data-url} 用 kebab、直接访问也可用 PascalCase。
+ * <p>REST 端点为精确路径匹配（不像页面路由那样大小写/连字符归一化），
+ * 页面 {@code data-url} 与这里登记的地址都使用小写连字符。
  */
 @RestController
 public class GridDataUrlDataController {
