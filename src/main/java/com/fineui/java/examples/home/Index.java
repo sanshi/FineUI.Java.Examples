@@ -194,7 +194,8 @@ public class Index extends PageBase {
                     continue;   // 目录下无可见叶子 → 隐藏
                 }
                 node.setSelectable(false);
-                node.setIconFontName(iconFont);
+                // 目录是否显示企业版图标由自身标记决定，避免把混合示例目录误判为企业版。
+                node.setIconFontName(isCorp ? "_Enterprise" : iconFont);
                 if (!searchText.isEmpty()) {
                     node.setExpanded(true);   // 搜索时展开命中的目录
                 }
