@@ -22,7 +22,7 @@ public class Loading extends PageBase {
     public List<String> getImageUrls() {
         List<String> urls = new ArrayList<>(IMAGE_FOLDERS.length);
         for (String folder : IMAGE_FOLDERS) {
-            urls.add("/F/images/loading/_" + folder + "/ffffff_444444.gif");
+            urls.add("/FineUI/images/loading/_" + folder + "/ffffff_444444.gif");
         }
         return urls;
     }
