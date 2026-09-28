@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/** 验证不经过 FineUI 页面控制器的 HTML 响应仍有明确的脚本策略。 */
+/** 验证 FineUI 页面、编辑器例外和传统登录页各自的脚本策略边界。 */
 @SpringBootTest
 @AutoConfigureMockMvc
 class StrictCspCoverageTest {
@@ -47,9 +47,10 @@ class StrictCspCoverageTest {
     }
 
     @Test
-    void htmlErrorResponseDisablesScripts() throws Exception {
+    void htmlErrorResponseDoesNotInheritFineUiCsp() throws Exception {
+        // 未注册路由在建立 FineUI 页面上下文前就返回 404，不应套用普通页面的 CSP 策略。
         mockMvc.perform(get("/route-that-does-not-exist").accept(MediaType.TEXT_HTML))
                 .andExpect(status().isNotFound())
-                .andExpect(header().string("Content-Security-Policy", "script-src 'none';"));
+                .andExpect(header().doesNotExist("Content-Security-Policy"));
     }
 }
