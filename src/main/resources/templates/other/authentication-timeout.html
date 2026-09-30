@@ -33,12 +33,23 @@
         <th:block layout:fragment="script">
             <script>
                 function onRegisterHookClick(event) {
-                    F.beforeAjaxSuccess(function(data, textStatus, xhr, command) {
-                        // 本例用服务端重定向模拟登录超时，不需要解析响应脚本文本。
-                        if (command && command.type === 'page.redirect') {
+                    F.beforeAjaxSuccess(function(data, textStatus, xhr) {
+                        // Java 回发的原文是 JSON；成功钩子在整份响应应用前调用一次。
+                        // 此页按钮回发的典型响应：
+                        // {
+                        //     "commands": [
+                        //         {"type": "page.redirect", "url": "/?ReturnUrl=%2fother%2fauthentication-timeout"}
+                        //     ]
+                        // }
+                        // find 在 commands 数组中找出跳转命令。
+                        var commands = JSON.parse(data).commands || [];
+                        var redirect = commands.find(function(command) {
+                            return command.type === 'page.redirect';
+                        });
+                        if (redirect) {
                             if (!window.confirm('登陆超时，是否跳转到首页？')) {
                                 // 继续留在当前页面
-                                // 显式返回 false，阻止框架自动跳转。
+                                // 返回 false 会阻止本次响应中的所有更新和命令。
                                 return false;
                             }
                         }

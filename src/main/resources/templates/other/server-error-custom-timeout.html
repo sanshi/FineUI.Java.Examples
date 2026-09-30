@@ -14,7 +14,7 @@
             <!--/* 站点公共 JS（showCenterNotify 等全局函数） */-->
             <script th:src="@{/res/js/common.js}"></script>
             <script>
-                F.beforeAjaxError(function(data, textStatus) {
+                F.beforeAjaxError(function(data, textStatus, xhr) {
                     if (textStatus === 'timeout') {
                         showCenterNotify('AJAX请求超时！', 'error');
                     }

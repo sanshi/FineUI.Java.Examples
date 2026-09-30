@@ -6,7 +6,7 @@ import com.fineui.java.examples.code.PageBase;
 
 /**
  * 服务器错误（自行拦截）演示页面模型类（路由 {@code other/server-error-custom}）：点击按钮触发服务端异常
- * （500），页面用 {@code F.beforeAjaxError} 钩子自定义错误处理——解析返回内容并弹自定义 alert，
+ * （500），页面用 {@code F.beforeAjaxError} 钩子读取响应状态并弹自定义 alert，
  * 返回 false 阻止默认错误窗体。
  */
 @FineUIPage("other/server-error-custom")
