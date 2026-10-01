@@ -77,11 +77,8 @@
                     // 自定义回发，设置完成时回调complete
                     F.doPostBack({
                         eventName: 'Form1_Submit',
-                        // 不显示页面级加载动画（FineUI.Java 的 F.doPostBack 仅支持
-                        // eventName/eventArgument/eventTarget/complete，本键为兼容占位，无实际效果）
-                        enableAjaxLoading: false,
-                        complete: function(data) {
-                            // AJAX回发结束时隐藏面板加载动画
+                        complete: function(data, textStatus, xhr) {
+                            // 传输结束后、JSON 响应应用前隐藏表单加载动画；错误和超时也会执行。
                             form1.hideLoading();
                         }
                     });
