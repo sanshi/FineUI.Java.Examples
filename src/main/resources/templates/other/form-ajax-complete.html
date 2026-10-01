@@ -77,6 +77,8 @@
                     // 自定义回发，设置完成时回调complete
                     F.doPostBack({
                         eventName: 'Form1_Submit',
+                        // 只显示表单自身的加载动画
+                        enableAjaxLoading: false,
                         complete: function(data, textStatus, xhr) {
                             // 传输结束后、JSON 响应应用前隐藏表单加载动画；错误和超时也会执行。
                             form1.hideLoading();
