@@ -11,7 +11,9 @@
             <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="简单下拉列表（选中项改变事件）"
                 show-header="true">
                 <f:items>
-                    <f:drop-down-list id="DropDownList1" on-selected-index-changed="DropDownList1_SelectedIndexChanged">
+                    <f:drop-down-list id="DropDownList1" on-selected-index-changed="DropDownList1_SelectedIndexChanged"
+                        ajax-loading-type="Mask" show-ajax-loading-mask-text="true"
+                        ajax-loading-mask-text="正在处理下拉列表变更...">
                         <f:list-item text="可选项1" value="Value1"></f:list-item>
                         <f:list-item text="可选项2（不可选择）" value="Value2" enable-select="false"></f:list-item>
                         <f:list-item text="可选项3（不可选择）" value="Value3" enable-select="false"></f:list-item>
@@ -34,7 +36,7 @@
             测试用例：
             <ul>
                 <li>
-                    初始文本：可选项1；点击触发图标，显示下拉列表；点击：可选项5；显示文本：可选项5；触发回发事件
+                    初始文本：可选项1；点击触发图标，显示下拉列表；点击：可选项5；显示自定义回发提示，更新文本为可选项5
                 </li>
                 <li>
                     初始文本：可选项1；点击按钮：选中[可选项6]；显示文本：可选项6；<strong class="highlight">不会</strong>触发回发事件
