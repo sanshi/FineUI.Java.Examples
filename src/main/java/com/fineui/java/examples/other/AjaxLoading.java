@@ -2,6 +2,7 @@ package com.fineui.java.examples.other;
 
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.controls.Button;
 import com.fineui.java.examples.code.PageBase;
 
 /**
@@ -12,6 +13,8 @@ import com.fineui.java.examples.code.PageBase;
  */
 @FineUIPage("other/ajax-loading")
 public class AjaxLoading extends PageBase {
+
+    protected Button Button7;
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
@@ -26,5 +29,10 @@ public class AjaxLoading extends PageBase {
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    /** 更新按钮的回发配置，供下一次点击验证增量响应是否生效。 */
+    public void EnableButton7Disable_Click(Object sender, EventArgs e) {
+        Button7.setDisableControlBeforePostBack(true);
     }
 }

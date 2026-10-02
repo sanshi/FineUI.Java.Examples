@@ -26,6 +26,13 @@
                 ajax-loading-mask-text="这是自定义提示文本"></f:button>
             <br />
             <br />
+            <f:button id="Button7" text="回发时保持按钮可用" on-click="Button1_Click"
+                disable-control-before-post-back="false"></f:button>
+            <br />
+            <br />
+            <f:button id="Button8" text="启用按钮防重复点击" on-click="EnableButton7Disable_Click"></f:button>
+            <br />
+            <br />
             注：
             <ul>
                 <li>为了观察Ajax提示信息，所有按钮动作在后台都会睡眠1秒钟。</li>
