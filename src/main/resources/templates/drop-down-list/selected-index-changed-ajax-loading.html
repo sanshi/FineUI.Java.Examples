@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 下拉列表回发加载提示</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+
+            <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false"
+                show-border="true" show-header="true" title="下拉列表（回发加载提示）">
+                <f:items>
+                    <f:drop-down-list id="DropDownListPageDefault" label="默认遮罩"
+                        on-selected-index-changed="DropDownList_SelectedIndexChanged">
+                        <f:list-item text="可选项1" value="Value1"></f:list-item>
+                        <f:list-item text="可选项2" value="Value2"></f:list-item>
+                        <f:list-item text="可选项3" value="Value3"></f:list-item>
+                    </f:drop-down-list>
+
+                    <f:drop-down-list id="DropDownListNoLoading" label="关闭提示"
+                        on-selected-index-changed="DropDownList_SelectedIndexChanged" enable-ajax-loading="false">
+                        <f:list-item text="可选项1" value="Value1"></f:list-item>
+                        <f:list-item text="可选项2" value="Value2"></f:list-item>
+                        <f:list-item text="可选项3" value="Value3"></f:list-item>
+                    </f:drop-down-list>
+
+                    <f:drop-down-list id="DropDownListDefault" label="顶部文字"
+                        on-selected-index-changed="DropDownList_SelectedIndexChanged"
+                        ajax-loading-type="default" ajax-loading-text="正在更新选中项...">
+                        <f:list-item text="可选项1" value="Value1"></f:list-item>
+                        <f:list-item text="可选项2" value="Value2"></f:list-item>
+                        <f:list-item text="可选项3" value="Value3"></f:list-item>
+                    </f:drop-down-list>
+
+                    <f:drop-down-list id="DropDownListMaskText" label="遮罩文字"
+                        on-selected-index-changed="DropDownList_SelectedIndexChanged"
+                        ajax-loading-type="mask" show-ajax-loading-mask-text="true"
+                        ajax-loading-mask-text="正在处理下拉列表变更...">
+                        <f:list-item text="可选项1" value="Value1"></f:list-item>
+                        <f:list-item text="可选项2" value="Value2"></f:list-item>
+                        <f:list-item text="可选项3" value="Value3"></f:list-item>
+                    </f:drop-down-list>
+                </f:items>
+            </f:simple-form>
+
+            <br />
+            <f:label id="labResult"></f:label>
+            <br />
+            <br />
+            注：为了观察 Ajax 加载提示，四个下拉列表的选中项改变事件都会在后台等待 1 秒。
+
+        </th:block>
+    </body>
+
+</html>

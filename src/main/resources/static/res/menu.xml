@@ -385,6 +385,8 @@
 			<TreeNode Text="事件">
 				<TreeNode Text="下拉列表（选中项改变事件）" NavigateUrl="/drop-down-list/selected-index-changed">
 				</TreeNode>
+				<TreeNode Text="下拉列表（回发加载提示）" NavigateUrl="/drop-down-list/selected-index-changed-ajax-loading">
+				</TreeNode>
 				<TreeNode Text="下拉列表（选中项改变事件，可编辑，强制选择）" NavigateUrl="/drop-down-list/selected-index-changed-enable-edit">
 				</TreeNode>
 				<TreeNode Text="下拉列表（选中项改变事件，可编辑，用户输入值）" NavigateUrl="/drop-down-list/selected-index-changed-enable-edit-no-force-selection">
