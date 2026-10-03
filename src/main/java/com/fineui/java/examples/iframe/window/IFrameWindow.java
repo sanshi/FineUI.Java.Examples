@@ -17,11 +17,8 @@ public class IFrameWindow extends PageBase {
 
     Panel Panel1;
 
-    public void Page_Load(Object sender, EventArgs e) {
-        if (!isPostBack()) {
-            // 表单改变确认属页面级配置：只首屏下发（对齐约定：页面配置须放 if(!isPostBack()) 内）
-            getPageManager().enableFormChangeConfirm(true);
-        }
+    public void Page_Get(Object sender, EventArgs e) {
+        getPageManager().enableFormChangeConfirm(true);
     }
 
     public void btnClosePostBack_Click(Object sender, EventArgs e) {

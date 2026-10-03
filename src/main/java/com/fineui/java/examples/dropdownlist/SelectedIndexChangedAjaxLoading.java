@@ -2,6 +2,7 @@ package com.fineui.java.examples.dropdownlist;
 
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.enums.AjaxLoadingType;
 import com.fineui.java.core.controls.DropDownList;
 import com.fineui.java.core.controls.Label;
 import com.fineui.java.examples.code.PageBase;
@@ -12,10 +13,8 @@ public class SelectedIndexChangedAjaxLoading extends PageBase {
 
     protected Label labResult;
 
-    public void Page_Load(Object sender, EventArgs e) {
-        if (!isPostBack()) {
-            getPageManager().set("ajaxLoadingType", "mask");
-        }
+    public void Page_Get(Object sender, EventArgs e) {
+        getPageManager().ajaxLoadingType(AjaxLoadingType.Mask);
     }
 
     public void DropDownList_SelectedIndexChanged(Object sender, EventArgs e) {

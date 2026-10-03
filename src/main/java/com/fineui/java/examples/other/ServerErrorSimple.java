@@ -13,10 +13,8 @@ import com.fineui.java.examples.code.PageBase;
 @FineUIPage("other/server-error-simple")
 public class ServerErrorSimple extends PageBase {
 
-    public void Page_Load(Object sender, EventArgs e) {
-        if (!isPostBack()) {
-            getPageManager().simpleError(true);
-        }
+    public void Page_Get(Object sender, EventArgs e) {
+        getPageManager().simpleError(true);
     }
 
     public void Button5_Click(Object sender, EventArgs e) {

@@ -11,9 +11,12 @@ import com.fineui.java.examples.code.StudentGridData;
 public class Dashboard extends PageBase {
     Grid Grid1;
 
+    public void Page_Get(Object sender, EventArgs e) {
+        getPageManager().watermark(true).watermarkText("I❤︎FineUI");
+    }
+
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
-            getPageManager().set("watermark", true).set("watermarkText", "I❤︎FineUI");
             Grid1.setDataSource(StudentGridData.rows());
             Grid1.dataBind();
         }

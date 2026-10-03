@@ -16,9 +16,12 @@ public class PagerAutoSimpleMode extends PageBase {
 
     Grid Grid1;
 
+    public void Page_Get(Object sender, EventArgs e) {
+        getPageManager().gridPagerAutoSimpleMode(true);
+    }
+
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
-            getPageManager().gridPagerAutoSimpleMode(true);
             loadData();
         }
     }

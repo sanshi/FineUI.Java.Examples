@@ -2,6 +2,7 @@ package com.fineui.java.examples.other;
 
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.enums.AjaxLoadingType;
 import com.fineui.java.core.controls.Button;
 import com.fineui.java.examples.code.PageBase;
 
@@ -16,10 +17,8 @@ public class AjaxLoading extends PageBase {
 
     protected Button Button7;
 
-    public void Page_Load(Object sender, EventArgs e) {
-        if (!isPostBack()) {
-            getPageManager().set("ajaxLoadingType", "mask");
-        }
+    public void Page_Get(Object sender, EventArgs e) {
+        getPageManager().ajaxLoadingType(AjaxLoadingType.Mask);
     }
 
     /** 所有按钮共用的回发处理器：休眠 1 秒，便于观察 Ajax 提示信息。 */
