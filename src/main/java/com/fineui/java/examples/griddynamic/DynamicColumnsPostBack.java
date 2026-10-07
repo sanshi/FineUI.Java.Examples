@@ -78,7 +78,7 @@ public class DynamicColumnsPostBack extends PageBase {
 
         RenderField logTime = field("注册日期", "LogTime", FieldType.Date, null, 100);
         logTime.setRenderer(Renderer.Date);
-        logTime.setRendererArgument("yyyy/MM/dd");
+        logTime.setRendererArgument("yyyy-MM-dd");
         columns.add(logTime);
 
         RenderField expander = new RenderField();
@@ -119,7 +119,7 @@ public class DynamicColumnsPostBack extends PageBase {
         logTime.setTextAlign(TextAlign.Center);
         logTime.setFieldType(FieldType.Date);
         logTime.setRenderer(Renderer.Date);
-        logTime.setRendererArgument("yyyy/MM/dd");
+        logTime.setRendererArgument("yyyy-MM-dd");
         logTime.setHidden(true);   // 回发动态创建的列默认隐藏「记录时间」
         columns.add(logTime);
 

@@ -32,7 +32,7 @@ public class Student {
     private int group;
 
     @Display(nameKey = "Display_Student_EntranceDate")
-    @DisplayFormat(pattern = "yyyy/MM/dd")
+    @DisplayFormat(pattern = "yyyy-MM-dd")
     private LocalDate entranceDate;
 
     public String getName() {

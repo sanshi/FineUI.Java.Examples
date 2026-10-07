@@ -31,9 +31,9 @@
                         </f:editor>
                     </f:render-field>
                     <f:render-field header-text="入学日期" column-id="EntranceDate" data-field="EntranceDate" field-type="Date" renderer="Date"
-                        renderer-argument="yyyy/MM/dd HH:mm" width="200">
+                        renderer-argument="yyyy-MM-dd HH:mm" width="200">
                         <f:editor>
-                            <f:date-picker id="dpEntranceDate" required="true" date-format-string="yyyy/MM/dd HH:mm" show-time="true"
+                            <f:date-picker id="dpEntranceDate" required="true" date-format-string="yyyy-MM-dd HH:mm" show-time="true"
                                 show-second="false"></f:date-picker>
                         </f:editor>
                     </f:render-field>
@@ -55,8 +55,8 @@
             <br>
             为了正确的显示和编辑时间，请注意如下属性：
             <ul>
-                <li>入学日期列（RenderField）：field-type="Date" renderer="Date" renderer-argument="yyyy/MM/dd HH:mm"</li>
-                <li>入学日期的编辑表单字段（DatePicker）：date-format-string="yyyy/MM/dd HH:mm" show-time="true" show-second="false"</li>
+                <li>入学日期列（RenderField）：field-type="Date" renderer="Date" renderer-argument="yyyy-MM-dd HH:mm"</li>
+                <li>入学日期的编辑表单字段（DatePicker）：date-format-string="yyyy-MM-dd HH:mm" show-time="true" show-second="false"</li>
             </ul>
 
         </th:block>

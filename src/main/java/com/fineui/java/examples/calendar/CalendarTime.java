@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 @FineUIPage("calendar/calendar-time")
 public class CalendarTime extends PageBase {
 
-    private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm:ss";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     protected com.fineui.java.core.controls.Calendar Calendar1;
     protected Button Button1;

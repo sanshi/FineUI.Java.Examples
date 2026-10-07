@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 @FineUIPage("calendar/calendar-day-range-confirm-button")
 public class CalendarDayRangeConfirmButton extends PageBase {
 
-    private static final String DATE_FORMAT = "yyyy/MM/dd";
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     private final LocalDateTime startDate = LocalDateTime.now().plusDays(2);
     private final LocalDateTime endDate = LocalDateTime.now().plusDays(20);

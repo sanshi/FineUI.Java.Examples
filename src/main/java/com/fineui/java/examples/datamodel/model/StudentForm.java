@@ -27,7 +27,7 @@ public class StudentForm {
     @Size(max = 200)
     private String major;
     @Display(name = "注册日期")
-    @DisplayFormat(pattern = "yyyy/MM/dd")
+    @DisplayFormat(pattern = "yyyy-MM-dd")
     private LocalDate entranceDate;
     private Integer entranceYear;
     private Integer group;

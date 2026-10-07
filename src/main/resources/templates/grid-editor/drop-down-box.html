@@ -32,7 +32,7 @@
                                                 header-text="性别"></f:render-field>
                                             <f:render-field column-id="EntranceYear" data-field="EntranceYear" header-text="入学年份"></f:render-field>
                                             <f:render-field column-id="EntranceDate" data-field="EntranceDate" field-type="Date" renderer="Date"
-                                                renderer-argument="yyyy/MM/dd" header-text="入学日期"></f:render-field>
+                                                renderer-argument="yyyy-MM-dd" header-text="入学日期"></f:render-field>
                                             <f:render-check-field column-id="AtSchool" data-field="AtSchool" header-text="是否在校"></f:render-check-field>
                                             <f:render-field column-id="Major" data-field="Major" header-text="所学专业" expand-unused-space="true"></f:render-field>
                                         </f:columns>
@@ -56,7 +56,7 @@
                         </f:editor>
                     </f:render-field>
                     <f:render-field header-text="入学日期" column-id="EntranceDate" data-field="EntranceDate" field-type="Date" renderer="Date"
-                        renderer-argument="yyyy/MM/dd" width="150">
+                        renderer-argument="yyyy-MM-dd" width="150">
                         <f:editor>
                             <f:date-picker id="dpEntranceDate" required="true"></f:date-picker>
                         </f:editor>

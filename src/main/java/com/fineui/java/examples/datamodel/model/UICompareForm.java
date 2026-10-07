@@ -24,11 +24,11 @@ public class UICompareForm {
     private String confirmPassword;
     @Display(name = "开始日期")
     @NotNull(message = "{0}不能为空！")
-    @DisplayFormat(pattern = "yyyy/MM/dd")
+    @DisplayFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
     @Display(name = "结束日期")
     @NotNull(message = "{0}不能为空！")
-    @DisplayFormat(pattern = "yyyy/MM/dd")
+    @DisplayFormat(pattern = "yyyy-MM-dd")
     @UICompare(value = "startDate", operator = ComparisonOperator.GREATER_THAN, message = "{0}应该大于{1}！")
     private LocalDate endDate;
     @Display(name = "数字 1")

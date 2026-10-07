@@ -10,11 +10,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/** 带时间（不含秒）的日期范围日历（路由 {@code calendar/calendar-day-range-time-show-second}）：格式 yyyy/MM/dd HH:mm，时间列不显示秒。 */
+/** 带时间（不含秒）的日期范围日历（路由 {@code calendar/calendar-day-range-time-show-second}）：格式 yyyy-MM-dd HH:mm，时间列不显示秒。 */
 @FineUIPage("calendar/calendar-day-range-time-show-second")
 public class CalendarDayRangeTimeShowSecond extends PageBase {
 
-    private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm";
 
     protected com.fineui.java.core.controls.Calendar Calendar1;
     protected Button Button1;

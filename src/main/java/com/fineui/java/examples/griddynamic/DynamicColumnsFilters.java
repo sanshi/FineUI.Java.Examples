@@ -77,7 +77,7 @@ public class DynamicColumnsFilters extends PageBase {
 
         RenderField logTime = field("注册日期", "LogTime", FieldType.Date, null, 100);
         logTime.setRenderer(Renderer.Date);
-        logTime.setRendererArgument("yyyy/MM/dd");
+        logTime.setRendererArgument("yyyy-MM-dd");
         columns.add(logTime);
 
         return columns;

@@ -31,7 +31,7 @@ import java.util.Set;
 public class ExcelExportController {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
-    private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final String META = "<meta http-equiv=\"Content-Type\" content=\"application/vnd.ms-excel;charset=utf-8\"/>";
 
     // 导出全部列（Excel 页）

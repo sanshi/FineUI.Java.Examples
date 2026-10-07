@@ -30,12 +30,12 @@ public class UICompareModel {
 
     @Display(nameKey = "Display_StartDate")
     @NotNull(message = "#{ErrorMessage_Required}")
-    @DisplayFormat(pattern = "yyyy/MM/dd")
+    @DisplayFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
     @Display(nameKey = "Display_EndDate")
     @NotNull(message = "#{ErrorMessage_Required}")
-    @DisplayFormat(pattern = "yyyy/MM/dd")
+    @DisplayFormat(pattern = "yyyy-MM-dd")
     @UICompare(value = "startDate", operator = ComparisonOperator.GREATER_THAN, message = "#{ErrorMessage_UICompare_GreaterThan}")
     private LocalDate endDate;
 

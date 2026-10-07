@@ -34,7 +34,7 @@ public class Student {
     private int group;
 
     @Display(name = "注册日期")
-    @DisplayFormat(pattern = "yyyy/MM/dd")
+    @DisplayFormat(pattern = "yyyy-MM-dd")
     private LocalDate entranceDate;
 
     @Display(name = "状态")

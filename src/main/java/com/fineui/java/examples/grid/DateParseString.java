@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * 日期列（字符串数据，DateParseString）（路由 {@code grid/date-parse-string}）：
  * 入学日期列的数据是 {@code MM/dd/yyyy} 格式的字符串，用 {@code date-parse-string}
- * 指定解析格式，配合 Date 渲染器按 {@code yyyy/MM/dd} 输出。
+ * 指定解析格式，配合 Date 渲染器按 {@code yyyy-MM-dd} 输出。
  */
 @FineUIPage("grid/date-parse-string")
 public class DateParseString extends PageBase {

@@ -68,7 +68,7 @@ public class DynamicColumnsLocking extends PageBase {
         columns.add(field("分组", "Group", null, "renderGroup", 80, false, false));
         RenderField logTime = field("注册日期", "LogTime", FieldType.Date, null, 100, false, false);
         logTime.setRenderer(Renderer.Date);
-        logTime.setRendererArgument("yyyy/MM/dd");
+        logTime.setRendererArgument("yyyy-MM-dd");
         columns.add(logTime);
         return columns;
     }
@@ -91,7 +91,7 @@ public class DynamicColumnsLocking extends PageBase {
         columns.add(field("分组", "Group", null, "renderGroup", 80, true, false));
         RenderField logTime = field("注册日期", "LogTime", FieldType.Date, null, 100, true, false);
         logTime.setRenderer(Renderer.Date);
-        logTime.setRendererArgument("yyyy/MM/dd");
+        logTime.setRendererArgument("yyyy-MM-dd");
         columns.add(logTime);
         return columns;
     }

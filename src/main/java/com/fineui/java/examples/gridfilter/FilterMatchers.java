@@ -123,7 +123,7 @@ public final class FilterMatchers {
             return null;
         }
         String s = v.toString().trim();
-        // 兼容 yyyy/MM/dd、yyyy-MM-dd、及带时分秒的串（取日期部分）
+        // 兼容 yyyy-MM-dd、yyyy-MM-dd、及带时分秒的串（取日期部分）
         s = s.replace('/', '-');
         int sp = s.indexOf(' ');
         if (sp > 0) {

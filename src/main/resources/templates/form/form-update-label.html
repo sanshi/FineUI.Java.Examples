@@ -38,7 +38,7 @@
                                 <f:list-item text="老大丙" value="2"></f:list-item>
                             </f:drop-down-list>
                             <f:date-picker required="true" label="审批时间" empty-text="请输入审批时间" id="dpApplyTime" show-red-star="true"
-                                date-format-string="yyyy/MM/dd"></f:date-picker>
+                                date-format-string="yyyy-MM-dd"></f:date-picker>
                         </f:items>
                     </f:form-row>
                     <f:form-row>
@@ -113,7 +113,7 @@
                 }
 
                 function onModifyMaxValueClick(event) {
-                    var datestr = F.formatDate('yyyy/MM/dd', new Date());
+                    var datestr = F.formatDate('yyyy-MM-dd', new Date());
                     F.ui.dpApplyTime.setMaxValue('2016-11-22');
                 }
 

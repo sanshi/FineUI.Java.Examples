@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 @FineUIPage("calendar/calendar-time-show-second")
 public class CalendarTimeShowSecond extends PageBase {
 
-    private static final String DATE_FORMAT = "yyyy/MM/dd HH:mm";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm";
 
     protected com.fineui.java.core.controls.Calendar Calendar1;
     protected Button Button1;

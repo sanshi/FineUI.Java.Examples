@@ -72,7 +72,7 @@ public class DynamicColumnsSorting extends PageBase {
         columns.add(field("入学年份", "EntranceYear", FieldType.Int, null, 100, "EntranceYear"));
         RenderField logTime = field("注册日期", "LogTime", FieldType.Date, null, 100, null);
         logTime.setRenderer(Renderer.Date);
-        logTime.setRendererArgument("yyyy/MM/dd");
+        logTime.setRendererArgument("yyyy-MM-dd");
         columns.add(logTime);
         RenderField desc = field("描述", "Desc", null, null, 0, null);
         desc.setExpandUnusedSpace(true);
@@ -104,7 +104,7 @@ public class DynamicColumnsSorting extends PageBase {
         columns.add(field("分组", "Group", null, "renderGroup", 80, null));
         RenderField logTime = field("注册日期", "LogTime", FieldType.Date, null, 100, null);
         logTime.setRenderer(Renderer.Date);
-        logTime.setRendererArgument("yyyy/MM/dd");
+        logTime.setRendererArgument("yyyy-MM-dd");
         columns.add(logTime);
         return columns;
     }

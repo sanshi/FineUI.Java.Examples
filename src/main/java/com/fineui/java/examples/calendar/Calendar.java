@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 @FineUIPage("calendar/calendar")
 public class Calendar extends PageBase {
 
-    private static final String DATE_FORMAT = "yyyy/MM/dd";
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     // 字段类型用全限定名，避免与本示例页类名 Calendar 冲突。
     protected com.fineui.java.core.controls.Calendar Calendar1;

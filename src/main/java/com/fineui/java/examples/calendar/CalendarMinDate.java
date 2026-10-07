@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 @FineUIPage("calendar/calendar-min-date")
 public class CalendarMinDate extends PageBase {
 
-    private static final String DATE_FORMAT = "yyyy/MM/dd";
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     protected com.fineui.java.core.controls.Calendar Calendar1;
     protected Button Button1;
