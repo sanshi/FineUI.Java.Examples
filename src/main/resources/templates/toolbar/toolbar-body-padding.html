@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>工具栏主体内边距</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel id="PanelDefault" width="600" title="默认内边距" show-border="true">
+                <f:toolbars>
+                    <f:toolbar id="ToolbarDefault">
+                        <f:items>
+                            <f:button id="FirstDefault" text="第一项" width="80" />
+                            <f:button id="LastDefault" text="第二项" width="120" />
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+            <br />
+            <f:panel id="PanelZero" width="600" title="零内边距：保持默认效果" show-border="true">
+                <f:toolbars>
+                    <f:toolbar id="ToolbarZero" body-padding="0">
+                        <f:items>
+                            <f:button id="FirstZero" text="第一项" width="80" />
+                            <f:button id="LastZero" text="第二项" width="120" />
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+            <br />
+            <f:panel id="PanelLeft" width="600" title="左对齐：四周 12px" show-border="true">
+                <f:toolbars>
+                    <f:toolbar id="ToolbarLeft" body-padding="12">
+                        <f:items>
+                            <f:button id="FirstLeft" text="第一项" width="80" />
+                            <f:button id="LastLeft" text="第二项" width="120" />
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+            <br />
+            <f:panel id="PanelRight" width="600" title="右对齐：上下 8px，左右 16px" show-border="true">
+                <f:toolbars>
+                    <f:toolbar id="ToolbarRight" body-padding="8px 16px" toolbar-align="Right">
+                        <f:items>
+                            <f:button id="FirstRight" text="第一项" width="80" />
+                            <f:button id="LastRight" text="第二项" width="120" />
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+            <br />
+            <f:panel id="PanelCenter" width="600" title="居中：四边内边距不同" show-border="true">
+                <f:toolbars>
+                    <f:toolbar id="ToolbarCenter" body-padding="3px 17px 11px 29px" toolbar-align="Center">
+                        <f:items>
+                            <f:button id="FirstCenter" text="第一项" width="80" />
+                            <f:button id="LastCenter" text="第二项" width="120" />
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+            <br />
+            <f:panel id="PanelFill" width="600" title="两个填充项：左中右排列" show-border="true">
+                <f:toolbars>
+                    <f:toolbar id="ToolbarFill" body-padding="3px 17px 11px 29px">
+                        <f:items>
+                            <f:button id="FirstFill" text="第一项" width="80" />
+                            <f:toolbar-fill id="FillLeft" />
+                            <f:button id="CenterFill" text="中间项" width="100" />
+                            <f:toolbar-fill id="FillRight" />
+                            <f:button id="LastFill" text="第二项" width="120" />
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+            <br />
+            <f:panel id="PanelMulti" width="220" title="窄工具栏自动换行" show-border="true">
+                <f:toolbars>
+                    <f:toolbar id="ToolbarMulti" body-padding="3px 17px 11px 29px">
+                        <f:items>
+                            <f:button id="FirstMulti" text="第一项" width="80" />
+                            <f:button id="LastMulti" text="第二项" width="120" />
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+            <br />
+            <f:panel id="PanelHBox" width="600" title="显式 HBox 布局" show-border="true">
+                <f:toolbars>
+                    <f:toolbar id="ToolbarHBox" body-padding="8px 16px" layout="HBox" box-config-space="5">
+                        <f:items>
+                            <f:button id="FirstHBox" text="第一项" width="80" />
+                            <f:button id="LastHBox" text="第二项" box-flex="1" />
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:panel>
+            <br />
+            <p>BodyPadding 设置工具栏中 <code>.f-panel-body</code> 节点的内边距。例如 <code>8</code> 表示四周各 8px，<code>8px 12px</code> 表示上下各 8px、左右各
+                12px。默认不增加该节点的内边距，仅创建控件时生效；工具栏原有的外层内边距仍然保留。</p>
+        </th:block>
+    </body>
+
+</html>
