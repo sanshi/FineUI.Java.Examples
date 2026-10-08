@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · HBox 子项间隔</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <!-- 两个容器使用相同尺寸和内边距，便于直接比较两种间隔配置的结果。 -->
+            <f:panel id="PanelSpace" is-fluid="true" layout="HBox" height="120" body-padding="10" box-config-space="10" title='推荐写法：box-config-space="10"'>
+                <f:items>
+                    <f:panel id="SpaceItem1" box-flex="1" show-header="false" body-padding="8" content="子项一"></f:panel>
+                    <f:panel id="SpaceItem2" box-flex="1" show-header="false" body-padding="8" content="子项二"></f:panel>
+                    <f:panel id="SpaceItem3" box-flex="1" show-header="false" body-padding="8" content="子项三"></f:panel>
+                </f:items>
+            </f:panel>
+            <br />
+            <f:panel id="PanelMargins" is-fluid="true" layout="HBox" height="120" body-padding="10" box-config-child-margin="0 10 0 0"
+                box-config-last-child-margin="0" title='等效写法：普通子项边距 + 末项边距'>
+                <f:items>
+                    <f:panel id="MarginsItem1" box-flex="1" show-header="false" body-padding="8" content="子项一"></f:panel>
+                    <f:panel id="MarginsItem2" box-flex="1" show-header="false" body-padding="8" content="子项二"></f:panel>
+                    <f:panel id="MarginsItem3" box-flex="1" show-header="false" body-padding="8" content="子项三"></f:panel>
+                </f:items>
+            </f:panel>
+            <p>HBox 中的子项横向间隔为 10px，最后一个可见子项不留尾部间隔。父容器的 BodyPadding 负责四周留白，子项自身的 Margin 仍可覆盖布局边距。</p>
+        </th:block>
+    </body>
+
+</html>

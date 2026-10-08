@@ -9,7 +9,7 @@
         <th:block layout:fragment="body">
 
             <f:panel id="Panel5" is-fluid="true" show-border="true" enable-collapse="false" layout="HBox" auto-scroll="true" show-header="true"
-                title="面板（Layout=HBox AutoScroll=true）" box-config-child-margin="0 5 0 0" body-padding="5">
+                title="面板（Layout=HBox AutoScroll=true）" box-config-space="5" body-padding="5">
                 <f:items>
                     <f:panel id="Panel1" title="面板1" width="600" body-padding="10" show-border="true" show-header="false">
                         <f:items>
@@ -17,10 +17,10 @@
                             </f:label>
                         </f:items>
                     </f:panel>
-                    <f:panel id="Panel2" title="面板2" box-flex="1" min-width="600" margin="0" body-padding="10" show-border="true" show-header="false">
+                    <f:panel id="Panel2" title="面板2" box-flex="1" min-width="600" body-padding="10" show-border="true" show-header="false">
                         <f:items>
                             <f:label id="Label3"
-                                text-raw-html="BoxFlex=1<br>Margin=0<br>MinWidth=600<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>bottom line">
+                                text-raw-html="BoxFlex=1<br>末项无额外间隔<br>MinWidth=600<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>bottom line">
                             </f:label>
                         </f:items>
                     </f:panel>

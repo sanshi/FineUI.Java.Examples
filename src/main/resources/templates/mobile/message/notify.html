@@ -31,8 +31,7 @@
     <body>
         <th:block layout:fragment="body">
 
-            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 10px 0" body-padding="10px"
-                is-view-port="true">
+            <f:panel id="Panel1" show-border="false" show-header="false" layout="VBox" box-config-space="10" body-padding="10px" is-view-port="true">
                 <f:toolbars>
                     <f:toolbar id="Toolbar1" title="通知对话框" header-style="true"></f:toolbar>
                 </f:toolbars>
@@ -42,10 +41,10 @@
                     <f:button id="Button3" text="通知对话框（正在加载，不显示文字）" click-handler="onButton3Click"></f:button>
                     <f:button id="Button4" text="通知对话框（正在加载，自定义样式）" click-handler="onButton4Click"></f:button>
                     <f:label text=""></f:label>
-                    <f:panel show-border="false" show-header="false" layout="HBox" box-config-child-margin="0 10 0 0">
+                    <f:panel show-border="false" show-header="false" layout="HBox" box-config-space="10">
                         <f:items>
                             <f:button id="Button5" text="显示通知对话框" box-flex="1" click-handler="onShowNotifyWindowClick"></f:button>
-                            <f:button id="Button6" text="关闭通知对话框" box-flex="1" margin="0" click-handler="onHideNotifyWindowClick"></f:button>
+                            <f:button id="Button6" text="关闭通知对话框" box-flex="1" click-handler="onHideNotifyWindowClick"></f:button>
                         </f:items>
                     </f:panel>
                 </f:items>

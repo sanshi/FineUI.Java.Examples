@@ -8,8 +8,8 @@
     <body>
         <th:block layout:fragment="body">
 
-            <f:panel id="Panel2" is-fluid="true" height="350" show-border="true" enable-collapse="false" layout="HBox" body-padding="10"
-                box-config-child-margin="0 5 0 0" show-header="true" title="面板（Layout=HBox Height=350）（默认值：BoxConfigAlign=Stretch BoxConfigPosition=Start）">
+            <f:panel id="Panel2" is-fluid="true" height="350" show-border="true" enable-collapse="false" layout="HBox" body-padding="10" box-config-space="5"
+                show-header="true" title="面板（Layout=HBox Height=350）（默认值：BoxConfigAlign=Stretch BoxConfigPosition=Start）">
                 <f:items>
                     <f:panel id="Panel1" title="面板1" box-flex="1" body-padding="10" show-border="true" show-header="false">
                         <f:items>
@@ -21,16 +21,16 @@
                             <f:label id="Label2" text="Width=150"></f:label>
                         </f:items>
                     </f:panel>
-                    <f:panel id="Panel4" title="面板3" box-flex="2" body-padding="10" margin="0" show-border="true" show-header="false">
+                    <f:panel id="Panel4" title="面板3" box-flex="2" body-padding="10" show-border="true" show-header="false">
                         <f:items>
-                            <f:label id="Label3" text="BoxFlex=2 Margin=0"></f:label>
+                            <f:label id="Label3" text="BoxFlex=2 末项无额外间隔"></f:label>
                         </f:items>
                     </f:panel>
                 </f:items>
             </f:panel>
             <br /><br />
             <f:panel id="Panel5" is-fluid="true" height="350" show-border="true" enable-collapse="false" layout="HBox" box-config-align="Stretch"
-                box-config-position="End" body-padding="10" box-config-child-margin="0 5 0 0" show-header="true"
+                box-config-position="End" body-padding="10" box-config-space="5" show-header="true"
                 title="面板（Layout=HBox Height=350 BoxConfigAlign=Stretch BoxConfigPosition=End）">
                 <f:items>
                     <f:panel id="Panel6" title="面板1" width="200" body-padding="10" show-border="true" show-header="false">
@@ -43,16 +43,16 @@
                             <f:label id="Label5" text="Width=200"></f:label>
                         </f:items>
                     </f:panel>
-                    <f:panel id="Panel8" title="面板3" width="200" margin="0" body-padding="10" show-border="true" show-header="false">
+                    <f:panel id="Panel8" title="面板3" width="200" body-padding="10" show-border="true" show-header="false">
                         <f:items>
-                            <f:label id="Label6" text="Width=200 Margin=0"></f:label>
+                            <f:label id="Label6" text="Width=200 末项无额外间隔"></f:label>
                         </f:items>
                     </f:panel>
                 </f:items>
             </f:panel>
             <br /><br />
             <f:panel id="Panel9" is-fluid="true" height="350" show-border="true" enable-collapse="false" layout="HBox" box-config-align="Stretch"
-                box-config-position="Center" body-padding="10" box-config-child-margin="0 5 0 0" show-header="true"
+                box-config-position="Center" body-padding="10" box-config-space="5" show-header="true"
                 title="面板（Layout=HBox Height=350 BoxConfigAlign=Stretch BoxConfigPosition=Center）">
                 <f:items>
                     <f:panel id="Panel10" title="面板1" width="200" body-padding="10" show-border="true" show-header="false">
@@ -65,16 +65,16 @@
                             <f:label id="Label8" text="Width=200"></f:label>
                         </f:items>
                     </f:panel>
-                    <f:panel id="Panel12" title="面板3" width="200" margin="0" body-padding="10" show-border="true" show-header="false">
+                    <f:panel id="Panel12" title="面板3" width="200" body-padding="10" show-border="true" show-header="false">
                         <f:items>
-                            <f:label id="Label9" text="Width=200 Margin=0"></f:label>
+                            <f:label id="Label9" text="Width=200 末项无额外间隔"></f:label>
                         </f:items>
                     </f:panel>
                 </f:items>
             </f:panel>
             <br /><br />
             <f:panel id="Panel13" is-fluid="true" height="350" show-border="true" enable-collapse="false" layout="HBox" box-config-align="Center"
-                box-config-position="End" body-padding="10" box-config-child-margin="0 5 0 0" show-header="true"
+                box-config-position="End" body-padding="10" box-config-space="5" show-header="true"
                 title="面板（Layout=HBox Height=350 BoxConfigAlign=Center BoxConfigPosition=End）">
                 <f:items>
                     <f:panel id="Panel14" title="面板1" width="200" height="100" body-padding="10" show-border="true" show-header="false">
@@ -87,16 +87,16 @@
                             <f:label id="Label11" text="Width=200 Height=150"></f:label>
                         </f:items>
                     </f:panel>
-                    <f:panel id="Panel16" title="面板3" width="200" margin="0" height="200" body-padding="10" show-border="true" show-header="false">
+                    <f:panel id="Panel16" title="面板3" width="200" height="200" body-padding="10" show-border="true" show-header="false">
                         <f:items>
-                            <f:label id="Label12" text="Width=200 Height=200 Margin=0"></f:label>
+                            <f:label id="Label12" text="Width=200 Height=200 末项无额外间隔"></f:label>
                         </f:items>
                     </f:panel>
                 </f:items>
             </f:panel>
             <br /><br />
             <f:panel id="Panel21" is-fluid="true" height="350" show-border="true" enable-collapse="false" layout="HBox" box-config-align="End"
-                box-config-position="Center" body-padding="10" box-config-child-margin="0 5 0 0" show-header="true"
+                box-config-position="Center" body-padding="10" box-config-space="5" show-header="true"
                 title="面板（Layout=HBox Height=350 BoxConfigAlign=End BoxConfigPosition=Center）">
                 <f:items>
                     <f:panel id="Panel22" title="面板1" width="200" height="100" body-padding="10" show-border="true" show-header="false">
@@ -109,16 +109,16 @@
                             <f:label id="Label17" text="Width=200 Height=150"></f:label>
                         </f:items>
                     </f:panel>
-                    <f:panel id="Panel24" title="面板3" width="200" margin="0" height="200" body-padding="10" show-border="true" show-header="false">
+                    <f:panel id="Panel24" title="面板3" width="200" height="200" body-padding="10" show-border="true" show-header="false">
                         <f:items>
-                            <f:label id="Label18" text="Width=200 Height=200 Margin=0"></f:label>
+                            <f:label id="Label18" text="Width=200 Height=200 末项无额外间隔"></f:label>
                         </f:items>
                     </f:panel>
                 </f:items>
             </f:panel>
             <br /><br />
             <f:panel id="Panel17" is-fluid="true" height="350" show-border="true" enable-collapse="false" layout="HBox" box-config-align="StretchMax"
-                box-config-position="Center" body-padding="10" box-config-child-margin="0 5 0 0" show-header="true"
+                box-config-position="Center" body-padding="10" box-config-space="5" show-header="true"
                 title="面板（Layout=HBox Height=350 BoxConfigAlign=StretchMax BoxConfigPosition=Center）">
                 <f:items>
                     <f:panel id="Panel18" title="面板1" width="200" height="100" body-padding="10" show-border="true" show-header="false">
@@ -131,16 +131,16 @@
                             <f:label id="Label14" text="Width=200 Height=150"></f:label>
                         </f:items>
                     </f:panel>
-                    <f:panel id="Panel20" title="面板3" width="200" margin="0" height="200" body-padding="10" show-border="true" show-header="false">
+                    <f:panel id="Panel20" title="面板3" width="200" height="200" body-padding="10" show-border="true" show-header="false">
                         <f:items>
-                            <f:label id="Label15" text="Width=200 Height=200 Margin=0"></f:label>
+                            <f:label id="Label15" text="Width=200 Height=200 末项无额外间隔"></f:label>
                         </f:items>
                     </f:panel>
                 </f:items>
             </f:panel>
             <br /><br />
             <f:panel id="Panel25" is-fluid="true" height="350" show-border="true" enable-collapse="false" layout="HBox" box-config-align="StretchMaxCenter"
-                box-config-position="Center" body-padding="10" box-config-child-margin="0 5 0 0" show-header="true"
+                box-config-position="Center" body-padding="10" box-config-space="5" show-header="true"
                 title="面板（Layout=HBox Height=350 BoxConfigAlign=StretchMaxCenter BoxConfigPosition=Center）">
                 <f:items>
                     <f:panel id="Panel26" title="面板1" width="200" height="100" body-padding="10" show-border="true" show-header="false">
@@ -153,16 +153,16 @@
                             <f:label id="Label20" text="Width=200 Height=150"></f:label>
                         </f:items>
                     </f:panel>
-                    <f:panel id="Panel28" title="面板3" width="200" margin="0" height="200" body-padding="10" show-border="true" show-header="false">
+                    <f:panel id="Panel28" title="面板3" width="200" height="200" body-padding="10" show-border="true" show-header="false">
                         <f:items>
-                            <f:label id="Label21" text="Width=200 Height=200 Margin=0"></f:label>
+                            <f:label id="Label21" text="Width=200 Height=200 末项无额外间隔"></f:label>
                         </f:items>
                     </f:panel>
                 </f:items>
             </f:panel>
             <br /><br />
             <f:panel id="Panel31" is-fluid="true" height="350" show-border="true" enable-collapse="false" layout="HBox" box-config-align="StretchMaxEnd"
-                box-config-position="Center" body-padding="10" box-config-child-margin="0 5 0 0" show-header="true"
+                box-config-position="Center" body-padding="10" box-config-space="5" show-header="true"
                 title="面板（Layout=HBox Height=350 BoxConfigAlign=StretchMaxEnd BoxConfigPosition=Center）">
                 <f:items>
                     <f:panel id="Panel32" title="面板1" width="200" height="100" body-padding="10" show-border="true" show-header="false">
@@ -175,9 +175,9 @@
                             <f:label id="Label24" text="Width=200 Height=150"></f:label>
                         </f:items>
                     </f:panel>
-                    <f:panel id="Panel34" title="面板3" width="200" margin="0" height="200" body-padding="10" show-border="true" show-header="false">
+                    <f:panel id="Panel34" title="面板3" width="200" height="200" body-padding="10" show-border="true" show-header="false">
                         <f:items>
-                            <f:label id="Label25" text="Width=200 Height=200 Margin=0"></f:label>
+                            <f:label id="Label25" text="Width=200 Height=200 末项无额外间隔"></f:label>
                         </f:items>
                     </f:panel>
                 </f:items>

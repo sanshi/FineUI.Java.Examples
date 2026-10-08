@@ -10,7 +10,7 @@
 
             <f:tab-strip id="TabStrip1" show-border="false" active-tab-index="0" show-tab-header="false" is-view-port="true">
                 <f:toolbars>
-                    <f:toolbar header-style="true" layout="HBox" box-config-child-margin="0 5 0 0">
+                    <f:toolbar header-style="true" layout="HBox" box-config-space="5">
                         <f:button-group id="ButtonGroup1" enable-press-group="true" box-flex="1" layout="HBox">
                             <f:button id="Button1" text="标签一" box-flex="1" enable-press="true" pressed="true"></f:button>
                             <f:button id="Button2" text="标签二" box-flex="1" enable-press="true"></f:button>
@@ -19,7 +19,7 @@
                                 <f:listener event="presschange" handler="onButtonGroupPressChange" />
                             </f:listeners>
                         </f:button-group>
-                        <f:button id="Button4" margin="0" icon-font="_List" show-menu-icon="false">
+                        <f:button id="Button4" icon-font="_List" show-menu-icon="false">
                             <f:menu>
                                 <f:menu-check-box id="cbxNone" text="无动画" attribute-data-tag="none" group-name="Animation"></f:menu-check-box>
                                 <f:menu-check-box id="cbxSlide" text="水平滑动" attribute-data-tag="slideX" checked="true"
@@ -36,7 +36,7 @@
                     </f:toolbar>
                 </f:toolbars>
                 <f:tabs>
-                    <f:tab id="Tab1" body-padding="10px" layout="VBox" box-config-child-margin="0 0 10 0">
+                    <f:tab id="Tab1" body-padding="10px" layout="VBox" box-config-space="10">
                         <f:items>
                             <f:content-panel id="ContentPanel3" show-border="false" show-header="false">
                                 <p>
@@ -53,7 +53,7 @@
                             <f:button id="Button5" text="按钮一"></f:button>
                         </f:items>
                     </f:tab>
-                    <f:tab id="Tab2" body-padding="10px" layout="VBox" box-config-child-margin="0 0 10 0">
+                    <f:tab id="Tab2" body-padding="10px" layout="VBox" box-config-space="10">
                         <f:items>
                             <f:content-panel id="ContentPanel2" show-border="false" show-header="false">
                                 <p>
@@ -70,7 +70,7 @@
                             <f:button id="Button6" text="按钮二"></f:button>
                         </f:items>
                     </f:tab>
-                    <f:tab id="Tab3" body-padding="10px" layout="VBox" box-config-child-margin="0 0 10 0">
+                    <f:tab id="Tab3" body-padding="10px" layout="VBox" box-config-space="10">
                         <f:items>
                             <f:content-panel id="ContentPanel1" show-border="false" show-header="false">
                                 <p>

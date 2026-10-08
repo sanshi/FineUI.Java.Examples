@@ -27,22 +27,22 @@
     <body>
         <th:block layout:fragment="body">
 
-            <f:panel id="Panel1" css-class="mybgpanel" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 5px 0"
-                body-padding="10px" is-view-port="true">
+            <f:panel id="Panel1" css-class="mybgpanel" show-border="false" show-header="false" layout="VBox" box-config-space="5" body-padding="10px"
+                is-view-port="true">
                 <f:items>
                     <f:button id="btnOpenWindow" text="选择日期" click-handler="onOpenWindow1Click"></f:button>
                 </f:items>
             </f:panel>
 
             <f:window id="Window1" css-class="mywindow" show-header="false" show-border="false" hidden="true" hide-on-mask-click="true" is-modal="true"
-                body-padding="10px" layout="VBox" box-config-child-margin="0 0 5px 0" percent-width="100%" enable-default-corner="false" position-y="Bottom">
+                body-padding="10px" layout="VBox" box-config-space="5" percent-width="100%" enable-default-corner="false" position-y="Bottom">
                 <f:items>
                     <f:calendar id="Calendar1" date-format-string="yyyy-MM-dd" margin-bottom="10">
                         <f:listeners>
                             <f:listener event="select" handler="onCalendar1Select" />
                         </f:listeners>
                     </f:calendar>
-                    <f:button id="Button3" text="取消" margin="0" click-handler="onCloseWindow1Click"></f:button>
+                    <f:button id="Button3" text="取消" click-handler="onCloseWindow1Click"></f:button>
                 </f:items>
             </f:window>
 

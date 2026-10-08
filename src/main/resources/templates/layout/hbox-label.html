@@ -24,8 +24,8 @@
     <body>
         <th:block layout:fragment="body">
 
-            <f:panel id="Panel2" is-fluid="true" height="200" show-border="true" enable-collapse="true" layout="HBox" body-padding="10"
-                box-config-child-margin="0 5 0 0" show-header="true" title="面板（Panel）">
+            <f:panel id="Panel2" is-fluid="true" height="200" show-border="true" enable-collapse="true" layout="HBox" body-padding="10" box-config-space="5"
+                show-header="true" title="面板（Panel）">
                 <f:items>
                     <f:content-panel id="Panel1" show-border="true" show-header="false" auto-scroll="true" box-flex="1">
                         <div class="zuckerberg">
@@ -41,21 +41,21 @@
                             </p>
                         </div>
                     </f:content-panel>
-                    <f:panel id="Panel4" box-flex="2" margin="0" body-padding="10" show-border="true" show-header="false">
+                    <f:panel id="Panel4" box-flex="2" body-padding="10" show-border="true" show-header="false">
                         <f:items>
-                            <f:label id="Label3" text="BoxFlex=2 Margin=0"></f:label>
+                            <f:label id="Label3" text="BoxFlex=2 末项无额外间隔"></f:label>
                         </f:items>
                     </f:panel>
                 </f:items>
             </f:panel>
             <br />
-            <f:panel id="Panel5" is-fluid="true" height="200" show-border="true" enable-collapse="true" layout="HBox" body-padding="10"
-                box-config-child-margin="0 5 0 0" show-header="true" title="面板（Label）">
+            <f:panel id="Panel5" is-fluid="true" height="200" show-border="true" enable-collapse="true" layout="HBox" body-padding="10" box-config-space="5"
+                show-header="true" title="面板（Label）">
                 <f:items>
                     <f:label id="Label1" css-class="mylabel f-widget-content" encode-text="false" auto-scroll="true" box-flex="1"></f:label>
-                    <f:panel id="Panel8" box-flex="2" margin="0" body-padding="10" show-border="true" show-header="false">
+                    <f:panel id="Panel8" box-flex="2" body-padding="10" show-border="true" show-header="false">
                         <f:items>
-                            <f:label id="Label6" text="BoxFlex=2 Margin=0"></f:label>
+                            <f:label id="Label6" text="BoxFlex=2 末项无额外间隔"></f:label>
                         </f:items>
                     </f:panel>
                 </f:items>

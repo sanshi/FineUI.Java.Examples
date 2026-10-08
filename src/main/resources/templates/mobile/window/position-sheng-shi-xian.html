@@ -27,15 +27,15 @@
     <body>
         <th:block layout:fragment="body">
 
-            <f:panel id="Panel1" css-class="mybgpanel" show-border="false" show-header="false" layout="VBox" box-config-child-margin="0 0 5px 0"
-                body-padding="10px" is-view-port="true">
+            <f:panel id="Panel1" css-class="mybgpanel" show-border="false" show-header="false" layout="VBox" box-config-space="5" body-padding="10px"
+                is-view-port="true">
                 <f:items>
                     <f:button id="btnOpenWindow" text="选择省市县" click-handler="onOpenWindow1Click"></f:button>
                 </f:items>
             </f:panel>
 
             <f:window id="Window1" css-class="mywindow" show-header="false" show-border="false" hidden="true" hide-on-mask-click="true" is-modal="true"
-                body-padding="10px" layout="VBox" box-config-child-margin="0 0 5px 0" percent-width="100%" enable-default-corner="false" position-y="Bottom">
+                body-padding="10px" layout="VBox" box-config-space="5" percent-width="100%" enable-default-corner="false" position-y="Bottom">
                 <f:items>
                     <f:simple-form id="SimpleForm1" show-border="true" show-header="false" body-padding="10px" css-class="f-corner-all" layout="VBox"
                         message-target="None" label-align="Right">
