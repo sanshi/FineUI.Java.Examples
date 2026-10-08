@@ -50,7 +50,7 @@
                             var url = redirect.url;
                             // F.confirm是异步函数，直接返回
                             F.confirm({
-                                message: '登陆超时，是否跳转到首页？',
+                                message: '登录超时，是否跳转到首页？',
                                 ok: function() {
                                     // 确认后直接导航，不把响应文本当作代码执行。
                                     window.location.assign(url);

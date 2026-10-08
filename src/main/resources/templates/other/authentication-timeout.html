@@ -47,7 +47,7 @@
                             return command.type === 'page.redirect';
                         });
                         if (redirect) {
-                            if (!window.confirm('登陆超时，是否跳转到首页？')) {
+                            if (!window.confirm('登录超时，是否跳转到首页？')) {
                                 // 继续留在当前页面
                                 // 返回 false 会阻止本次响应中的所有更新和命令。
                                 return false;

@@ -2451,9 +2451,9 @@
 		</TreeNode>
 		<TreeNode Text="AJAX请求超时错误（自行拦截）" NavigateUrl="/other/server-error-custom-timeout">
 		</TreeNode>
-		<TreeNode Text="拦截服务器端重定向（模拟登陆超时，同步确认对话框）" NavigateUrl="/other/authentication-timeout">
+		<TreeNode Text="拦截服务器端重定向（模拟登录超时，同步确认对话框）" NavigateUrl="/other/authentication-timeout">
 		</TreeNode>
-		<TreeNode Text="拦截服务器端重定向（模拟登陆超时，异步确认对话框）" NavigateUrl="/other/authentication-timeout-async">
+		<TreeNode Text="拦截服务器端重定向（模拟登录超时，异步确认对话框）" NavigateUrl="/other/authentication-timeout-async">
 		</TreeNode>
 		<TreeNode Text="表单居中显示" NavigateUrl="/other/login-center">
 		</TreeNode>

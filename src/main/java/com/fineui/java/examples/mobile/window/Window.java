@@ -7,7 +7,7 @@ import com.fineui.java.core.controls.TextBox;
 import com.fineui.java.examples.mobile.MobilePageBase;
 
 /**
- * 移动端登陆窗体演示页（路由 {@code mobile/window/window}）：点按钮弹出模态登录窗体，
+ * 移动端登录窗体演示页（路由 {@code mobile/window/window}）：点按钮弹出模态登录窗体，
  * 窗体内表单校验通过后回发校验账号并居中通知结果。
  */
 @FineUIPage("mobile/window/window")

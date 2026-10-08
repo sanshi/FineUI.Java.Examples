@@ -7,7 +7,7 @@ import com.fineui.java.core.controls.TextBox;
 import com.fineui.java.examples.mobile.MobilePageBase;
 
 /**
- * 移动端登陆窗体（简洁按钮）演示页（路由 {@code mobile/window/button-plain}）：登录/取消按钮放在窗体底部
+ * 移动端登录窗体（简洁按钮）演示页（路由 {@code mobile/window/button-plain}）：登录/取消按钮放在窗体底部
  * 简洁样式工具栏内，标题居中且不显示关闭按钮。
  */
 @FineUIPage("mobile/window/button-plain")
