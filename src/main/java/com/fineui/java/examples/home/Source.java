@@ -160,9 +160,9 @@ public class Source extends PageBase {
         pc.register(tab);
     }
 
-    /** 文件类型图标地址（res/images/filetype/vs_{类型}.png）。 */
+    /** 文件类型图标地址（res/images/filetype/vs-{类型}.png）。 */
     private static String iconUrl(String ext) {
-        return "/res/images/filetype/vs_" + ext + ".png";
+        return "/res/images/filetype/vs-" + ext + ".png";
     }
 
     /**

@@ -4,7 +4,7 @@
     <head>
         <title>FineUI.Java · 通知对话框（分组显示，最新的在最上面）</title>
         <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
-        <meta name="sourcefiles" content="res:static/res/js/notify_group.js" />
+        <meta name="sourcefiles" content="res:static/res/js/notify-group.js" />
 
         <style>
             .notify-group-item .f-messagebox-message {
@@ -22,7 +22,7 @@
         </th:block>
 
         <th:block layout:fragment="script">
-            <script th:src="@{/res/js/notify_group.js}"></script>
+            <script th:src="@{/res/js/notify-group.js}"></script>
             <script>
                 var _orderNumber = 0;
 

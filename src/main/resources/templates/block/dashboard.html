@@ -5,10 +5,10 @@
         <title>FineUI.Java · Block 仪表盘</title>
         <!--/* 声明本页引用的其它源文件（分号分隔，每项写成 前缀:值，前缀有 route/template/class/res 四种，见 SourceFiles）：首页"查看源代码"把它们也渲染为选项卡 */-->
         <meta name="sourcefiles"
-            content="res:static/res/css/dashboard.css;res:static/res/css/responsive_card.css;res:static/res/js/dashboard_chart.js;res:static/res/js/grid.js;res:static/res/js/responsive_card.js" />
+            content="res:static/res/css/dashboard.css;res:static/res/css/responsive-card.css;res:static/res/js/dashboard-chart.js;res:static/res/js/grid.js;res:static/res/js/responsive-card.js" />
 
         <link th:href="@{/res/css/dashboard.css}" rel="stylesheet" />
-        <link th:href="@{/res/css/responsive_card.css}" rel="stylesheet" />
+        <link th:href="@{/res/css/responsive-card.css}" rel="stylesheet" />
     </head>
 
     <body>
@@ -318,9 +318,9 @@
         </th:block>
         <th:block layout:fragment="script">
             <script th:src="@{/res/third-party/echarts/echarts.min.js}"></script>
-            <script th:src="@{/res/js/dashboard_chart.js}"></script>
+            <script th:src="@{/res/js/dashboard-chart.js}"></script>
             <script th:src="@{/res/js/grid.js}"></script>
-            <script th:src="@{/res/js/responsive_card.js}"></script>
+            <script th:src="@{/res/js/responsive-card.js}"></script>
             <script th:inline="javascript">
                 function onTabstripToolClick(event) {
                     parent.addExampleTab &&
