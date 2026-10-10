@@ -15,8 +15,7 @@
     <body>
         <th:block layout:fragment="body">
 
-            <f:grid id="Grid1" row-data-bound-function="onGridRowDataBound" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id"
-                data-text-field="Name">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name">
                 <f:columns>
                     <f:row-number-field></f:row-number-field>
                     <f:render-field header-text="姓名" data-field="Name"></f:render-field>
@@ -39,13 +38,6 @@
         <th:block layout:fragment="script">
             <script th:src="@{/res/js/grid.js}"></script>
             <script th:inline="none">
-                function onGridRowDataBound(rowData) {
-                    // 这些列用于单选互斥，初始全部未选中；空值会渲染为空白单元格。
-                    rowData.values['AtSchool2'] = false;
-                    rowData.values['AtSchool3'] = false;
-                    rowData.values['AtSchool4'] = false;
-                }
-
                 function onNotifyCheckFieldStatusClick(event) {
                     var grid1 = F.ui.Grid1;
 
@@ -110,7 +102,9 @@
                         rowEl.siblings('.f-grid-row').each(function() {
                             // 列名在运行时确定，用实际 ColumnID 作为对象的键更新对应单元格。
                             // https://fineui.com/js/api/FineUI.Grid.html#updateCellValue
-                            grid1.updateCellValue($(this), { [columnId]: false }, true);
+                            grid1.updateCellValue($(this), {
+                                [columnId]: false
+                            }, true);
                         });
                     });
                 });

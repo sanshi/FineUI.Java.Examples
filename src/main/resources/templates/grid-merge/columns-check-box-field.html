@@ -7,8 +7,8 @@
 
     <body>
         <th:block layout:fragment="body">
-            <f:grid id="Grid1" row-data-bound-function="onGridRowDataBound" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id"
-                data-text-field="Name" enable-column-lines="true">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="表格" data-id-field="Id" data-text-field="Name"
+                enable-column-lines="true">
                 <f:columns>
                     <f:row-number-field></f:row-number-field>
                     <f:render-field header-text="ID" data-field="Id"></f:render-field>
@@ -37,11 +37,6 @@
         <th:block layout:fragment="script">
             <script th:src="@{/res/js/grid.js}"></script>
             <script>
-                function onGridRowDataBound(rowData) {
-                    // 同一组初始没有激活项；空值会渲染为空白单元格。
-                    rowData.values['CheckBoxField1'] = false;
-                }
-
                 function onGridDataLoad(event) {
                     this.mergeColumns(['GroupB']);
                 }
@@ -64,7 +59,9 @@
                                 if (nextRowGroupB == rowGroupB) {
                                     // 用 ColumnID 到新值的对象更新单元格，单列和多列采用同一种写法。
                                     // https://fineui.com/js/api/FineUI.Grid.html#updateCellValue
-                                    grid.updateCellValue(nextRowData.id, { CheckBoxField1: false }, true);
+                                    grid.updateCellValue(nextRowData.id, {
+                                        CheckBoxField1: false
+                                    }, true);
                                     return true;
                                 } else {
                                     return false;
