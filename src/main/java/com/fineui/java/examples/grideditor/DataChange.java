@@ -54,13 +54,14 @@ public class DataChange extends PageBase {
 
     public void btnUpdateCells_Click(Object sender, EventArgs e) {
         // 示例数据的稳定 ID 为 101；两次改值按入队顺序执行，仍只形成一条行修改记录。
-        Grid1.updateCellValue("101", "Name", "服务端修改");
+        // https://fineui.com/js/api/FineUI.Grid.html#updateCellValue
+        Grid1.updateCellValue("101", Map.of("Name", "服务端修改"));
         Grid1.updateCellValue("101", Map.of("Gender", 0, "Major", "服务端专业"));
     }
 
     public void btnUpdateAndCommit_Click(Object sender, EventArgs e) {
         // 同一次响应先改值再确认编辑基线；确认不会把结果写入服务端数据源。
-        Grid1.updateCellValue("101", "Name", "服务端修改后确认");
+        Grid1.updateCellValue("101", Map.of("Name", "服务端修改后确认"));
         Grid1.commitChanges();
     }
 

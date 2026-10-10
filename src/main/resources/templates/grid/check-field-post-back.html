@@ -36,7 +36,7 @@
                     grid1.el.on('click', '.f-grid-cell-AtSchool2 .f-grid-checkbox', function() {
                         var cnode = $(this);
                         var rowData = grid1.getRowData(cnode.closest('.f-grid-row'));
-                        var isChecked = cnode.hasClass('f-checked');
+                        var isChecked = rowData.values['AtSchool2'];
                         F.doPostBack({
                             eventName: 'Grid1_CheckFieldChanged',
                             eventArgument: {

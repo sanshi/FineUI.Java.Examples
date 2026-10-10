@@ -231,6 +231,8 @@
 
                     if (rowId) {
                         // 隐藏字段里有行标识：改这一行
+                        // 多列更新通过对象传入各列的新值，列名使用 ColumnID。
+                        // https://fineui.com/js/api/FineUI.Grid.html#updateCellValue
                         grid1.updateCellValue(rowId, values);
                     } else {
                         // 没有行标识：新增一行（命令列的图标由表格自己渲染，不用手工拼 HTML）

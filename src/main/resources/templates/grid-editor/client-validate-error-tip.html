@@ -91,7 +91,9 @@
                     var grid1 = F.ui.Grid1;
 
                     $.each(grid1.data, function(index, rowData) {
-                        grid1.updateCellValue(rowData.id, 'Name.cls', '');
+                        // 使用 'ColumnID.cls' 更新单元格样式，例如 'Name.cls' 表示这一列的样式。
+                        // https://fineui.com/js/api/FineUI.Grid.html#updateCellValue
+                        grid1.updateCellValue(rowData.id, { 'Name.cls': '' });
                     });
                 }
 
@@ -101,9 +103,9 @@
                         columnId = params.columnId;
                     if (columnId === 'Name') {
                         if (!value) {
-                            grid1.updateCellValue(rowId, 'Name.cls', 'errortip');
+                            grid1.updateCellValue(rowId, { 'Name.cls': 'errortip' });
                         } else {
-                            grid1.updateCellValue(rowId, 'Name.cls', '');
+                            grid1.updateCellValue(rowId, { 'Name.cls': '' });
                         }
                     }
                 }

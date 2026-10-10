@@ -44,7 +44,7 @@
                     rowEls.each(function() {
                         var cnode = $(this);
                         var rowData = grid1.getRowData(cnode);
-                        var isChecked = cnode.find('.f-grid-cell-AtSchool2 .f-grid-checkbox').hasClass('f-checked');
+                        var isChecked = rowData.values['AtSchool2'];
                         result.push('<tr>');
                         result.push('<td>' + rowData.id + '</td>');
                         result.push('<td>' + rowData.text + '</td>');
