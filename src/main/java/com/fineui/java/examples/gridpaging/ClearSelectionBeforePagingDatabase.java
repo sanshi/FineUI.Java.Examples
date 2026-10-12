@@ -9,7 +9,7 @@ import com.fineui.java.examples.code.StudentGridData2;
 
 /**
  * 跨页保持选中行（数据库分页，路由 {@code grid-paging/clear-selection-before-paging-database}）：
- * 每页经服务端回发取数；{@code clear-selection-before-binding=false} 使重新绑定数据不清空选中。
+ * 翻页时通过回发加载当前页的数据；{@code clear-selection-before-binding=false} 使重新绑定数据不清空选中。
  */
 @FineUIPage("grid-paging/clear-selection-before-paging-database")
 public class ClearSelectionBeforePagingDatabase extends PageBase {

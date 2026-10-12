@@ -33,7 +33,7 @@ public class ChangeDataUrl extends PageBase {
     }
 
     public void Button2_Click(Object sender, EventArgs e) {
-        // 回发时更换地址会自动从新数据源取数，不必再显式调用 loadDataUrl。
+        // 回发时更换地址会自动从新的数据源加载数据，不必再显式调用 loadDataUrl。
         loadData();
     }
 

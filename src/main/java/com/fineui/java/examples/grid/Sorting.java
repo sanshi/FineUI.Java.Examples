@@ -9,7 +9,7 @@ import com.fineui.java.examples.code.PageBase;
 import com.fineui.java.examples.code.StudentGridData;
 
 /**
- * 排序（路由 {@code grid/sorting}）：服务端排序（{@code onSort}）。初始按性别升序，点击列头按该列服务端重新排序取数。
+ * 排序（路由 {@code grid/sorting}）：服务端排序（{@code onSort}）。初始按性别升序，点击列头按该列服务端重新排序并加载数据。
  */
 @FineUIPage("grid/sorting")
 public class Sorting extends PageBase {

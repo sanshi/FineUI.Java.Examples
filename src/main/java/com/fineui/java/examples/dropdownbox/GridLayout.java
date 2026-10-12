@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * 下拉表格（复杂布局）演示页（路由 {@code drop-down-box/grid-layout}）：下拉框的弹出面板内是一个 VBox 面板，
  * 顶部一行搜索表单（姓名查找 + 是否在校单选），下方是数据库分页 + 服务端排序的多选表格。搜索、单选切换、
- * 翻页、排序都回发到服务端重新按当前条件取数并重绑表格。
+ * 翻页、排序都回发到服务端按当前筛选和排序条件重新加载数据并绑定表格。
  */
 @FineUIPage("drop-down-box/grid-layout")
 public class GridLayout extends PageBase {

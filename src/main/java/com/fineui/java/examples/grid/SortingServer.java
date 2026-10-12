@@ -8,7 +8,7 @@ import com.fineui.java.examples.code.StudentGridData;
 
 /**
  * 排序（服务器端改变排序列，路由 {@code grid/sorting-server}）：服务端排序（{@code onSort}），初始无排序字段，
- * 点击列头按该列服务端重新取数。
+ * 点击列头按该列服务端重新加载数据。
  */
 @FineUIPage("grid/sorting-server")
 public class SortingServer extends PageBase {

@@ -7,7 +7,7 @@ import com.fineui.java.core.controls.Grid;
 import com.fineui.java.examples.code.PageBase;
 import com.fineui.java.examples.code.StudentGridData;
 
-/** 卡片模式（排序，路由 {@code grid-card/card-sort}）：客户端菜单选排序字段/方向 → 服务端排序取数。 */
+/** 卡片模式（排序，路由 {@code grid-card/card-sort}）：客户端菜单选排序字段/方向 → 服务端按排序条件重新加载数据。 */
 @FineUIPage("grid-card/card-sort")
 public class CardSort extends PageBase {
 

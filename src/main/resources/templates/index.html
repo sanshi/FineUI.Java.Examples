@@ -49,8 +49,12 @@
                             </f:content-panel>
                             <f:panel id="leftPanel" css-class="leftregion" box-flex="1" show-border="false" show-header="false" layout="Fit">
                                 <f:items>
-                                    <f:tree id="treeMenu" show-border="false" show-header="false" enable-single-click-expand="true" hide-h-scrollbar="true"
-                                        hide-v-scrollbar="true" expander-to-right="true" header-style="true" all-header-style="true"></f:tree>
+                                    <!--/* 菜单点击只负责打开示例，搜索通过 Cookie 后重新请求整页，服务器无需在控件回发时恢复菜单节点。
+                                           因此设置 persist-nodes="false"，避免每次回发上传整棵菜单。 */-->
+                                    <f:tree id="treeMenu" show-border="false" show-header="false"
+                                        enable-single-click-expand="true" persist-nodes="false"
+                                        hide-h-scrollbar="true" hide-v-scrollbar="true" expander-to-right="true"
+                                        header-style="true" all-header-style="true"></f:tree>
                                 </f:items>
                             </f:panel>
                         </f:items>

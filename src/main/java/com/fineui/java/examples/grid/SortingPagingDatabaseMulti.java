@@ -11,7 +11,7 @@ import com.fineui.java.examples.code.GridSort;
 
 /**
  * 数据库分页 + 多列排序（路由 {@code grid/sorting-paging-database-multi}）：翻页与 Shift 叠加排序都经服务端回发，
- * 服务端同时按当前页 + 多列排序数组取数并更新排序提示。
+ * 服务端按当前页码和多列排序条件查询数据并更新排序提示。
  */
 @FineUIPage("grid/sorting-paging-database-multi")
 public class SortingPagingDatabaseMulti extends PageBase {

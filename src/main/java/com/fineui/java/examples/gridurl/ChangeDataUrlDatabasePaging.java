@@ -35,7 +35,7 @@ public class ChangeDataUrlDatabasePaging extends PageBase {
     }
 
     public void Button2_Click(Object sender, EventArgs e) {
-        // 地址变化会自动取数；增量属性先于命令生效，因此页码也会先重置。
+        // 地址变化会自动加载数据；增量属性先于命令生效，因此页码也会先重置。
         loadData();
     }
 

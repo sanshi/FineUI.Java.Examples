@@ -9,7 +9,7 @@ import com.fineui.java.examples.code.StudentGridData2;
 
 /**
  * 数据库分页排序（自定义回发，路由 {@code grid/sorting-paging-database-custom}）：不用内置服务端事件，
- * 而是客户端 {@code paging}/{@code sorting} 监听里统一触发一个自定义事件回发取数。
+ * 而是客户端 {@code paging}/{@code sorting} 监听里统一触发一个自定义事件回发加载数据。
  */
 @FineUIPage("grid/sorting-paging-database-custom")
 public class SortingPagingDatabaseCustom extends PageBase {

@@ -11,7 +11,7 @@ import com.fineui.java.examples.code.GridSort;
 
 /**
  * 多列排序（路由 {@code grid/sorting-multi}）：服务端排序。按住 Shift 点击多个列头可叠加排序列，
- * 服务端按多列排序数组重新取数并更新排序提示。初始按「入学年份降序，性别升序」。
+ * 服务端按多列排序条件重新加载数据并更新排序提示。初始按「入学年份降序，性别升序」。
  */
 @FineUIPage("grid/sorting-multi")
 public class SortingMulti extends PageBase {
