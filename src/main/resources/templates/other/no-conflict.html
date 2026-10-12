@@ -46,11 +46,8 @@
         </th:block>
 
         <th:block layout:fragment="script">
-            <!--/* 注意：Java 的 F.render 在 DOM ready 回调里执行（f:scripts 输出 $(function(){F.render(...)})）。
-                 页面 script 槽在 f:scripts 之后，这里的 $(function(){...}) 注册更晚、执行更晚——
-                 保证在 F.render 完成控件创建后再释放 F 命名空间。若立即执行或用 F.ready
-                 （checkWindowLoaded 可能在 DOM ready 前触发 load），会在 F.render 之前把 window.F
-                 还原为页面自定义对象，导致稍后 F.render 报 "F.render is not a function"。 */-->
+            <!--/* 等页面初始化完成后再释放全局 F，避免初始化时 F 已经被还原为页面自定义对象。
+                 后续通过 FineUI 或回调参数访问框架，不再使用全局 F。 */-->
             <script type="text/javascript">
                 $(function() {
                     result.push('<li>引入 FineUI 的客户端脚本...</li>');

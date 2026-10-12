@@ -95,9 +95,7 @@
                     }, 1000);
                 }
 
-                // 用 $(function(){...})（DOM ready）而非 F.ready：F.ready 由 checkWindowLoaded 轮询触发，
-                // 理论上可能早于 $(function(){F.render(...)})（f:scripts 输出）执行，那时 F.ui.Window1 尚未创建；
-                // DOM ready 回调注册在 f:scripts 之后、保证 F.render 先完成控件创建（与 no-conflict 页同一稳妥策略）。
+                // 等页面初始化并创建 Window1 后，再显示它的加载动画。
                 $(function() {
                     onRefreshClick();
                 });
