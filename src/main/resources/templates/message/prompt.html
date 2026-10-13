@@ -85,7 +85,8 @@
                     var checked = this.getValue();
 
                     F.ui.nbMultiLineHeight.setHidden(!checked);
-                    F.ui.cbxIsPassword.setHidden(!checked);
+                    // 密码模式只适用于单行输入；切回多行后隐藏这个选项。
+                    F.ui.cbxIsPassword.setHidden(checked);
                 }
 
             </script>
