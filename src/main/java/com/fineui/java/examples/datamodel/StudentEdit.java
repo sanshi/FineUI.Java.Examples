@@ -40,7 +40,7 @@ public class StudentEdit extends PageBase {
         if (student == null) {
             // 抛出即中止：不渲染本页模板，改渲染框架内置极简页并弹出提示。
             // 本页常被 Window 以 iframe 弹出，故让用户点「确定」后顺手关掉父级窗体。
-            throw new AbortPageException("该学生不存在或已被删除！", ActiveWindow.hideReference());
+            throw new AbortPageException("该学生不存在或已被删除！", ActiveWindow.hideCommand());
         }
         // 真实项目在此判断当前用户能不能编辑这条记录，无权则同样抛 AbortPageException。
         // ⚠️ 注意本方法只在首屏执行——回发时不跑，所以鉴权在事件处理器里还要再做一次（见 btnSave_Click）。
