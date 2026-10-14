@@ -20,6 +20,6 @@ public class ExcelSelectColumnsIFrame extends PageBase {
 
     /** 关闭本窗体，然后执行父页的 exportToExcel 函数并传入所选列。 */
     public void btnSaveContinue_Click(Object sender, EventArgs e) {
-        ActiveWindow.hideCallParentFunction("exportToExcel", (Object) cblColumns.getSelectedValueArray());
+        ActiveWindow.hideInvokeFunction("exportToExcel", (Object) cblColumns.getSelectedValueArray());
     }
 }

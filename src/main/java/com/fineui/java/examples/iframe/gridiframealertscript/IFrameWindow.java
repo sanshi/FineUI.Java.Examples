@@ -30,7 +30,7 @@ public class IFrameWindow extends ThirdPartyEditorPageBase {
         alert.setMessage("保存成功！");
         alert.setMessageBoxIcon(MessageBoxIcon.Success);
         alert.setTarget(Target.Top);
-        alert.setOkCommand(ActiveWindow.hideCallParentFunctionReference(
+        alert.setOkCommand(ActiveWindow.createHideInvokeFunctionCommand(
                 "closeWindow1", "参数 - " + LocalTime.now().getNano() / 1_000_000));
         alert.show();
     }

@@ -1,5 +1,6 @@
 package com.fineui.java.examples.iframe.gridiframereload;
 
+import com.fineui.java.core.ActiveWindow;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.examples.code.ThirdPartyEditorPageBase;
@@ -21,6 +22,6 @@ public class IFrameWindow extends ThirdPartyEditorPageBase {
     public void btnUpdateParentGrid_Click(Object sender, EventArgs e) {
         // 1. 这里放置保存窗体中数据的逻辑
         // 2. 不关闭窗体，直接回发父窗体
-        invokeActiveWindowFunction("closeWindow1", "参数 - " + LocalTime.now().getNano() / 1_000_000);
+        ActiveWindow.invokeFunction("closeWindow1", "参数 - " + LocalTime.now().getNano() / 1_000_000);
     }
 }

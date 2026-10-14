@@ -29,6 +29,6 @@ public class IFrameWindow extends ThirdPartyEditorPageBase {
 
     /** 保存后隐藏本窗体并关闭父页当前激活的选项卡（调用父页已定义的全局函数）。 */
     public void btnSaveCloseTab_Click(Object sender, EventArgs e) {
-        ActiveWindow.hideCallParentFunction("removeActiveTab");
+        ActiveWindow.hideInvokeFunction("removeActiveTab");
     }
 }

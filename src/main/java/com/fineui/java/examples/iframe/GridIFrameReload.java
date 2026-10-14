@@ -11,7 +11,7 @@ import com.fineui.java.examples.code.StudentGridData2;
 
 /**
  * 子页保存刷新父表格（不关闭窗体，路由 {@code iframe/grid-iframe-reload}）：子页「更新父页面表格」
- * （{@code btnUpdateParentGrid_Click}）用 {@code invokeActiveWindowFunction("closeWindow1", 参数)} 调用
+ * （{@code btnUpdateParentGrid_Click}）用 {@code ActiveWindow.invokeFunction("closeWindow1", 参数)} 调用
  * 父页脚本 {@code closeWindow1(参数)} -> {@code F.customEvent('CloseWindow1')} 回发父页
  * {@code Page_CustomEvent}，重新绑定表格并把标题改为「表格 - 回发参数：参数 - {ms}」，且<b>不关闭窗体</b>
  * （reload 而非 close）。
