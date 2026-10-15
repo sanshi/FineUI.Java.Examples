@@ -10,43 +10,47 @@
 
             <f:form id="SimpleForm1" is-fluid="true" body-padding="10" remove-last-fields-margin="true" label-align="Left" title="表单">
                 <f:rows>
-                    <f:form-row id="FormRow5">
+                    <f:form-row id="FormRow5" column-widths="50% auto">
                         <f:items>
                             <f:text-box id="TextBox1" label="文本一"></f:text-box>
-                            <f:panel id="ButtonPanel1" show-header="false" show-border="false">
-                                <f:items>
-                                    <f:button id="Button4" css-class="btn-in-form" text="按钮一"></f:button>
-                                </f:items>
-                            </f:panel>
+                            <f:button id="Button4" css-class="btn-in-form" text="按钮一"></f:button>
                         </f:items>
                     </f:form-row>
-                    <f:form-row id="FormRow6">
+                    <f:form-row id="FormRow6" column-widths="100% auto">
                         <f:items>
                             <f:text-box id="TextBox2" label="文本二"></f:text-box>
-                            <f:panel id="ButtonPanel2" show-header="false" show-border="false">
-                                <f:items>
-                                    <f:button id="Button3" css-class="btn-in-form" text="按钮二"></f:button>
-                                </f:items>
-                            </f:panel>
+                            <f:button id="Button3" css-class="btn-in-form" text="按钮二"></f:button>
                         </f:items>
                     </f:form-row>
-                    <f:form-row id="FormRow7">
+                    <f:form-row id="FormRow7" column-widths="100% auto">
                         <f:items>
                             <f:text-box id="TextBox3" label="文本三"></f:text-box>
                             <f:button id="Button1" css-class="btn-in-form" text="按钮三"></f:button>
                         </f:items>
                     </f:form-row>
-                    <f:form-row id="FormRow8">
+                    <f:form-row id="FormRow8" column-widths="100% auto">
                         <f:items>
                             <f:text-box id="TextBox4" label="文本四"></f:text-box>
                             <f:button id="Button2" css-class="btn-in-form" text="按钮四"></f:button>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row id="FormRow9">
+                        <f:items>
+                            <f:text-box id="TextBox5" label="默认均分"></f:text-box>
+                            <f:button id="Button5" css-class="btn-in-form" text="按钮五"></f:button>
+                        </f:items>
+                    </f:form-row>
+                    <f:form-row id="FormRow10" column-widths="50% 50%">
+                        <f:items>
+                            <f:text-box id="TextBox6" label="明确均分"></f:text-box>
+                            <f:button id="Button6" css-class="btn-in-form" text="按钮六"></f:button>
                         </f:items>
                     </f:form-row>
                 </f:rows>
             </f:form>
             <br />
             <br />
-            注：前两行用 Panel 承接列宽，按钮保持内容宽度；后两行的按钮直接占满所在列。
+            注：第一行使用 50% auto，后面三行使用 100% auto；最后两行分别展示默认均分和 50% 50%。
             <br />
             为表单设置 remove-last-fields-margin="true" 来移除最后一行表单字段的底部外边距。
 
