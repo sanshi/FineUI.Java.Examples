@@ -2,7 +2,7 @@ package com.fineui.java.examples.datamodel;
 
 import com.fineui.java.binding.BindProperty;
 import com.fineui.java.binding.HiddenProperty;
-import com.fineui.java.core.AbortPageException;
+import com.fineui.java.core.PageContext;
 import com.fineui.java.core.ActiveWindow;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
@@ -38,11 +38,12 @@ public class StudentEdit extends PageBase {
         studentId = getQueryInt("id", 0);
         student = StudentStore.find(studentId);
         if (student == null) {
-            // 抛出即中止：不渲染本页模板，改渲染框架内置极简页并弹出提示。
+            // 记录已删除时登记中止结果；当前方法返回后，框架改渲染极简提示页。
             // 本页常被 Window 以 iframe 弹出，故让用户点「确定」后顺手关掉父级窗体。
-            throw new AbortPageException("该学生不存在或已被删除！", ActiveWindow.hideCommand());
+            PageContext.abortPage("该学生不存在或已被删除！", ActiveWindow.hideCommand());
+            return;
         }
-        // 真实项目在此判断当前用户能不能编辑这条记录，无权则同样抛 AbortPageException。
+        // 真实项目还应检查编辑权限；无权时同样登记中止结果并返回。
         // ⚠️ 注意本方法只在首屏执行——回发时不跑，所以鉴权在事件处理器里还要再做一次（见 btnSave_Click）。
         // 本示例数据无归属关系，故只留说明。
     }
