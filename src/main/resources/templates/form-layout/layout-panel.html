@@ -13,13 +13,21 @@
                     <f:form-row id="FormRow5">
                         <f:items>
                             <f:text-box id="TextBox1" label="文本一"></f:text-box>
-                            <f:button id="Button4" css-class="btn-in-form" text="按钮一"></f:button>
+                            <f:panel id="ButtonPanel1" show-header="false" show-border="false">
+                                <f:items>
+                                    <f:button id="Button4" css-class="btn-in-form" text="按钮一"></f:button>
+                                </f:items>
+                            </f:panel>
                         </f:items>
                     </f:form-row>
                     <f:form-row id="FormRow6">
                         <f:items>
                             <f:text-box id="TextBox2" label="文本二"></f:text-box>
-                            <f:button id="Button3" css-class="btn-in-form" text="按钮二"></f:button>
+                            <f:panel id="ButtonPanel2" show-header="false" show-border="false">
+                                <f:items>
+                                    <f:button id="Button3" css-class="btn-in-form" text="按钮二"></f:button>
+                                </f:items>
+                            </f:panel>
                         </f:items>
                     </f:form-row>
                     <f:form-row id="FormRow7">
@@ -38,7 +46,9 @@
             </f:form>
             <br />
             <br />
-            注：为表单设置 remove-last-fields-margin="true" 来移除最后一行表单字段的底部外边距。
+            注：前两行用 Panel 承接列宽，按钮保持内容宽度；后两行的按钮直接占满所在列。
+            <br />
+            为表单设置 remove-last-fields-margin="true" 来移除最后一行表单字段的底部外边距。
 
         </th:block>
     </body>
