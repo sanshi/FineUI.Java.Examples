@@ -56,7 +56,7 @@ public class Form extends PageBase {
         }
 
         bindGrid();
-        invokeClientFunction("onNewButtonClick");
+        invokeFunction("onNewButtonClick");
     }
 
     /** 保存表单：隐藏字段里的行标识为空即新增、否则为编辑；保存后重新绑定并选中这一行。 */

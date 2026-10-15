@@ -17,6 +17,6 @@ public class AddTab extends PageBase {
 
     public void Button3_Click(Object sender, EventArgs e) {
         // 按名调用页面 script 槽定义的全局函数（无 eval）
-        invokeClientFunction("onCloseActiveTabClick");
+        invokeFunction("onCloseActiveTabClick");
     }
 }

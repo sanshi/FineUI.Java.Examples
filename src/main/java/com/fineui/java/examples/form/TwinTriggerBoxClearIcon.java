@@ -46,6 +46,6 @@ public class TwinTriggerBoxClearIcon extends PageBase {
 
     /** 把服务端认定的当前值回写客户端 __lastTriggerBoxValue，避免下次 blur/change 重复回发。 */
     private void updateClientJsParameter(String text) {
-        invokeClientFunction("updateLastTriggerBoxValue", text);
+        invokeFunction("updateLastTriggerBoxValue", text);
     }
 }

@@ -43,7 +43,7 @@ public class DatabaseMoreFlow extends PageBase {
         }
 
         if (dataIndex == pageCount - 1) {
-            invokeClientFunction("disableMoreButton");
+            invokeFunction("disableMoreButton");
         }
     }
 

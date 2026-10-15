@@ -31,6 +31,6 @@ public abstract class MobilePageBase extends PageBase {
 
     /** 居中通知（带图标）。回发后由客户端全局函数 {@code showCenterNotify(message, messageIcon)} 显示。 */
     protected void showCenterNotify(String message, MessageBoxIcon icon) {
-        invokeClientFunction("showCenterNotify", message, icon == null ? "" : icon.clientName());
+        invokeFunction("showCenterNotify", message, icon == null ? "" : icon.clientName());
     }
 }
