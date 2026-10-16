@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * 下拉表格（多选，分页，自定义编辑器设置函数）：兴趣爱好列进入编辑时弹出一个可复选、带分页的多选表格。
- * 因表格分页后需要的行可能在其他分页，故显示文本不再从表格数据现取，而是从页面内全量爱好表 {@code window.hobbyTable} 查得；
+ * 因表格分页后需要的行可能在其他分页，故显示文本从页面内的全量爱好数据查得；
  * 并配自定义编辑器设置函数 {@code editSetterHobby}（进入编辑时用全量爱好表把编码转成显示文本）。
  * 保存时把用户修改的数据落到会话缓存数据源、重新绑定，并展示修改的 JSON。
  */
@@ -28,6 +28,11 @@ public class DropDownBoxGridMultiPaging extends PageBase {
     Grid Grid1;
     Grid Grid2;
     Label labResult;
+
+    /** 页面显示其它分页的爱好名称时，读取与弹出表格绑定相同的完整列表。 */
+    public String getHobbyDataJson() {
+        return Json.encodeForScriptData(DropDownBoxGridMulti.hobbyTable());
+    }
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {

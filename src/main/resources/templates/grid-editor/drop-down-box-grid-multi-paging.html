@@ -66,30 +66,11 @@
 
         </th:block>
         <th:block layout:fragment="script">
+            <script type="application/json" id="hobbyData" th:utext="${page.hobbyDataJson}"></script>
             <script th:src="@{/res/js/grid.js}"></script>
             <script>
-                // 全量爱好表（分页时表格数据可能在其他分页，故显示文本从这里查）
-                window.hobbyTable = [{
-                        "Code": "reading",
-                        "Name": "读书"
-                    },
-                    {
-                        "Code": "basketball",
-                        "Name": "篮球"
-                    },
-                    {
-                        "Code": "travel",
-                        "Name": "旅游"
-                    },
-                    {
-                        "Code": "movie",
-                        "Name": "电影"
-                    },
-                    {
-                        "Code": "music",
-                        "Name": "音乐"
-                    }
-                ];
+                // 分页时从完整列表查名称，数据与服务端弹出表格保持一致。
+                window.hobbyTable = JSON.parse(document.getElementById('hobbyData').textContent);
 
                 function getTextByHobbies(value) {
                     var hobbies = value.split(',');

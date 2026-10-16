@@ -60,45 +60,10 @@
             <f:button id="btnRefresh" text="刷新本页面（保持列顺序）" css-class="marginr" click-handler="onRefreshClick"></f:button>
         </th:block>
         <th:block layout:fragment="script">
+            <script type="application/json" id="defaultColumnConfig" th:utext="${page.defaultColumnConfigJson}"></script>
             <script th:src="@{/res/js/grid.js}"></script>
             <script th:inline="none">
-                // 列配置默认值（用于「还原默认值」）
-                window.GRID_COLUMNCONFIG_DEFAULT = [{
-                        ColumnID: 'RowNumber',
-                        Hidden: true,
-                        HeaderText: ''
-                    },
-                    {
-                        ColumnID: 'Name',
-                        Hidden: false,
-                        HeaderText: '姓名'
-                    },
-                    {
-                        ColumnID: 'Gender',
-                        Hidden: false,
-                        HeaderText: '性别'
-                    },
-                    {
-                        ColumnID: 'EntranceYear',
-                        Hidden: false,
-                        HeaderText: '入学年份'
-                    },
-                    {
-                        ColumnID: 'AtSchool',
-                        Hidden: false,
-                        HeaderText: '是否在校'
-                    },
-                    {
-                        ColumnID: 'Major',
-                        Hidden: false,
-                        HeaderText: '所学专业'
-                    },
-                    {
-                        ColumnID: 'LogTime',
-                        Hidden: false,
-                        HeaderText: '注册日期'
-                    }
-                ];
+                window.GRID_COLUMNCONFIG_DEFAULT = JSON.parse(document.getElementById('defaultColumnConfig').textContent);
 
                 function onRefreshClick(event) {
                     window.location.reload();

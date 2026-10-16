@@ -204,12 +204,10 @@
         </th:block>
 
         <th:block layout:fragment="script">
-            <!--/* 移动菜单数据源：服务端「移动」子树经 Thymeleaf JS 内联序列化成 JS 对象树注入 */-->
-            <script th:inline="javascript">
-                window.MENUSOURCE = /*[[${page.menuSource}]]*/ [];
-
-            </script>
+            <script id="mobile-menu-data" type="application/json" th:utext="${page.menuDataJson}"></script>
             <script>
+                var MENUSOURCE = JSON.parse(document.getElementById('mobile-menu-data').textContent);
+
                 // 从二级菜单返回
                 function onBacktoPanel1Click(event) {
                     // 改变网址的 HASH 值（hashchange 驱动页面变化）

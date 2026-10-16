@@ -34,11 +34,9 @@
         <th:block layout:fragment="script">
             <script th:src="@{/res/js/grid.js}"></script>
             <!-- 服务端按当前 Locale 翻译的客户端 JS 资源（覆盖 grid.js 内静态中文兜底） -->
-            <script th:inline="javascript">
-                /*<![CDATA[*/
-                F.setResources( /*[[${page.javaScriptResources}]]*/ {});
-                /*]]>*/
-
+            <script id="grid-resources" type="application/json" th:utext="${page.javaScriptResourcesJson}"></script>
+            <script>
+                F.setResources(JSON.parse(document.getElementById('grid-resources').textContent));
             </script>
         </th:block>
     </body>

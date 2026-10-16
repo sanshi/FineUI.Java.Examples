@@ -16,7 +16,7 @@ import java.util.Map;
  *   <li>Java 侧：{@code _R("multilang.login.success")}、{@code _R("multilang.login.errorFormat", user, pwd)}（{@code {0}} 占位符）。</li>
  *   <li>模板侧：f: 控件属性用 Thymeleaf 消息表达式 {@code title="#{multilang.grid.title}"}；普通 HTML 用 {@code th:text="#{...}"}。</li>
  *   <li>JS 资源：{@code Page_Load} 里 {@code setJavaScriptResources("Male", "Female", ...)}，模板 script 段输出
- *       {@code F.setResources({...})}（见 {@link #getJavaScriptResources()}）。</li>
+ *       {@code F.setResources({...})}（见 {@link #getJavaScriptResourcesJson()}）。</li>
  * </ul>
  */
 public abstract class MultilangPageBase extends PageBase {
@@ -68,12 +68,8 @@ public abstract class MultilangPageBase extends PageBase {
         }
     }
 
-    /**
-     * 模板输出用：已翻译的客户端 JS 资源（key→当前语言值）。Thymeleaf JS 内联（{@code th:inline="javascript"}）
-     * 对 Map 直接序列化为 JSON 对象（不能返回 String——CharSequence 会被输出为 JS 字符串字面量导致
-     * {@code F.setResources("...")} 注入失效），配合模板 {@code F.setResources(/*[[${page.javaScriptResources}]]*&#47; {});}。
-     */
-    public Map<String, String> getJavaScriptResources() {
-        return jsResources;
+    /** 模板输出翻译后的文本数据，保留翻译中的引号并防止内容结束脚本标签。 */
+    public String getJavaScriptResourcesJson() {
+        return Json.encodeForScriptData(jsResources);
     }
 }

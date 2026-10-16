@@ -29,10 +29,12 @@
 
         </th:block>
         <th:block layout:fragment="script">
+            <script type="application/json" id="yearRange" th:utext="${page.yearRangeJson}"></script>
             <script th:src="@{/res/js/grid.js}"></script>
             <script>
-                window._MINYEAR = 2014;
-                window._MAXYEAR = 2017;
+                var yearRange = JSON.parse(document.getElementById('yearRange').textContent);
+                window._MINYEAR = yearRange.minYear;
+                window._MAXYEAR = yearRange.maxYear;
 
                 function updateTotalCell(grid, rowId) {
                     var me = grid,

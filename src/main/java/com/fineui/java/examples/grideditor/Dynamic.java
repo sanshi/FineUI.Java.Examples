@@ -37,12 +37,16 @@ public class Dynamic extends PageBase {
     Grid Grid1;
     Label labResult;
 
+    /** 客户端编辑年份列时读取服务端建列的同一范围。 */
+    public String getYearRangeJson() {
+        return Json.encodeForScriptData(Map.of("minYear", minYear, "maxYear", maxYear));
+    }
+
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
             buildColumns();
             Grid1.setDataSource(sourceData());
             Grid1.dataBind();
-            // 年份区间常量提供给客户端脚本使用（见 dynamic.html 内联 window._MINYEAR / _MAXYEAR）
         }
     }
 

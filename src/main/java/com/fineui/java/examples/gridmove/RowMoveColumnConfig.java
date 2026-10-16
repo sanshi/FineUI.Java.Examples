@@ -47,6 +47,11 @@ public class RowMoveColumnConfig extends PageBase {
 
     Grid Grid1;
 
+    /** 还原按钮使用服务端初始化列顺序时的同一份默认配置。 */
+    public String getDefaultColumnConfigJson() {
+        return Json.encodeForScriptData(defaultConfig());
+    }
+
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
             loadData();

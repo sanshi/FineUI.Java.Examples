@@ -1,6 +1,7 @@
 package com.fineui.java.examples.mobile;
 
 import com.fineui.java.core.FineUIPage;
+import com.fineui.java.examples.code.Json;
 import com.fineui.java.examples.code.PageBase;
 import org.springframework.core.io.ClassPathResource;
 import org.w3c.dom.Document;
@@ -21,7 +22,7 @@ import java.util.Map;
  *
  * <p>三级下滑菜单：一/二/三级菜单各一个铺满视口的面板 + 数据列表，靠 hashchange 与滑动动画在层级间切换。
  * 菜单数据由 {@link #getMenuSource()} 从 {@code res/menu.xml} 的「移动」子树递归构建成一棵 JSON 树，
- * 经模板注入到 {@code window.MENUSOURCE}，客户端脚本据此逐级加载列表。
+ * 页面通过非执行 JSON 数据块交给客户端脚本逐级加载列表。
  *
  * <p>目录节点只有 {@code text} + {@code children}；叶子节点有 {@code text} + {@code navigateUrl}。叶子的
  * {@code navigateUrl} 由菜单里的 {@code /mobile/?file=x} 改写为直达地址 {@code /mobile/x}——菜单项在 IFrame
@@ -33,7 +34,7 @@ public class Main extends PageBase {
     private List<Map<String, Object>> menuSource;
 
     /**
-     * 移动菜单数据源（供模板经 Thymeleaf JavaScript 内联注入 {@code window.MENUSOURCE}）。
+     * 移动菜单数据源（供页面 JSON 数据块使用）。
      * 惰性构建并缓存：读 {@code res/menu.xml}「移动」子树 → 递归转成菜单树。解析失败返回空列表。
      */
     public List<Map<String, Object>> getMenuSource() {
@@ -41,6 +42,11 @@ public class Main extends PageBase {
             menuSource = buildMenuSource();
         }
         return menuSource;
+    }
+
+    /** 菜单文字和地址以 JSON 字符串输出，避免把 XML 内容拼进可执行脚本。 */
+    public String getMenuDataJson() {
+        return Json.encodeForScriptData(getMenuSource());
     }
 
     private List<Map<String, Object>> buildMenuSource() {
