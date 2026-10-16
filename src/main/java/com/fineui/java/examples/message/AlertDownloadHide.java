@@ -5,6 +5,7 @@ import com.fineui.java.core.Confirm;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.MessageBoxIcon;
+import com.fineui.java.core.controls.Window;
 import com.fineui.java.examples.code.PageBase;
 
 /**
@@ -14,6 +15,8 @@ import com.fineui.java.examples.code.PageBase;
  */
 @FineUIPage("message/alert-download-hide")
 public class AlertDownloadHide extends PageBase {
+
+    Window Window1;
 
     public void Page_Load(Object sender, EventArgs e) {
     }
@@ -26,7 +29,7 @@ public class AlertDownloadHide extends PageBase {
 
     public void btnOperation_Click(Object sender, EventArgs e) {
         // 先隐藏当前页的窗体，再弹出确认框
-        hideComponent("Window1");
+        Window1.hide();
         Confirm confirm = new Confirm();
         confirm.setMessage("操作成功！点击确定按钮开始下载文件，点取消按钮弹出对话框");
         confirm.setMessageBoxIcon(MessageBoxIcon.Question);

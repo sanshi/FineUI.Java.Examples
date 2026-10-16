@@ -2,6 +2,7 @@ package com.fineui.java.examples.other;
 
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.PageContext;
 import com.fineui.java.examples.code.PageBase;
 
 /**
@@ -17,6 +18,6 @@ public class AddTab extends PageBase {
 
     public void Button3_Click(Object sender, EventArgs e) {
         // 按名调用页面 script 槽定义的全局函数（无 eval）
-        invokeFunction("onCloseActiveTabClick");
+        PageContext.invokeFunction("onCloseActiveTabClick");
     }
 }

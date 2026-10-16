@@ -1,6 +1,7 @@
 package com.fineui.java.examples.mobile;
 
 import com.fineui.java.core.MessageBoxIcon;
+import com.fineui.java.core.PageContext;
 import com.fineui.java.examples.code.PageBase;
 
 /**
@@ -31,6 +32,6 @@ public abstract class MobilePageBase extends PageBase {
 
     /** 居中通知（带图标）。回发后由客户端全局函数 {@code showCenterNotify(message, messageIcon)} 显示。 */
     protected void showCenterNotify(String message, MessageBoxIcon icon) {
-        invokeFunction("showCenterNotify", message, icon == null ? "" : icon.clientName());
+        PageContext.invokeFunction("showCenterNotify", message, icon == null ? "" : icon.clientName());
     }
 }

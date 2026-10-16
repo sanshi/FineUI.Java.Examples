@@ -6,6 +6,7 @@ import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.MessageBoxIcon;
+import com.fineui.java.core.PageContext;
 import com.fineui.java.core.enums.Target;
 import com.fineui.java.examples.code.PageBase;
 
@@ -24,7 +25,7 @@ public class IFrameWindow extends PageBase {
     public void btnOperation_Click(Object sender, EventArgs e) {
         // 先隐藏激活窗体（父页 Window2），再调用父页的 showConfirm 函数
         ActiveWindow.hide();
-        invokeParentFunction("showConfirm");
+        PageContext.invokeParentFunction("showConfirm");
     }
 
     public void btnTopCallback_Click(Object sender, EventArgs e) {

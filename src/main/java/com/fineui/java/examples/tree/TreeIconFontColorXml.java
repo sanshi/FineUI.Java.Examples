@@ -2,6 +2,7 @@ package com.fineui.java.examples.tree;
 
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.PageContext;
 import com.fineui.java.core.controls.Label;
 import com.fineui.java.core.controls.Tree;
 import com.fineui.java.core.controls.TreeNode;
@@ -47,7 +48,7 @@ public class TreeIconFontColorXml extends PageBase {
         for (String content : dynamicCss.values()) {
             css.append(content);
         }
-        addCss("dynamicCSSStyles", css.toString());
+        PageContext.addCss("dynamicCSSStyles", css.toString());
     }
 
     private void resolveXmlNodeList(List<TreeNode> nodes, NodeList xmlNodes) {

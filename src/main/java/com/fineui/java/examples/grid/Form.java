@@ -2,6 +2,7 @@ package com.fineui.java.examples.grid;
 
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.PageContext;
 import com.fineui.java.core.MessageBoxIcon;
 import com.fineui.java.core.controls.CheckBox;
 import com.fineui.java.core.controls.DatePicker;
@@ -56,7 +57,7 @@ public class Form extends PageBase {
         }
 
         bindGrid();
-        invokeFunction("onNewButtonClick");
+        PageContext.invokeFunction("onNewButtonClick");
     }
 
     /** 保存表单：隐藏字段里的行标识为空即新增、否则为编辑；保存后重新绑定并选中这一行。 */

@@ -3,6 +3,7 @@ package com.fineui.java.examples.gridpaging;
 import com.fineui.java.core.CustomEventArgs;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.PageContext;
 import com.fineui.java.core.controls.Grid;
 import com.fineui.java.examples.code.PageBase;
 import com.fineui.java.examples.code.StudentGridData2;
@@ -43,7 +44,7 @@ public class DatabaseMoreFlow extends PageBase {
         }
 
         if (dataIndex == pageCount - 1) {
-            invokeFunction("disableMoreButton");
+            PageContext.invokeFunction("disableMoreButton");
         }
     }
 

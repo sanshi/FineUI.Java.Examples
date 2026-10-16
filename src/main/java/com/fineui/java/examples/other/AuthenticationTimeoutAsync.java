@@ -2,6 +2,7 @@ package com.fineui.java.examples.other;
 
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
+import com.fineui.java.core.PageContext;
 import com.fineui.java.examples.code.PageBase;
 
 /**
@@ -20,6 +21,6 @@ public class AuthenticationTimeoutAsync extends PageBase {
 
     /** 模拟 Forms Authentication 超时：服务端重定向到首页（携带 ReturnUrl，指向本页的 Java kebab 路由）。 */
     public void Button2_Click(Object sender, EventArgs e) {
-        redirect("/?ReturnUrl=%2fother%2fauthentication-timeout-async");
+        PageContext.redirect("/?ReturnUrl=%2fother%2fauthentication-timeout-async");
     }
 }
