@@ -15,11 +15,6 @@ import com.fineui.java.examples.code.PageBase;
 @FineUIPage("csp/no-eval")
 public class NoEval extends PageBase {
 
-    /** 渲染前配置最严格 CSP：仅同源 + nonce；不开 unsafe-inline，也永不产出 unsafe-eval。 */
-    public void Page_Get(Object sender, EventArgs e) {
-        getPageManager().cspScripts(true).cspScriptsAllowNonce(true);
-    }
-
     public void btnPostback_Click(Object sender, EventArgs e) {
         showNotify("回发成功——FineUI.Java 全程无 eval，严格 CSP（无 'unsafe-eval'）下功能完整");
     }

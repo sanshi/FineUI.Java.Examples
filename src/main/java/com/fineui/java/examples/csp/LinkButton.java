@@ -14,11 +14,6 @@ import com.fineui.java.examples.code.PageBase;
 @FineUIPage("csp/link-button")
 public class LinkButton extends PageBase {
 
-    /** 渲染前配置 CSP：开启 + 启用 nonce（须放 Page_Get——响应头与 nonce 都要早于页面渲染）。 */
-    public void Page_Get(Object sender, EventArgs e) {
-        getPageManager().cspScripts(true).cspScriptsAllowNonce(true);
-    }
-
     public void lbServer_Click(Object sender, EventArgs e) {
         showNotify("你点击了链接按钮（服务器端事件）");
     }

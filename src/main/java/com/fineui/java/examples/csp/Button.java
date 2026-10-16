@@ -20,11 +20,6 @@ public class Button extends PageBase {
     com.fineui.java.core.controls.Button btnPressed;
     com.fineui.java.core.controls.Button btnTooltip;
 
-    /** 渲染前配置 CSP：开启 + 启用 nonce（须放 Page_Get——响应头与 nonce 都要早于页面渲染）。 */
-    public void Page_Get(Object sender, EventArgs e) {
-        getPageManager().cspScripts(true).cspScriptsAllowNonce(true);
-    }
-
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
             btnPrimary.setIconFont(IconFont.Tag);
