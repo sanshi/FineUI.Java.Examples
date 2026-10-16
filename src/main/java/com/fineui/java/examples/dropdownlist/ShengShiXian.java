@@ -4,7 +4,7 @@ import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.DropDownList;
 import com.fineui.java.core.controls.Label;
-import com.fineui.java.examples.code.DataSourceUtil;
+import com.fineui.java.examples.code.ProvinceCityCountyData;
 import com.fineui.java.examples.code.PageBase;
 
 import java.util.List;
@@ -30,8 +30,7 @@ public class ShengShiXian extends PageBase {
     }
 
     private void bindSheng() {
-        ddlSheng.setDataSource(DataSourceUtil.SHENG);
-        ddlSheng.dataBind();
+        ProvinceCityCountyData.bind(ddlSheng, ProvinceCityCountyData.provinces());
 
         ddlSheng.insertListItem(0, "-1", "选择省份", true);
         ddlSheng.setSelectedValue("-1");
@@ -41,10 +40,9 @@ public class ShengShiXian extends PageBase {
         String sheng = ddlSheng.getSelectedValue();
 
         if (sheng != null && !sheng.isEmpty() && !"-1".equals(sheng)) {
-            List<String> cities = DataSourceUtil.SHI.get(sheng);
+            var cities = ProvinceCityCountyData.cities(sheng);
             if (cities != null) {
-                ddlShi.setDataSource(cities);
-                ddlShi.dataBind();
+                ProvinceCityCountyData.bind(ddlShi, cities);
             }
         }
 
@@ -59,10 +57,9 @@ public class ShengShiXian extends PageBase {
         String shi = ddlShi.getSelectedValue();
 
         if (shi != null && !shi.isEmpty() && !"-1".equals(shi)) {
-            List<String> counties = DataSourceUtil.XIAN.get(shi);
+            var counties = ProvinceCityCountyData.counties(shi);
             if (counties != null) {
-                ddlXian.setDataSource(counties);
-                ddlXian.dataBind();
+                ProvinceCityCountyData.bind(ddlXian, counties);
             }
         }
 
@@ -88,7 +85,8 @@ public class ShengShiXian extends PageBase {
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
         String xian = ddlXian.getSelectedValue();
-        labResult.setText("您选择的省市县：" + ddlSheng.getSelectedValue() + " | " + ddlShi.getSelectedValue()
-                + ("-1".equals(xian) ? "" : " | " + xian));
+        labResult.setText("您选择的省市县：" + ProvinceCityCountyData.provinceName(ddlSheng.getSelectedValue()) + " | "
+                + ProvinceCityCountyData.cityName(ddlShi.getSelectedValue())
+                + ("-1".equals(xian) ? "" : " | " + ProvinceCityCountyData.countyName(xian)));
     }
 }

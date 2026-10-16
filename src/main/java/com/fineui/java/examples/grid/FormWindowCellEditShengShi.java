@@ -12,7 +12,7 @@ import com.fineui.java.core.controls.NumberBox;
 import com.fineui.java.core.controls.RadioButtonList;
 import com.fineui.java.core.controls.TextBox;
 import com.fineui.java.core.controls.Window;
-import com.fineui.java.examples.code.DataSourceUtil;
+import com.fineui.java.examples.code.ProvinceCityCountyData;
 import com.fineui.java.examples.code.Json;
 import com.fineui.java.examples.code.PageBase;
 import com.fineui.java.examples.grideditor.ShengShiGridData;
@@ -25,9 +25,8 @@ import java.util.Map;
 /**
  * 表格与表单（弹出窗体，表格中保存，省市联动）：在上一页的基础上加了「省 / 市」两列，市列表跟着省联动。
  *
- * <p>省市数据只有一份：省份列表 {@link DataSourceUtil#SHENG} 在首屏绑到省下拉列表上；「省 → 市」的对应关系
- * {@link #getShiJson()} 输出到页面脚本里，客户端切换省份时按它重新加载市下拉列表。表格里的省市两列直接存名称，
- * 不需要在客户端把代码翻译成名称。
+ * <p>省市数据从同一份固定编码文件读取。首屏把省市关系写成非执行 JSON，客户端切换省份时按编码加载城市；
+ * 表格保存省市编码，显示时再查名称。例如保存 {@code 007} 和 {@code 007001}，表格显示“安徽”和“合肥市”。
  *
  * <p>没选省时市下拉列表被禁用并提示「请先选择省！」；切换省份后原市若不属于新省份会被清空。演示数据里特意留了
  * 几行没有省市的记录，用来看这个效果。
@@ -58,17 +57,16 @@ public class FormWindowCellEditShengShi extends PageBase {
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
-            // 省下拉列表：全部省份（名称即值）
-            ddlSheng.setDataSource(DataSourceUtil.SHENG);
-            ddlSheng.dataBind();
+            // 省下拉列表保存固定编码，显示时使用列表项名称。
+            ProvinceCityCountyData.bind(ddlSheng, ProvinceCityCountyData.provinces());
 
             bindGrid();
         }
     }
 
-    /** 省→市数据（名称）的 JSON，供模板输出到 window._SHI 供客户端联动使用。 */
-    public String getShiJson() {
-        return Json.encode(DataSourceUtil.SHI);
+    /** 把固定省市编码和名称作为非执行 JSON 交给页面。 */
+    public String getProvinceCityJson() {
+        return Json.encodeForScriptData(ProvinceCityCountyData.provinceCityData());
     }
 
     /** 全部保存：把客户端攒下的这一批改动落到会话里的数据表。 */
@@ -128,7 +126,7 @@ public class FormWindowCellEditShengShi extends PageBase {
 
     /**
      * 会话里缓存的那张可改数据表；首次访问时用演示数据填充。
-     * 演示数据里省、市两列存的是名称，与省下拉列表的列表项值同源，客户端不需要再做代码到名称的翻译。
+     * 演示数据里省、市两列存固定编码，客户端依据首屏省市数据将其显示为名称。
      */
     @SuppressWarnings("unchecked")
     private List<Map<String, Object>> sourceData() {

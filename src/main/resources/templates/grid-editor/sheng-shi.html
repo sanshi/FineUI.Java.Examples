@@ -17,12 +17,12 @@
                             <f:text-box id="tbxName" required="true"></f:text-box>
                         </f:editor>
                     </f:render-field>
-                    <f:render-field header-text="所在省" column-id="Sheng" data-field="Sheng" width="150">
+                    <f:render-field header-text="所在省" column-id="Sheng" data-field="Sheng" width="150" renderer-function="renderSheng">
                         <f:editor>
                             <f:drop-down-list id="ddlSheng" required="true"></f:drop-down-list>
                         </f:editor>
                     </f:render-field>
-                    <f:render-field header-text="所在市" column-id="Shi" data-field="Shi" width="150">
+                    <f:render-field header-text="所在市" column-id="Shi" data-field="Shi" width="150" renderer-function="renderShi">
                         <f:editor>
                             <f:drop-down-list id="ddlShi" required="true"></f:drop-down-list>
                         </f:editor>
@@ -57,8 +57,35 @@
         </th:block>
         <th:block layout:fragment="script">
             <script th:src="@{/res/js/grid.js}"></script>
-            <script th:utext="|window._SHI = ${page.shiJson};|"></script>
+            <script type="application/json" id="provinceCityData" th:utext="${page.provinceCityJson}"></script>
             <script>
+                // 省市编码和名称来自非执行 JSON 数据块。
+                var provinceCityData = JSON.parse(document.getElementById('provinceCityData').textContent);
+                window._SHENG = provinceCityData.provinces;
+                window._SHI = provinceCityData.cities;
+        // 单元格保存固定编码，渲染时从统一数据查找名称。
+        function findPlaceName(items, code) {
+            if (!items) {
+                return '';
+            }
+            for (var i = 0; i < items.length; i++) {
+                if (items[i][0] === code) {
+                    return items[i][1];
+                }
+            }
+            return '';
+        }
+
+        function renderSheng(value) {
+            return findPlaceName(window._SHENG, value);
+        }
+
+        function renderShi(value, params) {
+            var provinceCode = params.rowValue['Sheng'];
+            return findPlaceName(window._SHI[provinceCode], value);
+        }
+
+
                 function onGrid1BeforeEdit(event, value, params) {
                     var grid1 = F.ui.Grid1;
 

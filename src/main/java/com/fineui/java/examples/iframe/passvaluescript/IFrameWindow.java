@@ -3,7 +3,7 @@ package com.fineui.java.examples.iframe.passvaluescript;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.RadioButtonList;
-import com.fineui.java.examples.code.DataSourceUtil;
+import com.fineui.java.examples.code.ProvinceCityCountyData;
 import com.fineui.java.examples.code.PageBase;
 
 /**
@@ -18,11 +18,10 @@ public class IFrameWindow extends PageBase {
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
-            ddlSheng.setDataSource(DataSourceUtil.SHENG);
-            ddlSheng.dataBind();
+            ProvinceCityCountyData.bind(ddlSheng, ProvinceCityCountyData.provinces());
             String selected = getQueryParam("selected");
             if (selected != null && !selected.isEmpty()) {
-                ddlSheng.setSelectedValue(selected);
+                ddlSheng.setSelectedValue(ProvinceCityCountyData.provinceCode(selected));
             }
         }
     }

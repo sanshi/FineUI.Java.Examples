@@ -3,7 +3,7 @@ package com.fineui.java.examples.iframe;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.DropDownList;
-import com.fineui.java.examples.code.DataSourceUtil;
+import com.fineui.java.examples.code.ProvinceCityCountyData;
 import com.fineui.java.examples.code.PageBase;
 
 import java.time.LocalTime;
@@ -23,9 +23,8 @@ public class SelectProvince extends PageBase {
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
-            ddlProvince.setDataSource(DataSourceUtil.SHENG);
-            ddlProvince.dataBind();
-            ddlProvince.setSelectedValue("安徽");
+            ProvinceCityCountyData.bind(ddlProvince, ProvinceCityCountyData.provinces());
+            ddlProvince.setSelectedValue("007");
         }
     }
 

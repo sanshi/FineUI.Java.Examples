@@ -6,7 +6,7 @@ import com.fineui.java.core.controls.DropDownList;
 import com.fineui.java.core.controls.Grid;
 import com.fineui.java.core.controls.Label;
 import com.fineui.java.core.controls.RenderField;
-import com.fineui.java.examples.code.DataSourceUtil;
+import com.fineui.java.examples.code.ProvinceCityCountyData;
 import com.fineui.java.examples.code.Json;
 import com.fineui.java.examples.code.PageBase;
 
@@ -17,8 +17,8 @@ import java.util.Map;
 
 /**
  * 单元格编辑（下拉列表，省市联动）：所在省下拉列表提供全部省份；进入所在市编辑前根据当前省动态加载市列表，
- * 未选省时禁用市下拉；更改省后若原市不属于新省则清空市。省市联动所需的「省→市」数据经 {@link #getShiJson()}
- * 输出到页面脚本供客户端使用。
+ * 未选省时禁用市下拉；更改省后若原市不属于新省则清空市。省市列表保存固定编码，
+ * 首屏通过非执行 JSON 把联动数据交给客户端，表格显示时再查名称。
  */
 @FineUIPage("grid-editor/sheng-shi")
 public class ShengShi extends PageBase {
@@ -36,18 +36,17 @@ public class ShengShi extends PageBase {
     }
 
     private void loadData() {
-        // 所在省下拉列表：全部省份（名称即值）。编辑器控件不进注册表、不能字段绑定，故经所在列取编辑器后设数据。
+        // 编辑器控件不进注册表，需经所在列取得编辑器；选项值使用固定省编码。
         DropDownList ddlSheng = (DropDownList) ((RenderField) Grid1.findColumn("Sheng")).getEditor();
-        ddlSheng.setDataSource(DataSourceUtil.SHENG);
-        ddlSheng.dataBind();
+        ProvinceCityCountyData.bind(ddlSheng, ProvinceCityCountyData.provinces());
 
         Grid1.setDataSource(sourceData());
         Grid1.dataBind();
     }
 
-    /** 省→市数据（名称）的 JSON，供模板输出到 window._SHI 供客户端联动使用。 */
-    public String getShiJson() {
-        return Json.encode(DataSourceUtil.SHI);
+    /** 把固定省市编码和名称作为非执行 JSON 交给页面。 */
+    public String getProvinceCityJson() {
+        return Json.encodeForScriptData(ProvinceCityCountyData.provinceCityData());
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {

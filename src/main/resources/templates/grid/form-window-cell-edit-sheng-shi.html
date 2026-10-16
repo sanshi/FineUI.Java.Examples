@@ -52,8 +52,8 @@
                             <f:text-box id="tbxEditorMajor"></f:text-box>
                         </f:editor>
                     </f:render-field>
-                    <f:render-field header-text="省" column-id="Sheng" data-field="Sheng" width="100"></f:render-field>
-                    <f:render-field header-text="市" column-id="Shi" data-field="Shi" width="150"></f:render-field>
+                    <f:render-field header-text="省" column-id="Sheng" data-field="Sheng" width="100" renderer-function="renderSheng"></f:render-field>
+                    <f:render-field header-text="市" column-id="Shi" data-field="Shi" width="150" renderer-function="renderShi"></f:render-field>
                     <f:render-field column-id="Edit" width="50" text-align="Center" enable-header-menu="false">
                         <f:commands>
                             <f:command command-name="Edit" icon="Pencil" tool-tip="编辑"></f:command>
@@ -129,8 +129,35 @@
         </th:block>
         <th:block layout:fragment="script">
             <script th:src="@{/res/js/grid.js}"></script>
-            <script th:utext="|window._SHI = ${page.shiJson};|"></script>
+            <script type="application/json" id="provinceCityData" th:utext="${page.provinceCityJson}"></script>
             <script>
+                // 省市编码和名称来自非执行 JSON 数据块。
+                var provinceCityData = JSON.parse(document.getElementById('provinceCityData').textContent);
+                window._SHENG = provinceCityData.provinces;
+                window._SHI = provinceCityData.cities;
+
+                // 表格保存编码，显示时从同一份省市数据查询名称。
+                function findPlaceName(items, code) {
+                    if (!items) {
+                        return '';
+                    }
+                    for (var i = 0; i < items.length; i++) {
+                        if (items[i][0] === code) {
+                            return items[i][1];
+                        }
+                    }
+                    return '';
+                }
+
+                function renderSheng(value) {
+                    return findPlaceName(window._SHENG, value);
+                }
+
+                function renderShi(value, params) {
+                    var provinceCode = params.rowValue['Sheng'];
+                    return findPlaceName(window._SHI[provinceCode], value);
+                }
+
                 // 点击「新增」：重置表单，市下拉列表回到「请先选择省！」的初始状态，再弹出窗体
                 function onNewButtonClick(event) {
                     F.ui.SimpleForm1.reset();

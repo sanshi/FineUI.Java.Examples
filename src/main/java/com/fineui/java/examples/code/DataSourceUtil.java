@@ -1,45 +1,12 @@
 package com.fineui.java.examples.code;
 
-import tools.jackson.core.type.TypeReference;
-import tools.jackson.databind.ObjectMapper;
-
-import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 示例数据源工具：省市县联动数据（从 classpath 的 {@code data/*.json} 一次性加载）。
- *
- * <p>{@link #SHENG} 省份名数组；{@link #SHI} 省份→地区市数组；{@link #XIAN} 地区市→县区市数组。
- */
+/** 其他示例所用的模拟列表数据。省市县固定编码由 {@link ProvinceCityCountyData} 读取。 */
 public final class DataSourceUtil {
 
     private DataSourceUtil() {
-    }
-
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-
-    /** 全部省份名（有序）。 */
-    public static final List<String> SHENG = load("data/sheng.json", new TypeReference<List<String>>() {
-    });
-
-    /** 省份名 → 该省地区市名数组。 */
-    public static final Map<String, List<String>> SHI = load("data/shi.json", new TypeReference<Map<String, List<String>>>() {
-    });
-
-    /** 地区市名 → 该市县区市名数组。 */
-    public static final Map<String, List<String>> XIAN = load("data/xian.json", new TypeReference<Map<String, List<String>>>() {
-    });
-
-    private static <T> T load(String path, TypeReference<T> type) {
-        try (InputStream in = DataSourceUtil.class.getClassLoader().getResourceAsStream(path)) {
-            if (in == null) {
-                throw new IllegalStateException("资源不存在: " + path);
-            }
-            return MAPPER.readValue(in, type);
-        } catch (Exception e) {
-            throw new IllegalStateException("加载省市县数据失败: " + path, e);
-        }
     }
 
     // —— 模拟国家列表（移动端 DataList 示例用；字段 Id/Image/Name/Desc/Group）——

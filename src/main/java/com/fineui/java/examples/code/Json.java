@@ -49,4 +49,13 @@ public final class Json {
         String json = MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(data);
         return json.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
     }
+
+    /**
+     * 给非执行 JSON 数据块输出原始 JSON。用 JSON 转义保留实际字符，避免地名或业务数据里的
+     * {@code </script>} 提前结束标签；HTML 实体转义会改变 JSON 的值，不能用于这种数据块。
+     */
+    public static String encodeForScriptData(Object data) {
+        String json = MAPPER.writeValueAsString(data);
+        return json.replace("&", "\\u0026").replace("<", "\\u003C").replace(">", "\\u003E");
+    }
 }
