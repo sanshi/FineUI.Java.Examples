@@ -21,11 +21,13 @@ public class Grid extends MultilangPageBase {
         super(messageSource);
     }
 
-    public void Page_Load(Object sender, EventArgs e) {
+    public void Page_Get(Object sender, EventArgs e) {
         // 客户端 JS 资源（key 与 grid.js 内 F.getResource 调用一致）
         setJavaScriptResources("Male", "Female", "GridGender", "GridMajor", "GridRowId", "GridRowText",
                 "NoSelectionMessage", "NamePrefix", "IntroPrefix");
+    }
 
+    public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
             loadData();
         }
