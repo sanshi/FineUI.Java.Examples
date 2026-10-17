@@ -57,9 +57,6 @@ public class FormWindowCellEditShengShi extends PageBase {
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
-            // 省下拉列表保存固定编码，显示时使用列表项名称。
-            ProvinceCityCountyData.bind(ddlSheng, ProvinceCityCountyData.provinces());
-
             bindGrid();
         }
     }

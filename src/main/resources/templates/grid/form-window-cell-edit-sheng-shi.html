@@ -133,8 +133,11 @@
             <script>
                 // 省市编码和名称来自非执行 JSON 数据块。
                 var provinceCityData = JSON.parse(document.getElementById('provinceCityData').textContent);
-                window._SHENG = provinceCityData.provinces;
-                window._SHI = provinceCityData.cities;
+
+                // 首次打开时从页面 JSON 加载省份，省市列表使用同一份固定编码数据。
+                F.ready(function () {
+                    F.ui.ddlSheng.loadData(provinceCityData.provinces);
+                });
 
                 // 表格保存编码，显示时从同一份省市数据查询名称。
                 function findPlaceName(items, code) {
@@ -150,12 +153,12 @@
                 }
 
                 function renderSheng(value) {
-                    return findPlaceName(window._SHENG, value);
+                    return findPlaceName(provinceCityData.provinces, value);
                 }
 
                 function renderShi(value, params) {
                     var provinceCode = params.rowValue['Sheng'];
-                    return findPlaceName(window._SHI[provinceCode], value);
+                    return findPlaceName(provinceCityData.cities[provinceCode], value);
                 }
 
                 // 点击「新增」：重置表单，市下拉列表回到「请先选择省！」的初始状态，再弹出窗体
@@ -194,7 +197,7 @@
                 // 没有省就清空选中、禁用并提示「请先选择省！」
                 function refreshShiList(sheng, shi) {
                     var ddlShi = F.ui.ddlShi;
-                    var shiData = window._SHI[sheng];
+                    var shiData = provinceCityData.cities[sheng];
 
                     if (!shiData) {
                         ddlShi.clearSelection();

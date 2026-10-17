@@ -64,8 +64,6 @@
             <script>
                 // 省市编码和名称来自非执行 JSON 数据块。
                 var provinceCityData = JSON.parse(document.getElementById('provinceCityData').textContent);
-                window._SHENG = provinceCityData.provinces;
-                window._SHI = provinceCityData.cities;
 
                 // 渲染性别单元格
                 function renderGender(value) {
@@ -88,8 +86,8 @@
                     var shengName = '',
                         sheng;
                     if (shengValue) {
-                        for (var i = 0, count = window._SHENG.length; i < count; i++) {
-                            sheng = window._SHENG[i];
+                        for (var i = 0, count = provinceCityData.provinces.length; i < count; i++) {
+                            sheng = provinceCityData.provinces[i];
                             if (shengValue == sheng[0]) {
                                 shengName = sheng[1] + '(' + sheng[0] + ')';
                                 break;
@@ -101,7 +99,7 @@
 
                 // 根据省代码和市代码获取市名称
                 function getShiName(shengValue, shiValue) {
-                    var shiData = window._SHI[shengValue],
+                    var shiData = provinceCityData.cities[shengValue],
                         shi, shiName = '';
                     if (shiData) {
                         for (var i = 0, count = shiData.length; i < count; i++) {
@@ -117,7 +115,7 @@
 
                 // 页面加载完毕
                 F.ready(function() {
-                    F.ui.ddlSheng.loadData(window._SHENG);
+                    F.ui.ddlSheng.loadData(provinceCityData.provinces);
                 });
 
                 // 单元格编辑前
@@ -129,7 +127,7 @@
 
                         var sheng = grid1.getCellValue(params.rowId, 'Sheng');
 
-                        var shidata = window._SHI[sheng];
+                        var shidata = provinceCityData.cities[sheng];
                         if (shidata) {
                             ddlShi.enable();
                             ddlShi.setEmptyText('');
@@ -146,7 +144,7 @@
                     var grid1 = F.ui.Grid1;
 
                     if (params.columnId === 'Sheng') {
-                        var shidata = window._SHI[value];
+                        var shidata = provinceCityData.cities[value];
                         if (shidata) {
                             var shi = grid1.getCellValue(params.rowId, 'Shi');
                             // 如果结束编辑时，市 不属于 当前 省，则清空 市
