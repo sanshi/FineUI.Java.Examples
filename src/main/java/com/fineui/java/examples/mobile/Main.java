@@ -1,5 +1,6 @@
 package com.fineui.java.examples.mobile;
 
+import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.examples.code.Json;
 import com.fineui.java.examples.code.PageBase;
@@ -21,7 +22,7 @@ import java.util.Map;
  * 移动示例首页（菜单壳，路由 {@code mobile/main}）。运行在预览器的手机 IFrame 内部，是移动 App 的「首页」。
  *
  * <p>三级下滑菜单：一/二/三级菜单各一个铺满视口的面板 + 数据列表，靠 hashchange 与滑动动画在层级间切换。
- * 菜单数据由 {@link #getMenuSource()} 从 {@code res/menu.xml} 的「移动」子树递归构建成一棵 JSON 树，
+ * 菜单数据在 Page_Get 中从 {@code res/menu.xml} 的「移动」子树递归构建成一棵 JSON 树，
  * 页面通过非执行 JSON 数据块交给客户端脚本逐级加载列表。
  *
  * <p>目录节点只有 {@code text} + {@code children}；叶子节点有 {@code text} + {@code navigateUrl}。叶子的
@@ -31,43 +32,31 @@ import java.util.Map;
 @FineUIPage("mobile/main")
 public class Main extends PageBase {
 
-    private List<Map<String, Object>> menuSource;
+    private String menuDataJson = "[]";
 
-    /**
-     * 移动菜单数据源（供页面 JSON 数据块使用）。
-     * 惰性构建并缓存：读 {@code res/menu.xml}「移动」子树 → 递归转成菜单树。解析失败返回空列表。
-     */
-    public List<Map<String, Object>> getMenuSource() {
-        if (menuSource == null) {
-            menuSource = buildMenuSource();
-        }
-        return menuSource;
-    }
-
-    /** 菜单文字和地址以 JSON 字符串输出，避免把 XML 内容拼进可执行脚本。 */
+    /** 页面模板读取的菜单 JSON；Page_Get 已转义菜单文字，避免内容提前结束数据标签。 */
     public String getMenuDataJson() {
-        return Json.encodeForScriptData(getMenuSource());
+        return menuDataJson;
     }
 
-    private List<Map<String, Object>> buildMenuSource() {
-        List<Map<String, Object>> result = new ArrayList<>();
+    public void Page_Get(Object sender, EventArgs e) {
+        // 页面模板会读取 menuDataJson，先从 XML 组装菜单，再编码成非执行 JSON 数据。
+        List<Map<String, Object>> menuSource = new ArrayList<>();
         Document doc = loadMenuXml();
-        if (doc == null) {
-            return result;
-        }
-        Element mobileRoot = findMobileRoot(doc.getDocumentElement());
-        if (mobileRoot == null) {
-            return result;
-        }
-        // 一级菜单（跳过「移动首页」自身）
-        for (Element child : elementChildren(mobileRoot)) {
-            String text = attr(child, "Text");
-            if ("移动首页".equals(text)) {
-                continue;
+        if (doc != null) {
+            Element mobileRoot = findMobileRoot(doc.getDocumentElement());
+            if (mobileRoot != null) {
+                // 一级菜单跳过「移动首页」自身，只把可打开的菜单项交给页面。
+                for (Element child : elementChildren(mobileRoot)) {
+                    String text = attr(child, "Text");
+                    if ("移动首页".equals(text)) {
+                        continue;
+                    }
+                    menuSource.add(resolveNode(child));
+                }
             }
-            result.add(resolveNode(child));
         }
-        return result;
+        menuDataJson = Json.encodeForScriptData(menuSource);
     }
 
     /** 递归把一个 XML 菜单节点转成菜单对象：有子节点 → 目录 {text, children}；否则 → 叶子 {text, navigateUrl}。 */
