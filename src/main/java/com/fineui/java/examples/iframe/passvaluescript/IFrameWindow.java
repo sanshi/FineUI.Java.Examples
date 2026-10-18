@@ -19,8 +19,8 @@ public class IFrameWindow extends PageBase {
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
             ProvinceCityCountyData.bind(ddlSheng, ProvinceCityCountyData.provinces());
-            String selected = getQueryParam("selected");
-            if (selected != null && !selected.isEmpty()) {
+            String selected = getQueryValue("selected");
+            if (!selected.isEmpty()) {
                 ddlSheng.setSelectedValue(ProvinceCityCountyData.provinceCode(selected));
             }
         }

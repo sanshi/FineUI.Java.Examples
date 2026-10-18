@@ -40,7 +40,7 @@ public class Source extends PageBase {
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
-            buildTabs(getQueryParam("files"));
+            buildTabs(getQueryValue("files"));
         }
     }
 

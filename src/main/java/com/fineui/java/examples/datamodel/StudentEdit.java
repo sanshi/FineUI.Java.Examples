@@ -32,7 +32,7 @@ public class StudentEdit extends PageBase {
 
     /** 每次按当前 URL 查找编辑目标；首屏才把数据库值填入表单。 */
     public void Page_Init(Object sender, EventArgs e) {
-        storedStudent = StudentStore.find(getQueryInt("id", 0));
+        storedStudent = StudentStore.find(getQueryIntValue("id"));
         if (storedStudent == null) {
             // 记录已删除时登记中止结果；当前方法返回后，框架改渲染极简提示页。
             // 本页常被 Window 以 iframe 弹出，故让用户点「确定」后顺手关掉父级窗体。

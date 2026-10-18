@@ -31,8 +31,8 @@
 
         </th:block>
         <th:block layout:fragment="script">
-            <!--/* 页面自带的内联脚本：带 nonce 才被 CSP 放行（nonce 由服务端在渲染前生成、经 page.cspScriptsNonceValue 取用） */-->
-            <script th:attr="nonce=${page.cspScriptsNonceValue}">
+            <!--/* 页面内联脚本由框架自动添加 nonce，在严格 CSP 下仍可执行。 */-->
+            <script>
                 console.log('Hello world!');
 
             </script>

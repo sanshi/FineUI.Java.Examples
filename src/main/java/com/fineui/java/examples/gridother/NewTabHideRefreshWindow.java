@@ -12,8 +12,8 @@ public class NewTabHideRefreshWindow extends ThirdPartyEditorPageBase {
     Label labUserName;
 
     public void Page_Load(Object sender, EventArgs e) {
-        String name = getQueryParam("name");
-        if (name != null && !name.isEmpty()) {
+        String name = getQueryValue("name");
+        if (!name.isEmpty()) {
             labUserName.setText(name);
         }
     }

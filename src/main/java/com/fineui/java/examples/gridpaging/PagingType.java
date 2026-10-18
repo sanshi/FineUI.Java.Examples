@@ -30,8 +30,8 @@ public class PagingType extends PageBase {
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
-            String pagingType = getQueryParam("type");
-            if (pagingType == null || pagingType.isEmpty()) {
+            String pagingType = getQueryValue("type");
+            if (pagingType.isEmpty()) {
                 // 缺省选中值
                 pagingType = "ArrowNumberBox";
             }
@@ -41,16 +41,16 @@ public class PagingType extends PageBase {
             ddlMaxPagingNumberButton.setEnabled(isNumberButton);
 
             boolean isShowMessage = true;
-            String showMessage = getQueryParam("message");
-            if (showMessage != null && !showMessage.isEmpty()) {
+            String showMessage = getQueryValue("message");
+            if (!showMessage.isEmpty()) {
                 isShowMessage = Boolean.parseBoolean(showMessage);
             }
             Grid1.setShowPagingMessage(isShowMessage);
             cbxShowPagingMessage.setChecked(isShowMessage);
 
             int maxNumberButtonCount = 5;
-            String maxNumberButton = getQueryParam("maxnumberbutton");
-            if (maxNumberButton != null && !maxNumberButton.isEmpty()) {
+            String maxNumberButton = getQueryValue("maxnumberbutton");
+            if (!maxNumberButton.isEmpty()) {
                 maxNumberButtonCount = Integer.parseInt(maxNumberButton);
             }
             Grid1.setMaxPagingNumberButton(maxNumberButtonCount);
@@ -71,8 +71,8 @@ public class PagingType extends PageBase {
     }
 
     public void Grid1_PageIndexChanged(Object sender, GridPageEventArgs e) {
-        String pagingType = getQueryParam("type");
-        if (pagingType == null || pagingType.isEmpty()) {
+        String pagingType = getQueryValue("type");
+        if (pagingType.isEmpty()) {
             pagingType = "未设置（使用默认 ArrowNumberBox）";
         }
         // 回发地址会保留页面原有查询串，因此事件处理函数仍可直接读取 ?type。

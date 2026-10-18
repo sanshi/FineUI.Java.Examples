@@ -39,7 +39,7 @@ public class SourceFile extends PageBase {
 
     /** 单文件高亮 HTML（模板 {@code th:utext} 读取）：据 {@code ?kind}/{@code ?path} 现取现算。 */
     public String getSourceHtml() {
-        return buildHtml(getQueryParam("kind"), getQueryParam("path"));
+        return buildHtml(getQueryValue("kind"), getQueryValue("path"));
     }
 
     /**
