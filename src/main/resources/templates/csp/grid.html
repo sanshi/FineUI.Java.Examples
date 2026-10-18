@@ -23,6 +23,14 @@
             <!--/* 按钮点击使用具名函数（click-handler），无需 'unsafe-eval'。 */-->
             <f:button text="选中了哪些行" click-handler="onShowSelectedNamesClick"></f:button>
 
+            <br />
+            <br />
+            注：
+            <ul>
+                <li>示例站已全局开启严格 CSP 和 nonce，页面模板中的普通内联脚本会自动获得 nonce。本页只需额外允许下方两个 CDN 脚本来源。</li>
+                <li>说明：<a target="_blank" href="https://fineui.com/docs/#/FineUIJava/190_csp_nonce">CSP 与外部脚本来源的配置</a></li>
+            </ul>
+
         </th:block>
         <th:block layout:fragment="script">
             <!--/* underscore 从白名单 CDN 加载：CSP 只放行 cdn.jsdelivr.net / unpkg.com 两个域（cspScriptsAllowUrls） */-->

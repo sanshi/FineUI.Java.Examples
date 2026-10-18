@@ -6,10 +6,10 @@ import com.fineui.java.core.enums.IconFont;
 import com.fineui.java.examples.code.PageBase;
 
 /**
- * CSP 按钮（路由 {@code csp/button}）：演示开启内容安全策略并启用 nonce（{@code cspScriptsAllowNonce}）。
+ * CSP 按钮（路由 {@code csp/button}）：在示例站全局开启的严格 CSP 和 nonce 下，演示按钮与模板脚本正常工作。
  *
  * <p>页面开启 CSP 后浏览器只放行同源脚本与带匹配 {@code nonce} 的内联脚本；页面里各按钮的点击回发
- * 与自带的内联 {@code <script>}（带 nonce）均正常运行——证明 FineUI.Java 在严格 CSP 下功能完整，
+ * 与自带的内联 {@code <script>}（框架自动添加 nonce）均正常运行——证明 FineUI.Java 在严格 CSP 下功能完整，
  * 且无需 {@code 'unsafe-eval'}（纯 JSON 回发、无 eval）。
  */
 @FineUIPage("csp/button")

@@ -18,6 +18,9 @@
             <p>下面尝试在脚本中执行 <code>eval(...)</code> 与 <code>new Function(...)</code>，因策略不含 <code>'unsafe-eval'</code>，浏览器会拦截并抛错：</p>
             <ul id="evalResult"></ul>
 
+            <p>注：示例站已全局开启严格 CSP 和 nonce，本页不需要单独开启。模板中的普通内联脚本会自动获得 nonce，但其中的 <code>eval</code> 和 <code>new Function</code> 仍会被浏览器拦截。
+                详见<a target="_blank" href="https://fineui.com/docs/#/FineUIJava/190_csp_nonce">CSP 与 nonce 的配置和用法</a>。</p>
+
         </th:block>
         <th:block layout:fragment="script">
             <!--/* 框架为模板内联脚本自动添加当前页面 nonce；脚本中的 eval / new Function 仍会被 CSP 拦截。 */-->

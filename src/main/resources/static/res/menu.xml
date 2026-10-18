@@ -2299,13 +2299,13 @@
 		<TreeNode Text="内容安全策略（CSP）">
 			<TreeNode Text="无需 eval 的严格 CSP" NavigateUrl="/csp/no-eval">
 			</TreeNode>
-			<TreeNode Text="按钮（cspScriptsAllowNonce）" NavigateUrl="/csp/button">
+			<TreeNode Text="按钮（严格 CSP）" NavigateUrl="/csp/button">
 			</TreeNode>
-			<TreeNode Text="链接按钮与超链接（cspScriptsAllowNonce）" NavigateUrl="/csp/link-button">
+			<TreeNode Text="链接按钮与超链接（严格 CSP）" NavigateUrl="/csp/link-button">
 			</TreeNode>
-			<TreeNode Text="富文本编辑器（cspScriptsAllowUnsafeInline）" NavigateUrl="/csp/html-editor">
+			<TreeNode Text="富文本编辑器（CSP 兼容例外）" NavigateUrl="/csp/html-editor">
 			</TreeNode>
-			<TreeNode Text="表格（cspScriptsAllowUrls）" NavigateUrl="/csp/grid">
+			<TreeNode Text="表格（外部脚本来源）" NavigateUrl="/csp/grid">
 			</TreeNode>
 		</TreeNode>
 		<TreeNode Text="第三方组件">

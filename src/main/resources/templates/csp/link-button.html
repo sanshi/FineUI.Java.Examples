@@ -20,6 +20,14 @@
             <br />
             <f:hyper-link id="hlNav" text="超链接 - 新窗口导航" target="_blank" navigate-url="https://www.fineui.com/"></f:hyper-link>
 
+            <br />
+            <br />
+            注：
+            <ul>
+                <li>示例站已全局开启严格 CSP 和 nonce，本页不需要重复设置。框架会为页面模板中的普通内联 <code>&lt;script&gt;</code> 自动添加本次请求的 nonce。</li>
+                <li>说明：<a target="_blank" href="https://fineui.com/docs/#/FineUIJava/190_csp_nonce">CSP 与 nonce 的配置和用法</a></li>
+            </ul>
+
         </th:block>
         <th:block layout:fragment="script">
             <!--/* 页面内联脚本由框架自动添加 nonce，在严格 CSP 下仍可执行。 */-->
