@@ -13,7 +13,7 @@ public class SelectedIndexChangedAjaxLoading extends PageBase {
 
     protected Label labResult;
 
-    public void Page_Get(Object sender, EventArgs e) {
+    public void Page_Init(Object sender, EventArgs e) {
         getPageManager().ajaxLoadingType(AjaxLoadingType.Mask);
     }
 

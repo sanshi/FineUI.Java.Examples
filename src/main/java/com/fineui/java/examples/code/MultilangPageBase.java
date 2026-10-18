@@ -15,7 +15,7 @@ import java.util.Map;
  * <ul>
  *   <li>Java 侧：{@code _R("multilang.login.success")}、{@code _R("multilang.login.errorFormat", user, pwd)}（{@code {0}} 占位符）。</li>
  *   <li>模板侧：f: 控件属性用 Thymeleaf 消息表达式 {@code title="#{multilang.grid.title}"}；普通 HTML 用 {@code th:text="#{...}"}。</li>
- *   <li>JS 资源：{@code Page_Get} 里 {@code setJavaScriptResources("Male", "Female", ...)}，模板 script 段输出
+ *   <li>JS 资源：{@code Page_Init} 里 {@code setJavaScriptResources("Male", "Female", ...)}，模板 script 段输出
  *       {@code F.setResources({...})}（见 {@link #getJavaScriptResourcesJson()}）。</li>
  * </ul>
  */

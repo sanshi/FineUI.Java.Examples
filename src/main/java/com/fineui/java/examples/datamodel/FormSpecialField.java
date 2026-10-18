@@ -25,10 +25,12 @@ public class FormSpecialField extends PageBase {
     }
 
     /** 首屏加载表单初值（回发不执行：那时表单值由客户端回传，框架兜底新建空实例承载）。 */
-    public void Page_Get(Object sender, EventArgs e) {
-        power = new PowerForm();
-        power.setViewPowerId(101);
-        power.setViewPowerName("系统管理员");
+    public void Page_Init(Object sender, EventArgs e) {
+        if (!isPostBack()) {
+            power = new PowerForm();
+            power.setViewPowerId(101);
+            power.setViewPowerName("系统管理员");
+        }
     }
 
     public void btnSave_Click(Object sender, EventArgs e) {

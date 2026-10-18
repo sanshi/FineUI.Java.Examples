@@ -22,7 +22,7 @@ import java.util.Map;
  * 移动示例首页（菜单壳，路由 {@code mobile/main}）。运行在预览器的手机 IFrame 内部，是移动 App 的「首页」。
  *
  * <p>三级下滑菜单：一/二/三级菜单各一个铺满视口的面板 + 数据列表，靠 hashchange 与滑动动画在层级间切换。
- * 菜单数据在 Page_Get 中从 {@code res/menu.xml} 的「移动」子树递归构建成一棵 JSON 树，
+ * 菜单数据在 Page_Init 中从 {@code res/menu.xml} 的「移动」子树递归构建成一棵 JSON 树，
  * 页面通过非执行 JSON 数据块交给客户端脚本逐级加载列表。
  *
  * <p>目录节点只有 {@code text} + {@code children}；叶子节点有 {@code text} + {@code navigateUrl}。叶子的
@@ -34,12 +34,12 @@ public class Main extends PageBase {
 
     private String menuDataJson = "[]";
 
-    /** 页面模板读取的菜单 JSON；Page_Get 已转义菜单文字，避免内容提前结束数据标签。 */
+    /** 页面模板读取的菜单 JSON；Page_Init 已转义菜单文字，避免内容提前结束数据标签。 */
     public String getMenuDataJson() {
         return menuDataJson;
     }
 
-    public void Page_Get(Object sender, EventArgs e) {
+    public void Page_Init(Object sender, EventArgs e) {
         // 页面模板会读取 menuDataJson，先从 XML 组装菜单，再编码成非执行 JSON 数据。
         List<Map<String, Object>> menuSource = new ArrayList<>();
         Document doc = loadMenuXml();

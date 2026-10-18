@@ -21,8 +21,10 @@ public class FormSecondaryProperty extends PageBase {
     }
 
     /** 首屏加载表单初值（回发不执行：那时表单值由客户端回传，框架兜底新建空实例承载）。 */
-    public void Page_Get(Object sender, EventArgs e) {
-        student = DataModelSamples.student();
+    public void Page_Init(Object sender, EventArgs e) {
+        if (!isPostBack()) {
+            student = DataModelSamples.student();
+        }
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {

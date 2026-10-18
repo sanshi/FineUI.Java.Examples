@@ -12,7 +12,7 @@ import com.fineui.java.core.EventArgs;
 public abstract class ThirdPartyEditorPageBase extends PageBase {
 
     /** 在响应头生成前关闭本页 CSP；所有编辑器页面都通过继承统一执行，不在子类重复声明。 */
-    public void Page_Get(Object sender, EventArgs e) {
+    public void Page_Init(Object sender, EventArgs e) {
         getPageManager().cspScripts(false);
     }
 }

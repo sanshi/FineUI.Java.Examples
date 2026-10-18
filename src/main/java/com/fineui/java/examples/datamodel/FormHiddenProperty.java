@@ -33,10 +33,12 @@ public class FormHiddenProperty extends PageBase {
      * 首屏加载表单初值与隐藏属性初值（回发不执行）：回发时表单值由客户端回传（框架兜底新建空实例承载），
      * 隐藏属性由 __FSTATE 恢复，两者都不需要也不应该在这里再赋一次。
      */
-    public void Page_Get(Object sender, EventArgs e) {
-        student = DataModelSamples.student();
-        userRoleId = 101;
-        userRoleName = "系统管理员";
+    public void Page_Init(Object sender, EventArgs e) {
+        if (!isPostBack()) {
+            student = DataModelSamples.student();
+            userRoleId = 101;
+            userRoleName = "系统管理员";
+        }
     }
 
     public void btnModifyHiddenProperty_Click(Object sender, EventArgs e) {

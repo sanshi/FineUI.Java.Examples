@@ -20,7 +20,7 @@ public class Grid extends PageBase {
     com.fineui.java.core.controls.Grid Grid1;
 
     /** 首屏渲染前放行 underscore 外部脚本域；全局同源与 nonce 设置继续生效。 */
-    public void Page_Get(Object sender, EventArgs e) {
+    public void Page_Init(Object sender, EventArgs e) {
         getPageManager().cspScriptsAllowUrls("cdn.jsdelivr.net", "unpkg.com");
     }
 

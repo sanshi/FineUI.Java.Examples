@@ -13,7 +13,7 @@
             <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" show-border="true" show-header="true" title="编辑学生">
                 <f:items>
                     <!--/* 只读展示：Label 是展示型控件，客户端不采集它的值、也不参与回发绑定。
-                           首屏由 Page_Get 加载的实体填值；保存时事件处理器不覆盖分组，故数据源里的原值保持不变 */-->
+                           首屏由 Page_Init 加载的实体填值；保存时事件处理器不覆盖分组，故数据源里的原值保持不变 */-->
                     <f:label for="student.group"></f:label>
                     <f:text-box for="student.name"></f:text-box>
                     <f:radio-button-list for="student.gender" column-number="3">

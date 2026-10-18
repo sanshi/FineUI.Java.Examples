@@ -16,7 +16,7 @@ public class PagerAutoSimpleMode extends PageBase {
 
     Grid Grid1;
 
-    public void Page_Get(Object sender, EventArgs e) {
+    public void Page_Init(Object sender, EventArgs e) {
         getPageManager().gridPagerAutoSimpleMode(true);
     }
 

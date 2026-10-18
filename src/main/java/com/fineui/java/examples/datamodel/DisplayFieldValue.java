@@ -45,8 +45,10 @@ public class DisplayFieldValue extends PageBase {
     TextBox tbxName;
 
     /** 首屏加载实体供 for 回显（回发不执行）。 */
-    public void Page_Get(Object sender, EventArgs e) {
-        student = StudentStore.find(101);
+    public void Page_Init(Object sender, EventArgs e) {
+        if (!isPostBack()) {
+            student = StudentStore.find(101);
+        }
     }
 
     public void btnRead_Click(Object sender, EventArgs e) {

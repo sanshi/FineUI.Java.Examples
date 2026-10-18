@@ -14,7 +14,7 @@ import com.fineui.java.examples.datamodel.model.LoginForm;
  */
 @FineUIPage("data-model/login-model")
 public class LoginModel extends PageBase {
-    // 本页没有首屏初值要加载，故不写 Page_Get：字段保持 null，框架会兜底新建一个空实例承载表单值。
+    // 本页没有首屏初值要加载，故不写 Page_Init：字段保持 null，框架会兜底新建一个空实例承载表单值。
     @BindProperty
     private LoginForm currentUser;
 
