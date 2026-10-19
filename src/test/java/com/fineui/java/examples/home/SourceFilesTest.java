@@ -53,6 +53,13 @@ class SourceFilesTest {
         assertNull(SourceFiles.resolveClass(null), "null");
     }
 
+    @Test
+    void localJavaSourceCanBeReadWithoutPackagedCopy() {
+        String source = new SourceFile().readJavaSrc(SourceFiles.class);
+        assertNotNull(source);
+        assertTrue(source.contains("final class SourceFiles"));
+    }
+
     // ===== res: =====
 
     @Test

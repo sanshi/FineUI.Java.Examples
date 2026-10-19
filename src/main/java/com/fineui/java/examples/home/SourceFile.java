@@ -77,10 +77,10 @@ public class SourceFile extends PageBase {
 
     /**
      * 读某个示例 Java 类的源：部署态优先从 classpath 读打包脚本注入的源码副本（{@code /source/java/{包/类}.java}，
-     * 与 {@code templates/} 同机制，服务器上没有文件系统 src）；开发态 classpath 无此资源，回落文件系统按
-     * {@code {包/类}.java} 相对路径定位。
+     * 与 {@code templates/} 同机制，服务器上没有文件系统 src）；开发态 classpath 无此资源时，按运行命令的
+     * 工作目录查找示例工程源码。独立示例仓、工作区根目录和 FineUI.Java 启动脚本所在目录都应能找到同一文件。
      */
-    private String readJavaSrc(Class<?> clazz) {
+    String readJavaSrc(Class<?> clazz) {
         String className = clazz.getName().replace('.', '/');
         try (InputStream in = getClass().getResourceAsStream("/source/java/" + className + ".java")) {
             if (in != null) {
@@ -89,14 +89,19 @@ public class SourceFile extends PageBase {
         } catch (Exception ignore) {
             // classpath 读取失败：回落文件系统
         }
-        String rel = "fineui-java-examples/src/main/java/" + className + ".java";
-        for (String base : new String[]{"", "FineUI.Java/", "../"}) {
-            Path p = Path.of(base + rel);
-            if (Files.isReadable(p)) {
+        String relativeSource = "src/main/java/" + className + ".java";
+        Path[] exampleDirectories = {
+                Path.of(""),
+                Path.of("OpenSource", "FineUI.Java.Examples"),
+                Path.of("..", "OpenSource", "FineUI.Java.Examples")
+        };
+        for (Path exampleDirectory : exampleDirectories) {
+            Path sourceFile = exampleDirectory.resolve(relativeSource);
+            if (Files.isReadable(sourceFile)) {
                 try {
-                    return Files.readString(p, StandardCharsets.UTF_8);
+                    return Files.readString(sourceFile, StandardCharsets.UTF_8);
                 } catch (Exception ignore) {
-                    return null;   // 读失败：源码查看是辅助功能，静默降级
+                    // 某个候选文件无法读取时，继续尝试其它本地工作目录。
                 }
             }
         }
