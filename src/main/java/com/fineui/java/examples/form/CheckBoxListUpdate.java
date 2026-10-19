@@ -106,7 +106,7 @@ public class CheckBoxListUpdate extends PageBase {
         }
     }
 
-    /** 将每项的名称和编号映射到列表；绑定后用编号设置选中项。 */
+    /** 绑定数据时才指定字段：name 显示为选项文本，id 作为提交和选中的值。 */
     private static void rebind(CheckBoxList list, List<TestClass> dataSource, List<String> selected) {
         list.setDataTextField("name");
         list.setDataValueField("id");
