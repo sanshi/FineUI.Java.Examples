@@ -26,10 +26,17 @@ public class CheckBoxListSwitch extends PageBase {
     }
 
     private void loadData() {
-        CheckBoxList2.addCheckItem("item1", "数据绑定值 1", true, false);
-        CheckBoxList2.addCheckItem("item2", "数据绑定值 2", true, false);
-        CheckBoxList2.addCheckItem("item3", "数据绑定值 3", true, false);
-        CheckBoxList2.addCheckItem("item4", "数据绑定值 4", true, false);
+        List<TestClass> dataSource = List.of(
+                new TestClass("item1", "数据绑定值 1"),
+                new TestClass("item2", "数据绑定值 2"),
+                new TestClass("item3", "数据绑定值 3"),
+                new TestClass("item4", "数据绑定值 4")
+        );
+
+        CheckBoxList2.setDataTextField("name");
+        CheckBoxList2.setDataValueField("id");
+        CheckBoxList2.setDataSource(dataSource);
+        CheckBoxList2.dataBind();
         CheckBoxList2.setSelectedValues(List.of("item1", "item3"));
     }
 
@@ -51,5 +58,9 @@ public class CheckBoxListSwitch extends PageBase {
         } else {
             showNotify("列表一没有选中项！");
         }
+    }
+
+    /** 示例数据中的 id 作为选中值，name 作为显示文本。 */
+    public record TestClass(String id, String name) {
     }
 }

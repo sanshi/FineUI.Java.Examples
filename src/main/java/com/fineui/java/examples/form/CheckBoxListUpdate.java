@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 复选框列表 - 运行时更新演示页（路由 {@code form/check-box-list-update}）：在回发事件里重新绑定列表项与选中项
- * （运行时重新绑定数据）。运行时改动经增量下发、客户端 {@code loadData} 重建；列表四可反复"清空/填充"切换。
+ * （运行时重新绑定数据）。列表四可反复切换清空和填充。
  */
 @FineUIPage("form/check-box-list-update")
 public class CheckBoxListUpdate extends PageBase {
@@ -25,9 +25,16 @@ public class CheckBoxListUpdate extends PageBase {
         }
     }
 
-    // 数据绑定列表二（value1..6 → 可选项 X），选中 value1/value2/value3
     private void loadData() {
-        rebind(CheckBoxList2, 6, "可选项 ", List.of("value1", "value2", "value3"));
+        List<TestClass> dataSource = List.of(
+                new TestClass("value1", "可选项 1"),
+                new TestClass("value2", "可选项 2"),
+                new TestClass("value3", "可选项 3"),
+                new TestClass("value4", "可选项 4"),
+                new TestClass("value5", "可选项 5"),
+                new TestClass("value6", "可选项 6")
+        );
+        rebind(CheckBoxList2, dataSource, List.of("value1", "value2", "value3"));
     }
 
     public void btnCheckedItemsList1_Click(Object sender, EventArgs e) {
@@ -47,31 +54,68 @@ public class CheckBoxListUpdate extends PageBase {
     }
 
     public void btnUpdateList1_Click(Object sender, EventArgs e) {
-        rebind(CheckBoxList1, 4, "数据绑定值 ", List.of("value1", "value3"));
+        List<TestClass> dataSource = List.of(
+                new TestClass("value1", "数据绑定值 1"),
+                new TestClass("value2", "数据绑定值 2"),
+                new TestClass("value3", "数据绑定值 3"),
+                new TestClass("value4", "数据绑定值 4")
+        );
+        rebind(CheckBoxList1, dataSource, List.of("value1", "value3"));
     }
 
     public void btnUpdateList2_Click(Object sender, EventArgs e) {
-        rebind(CheckBoxList2, 6, "数据绑定值 ", List.of("value1", "value3", "value6"));
+        List<TestClass> dataSource = List.of(
+                new TestClass("value1", "数据绑定值 1"),
+                new TestClass("value2", "数据绑定值 2"),
+                new TestClass("value3", "数据绑定值 3"),
+                new TestClass("value4", "数据绑定值 4"),
+                new TestClass("value5", "数据绑定值 5"),
+                new TestClass("value6", "数据绑定值 6")
+        );
+        rebind(CheckBoxList2, dataSource, List.of("value1", "value3", "value6"));
     }
 
     public void btnUpdateList3_Click(Object sender, EventArgs e) {
-        rebind(CheckBoxList3, 9, "数据绑定值 ", List.of("value1", "value2", "value6", "value7"));
+        List<TestClass> dataSource = List.of(
+                new TestClass("value1", "数据绑定值 1"),
+                new TestClass("value2", "数据绑定值 2"),
+                new TestClass("value3", "数据绑定值 3"),
+                new TestClass("value4", "数据绑定值 4"),
+                new TestClass("value5", "数据绑定值 5"),
+                new TestClass("value6", "数据绑定值 6"),
+                new TestClass("value7", "数据绑定值 7"),
+                new TestClass("value8", "数据绑定值 8"),
+                new TestClass("value9", "数据绑定值 9")
+        );
+        rebind(CheckBoxList3, dataSource, List.of("value1", "value2", "value6", "value7"));
     }
 
     public void btnUpdateList4_Click(Object sender, EventArgs e) {
         if (CheckBoxList4.getItemCount() > 0) {
             CheckBoxList4.clearItems();
         } else {
-            rebind(CheckBoxList4, 6, "数据绑定值 ", List.of("value1", "value2"));
+            List<TestClass> dataSource = List.of(
+                    new TestClass("value1", "数据绑定值 1"),
+                    new TestClass("value2", "数据绑定值 2"),
+                    new TestClass("value3", "数据绑定值 3"),
+                    new TestClass("value4", "数据绑定值 4"),
+                    new TestClass("value5", "数据绑定值 5"),
+                    new TestClass("value6", "数据绑定值 6")
+            );
+            rebind(CheckBoxList4, dataSource, List.of("value1", "value2"));
         }
     }
 
-    // 清空后按 valueN → 前缀+N 重建 count 项，并设置选中值
-    private static void rebind(CheckBoxList list, int count, String textPrefix, List<String> selected) {
-        list.clearItems();
-        for (int i = 1; i <= count; i++) {
-            list.addCheckItem("value" + i, textPrefix + i, true, false);
-        }
+    /** 将每项的名称和编号映射到列表；绑定后用编号设置选中项。 */
+    private static void rebind(CheckBoxList list, List<TestClass> dataSource, List<String> selected) {
+        list.setDataTextField("name");
+        list.setDataValueField("id");
+        list.setDataSource(dataSource);
+        list.dataBind();
         list.setSelectedValues(selected);
+    }
+
+    /** 示例数据中的 id 作为选中值，name 作为显示文本。 */
+    public record TestClass(String id, String name) {
     }
 }

@@ -23,12 +23,20 @@ public class CheckBoxListDisabled extends PageBase {
         }
     }
 
-    // 数据绑定列表二：item1/item2 禁用（按数据字段控制可选性），选中 item1/item3
+    /** 从数据源读取可选状态；item1、item2 不可勾选，item1 仍可作为预选值显示。 */
     private void loadData() {
-        CheckBoxList2.addCheckItem("item1", "数据绑定值 1", false, false);
-        CheckBoxList2.addCheckItem("item2", "数据绑定值 2", false, false);
-        CheckBoxList2.addCheckItem("item3", "数据绑定值 3", true, false);
-        CheckBoxList2.addCheckItem("item4", "数据绑定值 4", true, false);
+        List<TestClass> dataSource = List.of(
+                new TestClass("item1", "数据绑定值 1", false),
+                new TestClass("item2", "数据绑定值 2", false),
+                new TestClass("item3", "数据绑定值 3", true),
+                new TestClass("item4", "数据绑定值 4", true)
+        );
+
+        CheckBoxList2.setDataEnabledField("enabled");
+        CheckBoxList2.setDataTextField("name");
+        CheckBoxList2.setDataValueField("id");
+        CheckBoxList2.setDataSource(dataSource);
+        CheckBoxList2.dataBind();
         CheckBoxList2.setSelectedValues(List.of("item1", "item3"));
     }
 
@@ -46,5 +54,9 @@ public class CheckBoxListDisabled extends PageBase {
         } else {
             showNotify("列表一没有选中项！");
         }
+    }
+
+    /** enabled 由数据源决定每项能否勾选；id 和 name 分别映射值与文本。 */
+    public record TestClass(String id, String name, boolean enabled) {
     }
 }
