@@ -6,7 +6,7 @@ import com.fineui.java.core.controls.DropDownBox;
 import com.fineui.java.core.controls.Label;
 import com.fineui.java.examples.code.PageBase;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * 多选标签（下拉复选框列表，用户输入值，初始值）演示页（路由 {@code drop-down-box/tags-check-box-list-enable-edit-default}）：
@@ -21,9 +21,10 @@ public class TagsCheckBoxListEnableEditDefault extends PageBase {
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
-            // 设置下拉框的初始值为自定义文本（用户输入值以 __USERINPUT 前缀标记，须原样保留）
-            DropDownBox1.setText("JavaScript, 初始自定义值");
-            DropDownBox1.setValues(Arrays.asList("js", "__USERINPUT_value1"));
+            // 一个真实选项和一个自定义标签按位置配对，初始自定义值不会误认作列表项。
+            DropDownBox1.setSelection(
+                    List.of("js", "__USERINPUT_value1"),
+                    List.of("JavaScript", "初始自定义值"));
         }
     }
 
@@ -37,13 +38,20 @@ public class TagsCheckBoxListEnableEditDefault extends PageBase {
     }
 
     public void btnSelectItem6_Click(Object sender, EventArgs e) {
-        // 后台更新下拉框的值，需要同时设置文本和值
-        DropDownBox1.setTexts(Arrays.asList("PHP", "Basic"));
-        DropDownBox1.setValues(Arrays.asList("php", "basic"));
+        DropDownBox1.setSelection(
+                List.of("php", "basic"),
+                List.of("PHP", "Basic"));
     }
 
     public void btnSetText_Click(Object sender, EventArgs e) {
-        DropDownBox1.setText("用户输入值");
-        DropDownBox1.setValues(Arrays.asList("__USERINPUT_value2"));
+        DropDownBox1.setUserInput("用户输入值");
+    }
+
+    public void btnSetCommaText_Click(Object sender, EventArgs e) {
+        DropDownBox1.setUserInput("研发, 华东");
+    }
+
+    public void btnClearSelection_Click(Object sender, EventArgs e) {
+        DropDownBox1.clearSelection();
     }
 }

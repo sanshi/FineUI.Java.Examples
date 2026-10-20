@@ -6,8 +6,6 @@ import com.fineui.java.core.controls.DropDownBox;
 import com.fineui.java.core.controls.Label;
 import com.fineui.java.examples.code.PageBase;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,8 +20,7 @@ public class CheckBoxListEnableEditDefault extends PageBase {
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
-            // 设置下拉框的初始值为自定义文本（无对应选中值）
-            DropDownBox1.setText("初始自定义值");
+            DropDownBox1.setUserInput("初始自定义值");
         }
     }
 
@@ -37,14 +34,21 @@ public class CheckBoxListEnableEditDefault extends PageBase {
     }
 
     public void btnSelectItem6_Click(Object sender, EventArgs e) {
-        // 后台更新下拉框的值，需要同时设置文本和值
-        DropDownBox1.setTexts(Arrays.asList("PHP", "Basic"));
-        DropDownBox1.setValues(Arrays.asList("php", "basic"));
+        DropDownBox1.setSelection(
+                List.of("php", "basic"),
+                List.of("PHP", "Basic"));
     }
 
     public void btnSetText_Click(Object sender, EventArgs e) {
-        // 只更新文本、清空所有选中值（值置为空数组）
-        DropDownBox1.setText("用户输入值");
-        DropDownBox1.setValues(new ArrayList<>());
+        DropDownBox1.setUserInput("用户输入值");
+    }
+
+    public void btnSetCommaText_Click(Object sender, EventArgs e) {
+        // 逗号属于用户输入的文字，不能拆成两个选项。
+        DropDownBox1.setUserInput("研发, 华东");
+    }
+
+    public void btnClearSelection_Click(Object sender, EventArgs e) {
+        DropDownBox1.clearSelection();
     }
 }
