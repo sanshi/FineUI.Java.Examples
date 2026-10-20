@@ -15,7 +15,7 @@ public class TreeIconFontColor extends PageBase {
     Label labResult;
 
     public void btnGetSelectedNode_Click(Object sender, EventArgs e) {
-        String selectedId = Tree1.getSelectedNodeId();
+        String selectedId = Tree1.getSelectedNodeID();
         if (!selectedId.isEmpty()) {
             labResult.setText(String.format("选中的节点：%s（%s）", Tree1.getSelectedNode().getText(), selectedId));
         } else {

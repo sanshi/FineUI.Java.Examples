@@ -30,7 +30,7 @@ public class MultiSelectSelectedIndexChanged extends PageBase {
     private void writeSelection() {
         String text = DropDownList1.getText();
         if (text != null && !text.isEmpty()) {
-            labResult.setText("选中项文本：" + text + "<br/>选中项值：" + String.join(", ", DropDownList1.getSelectedValues()));
+            labResult.setText("选中项文本：" + text + "<br/>选中项值：" + String.join(", ", DropDownList1.getSelectedValueArray()));
         } else {
             labResult.setText("无选中项");
         }

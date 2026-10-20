@@ -20,8 +20,8 @@ public class TreeSelectMultiSelectableSelected extends PageBase {
     Label labResult;
 
     public void btnGetSelectedValues_Click(Object sender, EventArgs e) {
-        List<String> ids = Tree1.getSelectedNodeIds();
-        if (!ids.isEmpty()) {
+        String[] ids = Tree1.getSelectedNodeIDArray();
+        if (ids.length > 0) {
             StringBuilder sb = new StringBuilder();
             sb.append("选中的节点：");
             sb.append("<ul>");
@@ -36,9 +36,9 @@ public class TreeSelectMultiSelectableSelected extends PageBase {
     }
 
     public void btnSelectOthers_Click(Object sender, EventArgs e) {
-        List<String> ids = new ArrayList<>(Tree1.getSelectedNodeIds());
+        List<String> ids = new ArrayList<>(java.util.Arrays.asList(Tree1.getSelectedNodeIDArray()));
         ids.add("hefei");
         ids.add("huangshan");
-        Tree1.setSelectedNodeIds(ids);
+        Tree1.setSelectedNodeIDArray(ids.toArray(new String[0]));
     }
 }

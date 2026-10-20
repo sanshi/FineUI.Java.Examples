@@ -32,6 +32,6 @@ public class SelectRows extends PageBase {
                 ids.add(String.valueOf(row.get("Id")));
             }
         }
-        Grid1.setSelectedRowIdArray(ids.toArray(new String[0]));
+        Grid1.setSelectedRowIDArray(ids.toArray(new String[0]));
     }
 }

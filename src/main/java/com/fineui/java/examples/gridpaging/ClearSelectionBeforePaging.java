@@ -29,7 +29,7 @@ public class ClearSelectionBeforePaging extends PageBase {
     public void btnReadSelection_Click(Object sender, EventArgs e) {
         String[] cell = Grid1.getSelectedCell();
         String cellText = cell == null || cell.length == 0 ? "空" : String.join(",", cell);
-        labServerSelection.setText("选中行数：" + Grid1.getSelectedRowIdArray().length + "；单元格：" + cellText);
+        labServerSelection.setText("选中行数：" + Grid1.getSelectedRowIDArray().length + "；单元格：" + cellText);
     }
 
     public void Page_Load(Object sender, EventArgs e) {

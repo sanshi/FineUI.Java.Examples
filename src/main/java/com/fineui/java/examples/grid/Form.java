@@ -98,7 +98,7 @@ public class Form extends PageBase {
 
         // 重新绑定表格，并选中刚保存的这一行（回发里调用会下发按行标识选中的命令）
         bindGrid();
-        Grid1.setSelectedRowIdArray(new String[] {String.valueOf(rowData.get("Id"))});
+        Grid1.setSelectedRowIDArray(new String[] {String.valueOf(rowData.get("Id"))});
     }
 
     private void bindGrid() {

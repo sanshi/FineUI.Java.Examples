@@ -38,19 +38,19 @@ public class CheckBoxListUpdate extends PageBase {
     }
 
     public void btnCheckedItemsList1_Click(Object sender, EventArgs e) {
-        showNotify("列表一的选中项：" + String.join(", ", CheckBoxList1.getSelectedValues()));
+        showNotify("列表一的选中项：" + String.join(", ", CheckBoxList1.getSelectedValueArray()));
     }
 
     public void btnCheckedItemsList2_Click(Object sender, EventArgs e) {
-        showNotify("列表二的选中项：" + String.join(", ", CheckBoxList2.getSelectedValues()));
+        showNotify("列表二的选中项：" + String.join(", ", CheckBoxList2.getSelectedValueArray()));
     }
 
     public void btnCheckedItemsList3_Click(Object sender, EventArgs e) {
-        showNotify("列表三的选中项：" + String.join(", ", CheckBoxList3.getSelectedValues()));
+        showNotify("列表三的选中项：" + String.join(", ", CheckBoxList3.getSelectedValueArray()));
     }
 
     public void btnCheckedItemsList4_Click(Object sender, EventArgs e) {
-        showNotify("列表四的选中项：" + String.join(", ", CheckBoxList4.getSelectedValues()));
+        showNotify("列表四的选中项：" + String.join(", ", CheckBoxList4.getSelectedValueArray()));
     }
 
     public void btnUpdateList1_Click(Object sender, EventArgs e) {
@@ -112,7 +112,7 @@ public class CheckBoxListUpdate extends PageBase {
         list.setDataValueField("id");
         list.setDataSource(dataSource);
         list.dataBind();
-        list.setSelectedValues(selected);
+        list.setSelectedValueArray(selected.toArray(new String[0]));
     }
 
     /** 示例数据中的 id 作为选中值，name 作为显示文本。 */

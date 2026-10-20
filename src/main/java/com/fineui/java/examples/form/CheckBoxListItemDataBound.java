@@ -43,7 +43,7 @@ public class CheckBoxListItemDataBound extends PageBase {
         CheckBoxList2.setDataSource(myList);
         CheckBoxList2.dataBind();
 
-        CheckBoxList2.setSelectedValues(List.of("item1", "item3"));   // 首屏预选（对齐初始选中态）
+        CheckBoxList2.setSelectedValueArray(new String[] {"item1", "item3"});   // 首屏预选（对齐初始选中态）
     }
 
     public void CheckBoxList2_ItemDataBound(Object sender, CheckItemEventArgs e) {

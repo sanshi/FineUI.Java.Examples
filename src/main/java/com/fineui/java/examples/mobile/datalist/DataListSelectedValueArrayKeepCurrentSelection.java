@@ -45,12 +45,12 @@ public class DataListSelectedValueArrayKeepCurrentSelection extends MobilePageBa
 
     /** 服务端设置选择，替换当前可取消的选中项。 */
     public void btnSetSelection_Click(Object sender, EventArgs e) {
-        DataList1.setSelectedValueArray(java.util.List.of("fr", "us"));
+        DataList1.setSelectedValueArray(new String[] {"fr", "us"});
     }
 
     /** 服务端清空选择。 */
     public void btnClearSelection_Click(Object sender, EventArgs e) {
-        DataList1.setSelectedValueArray(java.util.List.of());
+        DataList1.setSelectedValueArray(new String[0]);
     }
 
     /** 倒序重绑同一批列表项，并选中美国。 */

@@ -37,7 +37,7 @@ public class CheckBoxListAutoColumnWidth extends PageBase {
         CheckBoxList2.setDataValueField("id");
         CheckBoxList2.setDataSource(dataSource);
         CheckBoxList2.dataBind();
-        CheckBoxList2.setSelectedValues(List.of("item1", "item3"));
+        CheckBoxList2.setSelectedValueArray(new String[] {"item1", "item3"});
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
@@ -45,16 +45,16 @@ public class CheckBoxListAutoColumnWidth extends PageBase {
     }
 
     public void CheckBoxList3_SelectedIndexChanged(Object sender, EventArgs e) {
-        showNotify("列表三的选中项：" + String.join(", ", CheckBoxList3.getSelectedValues()));
+        showNotify("列表三的选中项：" + String.join(", ", CheckBoxList3.getSelectedValueArray()));
     }
 
     public void btnServerSetSelectedValue_Click(Object sender, EventArgs e) {
-        CheckBoxList1.setSelectedValues(List.of("value1", "value3"));
+        CheckBoxList1.setSelectedValueArray(new String[] {"value1", "value3"});
     }
 
     public void btnServerGetSelectedValue_Click(Object sender, EventArgs e) {
-        if (!CheckBoxList1.getSelectedValues().isEmpty()) {
-            showNotify("列表一的选中项：" + String.join(", ", CheckBoxList1.getSelectedValues()));
+        if (CheckBoxList1.getSelectedValueArray().length > 0) {
+            showNotify("列表一的选中项：" + String.join(", ", CheckBoxList1.getSelectedValueArray()));
         } else {
             showNotify("列表一没有选中项！");
         }

@@ -120,7 +120,7 @@ public class FormWindow extends PageBase {
 
         // 重新绑定表格，选中刚保存的这一行，然后关掉窗体
         bindGrid();
-        Grid1.setSelectedRowIdArray(new String[] {String.valueOf(rowData.get("Id"))});
+        Grid1.setSelectedRowIDArray(new String[] {String.valueOf(rowData.get("Id"))});
         Window1.setHidden(true);
     }
 

@@ -18,7 +18,7 @@ public class CardSingleSelect extends PageBase {
         if (!isPostBack()) {
             Grid1.setDataSource(StudentGridData.rows());
             Grid1.dataBind();
-            Grid1.setSelectedRowIdArray(new String[] {"106"});
+            Grid1.setSelectedRowIDArray(new String[] {"106"});
         }
     }
 
@@ -27,6 +27,6 @@ public class CardSingleSelect extends PageBase {
     }
 
     public void Button2_Click(Object sender, EventArgs e) {
-        Grid1.setSelectedRowIdArray(new String[] {"106"});   // 服务端选中第 6 行
+        Grid1.setSelectedRowIDArray(new String[] {"106"});   // 服务端选中第 6 行
     }
 }

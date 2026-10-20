@@ -26,7 +26,7 @@ public class CheckAll extends PageBase {
     private void loadData() {
         Grid1.setDataSource(StudentGridData.rows());
         Grid1.dataBind();
-        Grid1.setSelectedRowIdArray(new String[] {"105", "110"});   // 初始选中第 5、10 行
+        Grid1.setSelectedRowIDArray(new String[] {"105", "110"});   // 初始选中第 5、10 行
     }
 
     public void Button1_Click(Object sender, EventArgs e) {
@@ -34,6 +34,6 @@ public class CheckAll extends PageBase {
     }
 
     public void Button2_Click(Object sender, EventArgs e) {
-        Grid1.setSelectedRowIdArray(new String[] {"102", "106", "108"});   // 服务端选中第 2、6、8 行
+        Grid1.setSelectedRowIDArray(new String[] {"102", "106", "108"});   // 服务端选中第 2、6、8 行
     }
 }

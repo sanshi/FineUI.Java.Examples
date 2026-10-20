@@ -34,7 +34,7 @@ public class TwoGrid extends PageBase {
         Grid2.setDataSource(classTable);
         Grid2.dataBind();
 
-        Grid2.setSelectedRowIdArray(new String[] { String.valueOf(selectedRowId) });
+        Grid2.setSelectedRowIDArray(new String[] { String.valueOf(selectedRowId) });
         labelClassDesc.setText(getClassDesc(selectedRowId, classTable));
 
         Grid1.setDataSource(getClassDetailRows(selectedRowId));

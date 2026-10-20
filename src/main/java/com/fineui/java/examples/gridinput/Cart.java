@@ -20,7 +20,7 @@ public class Cart extends PageBase {
         if (!isPostBack()) {
             Grid1.setDataSource(CartData.rows());
             Grid1.dataBind();
-            Grid1.setSelectedRowIdArray(new String[] {"101", "102"});   // 默认选中前两件商品
+            Grid1.setSelectedRowIDArray(new String[] {"101", "102"});   // 默认选中前两件商品
         }
     }
 

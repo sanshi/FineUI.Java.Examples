@@ -18,7 +18,7 @@ public class NoForceSelectionInitValueMultiSelect extends PageBase {
     }
 
     public void btnSelectItem6_Click(Object sender, EventArgs e) {
-        DropDownList1.setSelectedValues(List.of("Value4", "Value6"));
+        DropDownList1.setSelectedValueArray(new String[] {"Value4", "Value6"});
     }
 
     public void btnSetText_Click(Object sender, EventArgs e) {
@@ -26,8 +26,8 @@ public class NoForceSelectionInitValueMultiSelect extends PageBase {
     }
 
     public void btnGetSelection_Click(Object sender, EventArgs e) {
-        if (!DropDownList1.getSelectedValues().isEmpty()) {
-            labResult.setText("选中项文本：" + DropDownList1.getText() + "<br/>选中项值：" + String.join(", ", DropDownList1.getSelectedValues()));
+        if (DropDownList1.getSelectedValueArray().length > 0) {
+            labResult.setText("选中项文本：" + DropDownList1.getText() + "<br/>选中项值：" + String.join(", ", DropDownList1.getSelectedValueArray()));
         } else {
             labResult.setText("用户输入值：" + DropDownList1.getText());
         }

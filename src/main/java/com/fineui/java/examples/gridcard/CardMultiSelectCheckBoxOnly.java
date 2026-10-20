@@ -18,7 +18,7 @@ public class CardMultiSelectCheckBoxOnly extends PageBase {
         if (!isPostBack()) {
             Grid1.setDataSource(StudentGridData.rows());
             Grid1.dataBind();
-            Grid1.setSelectedRowIdArray(new String[] {"105", "110"});
+            Grid1.setSelectedRowIDArray(new String[] {"105", "110"});
         }
     }
 
@@ -27,6 +27,6 @@ public class CardMultiSelectCheckBoxOnly extends PageBase {
     }
 
     public void Button2_Click(Object sender, EventArgs e) {
-        Grid1.setSelectedRowIdArray(new String[] {"102", "106", "108"});   // 服务端选中第 2、6、8 行
+        Grid1.setSelectedRowIDArray(new String[] {"102", "106", "108"});   // 服务端选中第 2、6、8 行
     }
 }

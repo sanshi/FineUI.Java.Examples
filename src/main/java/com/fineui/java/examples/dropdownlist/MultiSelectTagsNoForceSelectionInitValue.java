@@ -18,7 +18,7 @@ public class MultiSelectTagsNoForceSelectionInitValue extends PageBase {
         if (!isPostBack()) {
             // 初始选中两个真实项 + 一个用户输入值（__USERINPUT_ 前缀标记非列表项的用户录入值）
             DropDownList1.setText("可选项1, 可选项4, 初始自定义值1");
-            DropDownList1.setSelectedValues(List.of("Value1", "Value4", "__USERINPUT_value1"));
+            DropDownList1.setSelectedValueArray(new String[] {"Value1", "Value4", "__USERINPUT_value1"});
         }
     }
 
@@ -29,7 +29,7 @@ public class MultiSelectTagsNoForceSelectionInitValue extends PageBase {
     public void btnGetSelection_Click(Object sender, EventArgs e) {
         String text = DropDownList1.getText();
         if (text != null && !text.isEmpty()) {
-            labResult.setText("选中项文本：" + text + "<br/>选中项值：" + String.join(", ", DropDownList1.getSelectedValues()));
+            labResult.setText("选中项文本：" + text + "<br/>选中项值：" + String.join(", ", DropDownList1.getSelectedValueArray()));
         } else {
             labResult.setText("无选中项");
         }
