@@ -35,7 +35,7 @@ public class PagingSummaryData extends PageBase {
         Grid1.setDataSource(pagedData);
         Grid1.dataBind();
         // 3. 合计行数据（当前页）
-        Grid1.setSummaryData(getSummaryData(pagedData));
+        Grid1.setSummaryData(calculateSummaryData(pagedData));
     }
 
     public void Grid1_PageIndexChanged(Object sender, GridPageEventArgs e) {
@@ -43,7 +43,7 @@ public class PagingSummaryData extends PageBase {
     }
 
     /** 合计行：本页文件总大小与文件数。 */
-    private Map<String, Object> getSummaryData(List<Map<String, Object>> paged) {
+    private Map<String, Object> calculateSummaryData(List<Map<String, Object>> paged) {
         int totalSize = 0;
         int totalFileCount = 0;
         for (Map<String, Object> row : paged) {

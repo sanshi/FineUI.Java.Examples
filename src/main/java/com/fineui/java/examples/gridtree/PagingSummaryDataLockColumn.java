@@ -35,14 +35,14 @@ public class PagingSummaryDataLockColumn extends PageBase {
         Grid1.setDataSource(pagedData);
         Grid1.dataBind();
         // 3. 合计行数据（当前页）
-        Grid1.setSummaryData(getSummaryData(pagedData));
+        Grid1.setSummaryData(calculateSummaryData(pagedData));
     }
 
     public void Grid1_PageIndexChanged(Object sender, GridPageEventArgs e) {
         loadData();
     }
 
-    private Map<String, Object> getSummaryData(List<Map<String, Object>> paged) {
+    private Map<String, Object> calculateSummaryData(List<Map<String, Object>> paged) {
         int totalSize = 0;
         int totalFileCount = 0;
         for (Map<String, Object> row : paged) {
