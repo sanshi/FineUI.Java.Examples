@@ -60,7 +60,7 @@ public class GridIFrameAlert extends PageBase {
 
     public void Window1_Close(Object sender, EventArgs e) {
         autoBindGrid();
-        String arg = e.getArgument();
+        String arg = (String) e.getArgument("closeArgument");
         Grid1.setTitle("表格 - 回发参数：" + (arg == null || arg.isEmpty() ? "Window1_Close" : arg));
     }
 }
