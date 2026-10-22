@@ -35,6 +35,20 @@ public class GroupFieldManyColumns extends PageBase {
         }
     }
 
+    public void btnCheckColumns_Click(Object sender, EventArgs e) {
+        // 这些列只在首次加载时创建；普通回发必须能读到完整列树，而不只是模板中的序号列。
+        int leafCount = countLeafColumns(Grid1.getColumns());
+        showNotify("顶层列：" + Grid1.getColumns().size() + "，叶子列：" + leafCount);
+    }
+
+    private static int countLeafColumns(java.util.List<com.fineui.java.core.controls.GridColumn> columns) {
+        int count = 0;
+        for (com.fineui.java.core.controls.GridColumn column : columns) {
+            count += column instanceof GroupField group ? countLeafColumns(group.getColumns()) : 1;
+        }
+        return count;
+    }
+
     // 生成全部列：5 个锁定列 + 12 个月 ×（发货 18 列 + 开票 17 列），共 425 个叶子列
     private void buildColumns() {
         addLockedColumn("客户编号", "khbh", 90);

@@ -10,6 +10,7 @@
         <th:block layout:fragment="body">
             <!-- 列结构是 5 个锁定列 + 12 个月 ×（发货 18 列 + 开票 17 列）的规整循环（共 425 个叶子列），
                  不在模板里逐列声明，由页面类 GroupFieldManyColumns 用代码生成；这里只声明序号列。 -->
+            <f:button id="btnCheckColumns" text="读取后台列数" on-click="btnCheckColumns_Click"></f:button>
             <f:grid id="Grid1" is-fluid="true" is-view-port="true" show-border="true" show-header="true" title="多级分组表头 + 大量列（约 425 列，验证表头/表体列线对齐）"
                 data-id-field="Id" allow-column-locking="true" enable-column-lines="true">
                 <f:columns>
