@@ -25,6 +25,11 @@ public class Window extends PageBase {
         Window1.setIFrameAttribute("title", "服务端已更新标题");
     }
 
+    public void btnRemoveIFrameReferrerPolicy_Click(Object sender, EventArgs e) {
+        // 移除来源策略后，标题和沙箱约束仍按当前值保留。
+        Window1.removeIFrameAttribute("referrerpolicy");
+    }
+
     public String getLoadTime() {
         return LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
     }

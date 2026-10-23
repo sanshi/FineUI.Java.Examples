@@ -11,8 +11,8 @@
         <th:block layout:fragment="body">
 
             <f:button id="Button1" text="弹出窗体" click-handler="onOpenWindow1Click"></f:button>
-            <f:button id="btnUpdateIFrameTitle" text="服务端更新 IFrame 标题"
-                on-click="btnUpdateIFrameTitle_Click"></f:button>
+            <f:button id="btnUpdateIFrameTitle" text="服务端更新 IFrame 标题" on-click="btnUpdateIFrameTitle_Click"></f:button>
+            <f:button id="btnRemoveIFrameReferrerPolicy" text="服务端移除 IFrame 来源策略" on-click="btnRemoveIFrameReferrerPolicy_Click"></f:button>
             <f:window id="Window1" hidden="true" enable-iframe="true" target="Top" iframe-url="/iframe/window/iframe-window" enable-maximize="true"
                 enable-resize="true" height="500" width="800" title="窗体一">
                 <f:iframe-attributes>
@@ -22,7 +22,7 @@
                 </f:iframe-attributes>
             </f:window>
             <br />
-            注：title、sandbox 和 referrerpolicy 设置在窗体内部的 iframe 元素上，不改变页面外观。打开浏览器开发者工具查看 Window1 下的 iframe；点击服务端更新按钮后，title 会由“窗体内的编辑页面”变为“服务端已更新标题”，其他属性保留。
+            注：title、sandbox 和 referrerpolicy 设置在窗体内部的 iframe 元素上，不改变页面外观。打开浏览器开发者工具查看 Window1 下的 iframe；更新标题只改 title，移除来源策略只删除 referrerpolicy，其余属性保留。
             <br /><br />
 
             页面加载时间：<span th:text="${page.loadTime}">00:00:00</span>
