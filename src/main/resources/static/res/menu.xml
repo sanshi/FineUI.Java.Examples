@@ -1067,6 +1067,8 @@
 				</TreeNode>
 			</TreeNode>
 			<TreeNode Text="杂项">
+				<TreeNode Text="表头属性与编辑器共存" NavigateUrl="/grid-editor/header-attributes">
+				</TreeNode>
 				<TreeNode Text="行扩展列与单元格编辑" NavigateUrl="/grid-editor/after-edit-row-expander">
 				</TreeNode>
 				<TreeNode Text="行扩展列与新增删除行" NavigateUrl="/grid-editor/new-delete-row-expander">

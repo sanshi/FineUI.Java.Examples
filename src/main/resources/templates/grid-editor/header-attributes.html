@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 表头属性与编辑器共存</title>
+
+        <style>
+            /* 只有带 data-required 属性的表头显示红星，不改变单元格内容。 */
+            #Grid1 .f-grid-colheader[data-required="true"] .f-grid-colheader-title::before {
+                content: "*";
+                color: #d9534f;
+                margin-right: 4px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" height="240" show-border="true" show-header="true" title="单击单元格进行编辑" data-id-field="Id" allow-cell-editing="true"
+                clicks-to-edit="1">
+                <f:columns>
+                    <f:row-number-field></f:row-number-field>
+                    <f:render-field column-id="Code" data-field="Code" header-text="编号" width="180">
+                        <!--/* 编号列先声明表头属性，再声明编辑器。 */-->
+                        <f:attributes>
+                            <f:attribute key="data-required" value="true"></f:attribute>
+                        </f:attributes>
+                        <f:editor>
+                            <f:text-box id="tbxCode" required="true"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                    <f:render-field column-id="Name" data-field="Name" header-text="名称" width="240">
+                        <!--/* 名称列交换两块的顺序，表头属性与编辑器仍同时生效。 */-->
+                        <f:editor>
+                            <f:text-box id="tbxName" required="true"></f:text-box>
+                        </f:editor>
+                        <f:attributes>
+                            <f:attribute key="data-required" value="true"></f:attribute>
+                        </f:attributes>
+                    </f:render-field>
+                    <f:render-field column-id="Remark" data-field="Remark" header-text="备注" expand-unused-space="true" min-width="200">
+                        <f:editor>
+                            <f:text-box id="tbxRemark"></f:text-box>
+                        </f:editor>
+                    </f:render-field>
+                </f:columns>
+            </f:grid>
+
+            <br>
+            <f:button id="btnSubmit" text="保存数据" on-click="btnSubmit_Click"></f:button>
+            <br>
+            <f:label id="labResult" encode-text="true"></f:label>
+
+            <br>
+            <br>
+            编号列先声明 <code>&lt;f:attributes&gt;</code>，名称列先声明 <code>&lt;f:editor&gt;</code>，两种顺序均可正常编辑。
+            <br>
+            表头红星由自定义属性配合 CSS 显示；输入是否必填由编辑器的 <code>required="true"</code> 控制。
+            <br>
+            修改后点击“保存数据”，当前会话内刷新页面仍可看到保存的内容。
+        </th:block>
+    </body>
+
+</html>
