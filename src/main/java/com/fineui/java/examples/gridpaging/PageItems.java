@@ -24,8 +24,7 @@ public class PageItems extends PageBase {
 
     public void btnClearData_Click(Object sender, EventArgs e) {
         // 清空数据：数据源置空后重绑，表格显示空占位行
-        Grid1.setDataSource(null);
-        Grid1.dataBind();
+        Grid1.clearData();
     }
 
     public void btnRebindData_Click(Object sender, EventArgs e) {

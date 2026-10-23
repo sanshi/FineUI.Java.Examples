@@ -124,7 +124,8 @@ public final class StudentGridData2 {
         row.put("AtSchool", atSchool);
         row.put("Major", major);
         row.put("Group", group);
-        row.put("LogTime", LocalDate.parse(logDate));
+        // 注册日期固定为当天零点；保留日期类型供排序使用，响应统一带时分秒。
+        row.put("LogTime", LocalDate.parse(logDate).atStartOfDay());
         row.put("Desc", name + "，就读于" + major + "，于 " + entranceYear + " 年入学。");   // 行扩展列展示用
         // 学费 / 学杂费 / GPA（合计行示例用；固定值，使合计断言稳定复现）
         int[] fee = FEE_BY_ID.get(id);   // [ExtraFee, Fee]

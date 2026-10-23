@@ -25,8 +25,7 @@ public class FormFields extends PageBase {
     public void btnClearDate_Click(Object sender, EventArgs e) {
         dpStartDate.reset();
         dpEndDate.reset();
-        Grid1.setDataSource(null);
-        Grid1.dataBind();
+        Grid1.clearData();
     }
 
     public void btnSearch_Click(Object sender, EventArgs e) {

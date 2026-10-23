@@ -52,8 +52,7 @@ public class ColumnMove extends PageBase {
 
     // 清空数据：数据源置空后重新绑定，客户端清空表格并显示空占位行。
     public void btnClearData_Click(Object sender, EventArgs e) {
-        Grid1.setDataSource(null);
-        Grid1.dataBind();
+        Grid1.clearData();
     }
 
     // 重新绑定数据：换用 22 行的 StudentGridData2 数据重新绑定。

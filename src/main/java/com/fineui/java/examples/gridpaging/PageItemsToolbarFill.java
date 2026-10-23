@@ -23,8 +23,7 @@ public class PageItemsToolbarFill extends PageBase {
     }
 
     public void btnClearData_Click(Object sender, EventArgs e) {
-        Grid1.setDataSource(null);
-        Grid1.dataBind();
+        Grid1.clearData();
     }
 
     public void btnRebindData_Click(Object sender, EventArgs e) {

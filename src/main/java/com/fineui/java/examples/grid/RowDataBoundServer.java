@@ -5,7 +5,7 @@ import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.GridRowDataBoundEventArgs;
 import com.fineui.java.core.controls.Grid;
 
-import java.time.LocalDate;
+import java.time.temporal.TemporalAccessor;
 import java.time.format.DateTimeFormatter;
 import com.fineui.java.examples.code.PageBase;
 import com.fineui.java.examples.code.StudentGridData;
@@ -31,16 +31,16 @@ public class RowDataBoundServer extends PageBase {
 
     public void Grid1_RowDataBound(Object sender, GridRowDataBoundEventArgs e) {
         // 注意：getFieldValue 的参数是数据字段名（DataField），不是列标识符（ColumnID）
-        LocalDate logTime = (LocalDate) e.getFieldValue("LogTime");
-        e.setFieldValue("LogTime", logTime.format(CN_DATE));
+        // 两组示例数据分别使用日期与日期时间，格式化器只读取年月日。
+        TemporalAccessor logTime = (TemporalAccessor) e.getFieldValue("LogTime");
+        e.setFieldValue("LogTime", CN_DATE.format(logTime));
 
         int gender = ((Number) e.getFieldValue("Gender")).intValue();
         e.setFieldValue("Gender", gender == 1 ? "男" : "女");
     }
 
     public void btnClearData_Click(Object sender, EventArgs e) {
-        Grid1.setDataSource(null);
-        Grid1.dataBind();
+        Grid1.clearData();
     }
 
     public void btnRebindData_Click(Object sender, EventArgs e) {
