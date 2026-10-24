@@ -29,7 +29,7 @@
             <f:button text="选中第 2, 6, 8 行（客户端）" css-class="marginr" click-handler="onSelectRowsClick"></f:button>
             <f:button id="Button1" text="选中了哪些行" css-class="marginr" on-click="Button1_Click"></f:button>
             <f:button id="Button2" text="选中第 2, 6, 8 行" css-class="marginr" on-click="Button2_Click"></f:button>
-            <f:button text="选中了哪些行（自定义回发）" css-class="marginr" id="Button3" on-click="Button1_Click"></f:button>
+            <f:button text="选中了哪些行（自定义回发）" css-class="marginr" id="Button3" click-handler="onCheckSelectionClick" on-click="Button1_Click"></f:button>
             <br />
             <br />
             注：表格默认选中了第 5， 10 行。
@@ -40,6 +40,13 @@
             <script>
                 function onSelectRowsClick(event) {
                     F.ui.Grid1.selectRows([1, 5, 7]);
+                }
+
+                function onCheckSelectionClick(event) {
+                    if (!F.ui.Grid1.hasSelection()) {
+                        F.alert({ message: '没有选中项！', target: '_top' });
+                        return false;
+                    }
                 }
 
             </script>

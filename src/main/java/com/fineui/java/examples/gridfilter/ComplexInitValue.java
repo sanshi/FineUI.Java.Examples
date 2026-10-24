@@ -1,8 +1,10 @@
 package com.fineui.java.examples.gridfilter;
 
 import com.fineui.java.core.EventArgs;
+import com.fineui.java.core.IconHelper;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.Grid;
+import com.fineui.java.core.controls.DropDownList;
 import com.fineui.java.core.controls.GridColumnFilteredData;
 import com.fineui.java.core.controls.GridColumnFilteredItem;
 import com.fineui.java.core.controls.Label;
@@ -19,6 +21,7 @@ public class ComplexInitValue extends PageBase {
 
     Grid Grid1;
     Label labResult;
+    DropDownList groupList;
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
@@ -40,6 +43,11 @@ public class ComplexInitValue extends PageBase {
             group.addItem(new GridColumnFilteredItem(null, new String[]{"2", "3"}));   // 分组2, 分组3
             Grid1.findColumn("Group").setColumnFilteredData(group);
 
+            // 下拉项在面板中显示分组图标，提交值仍为 1—5，与显示 HTML 分开。
+            for (int index = 0; index < groupList.getItemCount(); index++) {
+                String imageUrl = IconHelper.resolveUrl("/res/images/16/" + (index + 1) + ".png");
+                groupList.setItemDisplay(index, "<img src=\"" + imageUrl + "\">&nbsp;分组" + (index + 1));
+            }
             bindGrid();
 
             labResult.setText("初始过滤数据：" + Grid1.getFilteredData());
