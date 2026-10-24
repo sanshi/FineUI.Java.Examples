@@ -3,7 +3,8 @@ package com.fineui.java.examples.datamodel;
 import com.fineui.java.binding.BindProperty;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
-import com.fineui.java.core.MessageBoxIcon;
+import com.fineui.java.core.RawHtml;
+import com.fineui.java.examples.code.Json;
 import com.fineui.java.examples.code.PageBase;
 import com.fineui.java.examples.datamodel.model.CheckBoxListForm;
 import com.fineui.java.examples.datamodel.model.GenderType;
@@ -11,7 +12,7 @@ import com.fineui.java.examples.datamodel.model.GenderType;
 import java.util.List;
 
 /**
- * 数据模型复选框与单选按钮列表（路由 {@code data-model/check-box-list}）：两个复选框列表 + 单选按钮列表
+ * 数据模型复选框与单选按钮列表（路由 {@code data-model/check-box-list}）：复选框、复选框列表及单选按钮列表
  * 经 {@code for} 绑定到 {@link CheckBoxListForm} 的集合/枚举属性（初始选中态随模型回显），
  * 提交回发后服务端把选择结果序列化为 JSON 展示。
  */
@@ -38,8 +39,9 @@ public class CheckBoxList extends PageBase {
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
         if (getModelState().isValid()) {
-            showNotify("用户提交的数据：复选框=" + form.getChecked() + "，复选列表=" + form.getCheckBoxList1(),
-                    MessageBoxIcon.Success);
+            // 完整展示提交模型，例如第三个单选项对应 radioButtonList1="Value3"。
+            // Json.encode 先转义模型内容，确保 <pre> 只负责排版、不把数据当 HTML。
+            showNotify(new RawHtml("用户提交的数据：<br/><pre>%s</pre>", Json.encode(form)));
         }
     }
 }
