@@ -5,6 +5,7 @@ import com.fineui.java.core.controls.ControlBase;
 import com.fineui.java.core.controls.RadioButton;
 import com.fineui.java.core.controls.RealTextField;
 import com.fineui.java.core.controls.SelectionListField;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * 表单提交后的字段值汇总（可信 HTML）：把若干列表控件的选中值拼成 {@code 表单字段值：<ul><li>id: 值</li>…</ul>}，
@@ -22,7 +23,7 @@ public final class FormSummary {
         for (SelectionListField list : lists) {
             String text = String.join(", ", list.getSelectedValueList());
             if (!text.isEmpty()) {
-                sb.append("<li>").append(list.getId()).append(": ").append(text).append("</li>");
+                append(sb, list.getId(), text);
             }
         }
         sb.append("</ul>");
@@ -35,7 +36,7 @@ public final class FormSummary {
         for (RealTextField f : fields) {
             String v = f.getValue();
             if (v != null && !v.isEmpty()) {
-                sb.append("<li>").append(f.getId()).append(": ").append(v).append("</li>");
+                append(sb, f.getId(), v);
             }
         }
         sb.append("</ul>");
@@ -74,6 +75,11 @@ public final class FormSummary {
     }
 
     private static void append(StringBuilder sb, String id, String value) {
-        sb.append("<li>").append(id).append(": ").append(value).append("</li>");
+        // 列表标签由示例固定提供，字段名和值只作为文字，避免输入中的标签变成页面元素。
+        sb.append("<li>")
+                .append(HtmlUtils.htmlEscape(id, "UTF-8"))
+                .append(": ")
+                .append(HtmlUtils.htmlEscape(value, "UTF-8"))
+                .append("</li>");
     }
 }
