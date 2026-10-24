@@ -4,6 +4,7 @@ import com.fineui.java.binding.BindProperty;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.RawHtml;
+import com.fineui.java.core.controls.DropDownList;
 import com.fineui.java.examples.code.Json;
 import com.fineui.java.examples.code.PageBase;
 import com.fineui.java.examples.datamodel.model.CheckBoxListForm;
@@ -20,6 +21,8 @@ import java.util.List;
 public class CheckBoxList extends PageBase {
     @BindProperty
     private CheckBoxListForm form;
+
+    protected DropDownList form_genderType_2;
 
     public CheckBoxListForm getForm() {
         return form;
@@ -39,9 +42,15 @@ public class CheckBoxList extends PageBase {
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
         if (getModelState().isValid()) {
-            // 完整展示提交模型，例如第三个单选项对应 radioButtonList1="Value3"。
-            // Json.encode 先转义模型内容，确保 <pre> 只负责排版、不把数据当 HTML。
-            showNotify(new RawHtml("用户提交的数据：<br/><pre>%s</pre>", Json.encode(form)));
+            // 单选列表写入模型；下拉列表另设 name，直接从控件读取，允许两者选择不同。
+            GenderType firstGender = form.getGenderType();
+            String otherGender = form_genderType_2.getText();
+
+            // 所有输入先转义，确保展示 JSON 时不把数据当 HTML。
+            showNotify(new RawHtml(
+                    "用户提交的数据：<br/><pre>%s</pre>"
+                            + "模型性别：%s<br/>独立下拉列表 form_genderType_2：%s",
+                    Json.encode(form), Json.encode(firstGender), Json.encode(otherGender)));
         }
     }
 }

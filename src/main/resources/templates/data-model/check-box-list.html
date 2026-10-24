@@ -30,8 +30,8 @@
                         <f:radio-item text="男" value="1"></f:radio-item>
                         <f:radio-item text="女" value="0"></f:radio-item>
                     </f:radio-button-list>
-                    <!-- 下方 DropDownList 与本 RadioButtonList 绑定同一属性 form.genderType：两个控件值须一致（绑定歧义检查）；
-                         两控件由同一绑定字段派生的 id 会撞车，故第二个控件显式加 _2 后缀消歧 -->
+                    <!-- 下拉列表共用模型的初值和验证规则；显式 name 让它成为独立输入，
+                         不写回 form.genderType，提交事件通过控件实例读取当前选择。 -->
                     <f:drop-down-list for="form.genderType" id="form_genderType_2" name="form_genderType_2">
                         <f:list-item text="男" value="1"></f:list-item>
                         <f:list-item text="女" value="0"></f:list-item>
