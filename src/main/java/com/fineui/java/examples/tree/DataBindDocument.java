@@ -20,8 +20,7 @@ public class DataBindDocument extends PageBase {
     }
 
     public void btnClear_Click(Object sender, EventArgs e) {
-        Tree1.dataBind(null);
-        Tree1.loadData(Tree1.getNodes());   // 空节点 → 客户端清空树
+        Tree1.clearData();
     }
 
     public void btnReBind_Click(Object sender, EventArgs e) {
