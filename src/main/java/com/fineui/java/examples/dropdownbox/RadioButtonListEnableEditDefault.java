@@ -34,7 +34,8 @@ public class RadioButtonListEnableEditDefault extends PageBase {
 
     public void btnGetSelection_Click(Object sender, EventArgs e) {
         String value = DropDownBox1.getValue();
-        if (value != null && !value.isEmpty()) {
+        // 空字符串也可以是选中项的 ID；只有 null 表示没有选择。
+        if (value != null) {
             labResult.setText(String.format("下拉框文本：%s（值：%s）", DropDownBox1.getText(), value));
         } else {
             labResult.setText(String.format("用户输入值：%s", DropDownBox1.getText()));
