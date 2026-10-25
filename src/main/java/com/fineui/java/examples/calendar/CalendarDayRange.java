@@ -23,6 +23,16 @@ public class CalendarDayRange extends PageBase {
     protected Button Button1;
     protected Label labResult;
 
+    public void btnMoveStart_Click(Object sender, EventArgs e) {
+        LocalDateTime start = Calendar1.getRangeStartDate();
+        LocalDateTime end = Calendar1.getRangeEndDate();
+        if (start != null && end != null && start.isBefore(end)) {
+            // 只改开始日期，保留用户当前选择的结束日期。
+            Calendar1.setRangeStartDate(start.plusDays(1));
+        }
+        labResult.setText("选择的日期：" + Calendar1.getText());
+    }
+
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
             Calendar1.setDateFormatString(DATE_FORMAT);
