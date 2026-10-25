@@ -35,18 +35,19 @@ public final class StudentGridData {
     /** 12 行学生数据（每行一个字段字典，字段名与列的 {@code data-field} 一致）。 */
     public static List<Map<String, Object>> rows() {
         List<Map<String, Object>> list = new ArrayList<>();
-        add(list, 101, "张萍萍", 0, 2000, true, "材料科学与工程系", 1);
-        add(list, 102, "陈飞", 1, 2000, false, "化学系", 1);
-        add(list, 103, "董婷婷", 0, 2000, true, "化学系", 2);
-        add(list, 104, "刘国", 1, 2020, false, "化学系", 2);
-        add(list, 105, "康颖颖", 0, 2008, true, "数学系", 3);
-        add(list, 106, "彭博", 1, 2008, true, "数学系", 3);
-        add(list, 107, "黄婷婷", 0, 2008, true, "数学系", 3);
-        add(list, 108, "唐超", 1, 2020, false, "物理系", 3);
-        add(list, 109, "杨婷婷", 0, 2020, true, "物理系", 5);
-        add(list, 110, "徐鹏", 1, 2020, false, "物理系", 5);
-        add(list, 111, "董国", 1, 2020, true, "自动化系", 5);
-        add(list, 112, "张三石", 1, 2012, true, "材料科学与工程系", 5);
+        LocalDate baseDate = LocalDate.now();
+        add(list, baseDate, 101, "张萍萍", 0, 2000, true, "材料科学与工程系", 1);
+        add(list, baseDate, 102, "陈飞", 1, 2000, false, "化学系", 1);
+        add(list, baseDate, 103, "董婷婷", 0, 2000, true, "化学系", 2);
+        add(list, baseDate, 104, "刘国", 1, 2020, false, "化学系", 2);
+        add(list, baseDate, 105, "康颖颖", 0, 2008, true, "数学系", 3);
+        add(list, baseDate, 106, "彭博", 1, 2008, true, "数学系", 3);
+        add(list, baseDate, 107, "黄婷婷", 0, 2008, true, "数学系", 3);
+        add(list, baseDate, 108, "唐超", 1, 2020, false, "物理系", 3);
+        add(list, baseDate, 109, "杨婷婷", 0, 2020, true, "物理系", 5);
+        add(list, baseDate, 110, "徐鹏", 1, 2020, false, "物理系", 5);
+        add(list, baseDate, 111, "董国", 1, 2020, true, "自动化系", 5);
+        add(list, baseDate, 112, "张三石", 1, 2012, true, "材料科学与工程系", 5);
         return list;
     }
 
@@ -70,7 +71,7 @@ public final class StudentGridData {
         return list;
     }
 
-    private static void add(List<Map<String, Object>> list, int id, String name, int gender,
+    private static void add(List<Map<String, Object>> list, LocalDate baseDate, int id, String name, int gender,
                             int entranceYear, boolean atSchool, String major, int group) {
         Map<String, Object> row = new LinkedHashMap<>();
         row.put("Id", id);
@@ -83,7 +84,7 @@ public final class StudentGridData {
         // 注册日期：相对今天的偏移天数（101-104:-100、105:-60、106-110:-50、111-112:-5），
         // 使表头过滤「日期范围」示例的行数保持稳定
         int logDaysAgo = id <= 104 ? 100 : (id == 105 ? 60 : (id <= 110 ? 50 : 5));
-        row.put("LogTime", LocalDate.now().minusDays(logDaysAgo));
+        row.put("LogTime", baseDate.minusDays(logDaysAgo).atStartOfDay());
         // 个人简介：基础句 + 按 id 追加 0~3 段，使各行文本长度不同（自动换行时行高随之变化，供行高/换行示例演示）
         StringBuilder desc = new StringBuilder(name + "，就读于" + major + "，于 " + entranceYear + " 年入学，是一名勤奋好学、积极向上的学生。");
         for (int k = 0; k < id % 4; k++) {

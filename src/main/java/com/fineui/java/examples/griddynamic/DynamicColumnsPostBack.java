@@ -13,9 +13,8 @@ import com.fineui.java.core.controls.RowNumberField;
 import com.fineui.java.core.enums.FieldType;
 import com.fineui.java.core.enums.Renderer;
 import com.fineui.java.core.enums.TextAlign;
-import com.fineui.java.examples.code.GroupFieldGridData;
+import com.fineui.java.examples.code.DynamicColumnsData;
 import com.fineui.java.examples.code.PageBase;
-import com.fineui.java.examples.code.StudentGridData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,12 +41,12 @@ public class DynamicColumnsPostBack extends PageBase {
             Grid1.setTitle("表格一（单选，行扩展列）");
             Grid1.configColumns(createTable1Columns(), new GridConfigOptions()
                     .setDataIdField("Id").setDataTextField("Name")
-                    .setEnableCheckBoxSelect(false).setEnableMultiSelect(false), StudentGridData.rows());
+                    .setEnableCheckBoxSelect(false).setEnableMultiSelect(false), DynamicColumnsData.studentRows());
         } else {
             Grid1.setTitle("表格二（多选，多表头，全选列）");
             Grid1.configColumns(createTable2Columns(), new GridConfigOptions()
                     .setDataIdField("Id").setDataTextField("Year")
-                    .setEnableCheckBoxSelect(true).setEnableMultiSelect(true), GroupFieldGridData.rows());
+                    .setEnableCheckBoxSelect(true).setEnableMultiSelect(true), DynamicColumnsData.statisticsRows());
         }
     }
 

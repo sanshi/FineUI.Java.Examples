@@ -1,6 +1,8 @@
 package com.fineui.java.examples.gridfilter;
 
 import com.fineui.java.core.EventArgs;
+import com.fineui.java.core.RawHtml;
+import com.fineui.java.examples.code.Json;
 import com.fineui.java.core.IconHelper;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.Grid;
@@ -50,13 +52,13 @@ public class ComplexInitValue extends PageBase {
             }
             bindGrid();
 
-            labResult.setText("初始过滤数据：" + Grid1.getFilteredData());
+            labResult.setTextRawHtml(new RawHtml("初始过滤数据：<pre>%s</pre>", Json.encode(Grid1.getFilteredData())));
         }
     }
 
     public void Grid1_FilterChanged(Object sender, EventArgs e) {
         bindGrid();
-        labResult.setText("过滤数据：" + Grid1.getFilteredData());
+        labResult.setTextRawHtml(new RawHtml("过滤数据：<pre>%s</pre>", Json.encode(Grid1.getFilteredData())));
     }
 
     public void btnUpdateFilteredData_Click(Object sender, EventArgs e) {
@@ -78,7 +80,7 @@ public class ComplexInitValue extends PageBase {
 
         bindGrid();
 
-        labResult.setText("后台更新过滤数据：" + Grid1.getFilteredData());
+        labResult.setTextRawHtml(new RawHtml("后台更新过滤数据：<pre>%s</pre>", Json.encode(Grid1.getFilteredData())));
     }
 
     private void bindGrid() {

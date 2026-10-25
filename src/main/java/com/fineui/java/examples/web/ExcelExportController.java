@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -50,7 +50,7 @@ public class ExcelExportController {
             td(sb, Boolean.TRUE.equals(row.get("AtSchool")) ? "√" : "×");
             td(sb, row.get("Major"));
             tdImage(sb, "/res/images/16/" + row.get("Group") + ".png");
-            td(sb, ((LocalDate) row.get("LogTime")).format(DATE_FMT));
+            td(sb, ((LocalDateTime) row.get("LogTime")).format(DATE_FMT));
             sb.append("</tr>");
         }
         sb.append("</table>");
@@ -164,7 +164,7 @@ public class ExcelExportController {
             td(sb, row.get("MathScore"));
             td(sb, row.get("TotalScore"));
             td(sb, row.get("Major"));
-            td(sb, ((LocalDate) row.get("LogTime")).format(DATE_FMT));
+            td(sb, ((LocalDateTime) row.get("LogTime")).format(DATE_FMT));
             sb.append("</tr>");
         }
         sb.append("</table>");
@@ -202,7 +202,9 @@ public class ExcelExportController {
             if (pick.contains("是否在校")) td(sb, Boolean.TRUE.equals(row.get("AtSchool")) ? "√" : "×");
             if (pick.contains("所学专业")) td(sb, row.get("Major"));
             if (pick.contains("分组")) tdImage(sb, "/res/images/16/" + row.get("Group") + ".png");
-            if (pick.contains("注册日期")) td(sb, ((LocalDate) row.get("LogTime")).format(DATE_FMT));
+            if (pick.contains("注册日期")) {
+                td(sb, ((LocalDateTime) row.get("LogTime")).format(DATE_FMT));
+            }
             sb.append("</tr>");
         }
         sb.append("</table>");

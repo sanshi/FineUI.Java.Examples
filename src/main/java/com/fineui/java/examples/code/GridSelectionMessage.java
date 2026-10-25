@@ -50,11 +50,12 @@ public final class GridSelectionMessage {
         return sb.toString();
     }
 
-    /** 展示层格式化：性别列的原始整数（1=男，其余=女，与 renderGender 一致）转成中文，其余键原样输出。 */
+    /** 展示层格式化：性别列的合法整数（1=男、0=女）转成中文；未知值与其它键原样输出。 */
     private static String formatKeyValue(String keyName, Object value) {
-        if ("Gender".equalsIgnoreCase(keyName)) {
-            return "1".equals(String.valueOf(value)) ? "男" : "女";
+        String text = value == null ? "" : String.valueOf(value);
+        if ("Gender".equalsIgnoreCase(keyName) && ("0".equals(text) || "1".equals(text))) {
+            return "1".equals(text) ? "男" : "女";
         }
-        return String.valueOf(value);
+        return text;
     }
 }

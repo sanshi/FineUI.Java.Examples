@@ -3,7 +3,8 @@ package com.fineui.java.examples.datamodel;
 import com.fineui.java.binding.BindProperty;
 import com.fineui.java.core.EventArgs;
 import com.fineui.java.core.FineUIPage;
-import com.fineui.java.core.MessageBoxIcon;
+import com.fineui.java.core.RawHtml;
+import com.fineui.java.examples.code.Json;
 import com.fineui.java.examples.code.PageBase;
 import com.fineui.java.examples.datamodel.model.DropDownListForm;
 
@@ -33,8 +34,7 @@ public class DropDownList extends PageBase {
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
         if (getModelState().isValid()) {
-            showNotify("用户提交的数据：单选=" + form.getDropDownList1() + "，多选=" + form.getDropDownList2(),
-                    MessageBoxIcon.Success);
+            showNotify(new RawHtml("用户提交的数据：<br/><pre>%s</pre>", Json.encode(form)));
         }
     }
 }
