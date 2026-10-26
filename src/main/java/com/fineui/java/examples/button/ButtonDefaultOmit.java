@@ -5,8 +5,8 @@ import com.fineui.java.core.FineUIPage;
 import com.fineui.java.examples.code.PageBase;
 
 /**
- * 演示页（路由 {@code button/button-default-omit}）：模板声明「默认值」的枚举属性首屏不产出对应 wire key、
- * 声明非默认才产出。纯静态展示，无服务端事件；用于「查看网页源代码」核对 {@code F.render} 载荷。
+ * 比较未设置、明确基础值和明确其他值。普通基础值可省略，表单配置保留明确覆盖。
+ * 页面同时展示表单级对齐方式，便于核对字段如何继承表单配置。
  */
 @FineUIPage("button/button-default-omit")
 public class ButtonDefaultOmit extends PageBase {
