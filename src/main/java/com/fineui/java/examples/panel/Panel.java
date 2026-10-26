@@ -1,6 +1,8 @@
 package com.fineui.java.examples.panel;
 
 import com.fineui.java.core.EventArgs;
+import com.fineui.java.core.RawHtml;
+import com.fineui.java.core.controls.Label;
 import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.ToolbarSeparator;
 import com.fineui.java.core.controls.ToolbarText;
@@ -23,6 +25,24 @@ public class Panel extends PageBase {
     ToolbarText ToolbarText1;
     ToolbarSeparator ToolbarSeparator1;
     Toolbar Toolbar1;
+
+    private static final String STATUS_MARKUP = "<b data-kind=\"status\">服务已连接</b>";
+    protected Label labToolbarText;
+
+    public void btnRichToolbarText_Click(Object sender, EventArgs e) {
+        ToolbarText1.setTextRawHtml(new RawHtml(STATUS_MARKUP));
+    }
+
+    public void btnPlainToolbarText_Click(Object sender, EventArgs e) {
+        // 先撤销HTML授权，再设置普通文字；同一段内容就会显示为带标签的文字。
+        ToolbarText1.setTextRawHtml(null);
+        ToolbarText1.setText(STATUS_MARKUP);
+    }
+
+    public void btnReadToolbarText_Click(Object sender, EventArgs e) {
+        labToolbarText.setText("文字：" + ToolbarText1.getText() + "；本轮HTML授权："
+                + (ToolbarText1.getTextRawHtml() == null ? "否" : "是"));
+    }
 
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
