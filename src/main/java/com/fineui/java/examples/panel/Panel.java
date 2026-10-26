@@ -34,14 +34,21 @@ public class Panel extends PageBase {
     }
 
     public void btnPlainToolbarText_Click(Object sender, EventArgs e) {
-        // 先撤销HTML授权，再设置普通文字；同一段内容就会显示为带标签的文字。
-        ToolbarText1.setTextRawHtml(null);
+        // 设置普通文本时明确关闭可信标记，同一段内容就会显示为带标签的文字。
+        ToolbarText1.setTextRaw(false);
         ToolbarText1.setText(STATUS_MARKUP);
     }
 
+    public void btnClearToolbarText_Click(Object sender, EventArgs e) {
+        // null表示清空内容并取消可信标记；只取消标记应调用setTextRaw(false)。
+        ToolbarText1.setTextRawHtml(null);
+    }
+
     public void btnReadToolbarText_Click(Object sender, EventArgs e) {
-        labToolbarText.setText("文字：" + ToolbarText1.getText() + "；本轮HTML授权："
-                + (ToolbarText1.getTextRawHtml() == null ? "否" : "是"));
+        // 清空后的null显示为空文字，避免Java字符串拼接把它显示成字面的“null”。
+        String text = ToolbarText1.getText();
+        labToolbarText.setText("文字：" + (text == null ? "" : text) + "；是否可信 HTML 标记："
+                + (ToolbarText1.isTextRaw() ? "是" : "否"));
     }
 
     public void Page_Load(Object sender, EventArgs e) {
