@@ -16,6 +16,13 @@ public class DropDownList extends PageBase {
     com.fineui.java.core.controls.DropDownList DropDownList1;
     Label labResult;
 
+    protected Label labClickAction;
+
+    public void btnToggleClickAction_Click(Object sender, EventArgs e) {
+        DropDownList1.setEnableClickAction(!DropDownList1.isEnableClickAction());
+        labClickAction.setText("输入区点击弹出：" + (DropDownList1.isEnableClickAction() ? "开启" : "关闭"));
+    }
+
     public void Page_Load(Object sender, EventArgs e) {
     }
 

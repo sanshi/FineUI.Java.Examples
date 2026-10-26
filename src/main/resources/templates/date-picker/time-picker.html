@@ -14,12 +14,15 @@
                     <f:time-picker id="TimePicker1" show-red-star="true" enable-edit="false" label="时间" increment="30" min-time-text="8:30"
                         max-time-text="20:30" required="true" empty-text="请选择时间"></f:time-picker>
                     <f:button id="btnSubmit" validate-forms="SimpleForm1" text="提交表单" on-click="btnSubmit_Click"></f:button>
+                    <f:button id="btnToggleClickAction" text="切换输入区点击弹出" on-click="btnToggleClickAction_Click"></f:button>
+                    <f:label id="labClickAction" text="输入区点击弹出：开启" show-label="false"></f:label>
                 </f:items>
             </f:simple-form>
             <br />
             <f:label id="labResult" encode-text="false" show-label="false"></f:label>
             <br />
             <br />
+            注：可在后台切换是否点击输入区打开面板；关闭后仍可点击右侧按钮，当前选中值保持不变。<br />
             注：本示例通过 EnableEdit 属性控制日期和时间选择器不可编辑。
 
         </th:block>

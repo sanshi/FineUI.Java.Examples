@@ -17,6 +17,15 @@ public class TimePicker extends PageBase {
     protected Button btnSubmit;
     protected Label labResult;
 
+    protected Label labClickAction;
+
+    public void btnToggleClickAction_Click(Object sender, EventArgs e) {
+        DatePicker1.setEnableClickAction(!DatePicker1.isEnableClickAction());
+        TimePicker1.setEnableClickAction(!TimePicker1.isEnableClickAction());
+        labClickAction.setText("日期：" + (DatePicker1.isEnableClickAction() ? "开启" : "关闭")
+                + "；时间：" + (TimePicker1.isEnableClickAction() ? "开启" : "关闭"));
+    }
+
     public void Page_Load(Object sender, EventArgs e) {
     }
 

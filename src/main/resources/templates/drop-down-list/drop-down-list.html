@@ -25,12 +25,15 @@
 
                     <f:button id="btnSelectItem6" text="选中[可选项6]" css-class="marginr" on-click="btnSelectItem6_Click"></f:button>
                     <f:button id="btnGetSelection" text="获取此下拉列表的选中项" on-click="btnGetSelection_Click"></f:button>
+                    <f:button id="btnToggleClickAction" text="切换输入区点击弹出" on-click="btnToggleClickAction_Click"></f:button>
+                    <f:label id="labClickAction" text="输入区点击弹出：开启" show-label="false"></f:label>
                 </f:items>
             </f:simple-form>
             <br />
             <f:label id="labResult" encode-text="false"></f:label>
             <br>
             <br>
+            注：可在后台切换是否点击输入区打开面板；关闭后仍可点击右侧按钮，当前选中值保持不变。<br />
             注：列表项的值不能为空字符串。
 
         </th:block>
