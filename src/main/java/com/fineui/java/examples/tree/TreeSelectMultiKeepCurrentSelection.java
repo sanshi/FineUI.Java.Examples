@@ -18,6 +18,7 @@ public class TreeSelectMultiKeepCurrentSelection extends PageBase {
 
     com.fineui.java.core.controls.Tree Tree1;
     Label labResult;
+    Label labKeepSelection;
 
     public void btnGetSelectedValues_Click(Object sender, EventArgs e) {
         String[] ids = Tree1.getSelectedNodeIDArray();
@@ -40,5 +41,11 @@ public class TreeSelectMultiKeepCurrentSelection extends PageBase {
         ids.add("hefei");
         ids.add("huangshan");
         Tree1.setSelectedNodeIDArray(ids.toArray(new String[0]));
+    }
+
+    public void btnToggleKeepSelection_Click(Object sender, EventArgs e) {
+        // 保留已有选择，只改变接下来的普通点击是否累加。
+        Tree1.setKeepCurrentSelection(!Tree1.isKeepCurrentSelection());
+        labKeepSelection.setText(Tree1.isKeepCurrentSelection() ? "连续点击累加选择：开启" : "连续点击累加选择：关闭");
     }
 }

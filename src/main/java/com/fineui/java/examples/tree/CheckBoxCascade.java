@@ -18,6 +18,13 @@ public class CheckBoxCascade extends PageBase {
 
     com.fineui.java.core.controls.Tree Tree1;
     Label labResult;
+    Label labCascadeCheck;
+
+    public void btnToggleCascadeCheck_Click(Object sender, EventArgs e) {
+        // 切换时保留当前勾选结果，后续勾选再使用新规则。
+        Tree1.setCascadeCheck(!Tree1.isCascadeCheck());
+        labCascadeCheck.setText(Tree1.isCascadeCheck() ? "父子级联勾选：开启" : "父子级联勾选：关闭");
+    }
 
     public void btnGetCheckedValues_Click(Object sender, EventArgs e) {
         List<TreeNode> nodes = Tree1.getCheckedNodes();
