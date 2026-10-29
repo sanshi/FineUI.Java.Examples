@@ -742,7 +742,7 @@
 		<TreeNode Text="行命令">
 			<TreeNode Text="行命令（客户端事件）" NavigateUrl="/grid/row-command">
 			</TreeNode>
-			<TreeNode Text="行命令弹窗（独立网址和标题字段）" NavigateUrl="/grid/row-command-window">
+			<TreeNode Text="行命令弹窗（网址和标题字段）" NavigateUrl="/grid/row-command-window">
 			</TreeNode>
 			<TreeNode Text="行命令（服务端事件）" NavigateUrl="/grid/row-command-post-back">
 			</TreeNode>

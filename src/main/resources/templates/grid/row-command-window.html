@@ -8,11 +8,11 @@
 
     <body>
         <th:block layout:fragment="body">
-            <p>点击“查看客户”，使用该行的客户标识打开详情，并把客户姓名显示在窗体标题中。</p>
-            <!-- Slug 和 DisplayName 只供命令使用，无需增加隐藏列或 data-attribute-fields。 -->
             <f:grid id="Grid1" title="客户列表" show-header="true" show-border="true" is-fluid="true" data-id-field="ID">
                 <f:columns>
                     <f:render-field header-text="客户编号" data-field="ID" width="150"></f:render-field>
+                    <f:render-field header-text="客户标识" data-field="Slug" width="220"></f:render-field>
+                    <f:render-field header-text="客户姓名" data-field="DisplayName" width="150"></f:render-field>
                     <f:render-field header-text="操作" expand-unused-space="true">
                         <f:commands>
                             <f:command text="查看客户" command-name="View" window-id="Details"
@@ -23,6 +23,8 @@
                 </f:columns>
             </f:grid>
             <f:window id="Details" title="客户详情" width="500" height="300" is-modal="true" enable-iframe="true" hidden="true"></f:window>
+
+            <p>点击“查看客户”打开该行的客户详情：网址参数取自 <code>Slug</code>，窗体标题取自 <code>DisplayName</code>。</p>
         </th:block>
     </body>
 
