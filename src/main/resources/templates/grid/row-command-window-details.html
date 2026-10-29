@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 客户详情</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <p>当前客户标识：<strong id="customerSlug" th:text="${page.customerSlug}"></strong></p>
+            <p>本示例展示行命令传入的网址参数。实际业务中应查询客户记录并校验访问权限。</p>
+        </th:block>
+    </body>
+
+</html>
