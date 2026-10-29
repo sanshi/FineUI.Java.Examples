@@ -821,11 +821,20 @@
 			<TreeNode Text="复选框列（单选，单选框样式）" NavigateUrl="/grid/check-field-radio">
 			</TreeNode>
 		</TreeNode>
-		<TreeNode Text="动态创建列">
+		<TreeNode Text="动态修改表格">
 			<TreeNode Text="动态创建列" NavigateUrl="/grid-dynamic/dynamic-columns">
 			</TreeNode>
 			<TreeNode Text="动态创建列（回发时改变表头）" NavigateUrl="/grid-dynamic/dynamic-columns-post-back">
 			</TreeNode>
+			<TreeNode Text="后台属性修改标题和宽度" NavigateUrl="/grid/header-change-properties" Version="16.1.0">
+			</TreeNode>
+			<TreeNode Text="修改表格显示与选择方式" NavigateUrl="/grid-dynamic/display-selection" Version="16.1.0"></TreeNode>
+			<TreeNode Text="增删列与多表头" NavigateUrl="/grid-dynamic/columns-collection" Version="16.1.0"></TreeNode>
+			<TreeNode Text="动态修改排序" NavigateUrl="/grid-dynamic/sorting" Version="16.1.0"></TreeNode>
+			<TreeNode Text="动态修改排序（数据库数据）" NavigateUrl="/grid-dynamic/sorting-database" Version="16.1.0"></TreeNode>
+			<TreeNode Text="动态修改分页（内存数据）" NavigateUrl="/grid-dynamic/paging-memory" Version="16.1.0"></TreeNode>
+			<TreeNode Text="动态修改分页（数据库数据）" NavigateUrl="/grid-dynamic/paging-database" Version="16.1.0"></TreeNode>
+			<TreeNode Text="动态修改列锁定与合计" NavigateUrl="/grid-dynamic/layout-summary" Version="16.1.0"></TreeNode>
 			<!--<TreeNode Text="动态创建列（回发，列锁定）" NavigateUrl="/grid-dynamic/dynamic-columns-locking">
 			</TreeNode>
 			<TreeNode Text="动态创建列（回发，排序）" NavigateUrl="/grid-dynamic/dynamic-columns-sorting">
@@ -877,8 +886,6 @@
 			<TreeNode Text="隐藏标题栏" NavigateUrl="/grid/header-hide">
 			</TreeNode>
 			<TreeNode Text="改变标题栏文本和宽度" NavigateUrl="/grid/header-change-text-width">
-			</TreeNode>
-			<TreeNode Text="后台属性修改标题和宽度" NavigateUrl="/grid/header-change-properties" Version="16.1.0">
 			</TreeNode>
 			<TreeNode Text="标题栏自动换行" NavigateUrl="/grid/header-wrap">
 			</TreeNode>

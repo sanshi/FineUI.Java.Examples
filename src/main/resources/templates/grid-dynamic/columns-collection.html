@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 增删列与多表头</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" title="增删列与多表头" show-header="true" show-border="true" is-fluid="true" height="400" data-id-field="Id" data-text-field="Name"
+                allow-paging="false" is-database-paging="false" is-database-sorting="false" enable-multi-select="false" paging-toolbar-visible="true">
+                <f:columns>
+                    <f:render-field column-id="Name" header-text="姓名" data-field="Name" sort-field="Name" width="220"></f:render-field>
+                    <f:render-field column-id="EntranceYear" header-text="入学年份" data-field="EntranceYear" field-type="Int" sort-field="EntranceYear"
+                        width="240"></f:render-field>
+                </f:columns>
+                <f:page-items>
+                    <f:button id="BusinessButton" text="业务按钮" on-click="BusinessButton_Click"></f:button>
+                </f:page-items>
+            </f:grid>
+            <br>
+            <f:button id="Button1" text="应用配置" on-click="Button1_Click" css-class="marginr"></f:button>
+            <f:button id="Button2" text="恢复配置" on-click="Button2_Click" css-class="marginr"></f:button>
+            <f:button id="Button3" text="读取当前配置" on-click="Button3_Click" css-class="marginr"></f:button>
+            <f:button id="Button4" text="清空列" on-click="Button4_Click"></f:button>
+            <f:button id="Button5" text="仅修改列宽和对齐" on-click="Button5_Click"></f:button>
+            <br><br>
+            <f:label id="LabelResult" text="修改后再次回发，核对后台取得的当前配置。"></f:label>
+
+            <p>用列集合直接替换为多表头，也可清空后恢复。这里使用已有字段，不重新查询数据；增加新的业务字段时应重新绑定。</p>
+        </th:block>
+    </body>
+
+</html>

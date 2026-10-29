@@ -5,7 +5,6 @@ import com.fineui.java.core.FineUIPage;
 import com.fineui.java.core.controls.DropDownList;
 import com.fineui.java.core.controls.Grid;
 import com.fineui.java.core.controls.GridColumn;
-import com.fineui.java.core.controls.GridConfigOptions;
 import com.fineui.java.core.controls.GroupField;
 import com.fineui.java.core.controls.RenderCheckField;
 import com.fineui.java.core.controls.RenderField;
@@ -29,6 +28,14 @@ public class DynamicColumnsPostBack extends PageBase {
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
             loadData();
+        } else {
+            // 动态列的函数名由本页固定提供；补齐显示行为不需要重新读取或绑定数据。
+            for (String[] entry : new String[][] {
+                    {"Gender", "renderGender"}, {"Major", "renderMajor"}, {"Group", "renderGroup"}}) {
+                if (Grid1.findColumn(entry[0]) instanceof RenderField field) {
+                    field.setRendererFunction(entry[1]);
+                }
+            }
         }
     }
 
@@ -39,15 +46,22 @@ public class DynamicColumnsPostBack extends PageBase {
     private void loadData() {
         if ("table1".equals(DropDownList1.getSelectedValue())) {
             Grid1.setTitle("表格一（单选，行扩展列）");
-            Grid1.configColumns(createTable1Columns(), new GridConfigOptions()
-                    .setDataIdField("Id").setDataTextField("Name")
-                    .setEnableCheckBoxSelect(false).setEnableMultiSelect(false), DynamicColumnsData.studentRows());
+            Grid1.setColumns(createTable1Columns());
+            Grid1.setDataIdField("Id");
+            Grid1.setDataTextField("Name");
+            Grid1.setEnableCheckBoxSelect(false);
+            Grid1.setEnableMultiSelect(false);
+            Grid1.setDataSource(DynamicColumnsData.studentRows());
         } else {
             Grid1.setTitle("表格二（多选，多表头，全选列）");
-            Grid1.configColumns(createTable2Columns(), new GridConfigOptions()
-                    .setDataIdField("Id").setDataTextField("Year")
-                    .setEnableCheckBoxSelect(true).setEnableMultiSelect(true), DynamicColumnsData.statisticsRows());
+            Grid1.setColumns(createTable2Columns());
+            Grid1.setDataIdField("Id");
+            Grid1.setDataTextField("Year");
+            Grid1.setEnableCheckBoxSelect(true);
+            Grid1.setEnableMultiSelect(true);
+            Grid1.setDataSource(DynamicColumnsData.statisticsRows());
         }
+        Grid1.dataBind();
     }
 
     private List<GridColumn> createTable1Columns() {

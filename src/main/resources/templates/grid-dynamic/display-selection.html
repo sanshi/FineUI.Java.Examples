@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · 修改表格显示与选择方式</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" title="修改表格显示与选择方式" show-header="true" show-border="true" is-fluid="true" height="400" data-id-field="Id" data-text-field="Name"
+                allow-paging="false" is-database-paging="false" is-database-sorting="false" enable-multi-select="false" enable-alternate-row-color="false"
+                paging-toolbar-visible="true">
+                <f:columns>
+                    <f:render-field column-id="Name" header-text="姓名" data-field="Name" sort-field="Name" width="220"></f:render-field>
+                    <f:render-field column-id="EntranceYear" header-text="入学年份" data-field="EntranceYear" field-type="Int" sort-field="EntranceYear"
+                        width="240"></f:render-field>
+                </f:columns>
+                <f:page-items>
+                    <f:button id="BusinessButton" text="业务按钮" on-click="BusinessButton_Click"></f:button>
+                </f:page-items>
+            </f:grid>
+            <br>
+            <f:button id="Button1" text="应用配置" on-click="Button1_Click" css-class="marginr"></f:button>
+            <f:button id="Button2" text="恢复配置" on-click="Button2_Click" css-class="marginr"></f:button>
+            <f:button id="Button3" text="读取当前配置" on-click="Button3_Click" css-class="marginr"></f:button>
+            <br><br>
+            <f:label id="LabelResult" text="修改后再次回发，核对后台取得的当前配置。"></f:label>
+
+            <p>直接设置表格属性即可改变选择列和外观，不需要重新赋值 Columns 或绑定数据。可先选中多行，再切回单选。</p>
+        </th:block>
+    </body>
+
+</html>
