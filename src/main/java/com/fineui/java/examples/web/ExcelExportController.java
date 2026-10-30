@@ -84,7 +84,7 @@ public class ExcelExportController {
             td(sb, Boolean.TRUE.equals(row.get("AtSchool")) ? "√" : "×");
             td(sb, row.get("Major"));
             tdImage(sb, "/res/images/16/" + row.get("Group") + ".png");
-            td(sb, scores.has(rowId) ? scores.get(rowId).asText() : "");
+            td(sb, scores.has(rowId) ? scores.get(rowId).asString() : "");
             sb.append("</tr>");
         }
         sb.append("</table>");
@@ -95,18 +95,18 @@ public class ExcelExportController {
     @PostMapping("/grid/excel-row-command-download/export")
     public ResponseEntity<byte[]> exportRow(@RequestParam(required = false) String content) {
         JsonNode rowData = readJson(content);
-        String rowId = rowData.path("id").asText("");
+        String rowId = rowData.path("id").asString("");
         int rowIndex = rowData.path("index").asInt(0);
         JsonNode v = rowData.path("values");
         StringBuilder sb = new StringBuilder();
         sb.append("你点击了第 ").append(rowIndex + 1).append(" 行，数据如下：\n");
         sb.append("ID：").append(rowId).append('\n');
-        sb.append("姓名：").append(v.path("Name").asText("")).append('\n');
-        sb.append("性别：").append("1".equals(v.path("Gender").asText("")) ? "男" : "女").append('\n');
-        sb.append("入学年份：").append(v.path("EntranceYear").asText("")).append('\n');
+        sb.append("姓名：").append(v.path("Name").asString("")).append('\n');
+        sb.append("性别：").append("1".equals(v.path("Gender").asString("")) ? "男" : "女").append('\n');
+        sb.append("入学年份：").append(v.path("EntranceYear").asString("")).append('\n');
         sb.append("是否在校：").append(v.path("AtSchool").asBoolean(false) ? "是" : "否").append('\n');
-        sb.append("所学专业：").append(v.path("Major").asText("")).append('\n');
-        sb.append("分组：").append(v.path("Group").asText(""));
+        sb.append("所学专业：").append(v.path("Major").asString("")).append('\n');
+        sb.append("分组：").append(v.path("Group").asString(""));
         byte[] bytes = sb.toString().getBytes(StandardCharsets.UTF_8);
         // 文件名只保留安全字符（防 Content-Disposition 头注入：行 id 来自客户端）
         String safeRowId = rowId.replaceAll("[^A-Za-z0-9_-]", "");
@@ -149,7 +149,7 @@ public class ExcelExportController {
                         .append(rowspan != 1 ? " rowspan=\"" + rowspan + "\"" : "")
                         .append(colspan != 1 ? " colspan=\"" + colspan + "\"" : "")
                         .append(colspan != 1 ? " style=\"text-align:center;\"" : "")
-                        .append(">").append(escapeHtml(column.path("text").asText(""))).append("</th>");
+                        .append(">").append(escapeHtml(column.path("text").asString(""))).append("</th>");
             }
             sb.append("</tr>");
         }
@@ -178,7 +178,7 @@ public class ExcelExportController {
         Set<String> pick = new LinkedHashSet<>();
         if (selected.isArray()) {
             for (JsonNode name : selected) {
-                pick.add(name.asText());
+                pick.add(name.asString());
             }
         }
         StringBuilder sb = new StringBuilder(META);

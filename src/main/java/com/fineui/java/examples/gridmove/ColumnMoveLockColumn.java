@@ -40,12 +40,12 @@ public class ColumnMoveLockColumn extends PageBase {
 
             List<String> columnIds = new ArrayList<>();
             for (JsonNode id : p.path("columnIds")) {
-                columnIds.add(id.asText());
+                columnIds.add(id.asString());
             }
 
             List<String> lockedColumnIds = new ArrayList<>();
             for (JsonNode id : p.path("lockedColumnIds")) {
-                lockedColumnIds.add(id.asText());
+                lockedColumnIds.add(id.asString());
             }
 
             // 模拟操作数据库中的数据

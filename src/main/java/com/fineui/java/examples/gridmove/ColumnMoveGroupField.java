@@ -65,7 +65,7 @@ public class ColumnMoveGroupField extends PageBase {
     private void applyOrders(JsonNode savedColumns) {
         int order = 0;
         for (JsonNode column : savedColumns) {
-            GridColumn found = findColumn(Grid1.getColumns(), column.path("columnId").asText());
+            GridColumn found = findColumn(Grid1.getColumns(), column.path("columnId").asString());
             if (found != null) {
                 found.setColumnOrder(order);
             }

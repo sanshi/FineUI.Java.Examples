@@ -21,6 +21,6 @@ abstract class WebUploaderPageBase extends PageBase {
     }
 
     private static String rowId(JsonNode row) {
-        return row.isTextual() ? row.asText() : row.path("id").asText();
+        return row.isString() ? row.asString() : row.path("id").asString();
     }
 }

@@ -52,12 +52,12 @@ public class SelectFromWindow extends PageBase {
             JsonNode values = mergedRow.path("values");
             Map<String, Object> row = new LinkedHashMap<>();
             row.put("Id", rowIndex);
-            row.put("Name", values.path("Name").asText(""));
+            row.put("Name", values.path("Name").asString(""));
             row.put("EntranceYear", values.path("EntranceYear").asInt());
             row.put("AtSchool", values.path("AtSchool").asBoolean());
-            row.put("Major", values.path("Major").asText(""));
+            row.put("Major", values.path("Major").asString(""));
             row.put("Gender", values.path("Gender").asInt());
-            row.put("EntranceDate", values.path("EntranceDate").asText(""));
+            row.put("EntranceDate", values.path("EntranceDate").asString(""));
             newTable.add(row);
             rowIndex++;
         }

@@ -23,7 +23,7 @@ class ThirdPartyEditorPageBaseTest {
     }
 
     @Test
-    void pageGetDisablesCspSeededByGlobalConfiguration() {
+    void pageInitDisablesCspSeededByGlobalConfiguration() {
         Probe page = new Probe();
         PageContext.begin(page, false, "editor/probe");
         new PageManager()
@@ -32,7 +32,7 @@ class ThirdPartyEditorPageBaseTest {
                 .cspScriptsAllowUnsafeInline(false)
                 .cspScriptsAllowUnsafeEval(false);
 
-        PageLifecycle.invokePageGet(page);
+        PageLifecycle.invokePageInit(page);
 
         CspConfig csp = PageContext.current().csp();
         assertFalse(csp.isCspScripts());

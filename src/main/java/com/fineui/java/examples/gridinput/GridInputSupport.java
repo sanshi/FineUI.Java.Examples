@@ -25,7 +25,7 @@ final class GridInputSupport {
 
     private static String text(JsonNode item, int i) {
         JsonNode v = item != null && item.isArray() && item.size() > i ? item.get(i) : null;
-        return v == null || v.isNull() ? "" : v.asText();
+        return v == null || v.isNull() ? "" : v.asString();
     }
 
     // 「用户输入值」列：数组（如复选列的多个选中值）用逗号连接，否则原样文本。
@@ -40,11 +40,11 @@ final class GridInputSupport {
                 if (sb.length() > 0) {
                     sb.append(", ");
                 }
-                sb.append(e.asText());
+                sb.append(e.asString());
             }
             return sb.toString();
         }
-        return v.asText();
+        return v.asString();
     }
 
     // HTML 转义（用户输入回显进结果表格，防注入）。

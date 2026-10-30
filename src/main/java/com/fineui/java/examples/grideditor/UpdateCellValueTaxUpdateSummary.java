@@ -54,7 +54,7 @@ public class UpdateCellValueTaxUpdateSummary extends PageBase {
 
                 Map<String, Object> newRow = new LinkedHashMap<>();
                 newRow.put("Id", rowIndex);   // 实际项目中请使用数据库中的自增长主键，无需设置此列的值
-                newRow.put("Name", values.path("Name").asText(null));
+                newRow.put("Name", values.path("Name").asString(null));
                 newRow.put("Price", numberOrNull(values.path("Price")));
                 newRow.put("PriceWithTax", numberOrNull(values.path("PriceWithTax")));
                 newRow.put("Tax", numberOrNull(values.path("Tax")));

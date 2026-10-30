@@ -28,8 +28,8 @@ public class RowCommandPostBackCrc extends PageBase {
             showNotify(String.format("你点击了第 %d 行，第 %d 列，行ID：%s，姓名：%s",
                     p.path("rowIndex").asInt() + 1,
                     p.path("columnIndex").asInt() + 1,
-                    p.path("rowId").asText(),
-                    p.path("rowText").asText()));
+                    p.path("rowId").asString(),
+                    p.path("rowText").asString()));
         }
     }
 }

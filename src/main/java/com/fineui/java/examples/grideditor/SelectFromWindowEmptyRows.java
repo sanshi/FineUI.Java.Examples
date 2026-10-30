@@ -94,7 +94,7 @@ public class SelectFromWindowEmptyRows extends PageBase {
         if (n.isMissingNode() || n.isNull()) {
             return "";
         }
-        return n.asText("");
+        return n.asString("");
     }
 
     /**

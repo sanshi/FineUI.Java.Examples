@@ -40,7 +40,7 @@ public class SaveLockedAndOrder extends PageBase {
             if (arr.isArray()) {
                 for (JsonNode c : arr) {
                     Map<String, Object> m = new LinkedHashMap<>();
-                    m.put("ColumnID", c.path("ColumnID").asText());
+                    m.put("ColumnID", c.path("ColumnID").asString());
                     m.put("Locked", c.path("Locked").asBoolean(false));
                     saved.add(m);
                 }

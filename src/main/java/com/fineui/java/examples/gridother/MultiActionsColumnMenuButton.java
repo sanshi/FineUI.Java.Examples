@@ -32,12 +32,12 @@ public class MultiActionsColumnMenuButton extends PageBase {
         if ("Grid1_CustomDelete".equals(e.getEventName())) {
             JsonNode p = Json.parse(e.getArgument());
             showNotify(String.format("你点击了第 %d 行的删除按钮，行ID：%s，姓名：%s",
-                    p.path("rowIndex").asInt() + 1, p.path("rowId").asText(), p.path("rowText").asText()));
+                    p.path("rowIndex").asInt() + 1, p.path("rowId").asString(), p.path("rowText").asString()));
         } else if ("Grid1_CustomEdit".equals(e.getEventName())) {
             JsonNode p = Json.parse(e.getArgument());
             showNotify(String.format("你点击了第 %d 行的菜单项 %s，行ID：%s，姓名：%s",
-                    p.path("rowIndex").asInt() + 1, p.path("actionName").asText(),
-                    p.path("rowId").asText(), p.path("rowText").asText()));
+                    p.path("rowIndex").asInt() + 1, p.path("actionName").asString(),
+                    p.path("rowId").asString(), p.path("rowText").asString()));
         }
     }
 

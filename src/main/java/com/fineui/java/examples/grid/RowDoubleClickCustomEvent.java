@@ -26,7 +26,7 @@ public class RowDoubleClickCustomEvent extends PageBase {
         if ("Grid1_RowDblClick".equals(e.getEventName())) {
             JsonNode p = Json.parse(e.getArgument());
             showNotify(String.format("你双击了第 %d 行，行ID：%s，姓名：%s，列：%s",
-                    p.path("rowIndex").asInt() + 1, p.path("rowId").asText(), p.path("rowText").asText(), p.path("columnText").asText()));
+                    p.path("rowIndex").asInt() + 1, p.path("rowId").asString(), p.path("rowText").asString(), p.path("columnText").asString()));
         }
     }
 }

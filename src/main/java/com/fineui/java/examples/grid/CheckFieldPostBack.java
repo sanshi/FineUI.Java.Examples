@@ -29,7 +29,7 @@ public class CheckFieldPostBack extends PageBase {
         if ("Grid1_CheckFieldChanged".equals(e.getEventName())) {
             JsonNode p = Json.parse(e.getArgument());
             showNotify(String.format("你点击了的行ID：%s，姓名：%s，是否在校：%s",
-                    p.path("rowId").asText(), p.path("rowText").asText(),
+                    p.path("rowId").asString(), p.path("rowText").asString(),
                     p.path("isChecked").asBoolean() ? "是" : "否"));
         }
     }

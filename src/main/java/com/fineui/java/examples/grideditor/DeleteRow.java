@@ -51,7 +51,7 @@ public class DeleteRow extends PageBase {
 
         if (selectedRows != null && selectedRows.isArray()) {
             for (JsonNode rowId : selectedRows) {
-                deleteRowById(source, rowId.asText());
+                deleteRowById(source, rowId.asString());
             }
         }
 

@@ -34,7 +34,7 @@ public class CheckBox extends PageBase {
                 StringBuilder sb = new StringBuilder("复选框选中的值：<ul>");
                 for (JsonNode node : rows) {
                     sb.append(String.format("<li>%s（%s）</li>",
-                            node.path("text").asText(), node.path("id").asText()));
+                            node.path("text").asString(), node.path("id").asString()));
                 }
                 sb.append("</ul>");
                 labResult.setText(sb.toString());

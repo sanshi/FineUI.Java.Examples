@@ -41,9 +41,9 @@ public class RightSaveLockedAndOrderColumnMove extends PageBase {
             List<Map<String, Object>> saved = new ArrayList<>();
             for (JsonNode c : arr) {
                 Map<String, Object> m = new LinkedHashMap<>();
-                m.put("ColumnID", c.path("ColumnID").asText());
+                m.put("ColumnID", c.path("ColumnID").asString());
                 m.put("Locked", c.path("Locked").asBoolean(false));
-                m.put("LockedPosition", c.path("LockedPosition").asText(""));
+                m.put("LockedPosition", c.path("LockedPosition").asString(""));
                 saved.add(m);
             }
             session().setAttribute(SESSION_KEY, saved);

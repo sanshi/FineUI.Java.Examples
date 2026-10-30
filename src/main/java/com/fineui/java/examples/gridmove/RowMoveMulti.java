@@ -36,7 +36,7 @@ public class RowMoveMulti extends PageBase {
             JsonNode p = Json.parse(e.getArgument());
             List<String> rowIds = new ArrayList<>();
             for (JsonNode id : p.path("rowIds")) {
-                rowIds.add(id.asText());
+                rowIds.add(id.asString());
             }
             session().setAttribute(SESSION_KEY, rowIds);
             showNotify("数据保存成功！");

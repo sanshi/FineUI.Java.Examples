@@ -64,7 +64,7 @@ public class FormWindow extends PageBase {
         if ("Grid1_DeleteRows".equals(e.getEventName())) {
             JsonNode selectedRows = Json.parse(e.getArgument()).path("selectedRows");
             for (JsonNode rowId : selectedRows) {
-                deleteRowById(sourceData(), rowId.asText());
+                deleteRowById(sourceData(), rowId.asString());
             }
 
             bindGrid();

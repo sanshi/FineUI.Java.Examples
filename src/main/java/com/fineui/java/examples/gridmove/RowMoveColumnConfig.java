@@ -81,8 +81,8 @@ public class RowMoveColumnConfig extends PageBase {
             JsonNode arr = Json.parse(e.getArgument()).path("configedColumns");
             List<Map<String, Object>> saved = new ArrayList<>();
             for (JsonNode c : arr) {
-                saved.add(col(c.path("ColumnID").asText(), c.path("Hidden").asBoolean(false),
-                        c.path("HeaderText").asText("")));
+                saved.add(col(c.path("ColumnID").asString(), c.path("Hidden").asBoolean(false),
+                        c.path("HeaderText").asString("")));
             }
             session().setAttribute(SESSION_KEY, saved);
         }

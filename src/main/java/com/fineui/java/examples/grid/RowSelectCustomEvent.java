@@ -27,7 +27,7 @@ public class RowSelectCustomEvent extends PageBase {
             JsonNode p = Json.parse(e.getArgument());
             showNotify(String.format("你%s了第 %d 行，行ID：%s，姓名：%s，列：%s",
                     p.path("isDeselect").asBoolean() ? "取消选中" : "选中",
-                    p.path("rowIndex").asInt() + 1, p.path("rowId").asText(), p.path("rowText").asText(), p.path("columnText").asText()));
+                    p.path("rowIndex").asInt() + 1, p.path("rowId").asString(), p.path("rowText").asString(), p.path("columnText").asString()));
         }
     }
 }

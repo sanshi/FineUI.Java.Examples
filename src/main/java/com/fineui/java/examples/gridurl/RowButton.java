@@ -24,7 +24,7 @@ public class RowButton extends PageBase {
         if ("Grid1_CustomEvent".equals(e.getEventName())) {
             JsonNode param = Json.parse(e.getArgument());
 
-            String eventType = param.path("eventType").asText();
+            String eventType = param.path("eventType").asString();
             String eventTypeStr = "";
             if ("edit".equals(eventType)) {
                 eventTypeStr = "编辑";
@@ -35,8 +35,8 @@ public class RowButton extends PageBase {
             showNotify(String.format("你点击了第 %d 行的 %s 按钮，行ID：%s，姓名：%s",
                     param.path("rowIndex").asInt() + 1,
                     eventTypeStr,
-                    param.path("rowId").asText(),
-                    param.path("rowText").asText()));
+                    param.path("rowId").asString(),
+                    param.path("rowText").asString()));
         }
     }
 }

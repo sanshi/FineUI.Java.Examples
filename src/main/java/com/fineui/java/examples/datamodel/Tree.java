@@ -30,8 +30,8 @@ public class Tree extends PageBase {
         JsonNode nodes = Json.parse(e.getArgument());
         if (nodes.isArray()) {
             for (JsonNode node : nodes) {
-                html.append("<li>").append(escape(node.path("NodeText").asText()))
-                        .append("（").append(escape(node.path("NodeId").asText())).append("）</li>");
+                html.append("<li>").append(escape(node.path("NodeText").asString()))
+                        .append("（").append(escape(node.path("NodeId").asString())).append("）</li>");
                 count++;
             }
         }

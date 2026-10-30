@@ -36,8 +36,8 @@ public class RowMoveBetween2Grid extends PageBase {
         StringBuilder sb = new StringBuilder();
         sb.append("<ul>");
         for (JsonNode item : columnNames) {
-            sb.append("<li>ID:").append(item.path("id").asText())
-                    .append(" Name:").append(item.path("name").asText()).append("</li>");
+            sb.append("<li>ID:").append(item.path("id").asString())
+                    .append(" Name:").append(item.path("name").asString()).append("</li>");
         }
         sb.append("</ul>");
 

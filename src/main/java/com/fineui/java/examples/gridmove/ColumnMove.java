@@ -39,7 +39,7 @@ public class ColumnMove extends PageBase {
             JsonNode columnIds = Json.parse(json).path("columnIds");
             int order = 0;
             for (JsonNode columnId : columnIds) {
-                GridColumn found = Grid1.getColumnById(columnId.asText());
+                GridColumn found = Grid1.getColumnById(columnId.asString());
                 if (found != null) {
                     found.setColumnOrder(order);
                 }

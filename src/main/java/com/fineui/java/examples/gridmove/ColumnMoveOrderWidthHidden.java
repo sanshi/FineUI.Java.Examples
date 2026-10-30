@@ -52,7 +52,7 @@ public class ColumnMoveOrderWidthHidden extends PageBase {
         JsonNode columns = Json.parse(json).path("columnIds");
         int order = 0;
         for (JsonNode column : columns) {
-            GridColumn found = Grid1.getColumnById(column.path("columnId").asText());
+            GridColumn found = Grid1.getColumnById(column.path("columnId").asString());
             if (found != null) {
                 found.setColumnOrder(order);
                 if (column.path("hidden").asBoolean(false)) {

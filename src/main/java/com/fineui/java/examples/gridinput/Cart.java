@@ -40,7 +40,7 @@ public class Cart extends PageBase {
                         total += price * number;
                         count += number;   // 数量求和，而非选中行数
                         sb.append(String.format("<li>%s（单价：¥%.2f，数量：%d）</li>",
-                                item.get(1).asText(), price, number));
+                                item.get(1).asString(), price, number));
                     }
                 }
             }

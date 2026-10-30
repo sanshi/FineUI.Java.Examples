@@ -35,8 +35,8 @@ public class SaveLocked extends PageBase {
     public void Page_CustomEvent(Object sender, CustomEventArgs e) {
         if ("Grid1_ColumnLockUnlock".equals(e.getEventName())) {
             JsonNode p = Json.parse(e.getArgument());
-            String type = p.path("type").asText();
-            String columnId = p.path("columnId").asText();
+            String type = p.path("type").asString();
+            String columnId = p.path("columnId").asString();
             List<String> locked = lockedColumns();
             if ("lock".equals(type)) {
                 if (!locked.contains(columnId)) {
