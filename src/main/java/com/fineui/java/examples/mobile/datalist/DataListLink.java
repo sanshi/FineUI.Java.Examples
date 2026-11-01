@@ -33,7 +33,7 @@ public class DataListLink extends MobilePageBase {
             String name = String.valueOf(row.get("Name"));
             String navigateUrl = "http://baike.baidu.com/item/" + URLEncoder.encode(name, StandardCharsets.UTF_8);
             DataList1.addItem(new RawHtml(DATALIST_ITEM_TEMPLATE, iconUrl, name, row.get("Desc")),
-                    null, true, false, null, navigateUrl, "_blank", true);
+                    String.valueOf(row.get("Id")), true, false, null, navigateUrl, "_blank", true);
         }
     }
 }

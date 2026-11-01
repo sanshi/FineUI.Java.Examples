@@ -39,12 +39,12 @@ public class DataListLinkToPanelGroupArrow extends MobilePageBase {
             if ("中国".equals(name)) {
                 // 中国项：特殊模板、不设链接与箭头（不可点进详情）
                 DataList1.addItem(new RawHtml(DATALIST_ITEM_TEMPLATE_CHINA, iconUrl, name, row.get("Desc")),
-                        null, true, false, groupName, null, null, false);
+                        String.valueOf(row.get("Id")), true, false, groupName, null, null, false);
             } else {
                 // 其余项：用普通占位地址保留链接语义，仅欧洲组显示右侧箭头。
                 boolean showArrow = "欧洲".equals(groupName);
                 DataList1.addItem(new RawHtml(DATALIST_ITEM_TEMPLATE, iconUrl, name, row.get("Desc")),
-                        null, true, false, groupName, "#", null, showArrow);
+                        String.valueOf(row.get("Id")), true, false, groupName, "#", null, showArrow);
             }
         }
     }

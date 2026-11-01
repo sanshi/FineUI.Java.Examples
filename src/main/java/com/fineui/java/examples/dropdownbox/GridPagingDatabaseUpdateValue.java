@@ -10,7 +10,6 @@ import com.fineui.java.examples.code.PageBase;
 import com.fineui.java.examples.code.StudentGridData2;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * 下拉表格（数据库分页，后台更新选中值，路由 {@code drop-down-box/grid-paging-database-update-value}）：
@@ -57,7 +56,6 @@ public class GridPagingDatabaseUpdateValue extends PageBase {
     }
 
     public void btnClearValue_Click(Object sender, EventArgs e) {
-        DropDownBox1.setText("");
-        DropDownBox1.setValues(Collections.emptyList());
+        DropDownBox1.clearSelection();
     }
 }

@@ -37,7 +37,7 @@ public class DataListMore extends MobilePageBase {
         for (Map<String, Object> row : getDataByIndex(0)) {
             String iconUrl = IconHelper.resolveUrl("/res/icon/flag_" + row.get("Image") + ".png");
             DataList1.addItem(new RawHtml(DATALIST_ITEM_TEMPLATE, iconUrl, row.get("Name"), row.get("Desc")),
-                    null, true, false, null, null, null, false);
+                    String.valueOf(row.get("Id")), true, false, null, null, null, false);
         }
     }
 
@@ -60,7 +60,7 @@ public class DataListMore extends MobilePageBase {
             for (Map<String, Object> row : getDataByIndex(dataIndex)) {
                 String iconUrl = IconHelper.resolveUrl("/res/icon/flag_" + row.get("Image") + ".png");
                 RawHtml text = new RawHtml(DATALIST_ITEM_TEMPLATE, iconUrl, row.get("Name"), row.get("Desc"));
-                batch.add(DataList1.createItem(text, null, true, null, null, null, false));
+                batch.add(DataList1.createItem(text, String.valueOf(row.get("Id")), true, null, null, null, false));
             }
             // AppendData：在列表末尾追加一批（不重绑整表）
             DataList1.appendData(batch);

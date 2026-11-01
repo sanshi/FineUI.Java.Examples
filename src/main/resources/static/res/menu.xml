@@ -578,6 +578,10 @@
 			</TreeNode>
 		</TreeNode>
 		<TreeNode Text="杂项">
+			<TreeNode Text="统一清空选择" NavigateUrl="/form/clear-selection">
+			</TreeNode>
+			<TreeNode Text="下拉列表赋值顺序" NavigateUrl="/form/drop-down-list-assignment-order">
+			</TreeNode>
 			<TreeNode Text="重置表单" NavigateUrl="/form/form-reset">
 			</TreeNode>
 			<TreeNode Text="动态创建表单元素" NavigateUrl="/form/form-dynamic">

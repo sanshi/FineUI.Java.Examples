@@ -50,7 +50,7 @@ public class DataListSelectedValue extends MobilePageBase {
 
     /** 服务端清空选择。 */
     public void btnClearSelection_Click(Object sender, EventArgs e) {
-        DataList1.setSelectedValue(null);
+        DataList1.clearSelection();
     }
 
     /** 倒序重绑同一批列表项，并选中美国。 */

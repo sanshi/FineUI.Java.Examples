@@ -22,8 +22,8 @@ public class ClearSelectionBeforePaging extends PageBase {
         Grid1.selectCell("106", "Name");
     }
 
-    public void btnClearSelections_Click(Object sender, EventArgs e) {
-        Grid1.clearSelections();
+    public void btnClearSelection_Click(Object sender, EventArgs e) {
+        Grid1.clearSelection();
     }
 
     public void btnReadSelection_Click(Object sender, EventArgs e) {

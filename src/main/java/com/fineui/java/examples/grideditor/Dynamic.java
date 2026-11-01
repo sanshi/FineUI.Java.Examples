@@ -51,9 +51,7 @@ public class Dynamic extends PageBase {
     }
 
     public void btnSubmit_Click(Object sender, EventArgs e) {
-        // 页面每次请求都是全新的对象，回发时需重建列，dataBind 才能按列解析出要序列化的字段
-        buildColumns();
-
+        // 当前动态列和编辑器已从回发状态恢复，保存时直接复用，避免重新替换正在使用的编辑列。
         List<Map<String, Object>> source = sourceData();
 
         for (Map<String, Object> modifiedRow : Grid1.getModifiedData()) {

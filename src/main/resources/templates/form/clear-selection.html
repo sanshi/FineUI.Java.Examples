@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>统一清空选择</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel id="Panel1" is-fluid="true" max-width="1000" layout="Block" block-config-space="20" show-header="false" show-border="false">
+                <f:items>
+                    <f:panel id="PanelActions" block="12" show-header="false" show-border="false">
+                        <f:items>
+                            <f:button id="btnClearSelection" text="清空全部选择" on-click="btnClearSelection_Click" css-class="marginr marginb" />
+                            <f:button id="btnClearAndSelect" text="清空后重新选中甲" on-click="btnClearAndSelect_Click" css-class="marginr marginb" />
+                            <f:button id="btnReadSelection" text="读取当前选择" on-click="btnReadSelection_Click" css-class="marginb" />
+                        </f:items>
+                    </f:panel>
+                    <f:panel id="PanelResult" block="12" title="后台读取结果" show-header="true" show-border="true" body-padding="10">
+                        <f:items>
+                            <f:label id="labResult" show-label="false" text="请先清空，再读取当前选择。" />
+                        </f:items>
+                    </f:panel>
+
+                    <f:grid id="Grid1" block="12" block-md="6" height="220" title="表格（Grid）" show-header="true" show-border="true" data-id-field="Id"
+                        data-text-field="Name" enable-check-box-select="true" enable-multi-select="true" selected-row-id-array="a,b"
+                        row-data-bound-function="onGridRowDataBound">
+                        <f:columns>
+                            <f:render-field column-id="Name" data-field="Name" header-text="名称" expand-unused-space="true" />
+                        </f:columns>
+                    </f:grid>
+                    <f:tree id="Tree1" block="12" block-md="6" height="220" title="树（Tree）" show-header="true" show-border="true" enable-multi-select="true"
+                        enable-check-box="true" selected-node-id-array="a,b">
+                        <f:nodes>
+                            <f:tree-node node-id="root" text="分组" expanded="true" enable-check-box="false">
+                                <f:tree-node node-id="a" text="甲" checked="true" />
+                                <f:tree-node node-id="b" text="乙（不可选）" selectable="false" />
+                            </f:tree-node>
+                        </f:nodes>
+                        <f:toolbars>
+                            <f:toolbar id="ToolbarTree" position="Bottom">
+                                <f:items>
+                                    <f:button id="btnUncheckNodes" text="取消树节点勾选" on-click="btnUncheckNodes_Click" />
+                                </f:items>
+                            </f:toolbar>
+                        </f:toolbars>
+                    </f:tree>
+
+                    <f:simple-form id="SimpleFormDropDownList" block="12" block-md="6" title="下拉列表（DropDownList）" show-header="true" show-border="true"
+                        body-padding="10">
+                        <f:items>
+                            <f:drop-down-list id="DropDownList1" label="下拉列表" show-label="false" enable-multi-select="true" multi-select-mode="Tags">
+                                <f:items>
+                                    <f:list-item value="a" text="甲" selected="true" />
+                                    <f:list-item value="b" text="乙" selected="true" />
+                                </f:items>
+                            </f:drop-down-list>
+                        </f:items>
+                    </f:simple-form>
+                    <f:simple-form id="SimpleFormDropDownBox" block="12" block-md="6" title="下拉选择框（DropDownBox）" show-header="true" show-border="true"
+                        body-padding="10">
+                        <f:items>
+                            <f:drop-down-box id="DropDownBox1" label="下拉选择框" show-label="false" data-control-id="CheckBoxList2" enable-multi-select="true"
+                                multi-select-mode="Tags" enable-edit="true" values="a,b" texts="甲,乙">
+                                <f:pop-panel>
+                                    <f:simple-form id="SimpleForm1" hidden="true" show-header="false" body-padding="10">
+                                        <f:items>
+                                            <f:check-box-list id="CheckBoxList2" auto-column-width="true">
+                                                <f:items>
+                                                    <f:check-item value="a" text="甲" />
+                                                    <f:check-item value="b" text="乙" />
+                                                </f:items>
+                                            </f:check-box-list>
+                                        </f:items>
+                                    </f:simple-form>
+                                </f:pop-panel>
+                            </f:drop-down-box>
+                        </f:items>
+                    </f:simple-form>
+
+                    <f:panel id="PanelDataList" block="12" block-md="6" title="数据列表（DataList）" show-header="true" show-border="true" body-padding="10">
+                        <f:items>
+                            <f:data-list id="DataList1" enable-select="true" enable-multi-select="true" selected-value-array="a,b">
+                                <f:items>
+                                    <f:data-list-item value="a" text="甲" />
+                                    <f:data-list-item value="b" text="乙（不可选）" enable-select="false" />
+                                </f:items>
+                            </f:data-list>
+                        </f:items>
+                    </f:panel>
+                    <f:simple-form id="SimpleFormCheckBoxList" block="12" block-md="6" title="复选框列表（CheckBoxList）" show-header="true" show-border="true"
+                        body-padding="10">
+                        <f:items>
+                            <f:check-box-list id="CheckBoxList1" label="复选框列表" show-label="false" auto-column-width="true">
+                                <f:items>
+                                    <f:check-item value="a" text="甲" selected="true" />
+                                    <f:check-item value="b" text="乙（禁用）" selected="true" enabled="false" />
+                                </f:items>
+                            </f:check-box-list>
+                        </f:items>
+                    </f:simple-form>
+                    <f:simple-form id="SimpleFormRadioButtonList" block="12" block-md="6" title="单选框列表（RadioButtonList）" show-header="true" show-border="true"
+                        body-padding="10">
+                        <f:items>
+                            <f:radio-button-list id="RadioButtonList1" label="单选框列表" show-label="false" auto-column-width="true">
+                                <f:items>
+                                    <f:radio-item value="a" text="甲" selected="true" />
+                                    <f:radio-item value="b" text="乙" />
+                                </f:items>
+                            </f:radio-button-list>
+                        </f:items>
+                    </f:simple-form>
+                </f:items>
+            </f:panel>
+            <br />
+            <p>七类控件都使用 clearSelection 清空选择，数据保留，禁用项的旧选择也会清除。</p>
+            <p>树的清空选择只取消节点高亮，保留节点勾选和展开状态；取消勾选请使用树区域内的按钮。</p>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onGridRowDataBound(rowData) {
+                    if (rowData.id === 'b') {
+                        rowData.unselectable = true;
+                    }
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

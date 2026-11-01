@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>下拉列表赋值顺序</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:simple-form id="SimpleForm1" is-fluid="true" max-width="600" title="可编辑下拉列表" show-header="true" show-border="true" body-padding="10"
+                label-width="100">
+                <f:items>
+                    <f:drop-down-list id="DropDownList2" label="当前选择" enable-edit="true" force-selection="false">
+                        <f:items>
+                            <f:list-item value="a" text="甲" selected="true" />
+                            <f:list-item value="b" text="乙" />
+                        </f:items>
+                    </f:drop-down-list>
+                </f:items>
+                <f:toolbars>
+                    <f:toolbar id="Toolbar1" position="Bottom">
+                        <f:items>
+                            <f:button id="btnValueThenText" text="清空后先赋值再写文字" on-click="btnValueThenText_Click" css-class="marginr" />
+                            <f:button id="btnTextThenValue" text="清空后先写文字再赋值" on-click="btnTextThenValue_Click" css-class="marginr" />
+                            <f:button id="btnReadDropDownList" text="读取赋值结果" on-click="btnReadDropDownList_Click" />
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+            </f:simple-form>
+            <br />
+            <f:simple-form id="SimpleFormResult" is-fluid="true" max-width="600" title="后台读取结果" show-header="true" show-border="true" body-padding="10">
+                <f:items>
+                    <f:label id="labResult" show-label="false" text="请先选择一种赋值顺序，再读取赋值结果。" />
+                </f:items>
+            </f:simple-form>
+            <br />
+            <p>可编辑下拉列表清空后，最后写文字表示自由输入，最后选值则显示对应选项。</p>
+            <p>先赋值再写文字：选中值为空，文字为“自定义输入”；先写文字再赋值：选中值为 a，文字为“甲”。</p>
+            <p>点击“读取赋值结果”，可核对下一次回发时后台收到的选中值和文字。</p>
+        </th:block>
+    </body>
+
+</html>

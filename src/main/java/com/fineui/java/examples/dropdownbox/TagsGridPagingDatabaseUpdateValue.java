@@ -57,7 +57,6 @@ public class TagsGridPagingDatabaseUpdateValue extends PageBase {
     }
 
     public void btnClearValue_Click(Object sender, EventArgs e) {
-        DropDownBox1.setText("");
-        DropDownBox1.setValues(List.of());
+        DropDownBox1.clearSelection();
     }
 }

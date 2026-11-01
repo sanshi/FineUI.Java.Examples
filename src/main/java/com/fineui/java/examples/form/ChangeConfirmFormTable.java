@@ -34,6 +34,8 @@ public class ChangeConfirmFormTable extends PageBase {
         SimpleForm1.clearDirty();
         // 读回表格的修改数据（本页只演示读回，不真正落库）
         Grid1.getModifiedData();
+        // 读取修改并确认保存后，提交当前行状态，离开页面时就不会继续提示这批已经保存的修改。
+        Grid1.commitChanges();
         showNotify("表单和表格提交成功！");
     }
 }
