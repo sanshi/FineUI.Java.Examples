@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+    <head>
+        <title>FineUI.Java · 回发时追加表单控件</title>
+    </head>
+    <body>
+        <th:block layout:fragment="body">
+            <f:button id="btnAdd" text="追加备注输入框和按钮" on-click="btnAdd_Click"></f:button>
+            <br />
+            <br />
+            <f:panel id="Panel1" title="新增控件区域" show-header="true" body-padding="10"></f:panel>
+            <f:label id="labResult" text="尚未追加控件"></f:label>
+            <ul class="compatibility-notes">
+                <li>点击追加后，后台创建备注输入框和提交按钮，立即放入上方面板。</li>
+                <li>输入备注并点击新增按钮提交，再修改备注并提交，观察结果及输入值。</li>
+                <li>重复点击追加不会创建同名控件；新按钮只在创建时登记事件。</li>
+            </ul>
+        </th:block>
+    </body>
+</html>

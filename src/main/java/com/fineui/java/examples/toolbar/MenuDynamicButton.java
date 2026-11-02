@@ -22,9 +22,6 @@ public class MenuDynamicButton extends PageBase {
     public void Page_Load(Object sender, EventArgs e) {
         if (!isPostBack()) {
             loadData();
-        } else {
-            // 动态控件的服务端事件映射不信任 __FSTATE，回发时必须由服务端重新声明。
-            btnDynamic.setOnClick("btnDynamic_Click");
         }
     }
 
