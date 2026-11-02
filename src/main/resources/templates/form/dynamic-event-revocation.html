@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+    <head>
+        <title>FineUI.Java · 动态事件的条件撤回</title>
+    </head>
+    <body>
+        <th:block layout:fragment="body">
+            <f:check-box id="cbxRevoke" text="本轮撤回动态按钮事件" show-label="false"></f:check-box>
+            <br />
+            <br />
+            <f:panel id="Panel1" title="首次加载时创建的动态按钮" show-header="true" body-padding="10"></f:panel>
+            <br />
+            <f:button id="btnReadCount" text="读取服务器处理次数" on-click="btnReadCount_Click"></f:button>
+            <br />
+            <br />
+            <f:label id="labCount" text="服务器处理次数：0"></f:label>
+            <br />
+            <br />
+            <f:label id="labResult" text="请先点击动态按钮，观察处理次数"></f:label>
+            <ul class="compatibility-notes">
+                <li>动态按钮仅首次绑定事件，回发无需重复登记。</li>
+                <li>勾选后每轮明确撤回事件，点击返回 HTTP 400；取消勾选后恢复。</li>
+                <li>读取服务器处理次数，确认拒绝时次数不增加。计数保存在 Session 中，刷新本页重置。</li>
+                <li>复选框仅模拟撤回条件，实际业务权限须由服务器判断并校验。</li>
+            </ul>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                F.beforeAjaxError(function (data, textStatus, xhr) {
+                    // 勾选撤回时的 HTTP 400 是本例的预期结果，直接显示在页面；其他错误仍走默认提示。
+                    if (xhr.status === 400 && F.ui.cbxRevoke.getValue()) {
+                        F.ui.labResult.setText('事件已撤回，服务器拒绝本次请求（HTTP 400）；请读取服务器处理次数核对');
+                        return false;
+                    }
+                });
+            </script>
+        </th:block>
+    </body>
+</html>

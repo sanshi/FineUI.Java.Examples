@@ -577,6 +577,12 @@
 			<TreeNode Text="表格样式（信息录入，不显示边框）" NavigateUrl="/form-table/table-style-layout-info-border">
 			</TreeNode>
 		</TreeNode>
+		<TreeNode Text="动态控件">
+			<TreeNode Text="动态创建表单元素" NavigateUrl="/form/form-dynamic">
+			</TreeNode>
+			<TreeNode Text="回发时追加表单控件" NavigateUrl="/form/form-dynamic-postback" />
+			<TreeNode Text="动态事件的条件撤回" NavigateUrl="/form/dynamic-event-revocation" />
+		</TreeNode>
 		<TreeNode Text="杂项">
 			<TreeNode Text="统一清空选择" NavigateUrl="/form/clear-selection">
 			</TreeNode>
@@ -584,9 +590,6 @@
 			</TreeNode>
 			<TreeNode Text="重置表单" NavigateUrl="/form/form-reset">
 			</TreeNode>
-			<TreeNode Text="动态创建表单元素" NavigateUrl="/form/form-dynamic">
-			</TreeNode>
-			<TreeNode Text="回发时追加表单控件" NavigateUrl="/form/form-dynamic-postback" />
 			<TreeNode Text="隐藏表单字段" NavigateUrl="/form/form-hide-field">
 			</TreeNode>
 			<TreeNode Text="禁用与只读" NavigateUrl="/form/form-disabled">
