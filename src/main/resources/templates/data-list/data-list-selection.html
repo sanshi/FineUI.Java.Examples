@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>数据列表：选择与清空</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel id="PanelDataListSingle" is-fluid="true" max-width="700" title="单选" show-border="true" body-padding="10" margin-bottom="20">
+                <f:items>
+                    <f:data-list id="DataListSingle" enable-select="true" selected-value="beijing">
+                        <f:items>
+                            <f:data-list-item value="beijing" text="北京" />
+                            <f:data-list-item value="shanghai" text="上海" />
+                            <f:data-list-item value="guangzhou" text="广州" />
+                        </f:items>
+                    </f:data-list>
+                </f:items>
+            </f:panel>
+            <f:panel id="PanelDataListMulti" is-fluid="true" max-width="700" title="多选" show-border="true" body-padding="10" margin-bottom="20">
+                <f:items>
+                    <f:data-list id="DataListMulti" enable-select="true" enable-multi-select="true" selected-value-array="beijing,shanghai">
+                        <f:items>
+                            <f:data-list-item value="beijing" text="北京" />
+                            <f:data-list-item value="shanghai" text="上海" />
+                            <f:data-list-item value="guangzhou" text="广州" />
+                        </f:items>
+                    </f:data-list>
+                </f:items>
+            </f:panel>
+            <f:panel id="PanelDataListKeep" is-fluid="true" max-width="700" title="多选并保持当前选择" show-border="true" body-padding="10" margin-bottom="20">
+                <f:items>
+                    <f:data-list id="DataListKeep" enable-select="true" enable-multi-select="true" keep-current-selection="true"
+                        selected-value-array="beijing,shanghai">
+                        <f:items>
+                            <f:data-list-item value="beijing" text="北京" />
+                            <f:data-list-item value="shanghai" text="上海" />
+                            <f:data-list-item value="guangzhou" text="广州" />
+                        </f:items>
+                    </f:data-list>
+                </f:items>
+            </f:panel>
+            <f:button id="btnRead" text="读取当前选择" on-click="btnRead_Click" css-class="marginr" />
+            <f:button id="btnAssign" text="后台设置选择" on-click="btnAssign_Click" css-class="marginr" />
+            <f:button id="btnClear" text="清空全部选择" on-click="btnClear_Click" />
+            <br />
+            <br />
+            <f:label id="labResult" text="请点击列表项，再读取后台选择。" />
+            <p>单选列表只保留一项；多选列表可配合 Ctrl 或 Shift 键选择多项。</p>
+            <p>保持当前选择时，直接点击会累积或取消该项。清空后再次读取，后台结果仍为空。</p>
+        </th:block>
+    </body>
+
+</html>

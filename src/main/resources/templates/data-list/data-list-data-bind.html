@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>数据列表：数据绑定</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel id="Panel1" is-fluid="true" max-width="700" title="数据绑定与追加" show-border="true" body-padding="10">
+                <f:items>
+                    <f:data-list id="DataList1" />
+                </f:items>
+            </f:panel>
+            <br />
+            <f:button id="btnReload" text="重新加载" on-click="btnReload_Click" css-class="marginr" />
+            <f:button id="btnAppend" text="追加两个城市" on-click="btnAppend_Click" />
+            <br />
+            <br />
+            <f:label id="labResult" text="数据数量：3" />
+            <f:hidden-field id="hfBatch" text="0" />
+            <p>首次加载绑定北京、上海和广州；重新加载会反序显示这三个城市，并清除已追加的数据。</p>
+            <p>每次追加深圳和杭州，项值带上批次编号，例如 shenzhen-1、shenzhen-2，连续追加也不会重复。</p>
+        </th:block>
+    </body>
+
+</html>

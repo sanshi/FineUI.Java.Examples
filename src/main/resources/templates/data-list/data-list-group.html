@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>数据列表：分组与模板</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel id="Panel1" is-fluid="true" max-width="700" title="分组与模板" show-border="true" body-padding="10">
+                <f:items>
+                    <f:data-list id="DataList1" enable-group="true" enable-select="true">
+                        <f:items>
+                            <f:data-list-item value="beijing" group="华北" text-raw-html="<strong>北京</strong><br />客户服务中心" navigate-url="#details"
+                                show-arrow="true" />
+                            <f:data-list-item value="tianjin" group="华北" text-raw-html="<strong>天津</strong><br />物流服务中心" navigate-url="#details"
+                                show-arrow="true" />
+                            <f:data-list-item value="shanghai" group="华东" text-raw-html="<strong>上海</strong><br />技术支持中心" navigate-url="#details"
+                                show-arrow="true" />
+                            <f:data-list-item value="hangzhou" group="华东" text-raw-html="<strong>杭州</strong><br />产品体验中心" navigate-url="#details"
+                                show-arrow="true" />
+                        </f:items>
+                        <f:listeners>
+                            <f:listener event="itemclick" handler="onDataListItemClick" />
+                        </f:listeners>
+                    </f:data-list>
+                </f:items>
+            </f:panel>
+            <br />
+            <f:label id="labResult" text="请点击一个城市。" />
+            <p>列表按区域分组，每项通过可信 HTML 模板展示标题和业务说明，并显示右侧箭头。</p>
+            <p>点击项时直接显示对应编号，不切换移动面板。模板中的 HTML 由应用固定提供，外部输入应先进行编码。</p>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script>
+                function onDataListItemClick(event, itemValue) {
+                    event.preventDefault();
+                    F.ui.labResult.setValue('当前项：' + itemValue);
+                }
+
+            </script>
+        </th:block>
+    </body>
+
+</html>

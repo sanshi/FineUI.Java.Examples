@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>数据列表：基础列表</title>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <f:panel id="Panel1" is-fluid="true" max-width="700" title="基础列表" show-border="true" body-padding="10">
+                <f:items>
+                    <f:data-list id="DataList1">
+                        <f:items>
+                            <f:data-list-item value="beijing" text-raw-html="|<img src='@{/res/icon/building.png}' alt='' /> 北京|" />
+                            <f:data-list-item value="shanghai" text="上海" />
+                            <f:data-list-item value="guangzhou" text="广州" />
+                            <f:data-list-item value="hefei" text="合肥" navigate-url="https://fineui.com/" target="_blank" />
+                        </f:items>
+                    </f:data-list>
+                </f:items>
+            </f:panel>
+            <br />
+            <p>列表项使用稳定的城市编号，文字、图片和普通超链接可放在同一个列表中。点击合肥，在新页面打开官网。</p>
+        </th:block>
+    </body>
+
+</html>
