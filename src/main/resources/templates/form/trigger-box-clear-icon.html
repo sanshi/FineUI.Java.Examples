@@ -10,11 +10,29 @@
 
             <f:simple-form id="SimpleForm1" is-fluid="true" body-padding="10" enable-collapse="false" show-border="true" title="表单" show-header="true">
                 <f:items>
-                    <f:trigger-box id="TriggerBox1" show-label="false" value="默认值" trigger-icon="Clear" show-trigger="false"
-                        auto-show-clear-icon="true"></f:trigger-box>
+                    <f:trigger-box id="TriggerBox1" show-label="false" value="默认值" trigger-icon="Clear" auto-show-clear-icon="true"></f:trigger-box>
+                    <f:twin-trigger-box id="TwinTriggerBox1" show-label="false" value="默认值" trigger1-icon="Clear" trigger2-icon="Search"
+                        auto-show-clear-icon="true" on-trigger2-click="TwinTriggerBox1_Trigger2Click"></f:twin-trigger-box>
+                    <f:check-box id="cbxAutoClear" show-label="false" text="根据文字自动显示清除图标" checked="true"></f:check-box>
+                    <f:check-box id="cbxShowTrigger" show-label="false" text="手动显示两个输入框的第一个按钮" checked="true" enabled="false"></f:check-box>
+                    <f:check-box id="cbxShowTrigger1" show-label="false" text="双触发器的第一个按钮手动开关" checked="true" enabled="false"></f:check-box>
+                    <f:check-box id="cbxShowTrigger2" show-label="false" text="显示双触发器的第二个按钮" checked="true"></f:check-box>
+                    <f:panel show-border="false" show-header="false" layout="HBox">
+                        <f:items>
+                            <f:button id="btnApplyVisibility" text="应用显隐设置" css-class="marginr" on-click="btnApplyVisibility_Click"></f:button>
+                            <f:button id="btnReadVisibility" text="读取当前状态" css-class="marginr" on-click="btnReadVisibility_Click"></f:button>
+                            <f:button id="btnFillText" text="填入文字" css-class="marginr" on-click="btnFillText_Click"></f:button>
+                            <f:button id="btnClearText" text="清空文字" on-click="btnClearText_Click"></f:button>
+                        </f:items>
+                    </f:panel>
+                    <f:label id="labVisibility" show-label="false"></f:label>
+                    <f:label id="labTriggerResult" show-label="false"></f:label>
                     <f:button id="btnSubmit" text="提交表单" on-click="btnSubmit_Click"></f:button>
                 </f:items>
             </f:simple-form>
+            <p>开启自动清除时，有文字显示第一个清除图标，空文本隐藏；无需同时设置show-trigger或show-trigger1。</p>
+            <p>取消自动清除并点击“应用显隐设置”后，可使用手动开关。自动模式保留这些手动值，关闭后恢复；第二个按钮始终独立。</p>
+            <p>“读取当前状态”只读取上一轮保留的属性和文字；“填入文字”和“清空文字”演示后台改变文本后立即更新图标。</p>
 
         </th:block>
     </body>
