@@ -15,21 +15,6 @@
                             <f:listener event="triggerclick" handler="onTriggerBox1TriggerClick"></f:listener>
                         </f:listeners>
                     </f:trigger-box>
-                    <f:twin-trigger-box id="TwinTriggerBox1" show-label="false" trigger1-icon="Search" trigger2-icon="Search" empty-text="双触发器：输入文字或点击右侧按钮"
-                        enable-edit="true" enable-click-action="false" on-trigger1-click="TwinTriggerBox1_Trigger1Click"
-                        on-trigger2-click="TwinTriggerBox1_Trigger2Click"></f:twin-trigger-box>
-                    <f:check-box id="cbxEnableEdit" show-label="false" text="允许两个输入框手工编辑" checked="true"></f:check-box>
-                    <f:check-box id="cbxEnableClickAction" show-label="false" text="点击双触发器输入区域时执行第二个按钮" checked="false"></f:check-box>
-                    <f:panel show-border="false" show-header="false" layout="HBox">
-                        <f:items>
-                            <f:button id="btnApplyOptions" text="应用设置" css-class="marginr" on-click="btnApplyOptions_Click"></f:button>
-                            <f:button id="btnReadOptions" text="读取当前状态" css-class="marginr" on-click="btnReadOptions_Click"></f:button>
-                            <f:button id="btnToggleReadonly" text="切换只读" css-class="marginr" on-click="btnToggleReadonly_Click"></f:button>
-                            <f:button id="btnToggleEnabled" text="切换可用" on-click="btnToggleEnabled_Click"></f:button>
-                        </f:items>
-                    </f:panel>
-                    <f:label id="labResult" show-label="false"></f:label>
-                    <f:label id="labTriggerResult" show-label="false"></f:label>
                 </f:items>
             </f:simple-form>
             <f:window id="Window1" title="弹出窗口" body-padding="10" is-modal="true" hidden="true" target="Top" width="450" height="300">
@@ -39,10 +24,7 @@
             </f:window>
             <br />
             <br />
-            <p>单触发器点击输入区域或右侧按钮即可弹出窗口（enable-click-action=true），关闭窗口后回填文字。</p>
-            <p>修改勾选项后点击“应用设置”：enable-edit控制能否手工输入，enable-click-action控制点击输入区域是否执行默认触发动作。
-                双触发器有第二个图标时，输入区点击执行第二个按钮；关闭输入区点击后，右侧按钮仍可使用。</p>
-            <p>“读取当前状态”只读取，不重新设置开关。“切换只读”和“切换可用”演示独立限制：允许编辑不会解除只读或禁用状态。</p>
+            注：点击输入框即可弹出窗体（enable-click-action=true）。
 
         </th:block>
         <th:block layout:fragment="script">
