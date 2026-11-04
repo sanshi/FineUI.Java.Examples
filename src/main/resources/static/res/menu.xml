@@ -16,6 +16,8 @@
 			</TreeNode>
 			<TreeNode Text="配置" NavigateUrl="/config/modify-web-config">
 			</TreeNode>
+			<TreeNode Text="AJAX 属性" NavigateUrl="/config/ajax-properties">
+			</TreeNode>
 			<TreeNode Text="图标" NavigateUrl="/config/icons">
 			</TreeNode>
 			<TreeNode Text="图标字体（默认）" NavigateUrl="/config/icon-fonts">

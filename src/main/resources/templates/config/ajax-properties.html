@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+
+    <head>
+        <title>FineUI.Java · AJAX 属性</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="sourcefiles" content="res:static/content/config/ajax-properties/query.js" />
+        <style>
+            .ajax-property-detail {
+                white-space: normal;
+                overflow-wrap: anywhere;
+            }
+
+            .ajax-property-detail pre {
+                white-space: pre-wrap;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <th:block layout:fragment="body">
+            <div id="ajaxPropertyCatalog" th:attr="data-catalog-url=@{/content/config/ajax-properties/catalog.json}">
+                <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="AJAX 属性" data-id-field="id" data-text-field="property"
+                    allow-paging="true" page-size="20" enable-text-selection="true" enable-multi-select="false" empty-text="未找到匹配属性，可缩短关键词或调整筛选条件。">
+                    <f:toolbars>
+                        <f:toolbar id="ToolbarFilters" position="Top" layout="HBox" box-config-space="10" body-padding="5">
+                            <f:items>
+                                <f:drop-down-list id="ddlControlType" label="控件类型" label-align="Top" box-flex="2" empty-text="全部控件" enable-edit="true"
+                                    auto-select-first-item="false" auto-show-clear-icon="true">
+                                    <f:listeners>
+                                        <f:listener event="change" handler="onAjaxPropertyQueryChange"></f:listener>
+                                    </f:listeners>
+                                </f:drop-down-list>
+                                <f:trigger-box id="tbxPropertySearch" label="搜索属性" label-align="Top" box-flex="3" empty-text="属性名或中文含义" trigger-icon="Clear"
+                                    auto-show-clear-icon="true">
+                                    <f:listeners>
+                                        <f:listener event="change" handler="onAjaxPropertyQueryChange"></f:listener>
+                                    </f:listeners>
+                                </f:trigger-box>
+                            </f:items>
+                        </f:toolbar>
+                        <f:toolbar id="ToolbarOptions" position="Top">
+                            <f:items>
+                                <f:check-box id="cbxExcludeInherited" text="排除继承属性" show-label="false">
+                                    <f:listeners>
+                                        <f:listener event="change" handler="onAjaxPropertyQueryChange"></f:listener>
+                                    </f:listeners>
+                                </f:check-box>
+                                <f:toolbar-fill></f:toolbar-fill>
+                                <f:label id="labResultCount" text="正在读取属性清单…" show-label="false"></f:label>
+                                <f:button id="btnRetryCatalog" text="重新读取" hidden="true" click-handler="loadAjaxPropertyCatalog"></f:button>
+                            </f:items>
+                        </f:toolbar>
+                    </f:toolbars>
+                    <f:columns>
+                        <f:render-field data-field="id" render-as-row-expander="true" expand-on-dbl-click="false"
+                            renderer-function="AjaxPropertyQuery.renderDetail"></f:render-field>
+                        <f:render-field column-id="control" header-text="控件" data-field="control" width="150"></f:render-field>
+                        <f:render-field column-id="property" header-text="属性" data-field="property" width="220"></f:render-field>
+                        <f:render-field column-id="description" header-text="含义" data-field="description" expand-unused-space="true"
+                            min-width="220"></f:render-field>
+                        <f:render-field column-id="effect" header-text="生效时机" data-field="effectText" width="120"></f:render-field>
+                    </f:columns>
+                    <f:listeners>
+                        <f:listener event="rowclick" handler="onAjaxPropertyQueryRowClick"></f:listener>
+                        <f:listener event="rowexpanderexpand" handler="onAjaxPropertyQueryExpand"></f:listener>
+                        <f:listener event="rowexpandercollapse" handler="onAjaxPropertyQueryCollapse"></f:listener>
+                    </f:listeners>
+                </f:grid>
+            </div>
+            <p><strong>什么是 AJAX 属性？</strong>在 FineUI.Java 中，可以在后台回发事件里修改这类属性，响应返回后会更新页面上已有的控件。例如调用 button.setText 可以修改按钮文字，无需刷新整个页面。</p>
+            <p>不同属性的生效时机有所区别：按钮文字在本次响应后更新，按钮确认文字在下一次点击时使用，必填规则在后续校验时使用。默认包含继承属性，勾选“排除继承属性”可只看当前类型自身声明的属性；点击表格行或左侧加号，查看使用条件、声明来源和后台赋值方式。</p>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script th:src="@{/content/config/ajax-properties/query.js}"></script>
+        </th:block>
+    </body>
+
+</html>
