@@ -18,11 +18,12 @@
         </style>
     </head>
 
-    <body>
+    <body class="f-body-darkerbg">
         <th:block layout:fragment="body">
             <div id="ajaxPropertyCatalog" th:attr="data-catalog-url=@{/content/config/ajax-properties/catalog.json}">
-                <f:grid id="Grid1" is-fluid="true" show-border="true" show-header="true" title="AJAX 属性" data-id-field="id" data-text-field="property"
-                    allow-paging="true" page-size="20" enable-text-selection="true" enable-multi-select="false" empty-text="未找到匹配属性，可缩短关键词或调整筛选条件。">
+                <f:grid id="Grid1" is-fluid="true" show-border="true" css-class="f-panel-border-shadow" show-header="true" title="AJAX 属性" data-id-field="id"
+                    data-text-field="property" allow-paging="true" page-size="100" enable-text-selection="true" enable-multi-select="false"
+                    empty-text="未找到匹配属性，可缩短关键词或调整筛选条件。">
                     <f:toolbars>
                         <f:toolbar id="ToolbarFilters" position="Top" layout="HBox" box-config-space="10" body-padding="5">
                             <f:items>
