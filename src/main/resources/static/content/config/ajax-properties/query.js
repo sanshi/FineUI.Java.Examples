@@ -193,11 +193,25 @@ window.AjaxPropertyQuery = (function () {
     return { loadCatalog, queueSearch, renderDetail, onRowClick, onExpand, onCollapse };
 })();
 
-// Java 的声明监听器按全局函数名查找，导出固定入口供筛选、重试和行展开事件调用。
-window.onAjaxPropertyQueryChange = AjaxPropertyQuery.queueSearch;
-window.loadAjaxPropertyCatalog = AjaxPropertyQuery.loadCatalog;
-window.onAjaxPropertyQueryRowClick = AjaxPropertyQuery.onRowClick;
-window.onAjaxPropertyQueryExpand = AjaxPropertyQuery.onExpand;
-window.onAjaxPropertyQueryCollapse = AjaxPropertyQuery.onCollapse;
+// 声明事件使用固定的全局函数入口，供筛选、重试和行展开调用。
+function onAjaxPropertyQueryChange() {
+    return AjaxPropertyQuery.queueSearch();
+}
+
+function onAjaxPropertyQueryRetry() {
+    return AjaxPropertyQuery.loadCatalog();
+}
+
+function onAjaxPropertyQueryRowClick(event, rowId) {
+    return AjaxPropertyQuery.onRowClick(event, rowId);
+}
+
+function onAjaxPropertyQueryExpand(event, rowId) {
+    return AjaxPropertyQuery.onExpand(event, rowId);
+}
+
+function onAjaxPropertyQueryCollapse(event, rowId) {
+    return AjaxPropertyQuery.onCollapse(event, rowId);
+}
 
 F.ready(AjaxPropertyQuery.loadCatalog);
