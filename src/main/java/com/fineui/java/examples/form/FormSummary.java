@@ -2,6 +2,8 @@ package com.fineui.java.examples.form;
 
 import com.fineui.java.core.controls.CheckBox;
 import com.fineui.java.core.controls.ControlBase;
+import com.fineui.java.core.controls.DropDownList;
+import com.fineui.java.core.controls.Label;
 import com.fineui.java.core.controls.RadioButton;
 import com.fineui.java.core.controls.RealTextField;
 import com.fineui.java.core.controls.SelectionListField;
@@ -60,6 +62,10 @@ public final class FormSummary {
                 if (!v.isEmpty()) {
                     append(sb, child.getId(), v);
                 }
+            } else if (child instanceof DropDownList list) {
+                append(sb, child.getId(), list.getText());
+            } else if (child instanceof Label label) {
+                append(sb, child.getId(), label.getText());
             } else if (child instanceof CheckBox cb) {
                 append(sb, child.getId(), String.valueOf(cb.isChecked()));
             } else if (child instanceof RadioButton rb) {
@@ -75,6 +81,9 @@ public final class FormSummary {
     }
 
     private static void append(StringBuilder sb, String id, String value) {
+        if (value == null || value.isEmpty()) {
+            return;
+        }
         // 列表标签由示例固定提供，字段名和值只作为文字，避免输入中的标签变成页面元素。
         sb.append("<li>")
                 .append(HtmlUtils.htmlEscape(id, "UTF-8"))
