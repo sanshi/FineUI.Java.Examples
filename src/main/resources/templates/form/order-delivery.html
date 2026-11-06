@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+<head>
+    <title>订单配送</title>
+</head>
+<body>
+    <th:block layout:fragment="body">
+        <f:simple-form id="Form1" title="订单配送" is-fluid="true" max-width="450" body-padding="16"
+            label-width="104" show-header="true" show-border="true">
+            <f:items>
+                <f:drop-down-list id="ddlDelivery" label="配送方式"
+                    on-selected-index-changed="ddlDelivery_SelectedIndexChanged">
+                    <f:list-item text="门店自提" value="pickup" selected="true"></f:list-item>
+                    <f:list-item text="快递配送" value="courier"></f:list-item>
+                </f:drop-down-list>
+                <f:text-box id="tbxAddress" label="收货地址"></f:text-box>
+                <f:button id="btnSubmit" text="提交订单" button-color="Primary" validate-forms="Form1"
+                    on-click="btnSubmit_Click"></f:button>
+                <f:label id="labResult" show-label="false" hidden="true"></f:label>
+            </f:items>
+        </f:simple-form>
+
+        <p>选择快递配送时，后台把收货地址设为必填。<code>ShowRedStar</code> 让标签立即显示星号，<code>Required</code> 在提交订单时校验空地址。切回门店自提，留空地址也可提交。</p>
+    </th:block>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+<head>
+    <title>预约咨询</title>
+</head>
+<body>
+    <th:block layout:fragment="body">
+        <f:simple-form id="Form1" title="预约咨询" is-fluid="true" max-width="450" body-padding="16"
+            label-width="104" show-header="true" show-border="true">
+            <f:items>
+                <f:drop-down-list id="ddlService" label="咨询项目"
+                    on-selected-index-changed="ddlService_SelectedIndexChanged">
+                    <f:list-item text="常规咨询（15 分钟）" value="standard" selected="true"></f:list-item>
+                    <f:list-item text="深度咨询（30 分钟）" value="extended"></f:list-item>
+                </f:drop-down-list>
+                <f:time-picker id="tpAppointment" label="开始时间" text="09:00"
+                    min-time-text="09:00" max-time-text="10:00" increment="15"
+                    required="true" show-red-star="true"></f:time-picker>
+                <f:button id="btnSubmit" text="提交预约" button-color="Primary" validate-forms="Form1"
+                    on-click="btnSubmit_Click"></f:button>
+                <f:label id="labResult" show-label="false" hidden="true"></f:label>
+            </f:items>
+        </f:simple-form>
+
+        <p>先选 09:15，再切换为深度咨询。后台把时间框的 AJAX 属性 <code>Increment</code> 改为 30，
+            原来的 09:15 会标为不可选。改选 09:30 后即可提交预约；切回常规咨询，09:15 也可以提交。</p>
+    </th:block>
+</body>
+</html>
