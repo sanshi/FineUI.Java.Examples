@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:f="http://fineui.com/java" layout:decorate="~{shared/layout}">
+    <head>
+        <title>FineUI.Java · 全局配置属性</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="sourcefiles" content="res:static/res/js/global-properties.js" />
+        <style>
+            .config-property-detail {
+                box-sizing: border-box;
+                max-width: min(76ch, calc(100vw - 6rem));
+                white-space: normal;
+                overflow-wrap: anywhere;
+            }
+
+            .config-property-detail pre {
+                white-space: pre-wrap;
+            }
+        </style>
+    </head>
+    <body class="f-body-darkerbg">
+        <th:block layout:fragment="body">
+            <f:grid id="Grid1" is-fluid="true" show-border="true" css-class="f-panel-border-shadow" show-header="true" title="全局配置属性"
+                    data-id-field="name" data-text-field="name" allow-paging="true" page-size="100"
+                    enable-text-selection="true" enable-multi-select="false"
+                    empty-text="未找到匹配的配置项，可缩短关键词或清除筛选条件。">
+                <f:toolbars>
+                    <f:toolbar id="ToolbarFilters" position="Top" layout="HBox" box-config-space="10" body-padding="5">
+                        <f:items>
+                            <f:drop-down-list id="ddlCategory" label="配置分类" label-align="Top" box-flex="2"
+                                    empty-text="全部分类" auto-select-first-item="false" auto-show-clear-icon="true">
+                                <f:listeners>
+                                    <f:listener event="change" handler="onConfigQueryChange"></f:listener>
+                                </f:listeners>
+                            </f:drop-down-list>
+                            <f:trigger-box id="tbxSearch" label="搜索配置项" label-align="Top" box-flex="3"
+                                    empty-text="名称、含义或可选值" trigger-icon="Clear" auto-show-clear-icon="true">
+                                <f:listeners>
+                                    <f:listener event="change" handler="onConfigQueryChange"></f:listener>
+                                </f:listeners>
+                            </f:trigger-box>
+                        </f:items>
+                    </f:toolbar>
+                    <f:toolbar id="ToolbarOptions" position="Top">
+                        <f:items>
+                            <f:toolbar-fill></f:toolbar-fill>
+                            <f:label id="labResultCount" show-label="false"></f:label>
+                        </f:items>
+                    </f:toolbar>
+                </f:toolbars>
+                <f:columns>
+                    <f:render-field data-field="name" render-as-row-expander="true"
+                            expand-on-dbl-click="false" renderer-function="ConfigPropertyQuery.renderDetail"></f:render-field>
+                    <f:render-field column-id="name" header-text="配置名称" data-field="name" width="234"
+                            renderer-function="ConfigPropertyQuery.renderName"></f:render-field>
+                    <f:render-field column-id="description" header-text="含义" data-field="description" expand-unused-space="true" min-width="220"></f:render-field>
+                    <f:render-field column-id="initialValue" header-text="初始值" data-field="initialText" width="140"></f:render-field>
+                    <f:render-field column-id="options" header-text="可选值或格式" data-field="options" width="245"></f:render-field>
+                </f:columns>
+                <f:listeners>
+                    <f:listener event="rowclick" handler="onConfigRowClick"></f:listener>
+                    <f:listener event="rowexpanderexpand" handler="onConfigRowExpand"></f:listener>
+                    <f:listener event="rowexpandercollapse" handler="onConfigRowCollapse"></f:listener>
+                </f:listeners>
+            </f:grid>
+            <p>初始值取自 FineUI.Java 的空配置。点击配置名称或左侧加号可查看完整取值和使用条件。配置示例可直接写入 <code>application.properties</code>。</p>
+            <p>Spring Boot 项目的依赖、页面注册和启动方式见<a th:href="@{/config/modify-web-config}">配置入门</a>。</p>
+        </th:block>
+        <th:block layout:fragment="script">
+            <script type="application/json" id="configPropertyCatalog" data-format="properties" data-example-label="application.properties 写法"
+                    data-grid="Grid1" data-category="ddlCategory" data-search="tbxSearch" data-count="labResultCount" th:utext="${page.catalogJson}"></script>
+            <script th:src="@{/res/js/global-properties.js}"></script>
+        </th:block>
+    </body>
+</html>

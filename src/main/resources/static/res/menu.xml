@@ -16,6 +16,7 @@
 			</TreeNode>
 			<TreeNode Text="配置" NavigateUrl="/config/modify-web-config">
 			</TreeNode>
+			<TreeNode Text="全局配置属性" NavigateUrl="/config/global-properties" />
 			<TreeNode Text="AJAX 属性" NavigateUrl="/config/ajax-properties">
 			</TreeNode>
 			<TreeNode Text="图标" NavigateUrl="/config/icons">
