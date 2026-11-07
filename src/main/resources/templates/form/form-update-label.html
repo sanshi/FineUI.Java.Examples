@@ -101,7 +101,7 @@
                 }
 
                 function onRemoveRegexClick(event) {
-                    F.ui.tbxEmail.setRegex('');
+                    F.ui.tbxEmail.setRegexPattern('');
                 }
 
                 function onRemoveMinLengthClick(event) {
@@ -114,7 +114,7 @@
 
                 function onModifyMaxValueClick(event) {
                     var datestr = F.formatDate('yyyy-MM-dd', new Date());
-                    F.ui.dpApplyTime.setMaxValue('2016-11-22');
+                    F.ui.dpApplyTime.setMaxValue(datestr);
                 }
 
             </script>
